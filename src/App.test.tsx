@@ -1,9 +1,21 @@
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import App from './App'
 
 describe('App', () => {
-  it('renders the v1 Remember flashcard content', () => {
+  it('shows modules and opens Remember flashcards', () => {
     render(<App />)
+
+    expect(
+      screen.getByRole('button', { name: 'Modules' }),
+    ).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', { name: 'Modules' }))
+
+    expect(
+      screen.getByRole('menuitem', { name: 'Remember' }),
+    ).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('menuitem', { name: 'Remember' }))
 
     expect(screen.getByText('What is a Hook?')).toBeInTheDocument()
     expect(screen.getByText('CS-101')).toBeInTheDocument()

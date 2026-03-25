@@ -11,7 +11,7 @@ export const RememberScreen = () => {
     return parseFlashcardsJsonV1(flashcardsJson)
   }, [])
 
-  const [activeTopicId] = useState(() => {
+  const [activeTopicId, setActiveTopicId] = useState(() => {
     if (parsed.kind === 'ok') return parsed.value.topicPacks[0]?.topicId ?? ''
     return ''
   })
@@ -51,13 +51,17 @@ export const RememberScreen = () => {
           const isActive = tp.topicId === topic.topicId
 
           return (
-            <div
+            <button
               key={tp.topicId}
               className={isActive ? 'memoryScoreItem isActive' : 'memoryScoreItem'}
+              type="button"
+              onClick={() => setActiveTopicId(tp.topicId)}
+              aria-pressed={isActive}
+              aria-label={`Topic ${tp.title}`}
             >
               <span className="memoryScoreTitle">{tp.title}</span>
               <span className="memoryScoreValue">{score}</span>
-            </div>
+            </button>
           )
         })}
       </div>

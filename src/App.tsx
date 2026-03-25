@@ -1,8 +1,12 @@
 import { useEffect, useState } from 'react'
 import { RememberScreen } from './modules/remember'
 
+type View = 'home' | 'remember'
+
 function App() {
   const [showRefreshPrompt, setShowRefreshPrompt] = useState(false)
+  const [view, setView] = useState<View>('home')
+  const [modulesOpen, setModulesOpen] = useState(false)
 
   useEffect(() => {
     const onNeedRefresh = (): void => {
@@ -35,9 +39,44 @@ function App() {
     window.location.reload()
   }
 
+  const openModules = (): void => setModulesOpen(true)
+  const closeModules = (): void => setModulesOpen(false)
+  const openRemember = (): void => {
+    setView('remember')
+    closeModules()
+  }
+
   return (
     <>
-      <RememberScreen />
+      {view === 'home' ? (
+        <main className="screen homeScreen" aria-label="Home">
+          <p className="kicker">App installed</p>
+          <h1 className="title">secondbrain</h1>
+
+          <button
+            type="button"
+            className="modulesButton"
+            onClick={openModules}
+          >
+            Modules
+          </button>
+
+          {modulesOpen ? (
+            <div className="modulesMenu" role="menu" aria-label="Modules">
+              <button
+                type="button"
+                role="menuitem"
+                className="moduleMenuItem"
+                onClick={openRemember}
+              >
+                Remember
+              </button>
+            </div>
+          ) : null}
+        </main>
+      ) : (
+        <RememberScreen />
+      )}
 
       {showRefreshPrompt ? (
         <div className="updatePrompt" role="alertdialog" aria-live="polite">

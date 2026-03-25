@@ -279,3 +279,62 @@ body {
   color: rgba(255, 255, 255, 0.8);
   font-size: 0.95rem;
 }
+
+/* Home / module picker */
+.homeScreen {
+  width: 100%;
+  gap: 1.25rem;
+  place-content: center;
+}
+
+.modulesButton {
+  appearance: none;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: rgba(17, 24, 39, 0.6);
+  color: #ffffff;
+  padding: 0.85rem 1.25rem;
+  border-radius: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  width: min(22rem, 85%);
+}
+
+.modulesButton:active {
+  transform: translateY(1px);
+}
+
+.modulesMenu {
+  width: min(22rem, 85%);
+  display: grid;
+  gap: 0.6rem;
+  padding: 0.8rem 0.8rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.moduleMenuItem {
+  appearance: none;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: rgba(17, 24, 39, 0.55);
+  color: #ffffff;
+  padding: 0.85rem 1rem;
+  border-radius: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.moduleMenuItem:active {
+  transform: translateY(1px);
+}
+
+/* Make topic pills tappable (Remember module) */
+.memoryScoreItem {
+  appearance: none;
+  cursor: pointer;
+}
+
+.memoryScoreItem:focus-visible {
+  outline: 2px solid rgba(147, 197, 253, 0.7);
+  outline-offset: 2px;
+}
