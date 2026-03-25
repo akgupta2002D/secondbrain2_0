@@ -58,3 +58,74 @@ body {
   font-size: clamp(2rem, 8vw, 3.25rem);
   line-height: 1.05;
 }
+
+.updatePrompt {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: env(safe-area-inset-bottom);
+  padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom));
+  display: grid;
+  place-items: center;
+  z-index: 50;
+}
+
+.updatePromptInner {
+  width: min(32rem, 100%);
+  border-radius: 1rem;
+  background: rgba(17, 24, 39, 0.92);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  padding: 0.9rem 1rem;
+}
+
+.updatePromptText {
+  text-align: left;
+  color: #e5e7eb;
+}
+
+.updatePromptTitle {
+  margin: 0;
+  font-weight: 700;
+  color: #f9fafb;
+}
+
+.updatePromptBody {
+  margin: 0.25rem 0 0;
+  font-size: 0.95rem;
+  color: #cbd5e1;
+}
+
+.updatePromptActions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  justify-content: flex-end;
+}
+
+.updatePromptButton {
+  appearance: none;
+  border: 1px solid rgba(147, 197, 253, 0.55);
+  background: rgba(59, 130, 246, 0.15);
+  color: #dbeafe;
+  padding: 0.6rem 0.9rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.updatePromptDismiss {
+  appearance: none;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: transparent;
+  color: #e5e7eb;
+  padding: 0.6rem 0.9rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.updatePromptButton:active,
+.updatePromptDismiss:active {
+  transform: translateY(1px);
+}
