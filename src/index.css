@@ -129,3 +129,153 @@ body {
 .updatePromptDismiss:active {
   transform: translateY(1px);
 }
+
+/* Remember module: iPhone-first matte black flashcards */
+.rememberScreen {
+  width: 100%;
+  display: grid;
+  gap: 1rem;
+  place-content: center;
+}
+
+.memoryScoreList {
+  width: 100%;
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-inline: 0.25rem;
+}
+
+.memoryScoreItem {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+  padding: 0.45rem 0.7rem;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.memoryScoreItem.isActive {
+  border-color: rgba(147, 197, 253, 0.45);
+  background: rgba(59, 130, 246, 0.12);
+}
+
+.memoryScoreTitle {
+  color: rgba(229, 231, 235, 0.9);
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+.memoryScoreValue {
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 750;
+}
+
+.flashcardButton {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  width: min(92vw, 40rem);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.flashcardInner {
+  position: relative;
+  width: 100%;
+  height: min(44vh, 30rem);
+  border-radius: 1.25rem;
+  background: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.6);
+  transform-style: preserve-3d;
+  transition: transform 420ms ease;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.flashcardInner.isFlipped {
+  transform: rotateY(180deg);
+}
+
+.flashcardFace {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  padding: 1.25rem 1.25rem;
+  backface-visibility: hidden;
+}
+
+.flashcardFront {
+  align-content: center;
+  text-align: center;
+}
+
+.flashcardBack {
+  transform: rotateY(180deg);
+  align-content: center;
+  text-align: center;
+}
+
+.flashcardTerm {
+  color: #ffffff;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-size: clamp(1.15rem, 5.2vw, 2.25rem);
+  line-height: 1.15;
+  padding: 0 0.25rem;
+}
+
+.flashcardDefinition {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(1rem, 4.2vw, 1.55rem);
+  line-height: 1.35;
+  font-weight: 650;
+}
+
+.flashcardMeta {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  display: flex;
+  gap: 0.6rem;
+  align-items: baseline;
+  justify-content: flex-end;
+}
+
+.flashcardMetaClass {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 750;
+  font-size: 0.95rem;
+}
+
+.flashcardMetaChapter {
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.rememberError {
+  padding: 1.25rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  background: rgba(239, 68, 68, 0.08);
+  text-align: center;
+}
+
+.rememberErrorTitle {
+  margin: 0;
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.rememberErrorBody {
+  margin: 0.5rem 0 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+}

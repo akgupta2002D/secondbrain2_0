@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { RememberScreen } from './modules/remember'
 
 function App() {
   const [showRefreshPrompt, setShowRefreshPrompt] = useState(false)
@@ -36,10 +37,7 @@ function App() {
 
   return (
     <>
-      <main className="screen" aria-label="App home">
-        <p className="kicker">App installed</p>
-        <h1 className="title">Hey Ankit</h1>
-      </main>
+      <RememberScreen />
 
       {showRefreshPrompt ? (
         <div className="updatePrompt" role="alertdialog" aria-live="polite">
