@@ -515,7 +515,7 @@ body {
 .topicMenuButton {
   position: absolute;
   top: calc(env(safe-area-inset-top) + 0.75rem);
-  right: calc(env(safe-area-inset-right) + 1rem);
+  right: calc(env(safe-area-inset-right) + 4.65rem);
   z-index: var(--sb-z-nav);
   appearance: none;
   border: 1px solid rgba(148, 163, 184, 0.3);
@@ -528,6 +528,23 @@ body {
   -webkit-tap-highlight-color: transparent;
   width: 3.2rem;
   min-height: 44px;
+}
+
+.rememberVersionInline {
+  position: absolute;
+  top: calc(env(safe-area-inset-top) + 0.85rem);
+  right: calc(env(safe-area-inset-right) + 1rem);
+  z-index: var(--sb-z-nav);
+  pointer-events: none;
+  padding: 0;
+  border-radius: 0;
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 
 .topicMenuButton:active {
@@ -690,6 +707,26 @@ body {
     background 160ms ease;
 }
 
+.updateButton {
+  appearance: none;
+  border: 1px solid rgba(147, 197, 253, 0.35);
+  background: rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+  padding: 0.85rem 1.25rem;
+  border-radius: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  width: min(22rem, 85%);
+  min-height: 44px;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 120ms ease, border-color 160ms ease,
+    background 160ms ease;
+}
+
+.updateButton:active {
+  transform: scale(0.98);
+}
+
 .modulesButton:active {
   transform: scale(0.98);
 }
@@ -733,6 +770,43 @@ body {
 
 .backButton:active {
   transform: scale(0.98);
+}
+
+.bottomUpdateVersion {
+  position: fixed;
+  right: calc(env(safe-area-inset-right) + 1rem);
+  bottom: calc(env(safe-area-inset-bottom) + 0.75rem);
+  z-index: 200;
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  pointer-events: auto;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.updateLinkSmall {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.85rem;
+  font-weight: 500; /* small + non-bold */
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.updateLinkSmall:active {
+  transform: scale(0.99);
+}
+
+.versionText {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.85rem;
+  font-weight: 500; /* non-bolded */
+  letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 
 .moduleMenuItem {

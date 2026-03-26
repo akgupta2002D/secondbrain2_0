@@ -7,6 +7,8 @@ function App() {
   const [showRefreshPrompt, setShowRefreshPrompt] = useState(false)
   const [view, setView] = useState<View>('home')
 
+  const appVersion = import.meta.env.VITE_APP_VERSION ?? '0.0.0'
+
   useEffect(() => {
     const onNeedRefresh = (): void => {
       setShowRefreshPrompt(true)
@@ -35,6 +37,31 @@ function App() {
     }
 
     // Fallback: if we can't find the registered reload callback, do a full refresh.
+    window.location.reload()
+  }
+
+  const onHardUpdate = async (): Promise<void> => {
+    setShowRefreshPrompt(false)
+
+    if ('serviceWorker' in navigator) {
+      try {
+        const reg = await navigator.serviceWorker.getRegistration()
+        if (reg) {
+          // Force an update check.
+          await reg.update()
+          // If a new SW is waiting, tell it to activate immediately.
+          if (reg.waiting) {
+            reg.waiting.postMessage({ type: 'SKIP_WAITING' })
+          }
+          // Give the browser a moment to activate before reloading.
+          await new Promise((r) => window.setTimeout(r, 500))
+        }
+      } catch {
+        // Ignore and fall back to reload below.
+      }
+    }
+
+    // "Hard reload" behavior: full page reload so assets are refetched.
     window.location.reload()
   }
 
@@ -106,6 +133,17 @@ function App() {
           </div>
         </div>
       ) : null}
+      <span className="bottomUpdateVersion" aria-label={`Version ${appVersion}`}>
+        <button
+          type="button"
+          className="updateLinkSmall"
+          onClick={onHardUpdate}
+          aria-label="Update PWA"
+        >
+          Update
+        </button>
+        <span className="versionText">{appVersion}</span>
+      </span>
     </>
   )
 }
