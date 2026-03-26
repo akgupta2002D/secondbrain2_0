@@ -85,6 +85,18 @@ function App() {
           >
             Modules
           </button>
+
+          <span className="bottomUpdateVersion" aria-label={`Version ${appVersion}`}>
+            <button
+              type="button"
+              className="updateLinkSmall"
+              onClick={onHardUpdate}
+              aria-label="Update PWA"
+            >
+              Update
+            </button>
+            <span className="versionText">{appVersion}</span>
+          </span>
         </main>
       ) : null}
 
@@ -133,17 +145,6 @@ function App() {
           </div>
         </div>
       ) : null}
-      <span className="bottomUpdateVersion" aria-label={`Version ${appVersion}`}>
-        <button
-          type="button"
-          className="updateLinkSmall"
-          onClick={onHardUpdate}
-          aria-label="Update PWA"
-        >
-          Update
-        </button>
-        <span className="versionText">{appVersion}</span>
-      </span>
     </>
   )
 }

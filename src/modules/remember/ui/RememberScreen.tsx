@@ -35,8 +35,6 @@ const pickRandomDifferentCardId = (
 }
 
 export const RememberScreen = ({ onBack }: Props) => {
-  const appVersion = import.meta.env.VITE_APP_VERSION ?? '0.0.0'
-
   const parsed = useMemo(() => {
     return parseFlashcardsJsonV1(flashcardsJson)
   }, [])
@@ -206,10 +204,6 @@ export const RememberScreen = ({ onBack }: Props) => {
       >
         ...
       </button>
-
-      <span className="rememberVersionInline" aria-hidden="true">
-        {appVersion}
-      </span>
 
       <div
         className={[
