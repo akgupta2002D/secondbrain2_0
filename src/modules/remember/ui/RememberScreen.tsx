@@ -68,7 +68,6 @@ export const RememberScreen = ({ onBack }: Props) => {
   })
 
   const [isCardFlipped, setIsCardFlipped] = useState(false)
-  const [feedback, setFeedback] = useState<ReviewResult | null>(null)
   const [swipeUi, setSwipeUi] = useState<{
     dragStrength: number
     dragDirection: 'left' | 'right' | 'none'
@@ -113,7 +112,6 @@ export const RememberScreen = ({ onBack }: Props) => {
   useEffect(() => {
     // Deck is stable (parsed once). When it changes, reset review state.
     setIsCardFlipped(false)
-    setFeedback(null)
     setCycleReviewedCardIds([])
     setCyclePromptOpen(false)
     setActiveCardId(allCards.length > 0 ? pickRandomCardId(allCards) : '')
@@ -167,12 +165,7 @@ export const RememberScreen = ({ onBack }: Props) => {
 
   const onSwipeReview = (result: ReviewResult): void => {
     if (cyclePromptOpen) return
-    setFeedback(result)
     onReview(result)
-
-    window.setTimeout(() => {
-      setFeedback(null)
-    }, 650)
   }
 
   const onStartAgain = (): void => {
@@ -316,21 +309,6 @@ export const RememberScreen = ({ onBack }: Props) => {
         onSwipe={onSwipeReview}
         onSwipeUiChange={setSwipeUi}
       />
-
-      {feedback ? (
-        <div
-          className={
-            [
-              'swipeEdgeFeedback',
-              feedback === 'correct' ? 'isLeft' : 'isRight',
-              feedback === 'correct' ? 'swipeEdgeFeedbackCorrect' : 'swipeEdgeFeedbackIncorrect',
-            ].join(' ')
-          }
-          aria-live="polite"
-        >
-          {feedback === 'correct' ? 'Know' : "Don't know"}
-        </div>
-      ) : null}
     </main>
   )
 }

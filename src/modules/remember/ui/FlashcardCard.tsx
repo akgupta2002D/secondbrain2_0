@@ -44,6 +44,7 @@ export const FlashcardCard = ({
   const [dragX, setDragX] = useState(0)
   const [isDragging, setIsDragging] = useState(false)
   const [isSettling, setIsSettling] = useState(false)
+  const [settleResult, setSettleResult] = useState<ReviewResult | null>(null)
 
   const handleClick = (): void => {
     // If a swipe triggered a review, swallow the subsequent click.
@@ -67,6 +68,7 @@ export const FlashcardCard = ({
     setIsDragging(true)
     setIsSettling(false)
     setDragX(0)
+    setSettleResult(null)
     onSwipeUiChange?.({ dragStrength: 0, dragDirection: 'none', isDragging: true })
     try {
       e.currentTarget.setPointerCapture(e.pointerId)
@@ -120,6 +122,7 @@ export const FlashcardCard = ({
     if (Math.abs(dy) > Math.abs(dx)) {
       setIsSettling(true)
       setDragX(0)
+      setSettleResult(null)
       onSwipeUiChange?.({ dragStrength: 0, dragDirection: 'none', isDragging: false })
       return
     }
@@ -127,12 +130,14 @@ export const FlashcardCard = ({
     if (Math.abs(dx) < SWIPE_THRESHOLD_PX) {
       setIsSettling(true)
       setDragX(0)
+      setSettleResult(null)
       onSwipeUiChange?.({ dragStrength: 0, dragDirection: 'none', isDragging: false })
       return
     }
 
     didSwipeRef.current = true
     const result: ReviewResult = dx > 0 ? 'correct' : 'incorrect'
+    setSettleResult(result)
 
     // Animate off-screen, then trigger review (so it feels smooth).
     setIsSettling(true)
@@ -144,6 +149,7 @@ export const FlashcardCard = ({
       onSwipe(result)
       setDragX(0)
       setIsSettling(false)
+      setSettleResult(null)
       onSwipeUiChange?.({ dragStrength: 0, dragDirection: 'none', isDragging: false })
     }, 140)
   }
@@ -153,6 +159,7 @@ export const FlashcardCard = ({
     endGesture()
     setIsSettling(true)
     setDragX(0)
+    setSettleResult(null)
     onSwipeUiChange?.({ dragStrength: 0, dragDirection: 'none', isDragging: false })
   }
 
@@ -202,6 +209,18 @@ export const FlashcardCard = ({
             : 'translateX(0px) rotateZ(0deg)',
         }}
       >
+        {settleResult ? (
+          <div
+            className={[
+              'swipeTopFeedback',
+              settleResult === 'correct' ? 'swipeTopFeedbackCorrect' : 'swipeTopFeedbackIncorrect',
+            ].join(' ')}
+            aria-live="polite"
+          >
+            {settleResult === 'correct' ? 'Know' : "Don't know"}
+          </div>
+        ) : null}
+
         <div className={isFlipped ? 'flashcardInner isFlipped' : 'flashcardInner'}>
           <div className="flashcardFace flashcardFront">
             <div className="flashcardTerm">{card.term}</div>

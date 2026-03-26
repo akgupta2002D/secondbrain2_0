@@ -194,6 +194,38 @@ body {
   transition: none;
 }
 
+/* Swipe feedback (on the card, short-lived) */
+.swipeTopFeedback {
+  position: absolute;
+  top: 0.9rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  pointer-events: none;
+  font-weight: 950;
+  letter-spacing: 0.01em;
+  font-size: clamp(1.05rem, 4.6vw, 1.35rem);
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.75),
+    0 0 26px rgba(255, 255, 255, 0.08);
+  animation: swipeTopIn 140ms ease-out both;
+}
+
+.swipeTopFeedbackCorrect {
+  color: rgba(187, 247, 208, 0.92);
+  text-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.75),
+    0 0 30px rgba(34, 197, 94, 0.22);
+}
+
+.swipeTopFeedbackIncorrect {
+  color: rgba(254, 202, 202, 0.92);
+  text-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.75),
+    0 0 30px rgba(239, 68, 68, 0.22);
+}
+
 /* Swipe background (behind the card) */
 .swipeSplitBg {
   position: fixed;
@@ -379,48 +411,6 @@ body {
   font-size: 0.95rem;
 }
 
-/* Swipe feedback (edge) */
-.swipeEdgeFeedback {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 60; /* above card */
-  pointer-events: none;
-  padding: 0;
-  border-radius: 0;
-  border: 0;
-  background: transparent;
-  color: rgba(255, 255, 255, 0.86);
-  font-weight: 950;
-  font-size: clamp(1.15rem, 5vw, 1.55rem);
-  text-shadow:
-    0 10px 40px rgba(0, 0, 0, 0.7),
-    0 0 26px rgba(255, 255, 255, 0.08);
-  animation: swipeBadgeIn 180ms ease-out both;
-}
-
-.swipeEdgeFeedback.isLeft {
-  left: max(1rem, env(safe-area-inset-left));
-}
-
-.swipeEdgeFeedback.isRight {
-  right: max(1rem, env(safe-area-inset-right));
-}
-
-.swipeEdgeFeedbackCorrect {
-  color: rgba(187, 247, 208, 0.92);
-  text-shadow:
-    0 10px 40px rgba(0, 0, 0, 0.7),
-    0 0 34px rgba(34, 197, 94, 0.22);
-}
-
-.swipeEdgeFeedbackIncorrect {
-  color: rgba(254, 202, 202, 0.92);
-  text-shadow:
-    0 10px 40px rgba(0, 0, 0, 0.7),
-    0 0 34px rgba(239, 68, 68, 0.22);
-}
-
 /* Cycle completion prompt */
 .cycleCompletePrompt {
   position: absolute;
@@ -487,6 +477,17 @@ body {
   to {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes swipeTopIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
   }
 }
 
