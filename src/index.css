@@ -6,7 +6,7 @@
 
 :root {
   color: #e5e7eb;
-  background: #111827;
+  background: #000000;
   font-family:
     Inter,
     -apple-system,
@@ -29,19 +29,21 @@ body,
 
 body {
   min-height: 100svh;
-  background: #111827;
+  background: #000000;
 }
 
 .screen {
   min-height: 100svh;
-  display: grid;
-  place-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 0.75rem;
   text-align: center;
-  padding-top: max(1.5rem, env(safe-area-inset-top));
-  padding-right: max(1.5rem, env(safe-area-inset-right));
-  padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
-  padding-left: max(1.5rem, env(safe-area-inset-left));
+  padding-top: max(1.25rem, env(safe-area-inset-top));
+  padding-right: max(1.25rem, env(safe-area-inset-right));
+  padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+  padding-left: max(1.25rem, env(safe-area-inset-left));
 }
 
 .kicker {
@@ -73,7 +75,7 @@ body {
 .updatePromptInner {
   width: min(32rem, 100%);
   border-radius: 1rem;
-  background: rgba(17, 24, 39, 0.92);
+  background: rgba(0, 0, 0, 0.88);
   border: 1px solid rgba(148, 163, 184, 0.35);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
   padding: 0.9rem 1rem;
@@ -133,9 +135,7 @@ body {
 /* Remember module: iPhone-first matte black flashcards */
 .rememberScreen {
   width: 100%;
-  display: grid;
   gap: 1rem;
-  place-content: center;
 }
 
 .memoryScoreList {
@@ -284,23 +284,24 @@ body {
 .homeScreen {
   width: 100%;
   gap: 1.25rem;
-  place-content: center;
 }
 
 .modulesButton {
   appearance: none;
   border: 1px solid rgba(148, 163, 184, 0.35);
-  background: rgba(17, 24, 39, 0.6);
+  background: rgba(0, 0, 0, 0.35);
   color: #ffffff;
   padding: 0.85rem 1.25rem;
   border-radius: 1rem;
   font-weight: 800;
   cursor: pointer;
   width: min(22rem, 85%);
+  transition: transform 120ms ease, box-shadow 160ms ease, border-color 160ms ease,
+    background 160ms ease;
 }
 
 .modulesButton:active {
-  transform: translateY(1px);
+  transform: scale(0.98);
 }
 
 .modulesMenu {
@@ -311,30 +312,83 @@ body {
   border-radius: 1rem;
   border: 1px solid rgba(148, 163, 184, 0.28);
   background: rgba(0, 0, 0, 0.35);
+  animation: modulesMenuIn 170ms ease-out both;
+}
+
+/* Modules screen: top-left back, centered list */
+.modulesScreen {
+  position: relative;
+  width: 100%;
+  justify-content: flex-start;
+  padding-top: max(4.5rem, env(safe-area-inset-top));
+  gap: 1rem;
+}
+
+.backButton {
+  position: absolute;
+  top: calc(env(safe-area-inset-top) + 0.75rem);
+  left: calc(env(safe-area-inset-left) + 1rem);
+  appearance: none;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+  padding: 0.55rem 0.8rem;
+  border-radius: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.backButton:active {
+  transform: scale(0.98);
 }
 
 .moduleMenuItem {
   appearance: none;
-  border: 1px solid rgba(148, 163, 184, 0.25);
-  background: rgba(17, 24, 39, 0.55);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: rgba(0, 0, 0, 0.75);
   color: #ffffff;
   padding: 0.85rem 1rem;
   border-radius: 0.9rem;
   font-weight: 800;
   cursor: pointer;
+  transition: transform 120ms ease, background 160ms ease, border-color 160ms ease;
+  width: min(22rem, 85%);
+  text-align: center;
 }
 
 .moduleMenuItem:active {
-  transform: translateY(1px);
+  transform: scale(0.98);
+}
+
+.moduleMenuItem:focus-visible {
+  outline: 2px solid rgba(147, 197, 253, 0.7);
+  outline-offset: 2px;
 }
 
 /* Make topic pills tappable (Remember module) */
 .memoryScoreItem {
   appearance: none;
   cursor: pointer;
+  transition: transform 120ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+.memoryScoreItem:active {
+  transform: scale(0.99);
 }
 
 .memoryScoreItem:focus-visible {
   outline: 2px solid rgba(147, 197, 253, 0.7);
   outline-offset: 2px;
+}
+
+@keyframes modulesMenuIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }

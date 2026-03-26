@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
 import { RememberScreen } from './modules/remember'
 
-type View = 'home' | 'remember'
+type View = 'home' | 'modules' | 'remember'
 
 function App() {
   const [showRefreshPrompt, setShowRefreshPrompt] = useState(false)
   const [view, setView] = useState<View>('home')
-  const [modulesOpen, setModulesOpen] = useState(false)
 
   useEffect(() => {
     const onNeedRefresh = (): void => {
@@ -39,19 +38,17 @@ function App() {
     window.location.reload()
   }
 
-  const openModules = (): void => setModulesOpen(true)
-  const closeModules = (): void => setModulesOpen(false)
+  const openModules = (): void => setView('modules')
+  const goHome = (): void => setView('home')
   const openRemember = (): void => {
     setView('remember')
-    closeModules()
   }
 
   return (
     <>
       {view === 'home' ? (
         <main className="screen homeScreen" aria-label="Home">
-          <p className="kicker">App installed</p>
-          <h1 className="title">secondbrain</h1>
+          <h1 className="title">Second Brain</h1>
 
           <button
             type="button"
@@ -60,23 +57,32 @@ function App() {
           >
             Modules
           </button>
-
-          {modulesOpen ? (
-            <div className="modulesMenu" role="menu" aria-label="Modules">
-              <button
-                type="button"
-                role="menuitem"
-                className="moduleMenuItem"
-                onClick={openRemember}
-              >
-                Remember
-              </button>
-            </div>
-          ) : null}
         </main>
-      ) : (
-        <RememberScreen />
-      )}
+      ) : null}
+
+      {view === 'modules' ? (
+        <main className="screen modulesScreen" aria-label="Modules">
+          <button
+            type="button"
+            className="backButton"
+            onClick={goHome}
+            aria-label="Back"
+          >
+            Back
+          </button>
+
+          <button
+            type="button"
+            role="menuitem"
+            className="moduleMenuItem"
+            onClick={openRemember}
+          >
+            Remember
+          </button>
+        </main>
+      ) : null}
+
+      {view === 'remember' ? <RememberScreen /> : null}
 
       {showRefreshPrompt ? (
         <div className="updatePrompt" role="alertdialog" aria-live="polite">
