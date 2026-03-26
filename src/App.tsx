@@ -7,7 +7,7 @@ function App() {
   const [showRefreshPrompt, setShowRefreshPrompt] = useState(false)
   const [view, setView] = useState<View>('home')
 
-  const appVersion = import.meta.env.VITE_APP_VERSION ?? '0.0.0'
+  const appVersion = typeof __APP_VERSION__ === 'string' ? __APP_VERSION__ : '0.0.0'
 
   useEffect(() => {
     const onNeedRefresh = (): void => {

@@ -60,6 +60,6 @@ export default defineConfig({
     }),
   ],
   define: {
-    'import.meta.env.VITE_APP_VERSION': JSON.stringify(appVersion),
+    __APP_VERSION__: JSON.stringify(appVersion),
   },
 })
