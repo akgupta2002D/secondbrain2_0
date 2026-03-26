@@ -62,6 +62,19 @@ export const RememberScreen = ({ onBack }: Props) => {
   const activeTopic = deck.topicPacks.find((t) => t.topicId === activeTopicId)
   const topic = activeTopic ?? firstTopic
 
+  const [topicModalOpen, setTopicModalOpen] = useState(false)
+
+  useEffect(() => {
+    if (!topicModalOpen) return
+
+    const onKeyDown = (e: KeyboardEvent): void => {
+      if (e.key === 'Escape') setTopicModalOpen(false)
+    }
+
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [topicModalOpen])
+
   useEffect(() => {
     const nextTopic =
       deck.topicPacks.find((t) => t.topicId === activeTopicId) ?? firstTopic
@@ -79,26 +92,75 @@ export const RememberScreen = ({ onBack }: Props) => {
         Back
       </button>
 
-      <div className="memoryScoreList" aria-label="Topic memory scores">
-        {deck.topicPacks.map((tp) => {
-          const score = memoryScores[tp.topicId] ?? MEMORY_SCORE_DEFAULT
-          const isActive = tp.topicId === topic.topicId
+      <button
+        type="button"
+        className="topicMenuButton"
+        onClick={() => setTopicModalOpen(true)}
+        aria-label="Topics"
+        aria-haspopup="dialog"
+        aria-expanded={topicModalOpen}
+        title="Topics"
+      >
+        ...
+      </button>
 
-          return (
+      {topicModalOpen ? (
+        <div
+          className="topicModalOverlay"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Select topic"
+          onClick={() => setTopicModalOpen(false)}
+        >
+          <div
+            className="topicModal"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="topicModalHeader">
+              <p className="topicModalHeaderClass">{deck.deckClass}</p>
+              <p className="topicModalHeaderTitle">Topics</p>
+            </div>
+
+            <div className="topicModalList" aria-label="Topic list">
+              {deck.topicPacks.map((tp) => {
+                const score =
+                  memoryScores[tp.topicId] ?? MEMORY_SCORE_DEFAULT
+                const isActive = tp.topicId === topic.topicId
+
+                return (
+                  <button
+                    key={tp.topicId}
+                    type="button"
+                    className={
+                      isActive ? 'topicModalItem isActive' : 'topicModalItem'
+                    }
+                    onClick={() => {
+                      setActiveTopicId(tp.topicId)
+                      setTopicModalOpen(false)
+                    }}
+                    aria-pressed={isActive}
+                    aria-label={`Topic ${tp.title}`}
+                  >
+                    <div className="topicModalItemMain">
+                      <span className="topicModalItemTitle">{tp.title}</span>
+                      <span className="topicModalItemChapter">{tp.chapter}</span>
+                    </div>
+                    <div className="topicModalItemMeta">{score}</div>
+                  </button>
+                )
+              })}
+            </div>
+
             <button
-              key={tp.topicId}
-              className={isActive ? 'memoryScoreItem isActive' : 'memoryScoreItem'}
               type="button"
-              onClick={() => setActiveTopicId(tp.topicId)}
-              aria-pressed={isActive}
-              aria-label={`Topic ${tp.title}`}
+              className="topicModalClose"
+              onClick={() => setTopicModalOpen(false)}
             >
-              <span className="memoryScoreTitle">{tp.title}</span>
-              <span className="memoryScoreValue">{score}</span>
+              Close
             </button>
-          )
-        })}
-      </div>
+          </div>
+        </div>
+      ) : null}
 
       <FlashcardCard
         key={`${topic.topicId}:${activeCardId}`}

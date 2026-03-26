@@ -137,18 +137,9 @@ body {
   width: 100%;
   gap: 1rem;
   position: relative;
-  justify-content: flex-start;
-  align-items: center;
-  padding-top: max(6.5rem, env(safe-area-inset-top));
-}
-
-.memoryScoreList {
-  width: 100%;
-  display: flex;
-  gap: 0.6rem;
   justify-content: center;
-  flex-wrap: wrap;
-  padding-inline: 0.25rem;
+  align-items: center;
+  padding-top: max(1.25rem, env(safe-area-inset-top));
 }
 
 .memoryScoreItem {
@@ -299,6 +290,160 @@ body {
   margin: 0.5rem 0 0;
   color: rgba(255, 255, 255, 0.8);
   font-size: 0.95rem;
+}
+
+/* Remember: topic menu (top-right) + modal */
+.topicMenuButton {
+  position: absolute;
+  top: calc(env(safe-area-inset-top) + 0.75rem);
+  right: calc(env(safe-area-inset-right) + 1rem);
+  appearance: none;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+  padding: 0.55rem 0.8rem;
+  border-radius: 0.9rem;
+  font-weight: 950;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  width: 3.2rem;
+}
+
+.topicMenuButton:active {
+  transform: scale(0.98);
+}
+
+.topicModalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background: rgba(0, 0, 0, 0.6);
+  display: grid;
+  place-items: center;
+  padding: max(1rem, env(safe-area-inset-top)) 1rem;
+}
+
+.topicModal {
+  width: min(92vw, 22rem);
+  border-radius: 1rem;
+  background: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.65);
+  overflow: hidden;
+  animation: topicModalIn 160ms ease-out both;
+}
+
+@keyframes topicModalIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.topicModalHeader {
+  padding: 1rem 1rem 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.topicModalHeaderClass {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.65);
+  font-weight: 950;
+  letter-spacing: 0.02em;
+  font-size: 0.9rem;
+}
+
+.topicModalHeaderTitle {
+  margin: 0;
+  color: #ffffff;
+  font-weight: 950;
+  font-size: 1.05rem;
+}
+
+.topicModalList {
+  padding: 0.25rem 1rem 1rem;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.topicModalItem {
+  appearance: none;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  border-radius: 0.95rem;
+  padding: 0.85rem 0.9rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  transition: transform 120ms ease, background 160ms ease,
+    border-color 160ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.topicModalItem:active {
+  transform: scale(0.99);
+}
+
+.topicModalItem.isActive {
+  border-color: rgba(147, 197, 253, 0.55);
+  background: rgba(59, 130, 246, 0.12);
+}
+
+.topicModalItemMain {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.topicModalItemTitle {
+  font-weight: 950;
+  font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.topicModalItemChapter {
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 850;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.topicModalItemMeta {
+  color: #ffffff;
+  font-weight: 950;
+  font-size: 1rem;
+  padding-left: 0.25rem;
+}
+
+.topicModalClose {
+  width: 100%;
+  appearance: none;
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  color: rgba(255, 255, 255, 0.9);
+  padding: 0.95rem 1rem;
+  cursor: pointer;
+  font-weight: 900;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.topicModalClose:active {
+  transform: scale(0.99);
 }
 
 /* Home / module picker */
