@@ -1,8 +1,11 @@
 import { fireEvent, render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
 import App from './App'
 
 describe('App', () => {
   it('shows modules and opens Remember flashcards', () => {
+    vi.spyOn(Math, 'random').mockReturnValue(0.1)
+
     render(<App />)
 
     expect(

@@ -40,6 +40,7 @@ function App() {
 
   const openModules = (): void => setView('modules')
   const goHome = (): void => setView('home')
+  const goModules = (): void => setView('modules')
   const openRemember = (): void => {
     setView('remember')
   }
@@ -82,7 +83,7 @@ function App() {
         </main>
       ) : null}
 
-      {view === 'remember' ? <RememberScreen /> : null}
+      {view === 'remember' ? <RememberScreen onBack={goModules} /> : null}
 
       {showRefreshPrompt ? (
         <div className="updatePrompt" role="alertdialog" aria-live="polite">
