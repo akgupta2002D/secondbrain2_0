@@ -223,8 +223,8 @@ export const RememberScreen = ({ onBack }: Props) => {
         <div
           className={[
             'swipeEdgeLabel',
-            swipeUi.dragDirection === 'left' ? 'isRight' : '',
-            swipeUi.dragDirection === 'right' ? 'isLeft' : '',
+            swipeUi.dragDirection === 'left' ? 'isLeft' : '',
+            swipeUi.dragDirection === 'right' ? 'isRight' : '',
           ].filter(Boolean).join(' ')}
           style={{ opacity: Math.max(0, swipeUi.dragStrength - 0.1) }}
         >
