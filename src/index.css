@@ -757,8 +757,8 @@ body {
 
 .bottomUpdateVersion {
   position: fixed;
-  right: calc(env(safe-area-inset-right) + 1rem);
-  bottom: calc(env(safe-area-inset-bottom) + 0.75rem);
+  right: calc(env(safe-area-inset-right) + 0.75rem);
+  bottom: calc(env(safe-area-inset-bottom) + 0.35rem);
   z-index: 200;
   display: inline-flex;
   gap: 0.5rem;
