@@ -229,24 +229,29 @@ export const RememberScreen = ({ onBack }: Props) => {
         onFlip={onFlip}
       />
 
-      {isCardFlipped ? (
-        <div className="reviewActions" aria-label="Review actions">
-          <button
-            type="button"
-            className="reviewButton reviewCorrect"
-            onClick={() => onReview('correct')}
-          >
-            Correct
-          </button>
-          <button
-            type="button"
-            className="reviewButton reviewIncorrect"
-            onClick={() => onReview('incorrect')}
-          >
-            Incorrect
-          </button>
-        </div>
-      ) : null}
+      <div
+        className={
+          isCardFlipped ? 'reviewActions' : 'reviewActions reviewActionsHidden'
+        }
+        aria-label="Review actions"
+      >
+        <button
+          type="button"
+          className="reviewButton reviewCorrect"
+          onClick={() => onReview('correct')}
+          disabled={!isCardFlipped}
+        >
+          Correct
+        </button>
+        <button
+          type="button"
+          className="reviewButton reviewIncorrect"
+          onClick={() => onReview('incorrect')}
+          disabled={!isCardFlipped}
+        >
+          Incorrect
+        </button>
+      </div>
     </main>
   )
 }

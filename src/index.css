@@ -313,6 +313,11 @@ body {
   padding-bottom: env(safe-area-inset-bottom);
 }
 
+.reviewActionsHidden {
+  visibility: hidden;
+  pointer-events: none;
+}
+
 .reviewButton {
   flex: 1 1 0;
   appearance: none;
