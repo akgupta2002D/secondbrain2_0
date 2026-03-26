@@ -1,15 +1,21 @@
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import type { Flashcard } from '../model/types'
 
 type Props = {
   card: Flashcard
   deckClass: string
   chapter: string
+  isFlipped: boolean
+  onFlip: () => void
 }
 
-export const FlashcardCard = ({ card, deckClass, chapter }: Props) => {
-  const [isFlipped, setIsFlipped] = useState(false)
-
+export const FlashcardCard = ({
+  card,
+  deckClass,
+  chapter,
+  isFlipped,
+  onFlip,
+}: Props) => {
   const ariaLabel = useMemo(() => {
     return isFlipped
       ? 'Flashcard back. Tap to show front.'
@@ -20,7 +26,7 @@ export const FlashcardCard = ({ card, deckClass, chapter }: Props) => {
     <button
       type="button"
       className="flashcardButton"
-      onClick={() => setIsFlipped((v) => !v)}
+      onClick={onFlip}
       aria-pressed={isFlipped}
       aria-label={ariaLabel}
     >

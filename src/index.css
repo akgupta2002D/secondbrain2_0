@@ -177,7 +177,8 @@ body {
   width: min(92vw, 40rem);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  perspective: 900px;
+  /* Higher perspective => flatter / less dramatic 3D feel */
+  perspective: 1400px;
 }
 
 .flashcardInner {
@@ -190,7 +191,8 @@ body {
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.6);
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
-  transition: transform 420ms ease;
+  /* Quick, smooth flip */
+  transition: transform 220ms ease-in-out;
   will-change: transform;
   display: grid;
   place-items: center;
@@ -199,6 +201,15 @@ body {
 
 .flashcardInner.isFlipped {
   transform: rotateY(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flashcardInner {
+    transition: none;
+  }
+  .flashcardFace {
+    transition: none;
+  }
 }
 
 .flashcardFace {
@@ -210,7 +221,7 @@ body {
      We rely on our opacity toggles + transforms instead. */
   backface-visibility: visible;
   -webkit-backface-visibility: visible;
-  transition: opacity 180ms ease;
+  transition: opacity 220ms ease-in-out;
 }
 
 .flashcardFront {
@@ -290,6 +301,45 @@ body {
   margin: 0.5rem 0 0;
   color: rgba(255, 255, 255, 0.8);
   font-size: 0.95rem;
+}
+
+/* Review actions (only after definition is visible) */
+.reviewActions {
+  width: min(92vw, 40rem);
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 0.9rem;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.reviewButton {
+  flex: 1 1 0;
+  appearance: none;
+  border-radius: 1rem;
+  padding: 0.95rem 0.6rem;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: rgba(0, 0, 0, 0.65);
+  color: #ffffff;
+  font-weight: 950;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 120ms ease, background 160ms ease,
+    border-color 160ms ease;
+}
+
+.reviewButton:active {
+  transform: scale(0.99);
+}
+
+.reviewCorrect {
+  border-color: rgba(34, 197, 94, 0.35);
+  background: rgba(34, 197, 94, 0.12);
+}
+
+.reviewIncorrect {
+  border-color: rgba(239, 68, 68, 0.4);
+  background: rgba(239, 68, 68, 0.12);
 }
 
 /* Remember: topic menu (top-right) + modal */

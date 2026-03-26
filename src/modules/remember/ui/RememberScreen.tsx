@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import flashcardsJson from '../data/flashcards.json'
 import { parseFlashcardsJsonV1 } from '../model/parseFlashcards'
-import { initMemoryScores } from '../model/memoryScore'
+import { applyReviewResultToScore, initMemoryScores } from '../model/memoryScore'
+import { loadMemoryScores, saveMemoryScores } from '../model/memoryScoreStorage'
 import { FlashcardCard } from './FlashcardCard'
 
 const MEMORY_SCORE_DEFAULT = 50
@@ -16,6 +17,19 @@ const pickRandomCardId = (
   if (cards.length === 0) return ''
   const idx = Math.floor(Math.random() * cards.length)
   return cards[idx]?.cardId ?? cards[0]!.cardId
+}
+
+const pickRandomDifferentCardId = (
+  cards: Array<{ cardId: string }>,
+  currentCardId: string,
+): string => {
+  if (cards.length === 0) return ''
+  if (cards.length === 1) return cards[0]!.cardId
+
+  const filtered = cards.filter((c) => c.cardId !== currentCardId)
+  return pickRandomCardId(
+    filtered.length > 0 ? filtered : cards,
+  )
 }
 
 export const RememberScreen = ({ onBack }: Props) => {
@@ -36,15 +50,29 @@ export const RememberScreen = ({ onBack }: Props) => {
     return ''
   })
 
-  const [memoryScores] = useState(() => {
-    if (parsed.kind === 'ok') {
-      return initMemoryScores(
-        MEMORY_SCORE_DEFAULT,
-        parsed.value.topicPacks.map((t) => ({ topicId: t.topicId })),
-      )
-    }
-    return {}
+  const [memoryScores, setMemoryScores] = useState(() => {
+    if (parsed.kind !== 'ok') return {}
+
+    const deckId = parsed.value.deckId
+    const topicPacks = parsed.value.topicPacks
+    const topicIds = topicPacks.map((t) => t.topicId)
+
+    const loaded = loadMemoryScores(
+      deckId,
+      topicIds,
+      MEMORY_SCORE_DEFAULT,
+    )
+    const loadedHasKeys = Object.keys(loaded).length > 0
+
+    return loadedHasKeys
+      ? loaded
+      : initMemoryScores(
+          MEMORY_SCORE_DEFAULT,
+          topicPacks.map((t) => ({ topicId: t.topicId })),
+        )
   })
+
+  const [isCardFlipped, setIsCardFlipped] = useState(false)
 
   if (parsed.kind === 'err') {
     return (
@@ -78,8 +106,38 @@ export const RememberScreen = ({ onBack }: Props) => {
   useEffect(() => {
     const nextTopic =
       deck.topicPacks.find((t) => t.topicId === activeTopicId) ?? firstTopic
+    setIsCardFlipped(false)
     setActiveCardId(pickRandomCardId(nextTopic.cards))
   }, [activeTopicId, deck]) // deck is stable (parsed once)
+
+  useEffect(() => {
+    saveMemoryScores(deck.deckId, memoryScores)
+  }, [deck.deckId, memoryScores])
+
+  const onFlip = (): void => setIsCardFlipped((v) => !v)
+
+  const onReview = (result: 'correct' | 'incorrect'): void => {
+    if (!isCardFlipped) return
+
+    const topicId = topic.topicId
+    const current = memoryScores[topicId] ?? MEMORY_SCORE_DEFAULT
+    const next = applyReviewResultToScore(
+      current,
+      result,
+    )
+
+    setMemoryScores((prev) => ({
+      ...prev,
+      [topicId]: next,
+    }))
+
+    setIsCardFlipped(false)
+    const nextCardId = pickRandomDifferentCardId(
+      topic.cards,
+      activeCardId,
+    )
+    setActiveCardId(nextCardId)
+  }
 
   return (
     <main className="screen rememberScreen" aria-label="Remember">
@@ -167,7 +225,28 @@ export const RememberScreen = ({ onBack }: Props) => {
         card={topic.cards.find((c) => c.cardId === activeCardId) ?? topic.cards[0]!}
         deckClass={deck.deckClass}
         chapter={topic.chapter}
+        isFlipped={isCardFlipped}
+        onFlip={onFlip}
       />
+
+      {isCardFlipped ? (
+        <div className="reviewActions" aria-label="Review actions">
+          <button
+            type="button"
+            className="reviewButton reviewCorrect"
+            onClick={() => onReview('correct')}
+          >
+            Correct
+          </button>
+          <button
+            type="button"
+            className="reviewButton reviewIncorrect"
+            onClick={() => onReview('incorrect')}
+          >
+            Incorrect
+          </button>
+        </div>
+      ) : null}
     </main>
   )
 }
