@@ -28,7 +28,7 @@ describe('App', () => {
     // The definition is present in the DOM (back face) even before flip.
     expect(
       screen.getByText(
-        /Problem where each input instance has a yes or no answer/i,
+        /computational problem in which each input instance is mapped to a binary outcome/i,
       ),
     ).toBeInTheDocument()
 

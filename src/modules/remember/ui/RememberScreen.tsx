@@ -1,10 +1,12 @@
 import { useEffect, useMemo, useState } from 'react'
 import flashcardsJson from '../data/definitions306.json'
+import cellBioJson from '../data/cellBio_cellJunction.json'
 import { parseFlashcardsJsonV1 } from '../model/parseFlashcards'
 import { applyReviewResultToScore, initMemoryScores } from '../model/memoryScore'
 import { loadMemoryScores, saveMemoryScores } from '../model/memoryScoreStorage'
 import { FlashcardCard } from './FlashcardCard'
 import type { ReviewResult } from '../model/memoryScore'
+import type { Deck } from '../model/types'
 
 const MEMORY_SCORE_DEFAULT = 50
 const MEMORY_SCORE_ID = 'class'
@@ -35,37 +37,48 @@ const pickRandomDifferentCardId = (
 }
 
 export const RememberScreen = ({ onBack }: Props) => {
-  const parsed = useMemo(() => {
-    return parseFlashcardsJsonV1(flashcardsJson)
+  const parsedDecks = useMemo(() => {
+    const parsed = [
+      parseFlashcardsJsonV1(flashcardsJson),
+      parseFlashcardsJsonV1(cellBioJson),
+    ]
+
+    const firstErr = parsed.find((r) => r.kind === 'err')
+    if (firstErr && firstErr.kind === 'err') return firstErr
+
+    const decks = parsed
+      .map((r) => (r.kind === 'ok' ? r.value : null))
+      .filter((d): d is Deck => d !== null)
+
+    if (decks.length === 0) {
+      return {
+        kind: 'err' as const,
+        error: { kind: 'invalid' as const, message: 'No decks available' },
+      }
+    }
+
+    return { kind: 'ok' as const, value: decks }
   }, [])
 
+  const [activeDeckId, setActiveDeckId] = useState(() => {
+    if (parsedDecks.kind !== 'ok') return ''
+    return parsedDecks.value[0]?.deckId ?? ''
+  })
+
+  const activeDeck = useMemo(() => {
+    if (parsedDecks.kind !== 'ok') return null
+    return parsedDecks.value.find((d) => d.deckId === activeDeckId) ?? parsedDecks.value[0] ?? null
+  }, [parsedDecks, activeDeckId])
+
   const [activeCardId, setActiveCardId] = useState(() => {
-    if (parsed.kind === 'ok') {
-      const allCards = parsed.value.topicPacks.flatMap((tp) => tp.cards)
+    if (activeDeck) {
+      const allCards = activeDeck.topicPacks.flatMap((tp) => tp.cards)
       return allCards.length > 0 ? pickRandomCardId(allCards) : ''
     }
     return ''
   })
 
-  const [memoryScores, setMemoryScores] = useState(() => {
-    if (parsed.kind !== 'ok') return {}
-
-    const deckId = parsed.value.deckId
-
-    const loaded = loadMemoryScores(
-      deckId,
-      [MEMORY_SCORE_ID],
-      MEMORY_SCORE_DEFAULT,
-    )
-    const loadedHasKeys = Object.keys(loaded).length > 0
-
-    return loadedHasKeys
-      ? loaded
-      : initMemoryScores(
-          MEMORY_SCORE_DEFAULT,
-          [{ topicId: MEMORY_SCORE_ID }],
-        )
-  })
+  const [memoryScores, setMemoryScores] = useState<Record<string, number>>({})
 
   const [isCardFlipped, setIsCardFlipped] = useState(false)
   const [swipeUi, setSwipeUi] = useState<{
@@ -78,18 +91,28 @@ export const RememberScreen = ({ onBack }: Props) => {
   )
   const [cyclePromptOpen, setCyclePromptOpen] = useState(false)
 
-  if (parsed.kind === 'err') {
+  if (parsedDecks.kind === 'err') {
     return (
       <main className="screen rememberScreen" aria-label="Remember error">
         <div className="rememberError">
           <p className="rememberErrorTitle">Failed to load flashcards</p>
-          <p className="rememberErrorBody">{parsed.error.message}</p>
+          <p className="rememberErrorBody">{parsedDecks.error.message}</p>
         </div>
       </main>
     )
   }
 
-  const deck = parsed.value
+  if (!activeDeck) {
+    return (
+      <main className="screen rememberScreen" aria-label="Remember error">
+        <div className="rememberError">
+          <p className="rememberErrorTitle">No active deck found</p>
+        </div>
+      </main>
+    )
+  }
+
+  const deck = activeDeck
   const allCards = useMemo(() => {
     return deck.topicPacks.flatMap((tp) => tp.cards)
   }, [deck])
@@ -110,12 +133,29 @@ export const RememberScreen = ({ onBack }: Props) => {
   }, [topicModalOpen])
 
   useEffect(() => {
-    // Deck is stable (parsed once). When it changes, reset review state.
+    // Reset review state when active deck changes.
     setIsCardFlipped(false)
     setCycleReviewedCardIds([])
     setCyclePromptOpen(false)
     setActiveCardId(allCards.length > 0 ? pickRandomCardId(allCards) : '')
   }, [deck, allCards])
+
+  useEffect(() => {
+    const loaded = loadMemoryScores(
+      deck.deckId,
+      [MEMORY_SCORE_ID],
+      MEMORY_SCORE_DEFAULT,
+    )
+    const loadedHasKeys = Object.keys(loaded).length > 0
+    setMemoryScores(
+      loadedHasKeys
+        ? loaded
+        : initMemoryScores(
+            MEMORY_SCORE_DEFAULT,
+            [{ topicId: MEMORY_SCORE_ID }],
+          ),
+    )
+  }, [deck.deckId])
 
   useEffect(() => {
     saveMemoryScores(deck.deckId, memoryScores)
@@ -246,25 +286,37 @@ export const RememberScreen = ({ onBack }: Props) => {
           >
             <div className="topicModalHeader">
               <p className="topicModalHeaderClass">{deck.deckClass}</p>
-              <p className="topicModalHeaderTitle">Topics</p>
+              <p className="topicModalHeaderTitle">Classes</p>
             </div>
 
             <div className="topicModalList" aria-label="Topic list">
-              <button
-                key={deck.deckId}
-                type="button"
-                className="topicModalItem isActive"
-                onClick={() => setTopicModalOpen(false)}
-                aria-pressed={true}
-                aria-label={`Class ${deck.deckClass}`}
-              >
-                <div className="topicModalItemMain">
-                  <span className="topicModalItemTitle">{deck.deckClass}</span>
-                </div>
-                <div className="topicModalItemMeta">
-                  {memoryScores[MEMORY_SCORE_ID] ?? MEMORY_SCORE_DEFAULT}
-                </div>
-              </button>
+              {parsedDecks.value.map((d) => {
+                const scoreForDeck = d.deckId === deck.deckId
+                  ? (memoryScores[MEMORY_SCORE_ID] ?? MEMORY_SCORE_DEFAULT)
+                  : (loadMemoryScores(d.deckId, [MEMORY_SCORE_ID], MEMORY_SCORE_DEFAULT)[MEMORY_SCORE_ID] ?? MEMORY_SCORE_DEFAULT)
+
+                const isActive = d.deckId === deck.deckId
+                return (
+                  <button
+                    key={d.deckId}
+                    type="button"
+                    className={`topicModalItem ${isActive ? 'isActive' : ''}`}
+                    onClick={() => {
+                      setActiveDeckId(d.deckId)
+                      setTopicModalOpen(false)
+                    }}
+                    aria-pressed={isActive}
+                    aria-label={`Class ${d.deckClass}`}
+                  >
+                    <div className="topicModalItemMain">
+                      <span className="topicModalItemTitle">{d.deckClass}</span>
+                    </div>
+                    <div className="topicModalItemMeta">
+                      {scoreForDeck}
+                    </div>
+                  </button>
+                )
+              })}
             </div>
 
             <button

@@ -1,0 +1,203 @@
+{
+    "version": 1,
+    "deckId": "cell-adhesion-division",
+    "class": "BIO",
+    "topicPacks": [
+      {
+        "topicId": "cell-adhesion",
+        "title": "Cell Adhesion",
+        "chapter": "Cell Adhesion",
+        "cards": [
+          {
+            "cardId": "ca-001",
+            "term": "Tight Junction",
+            "definition": "A junction that seals the space between epithelial cells to prevent leakage."
+          },
+          {
+            "cardId": "ca-002",
+            "term": "Adherens Junction",
+            "definition": "A cell junction that connects actin filaments between neighboring cells."
+          },
+          {
+            "cardId": "ca-003",
+            "term": "Desmosome",
+            "definition": "A junction that connects intermediate filaments between cells for structural support."
+          },
+          {
+            "cardId": "ca-004",
+            "term": "Gap Junction",
+            "definition": "A channel that allows small molecules and ions to pass between cells."
+          },
+          {
+            "cardId": "ca-005",
+            "term": "Hemidesmosome",
+            "definition": "A structure that anchors cells to the extracellular matrix."
+          },
+          {
+            "cardId": "ca-006",
+            "term": "Cadherin",
+            "definition": "A calcium-dependent protein that mediates cell–cell adhesion."
+          },
+          {
+            "cardId": "ca-007",
+            "term": "E-cadherin",
+            "definition": "A cadherin important in epithelial cells and early embryonic development."
+          },
+          {
+            "cardId": "ca-008",
+            "term": "Homophilic Binding",
+            "definition": "Binding between identical molecules, such as cadherin to cadherin."
+          },
+          {
+            "cardId": "ca-009",
+            "term": "Heterophilic Binding",
+            "definition": "Binding between different types of molecules."
+          },
+          {
+            "cardId": "ca-010",
+            "term": "Differential Adhesion",
+            "definition": "The process by which cells sort themselves based on adhesion strength."
+          },
+          {
+            "cardId": "ca-011",
+            "term": "Actin Filaments",
+            "definition": "Cytoskeletal structures involved in cell shape and adhesion."
+          },
+          {
+            "cardId": "ca-012",
+            "term": "Adhesion Belt",
+            "definition": "A ring of adherens junctions that can contract to change cell shape."
+          },
+          {
+            "cardId": "ca-013",
+            "term": "Invagination",
+            "definition": "The inward folding of a sheet of cells during development."
+          },
+          {
+            "cardId": "ca-014",
+            "term": "Tissue Remodeling",
+            "definition": "The reorganization of tissues during development or repair."
+          }
+        ]
+      },
+      {
+        "topicId": "cell-division",
+        "title": "Cell Division",
+        "chapter": "Cell Cycle",
+        "cards": [
+          {
+            "cardId": "cd-001",
+            "term": "Cell Cycle",
+            "definition": "The process of cell growth, DNA replication, and division."
+          },
+          {
+            "cardId": "cd-002",
+            "term": "Interphase",
+            "definition": "The stage of the cell cycle where the cell grows and replicates DNA."
+          },
+          {
+            "cardId": "cd-003",
+            "term": "G1 Phase",
+            "definition": "A phase of cell growth and environmental monitoring."
+          },
+          {
+            "cardId": "cd-004",
+            "term": "S Phase",
+            "definition": "The phase in which DNA replication occurs."
+          },
+          {
+            "cardId": "cd-005",
+            "term": "G2 Phase",
+            "definition": "The phase where the cell prepares for mitosis."
+          },
+          {
+            "cardId": "cd-006",
+            "term": "M Phase",
+            "definition": "The phase that includes mitosis and cytokinesis."
+          },
+          {
+            "cardId": "cd-007",
+            "term": "Mitosis",
+            "definition": "The division of the nucleus."
+          },
+          {
+            "cardId": "cd-008",
+            "term": "Cytokinesis",
+            "definition": "The division of the cytoplasm."
+          },
+          {
+            "cardId": "cd-009",
+            "term": "Mitogens",
+            "definition": "Signals that stimulate cell division."
+          },
+          {
+            "cardId": "cd-010",
+            "term": "Growth Factors",
+            "definition": "Signals that increase cell mass and promote protein synthesis."
+          },
+          {
+            "cardId": "cd-011",
+            "term": "Survival Factors",
+            "definition": "Signals that prevent programmed cell death."
+          },
+          {
+            "cardId": "cd-012",
+            "term": "Paracrine Signaling",
+            "definition": "Cell signaling over short distances between nearby cells."
+          },
+          {
+            "cardId": "cd-013",
+            "term": "DNA Damage",
+            "definition": "Errors in DNA caused by replication issues or external factors."
+          },
+          {
+            "cardId": "cd-014",
+            "term": "p53",
+            "definition": "A tumor suppressor protein that halts the cell cycle when DNA is damaged."
+          }
+        ]
+      },
+      {
+        "topicId": "chromosomes",
+        "title": "Chromosomes and Aging",
+        "chapter": "Intrinsic Control",
+        "cards": [
+          {
+            "cardId": "ch-001",
+            "term": "Chromosome",
+            "definition": "A structure of DNA and protein that carries genetic information."
+          },
+          {
+            "cardId": "ch-002",
+            "term": "Telomere",
+            "definition": "The protective end of a chromosome that shortens with each division."
+          },
+          {
+            "cardId": "ch-003",
+            "term": "Telomerase",
+            "definition": "An enzyme that maintains and extends telomeres."
+          },
+          {
+            "cardId": "ch-004",
+            "term": "Replicative Senescence",
+            "definition": "The process by which cells stop dividing after many cycles."
+          },
+          {
+            "cardId": "ch-005",
+            "term": "Apoptosis",
+            "definition": "Programmed cell death."
+          },
+          {
+            "cardId": "ch-006",
+            "term": "Cell Cycle Arrest",
+            "definition": "A halt in the cell cycle often triggered by DNA damage."
+          },
+          {
+            "cardId": "ch-007",
+            "term": "DAPI",
+            "definition": "A fluorescent dye used to stain DNA for visualization."
+          }
+        ]
+      }
+    ]
+  }
