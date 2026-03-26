@@ -4,8 +4,10 @@ import { parseFlashcardsJsonV1 } from '../model/parseFlashcards'
 import { applyReviewResultToScore, initMemoryScores } from '../model/memoryScore'
 import { loadMemoryScores, saveMemoryScores } from '../model/memoryScoreStorage'
 import { FlashcardCard } from './FlashcardCard'
+import type { ReviewResult } from '../model/memoryScore'
 
 const MEMORY_SCORE_DEFAULT = 50
+const MEMORY_SCORE_ID = 'class'
 
 type Props = {
   onBack: () => void
@@ -37,15 +39,10 @@ export const RememberScreen = ({ onBack }: Props) => {
     return parseFlashcardsJsonV1(flashcardsJson)
   }, [])
 
-  const [activeTopicId, setActiveTopicId] = useState(() => {
-    if (parsed.kind === 'ok') return parsed.value.topicPacks[0]?.topicId ?? ''
-    return ''
-  })
-
   const [activeCardId, setActiveCardId] = useState(() => {
     if (parsed.kind === 'ok') {
-      const firstTopic = parsed.value.topicPacks[0]
-      return firstTopic ? pickRandomCardId(firstTopic.cards) : ''
+      const allCards = parsed.value.topicPacks.flatMap((tp) => tp.cards)
+      return allCards.length > 0 ? pickRandomCardId(allCards) : ''
     }
     return ''
   })
@@ -54,12 +51,10 @@ export const RememberScreen = ({ onBack }: Props) => {
     if (parsed.kind !== 'ok') return {}
 
     const deckId = parsed.value.deckId
-    const topicPacks = parsed.value.topicPacks
-    const topicIds = topicPacks.map((t) => t.topicId)
 
     const loaded = loadMemoryScores(
       deckId,
-      topicIds,
+      [MEMORY_SCORE_ID],
       MEMORY_SCORE_DEFAULT,
     )
     const loadedHasKeys = Object.keys(loaded).length > 0
@@ -68,11 +63,16 @@ export const RememberScreen = ({ onBack }: Props) => {
       ? loaded
       : initMemoryScores(
           MEMORY_SCORE_DEFAULT,
-          topicPacks.map((t) => ({ topicId: t.topicId })),
+          [{ topicId: MEMORY_SCORE_ID }],
         )
   })
 
   const [isCardFlipped, setIsCardFlipped] = useState(false)
+  const [feedback, setFeedback] = useState<ReviewResult | null>(null)
+  const [cycleReviewedCardIds, setCycleReviewedCardIds] = useState<string[]>(
+    [],
+  )
+  const [cyclePromptOpen, setCyclePromptOpen] = useState(false)
 
   if (parsed.kind === 'err') {
     return (
@@ -86,9 +86,11 @@ export const RememberScreen = ({ onBack }: Props) => {
   }
 
   const deck = parsed.value
-  const firstTopic = deck.topicPacks[0]
-  const activeTopic = deck.topicPacks.find((t) => t.topicId === activeTopicId)
-  const topic = activeTopic ?? firstTopic
+  const allCards = useMemo(() => {
+    return deck.topicPacks.flatMap((tp) => tp.cards)
+  }, [deck])
+
+  const activeCard = allCards.find((c) => c.cardId === activeCardId) ?? allCards[0]
 
   const [topicModalOpen, setTopicModalOpen] = useState(false)
 
@@ -104,11 +106,13 @@ export const RememberScreen = ({ onBack }: Props) => {
   }, [topicModalOpen])
 
   useEffect(() => {
-    const nextTopic =
-      deck.topicPacks.find((t) => t.topicId === activeTopicId) ?? firstTopic
+    // Deck is stable (parsed once). When it changes, reset review state.
     setIsCardFlipped(false)
-    setActiveCardId(pickRandomCardId(nextTopic.cards))
-  }, [activeTopicId, deck]) // deck is stable (parsed once)
+    setFeedback(null)
+    setCycleReviewedCardIds([])
+    setCyclePromptOpen(false)
+    setActiveCardId(allCards.length > 0 ? pickRandomCardId(allCards) : '')
+  }, [deck, allCards])
 
   useEffect(() => {
     saveMemoryScores(deck.deckId, memoryScores)
@@ -118,9 +122,10 @@ export const RememberScreen = ({ onBack }: Props) => {
 
   const onReview = (result: 'correct' | 'incorrect'): void => {
     if (!isCardFlipped) return
+    if (cyclePromptOpen) return
+    if (!activeCard) return
 
-    const topicId = topic.topicId
-    const current = memoryScores[topicId] ?? MEMORY_SCORE_DEFAULT
+    const current = memoryScores[MEMORY_SCORE_ID] ?? MEMORY_SCORE_DEFAULT
     const next = applyReviewResultToScore(
       current,
       result,
@@ -128,15 +133,55 @@ export const RememberScreen = ({ onBack }: Props) => {
 
     setMemoryScores((prev) => ({
       ...prev,
-      [topicId]: next,
+      [MEMORY_SCORE_ID]: next,
     }))
 
     setIsCardFlipped(false)
+
+    const allCardIds = allCards.map((c) => c.cardId)
+    const currentCardId = activeCard.cardId
+    const nextReviewedIds = Array.from(
+      new Set([...cycleReviewedCardIds, currentCardId]),
+    )
+    const didCompleteCycle = nextReviewedIds.length >= allCardIds.length
+
+    if (didCompleteCycle) {
+      setCyclePromptOpen(true)
+      setCycleReviewedCardIds([])
+      return
+    }
+
+    setCycleReviewedCardIds(nextReviewedIds)
+
     const nextCardId = pickRandomDifferentCardId(
-      topic.cards,
-      activeCardId,
+      allCards,
+      currentCardId,
     )
     setActiveCardId(nextCardId)
+  }
+
+  const onSwipeReview = (result: ReviewResult): void => {
+    if (cyclePromptOpen) return
+    setFeedback(result)
+    onReview(result)
+
+    window.setTimeout(() => {
+      setFeedback(null)
+    }, 650)
+  }
+
+  const onStartAgain = (): void => {
+    setCyclePromptOpen(false)
+    setIsCardFlipped(false)
+    const nextCardId = activeCard
+      ? pickRandomDifferentCardId(allCards, activeCard.cardId)
+      : pickRandomCardId(allCards)
+    setActiveCardId(nextCardId)
+  }
+
+  const onChooseDifferentTopic = (): void => {
+    setCyclePromptOpen(false)
+    setTopicModalOpen(true)
   }
 
   return (
@@ -180,33 +225,21 @@ export const RememberScreen = ({ onBack }: Props) => {
             </div>
 
             <div className="topicModalList" aria-label="Topic list">
-              {deck.topicPacks.map((tp) => {
-                const score =
-                  memoryScores[tp.topicId] ?? MEMORY_SCORE_DEFAULT
-                const isActive = tp.topicId === topic.topicId
-
-                return (
-                  <button
-                    key={tp.topicId}
-                    type="button"
-                    className={
-                      isActive ? 'topicModalItem isActive' : 'topicModalItem'
-                    }
-                    onClick={() => {
-                      setActiveTopicId(tp.topicId)
-                      setTopicModalOpen(false)
-                    }}
-                    aria-pressed={isActive}
-                    aria-label={`Topic ${tp.title}`}
-                  >
-                    <div className="topicModalItemMain">
-                      <span className="topicModalItemTitle">{tp.title}</span>
-                      <span className="topicModalItemChapter">{tp.chapter}</span>
-                    </div>
-                    <div className="topicModalItemMeta">{score}</div>
-                  </button>
-                )
-              })}
+              <button
+                key={deck.deckId}
+                type="button"
+                className="topicModalItem isActive"
+                onClick={() => setTopicModalOpen(false)}
+                aria-pressed={true}
+                aria-label={`Class ${deck.deckClass}`}
+              >
+                <div className="topicModalItemMain">
+                  <span className="topicModalItemTitle">{deck.deckClass}</span>
+                </div>
+                <div className="topicModalItemMeta">
+                  {memoryScores[MEMORY_SCORE_ID] ?? MEMORY_SCORE_DEFAULT}
+                </div>
+              </button>
             </div>
 
             <button
@@ -220,13 +253,35 @@ export const RememberScreen = ({ onBack }: Props) => {
         </div>
       ) : null}
 
+      {cyclePromptOpen ? (
+        <div className="cycleCompletePrompt" aria-live="polite">
+          <p className="cycleCompleteTitle">Completed. Start again.</p>
+          <div className="cycleCompleteActions">
+            <button
+              type="button"
+              className="cycleActionButton"
+              onClick={onStartAgain}
+            >
+              Start Again
+            </button>
+            <button
+              type="button"
+              className="cycleActionButton cycleActionAlt"
+              onClick={onChooseDifferentTopic}
+            >
+              Different Topic
+            </button>
+          </div>
+        </div>
+      ) : null}
+
       <FlashcardCard
-        key={`${topic.topicId}:${activeCardId}`}
-        card={topic.cards.find((c) => c.cardId === activeCardId) ?? topic.cards[0]!}
+        key={activeCardId}
+        card={activeCard ?? allCards[0]!}
         deckClass={deck.deckClass}
-        chapter={topic.chapter}
         isFlipped={isCardFlipped}
         onFlip={onFlip}
+        onSwipe={onSwipeReview}
       />
 
       <div
@@ -252,6 +307,17 @@ export const RememberScreen = ({ onBack }: Props) => {
           Incorrect
         </button>
       </div>
+
+      {feedback ? (
+        <div
+          className={
+            feedback === 'correct' ? 'swipeBadge swipeBadgeCorrect' : 'swipeBadge swipeBadgeIncorrect'
+          }
+          aria-live="polite"
+        >
+          {feedback === 'correct' ? 'Correct' : 'Incorrect'}
+        </div>
+      ) : null}
     </main>
   )
 }

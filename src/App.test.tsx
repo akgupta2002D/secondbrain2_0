@@ -23,7 +23,6 @@ describe('App', () => {
 
     expect(screen.getByText('What is a Hook?')).toBeInTheDocument()
     expect(screen.getByText('CS-101')).toBeInTheDocument()
-    expect(screen.getByText('Hooks')).toBeInTheDocument()
 
     // The definition is present in the DOM (back face) even before flip.
     expect(

@@ -1,0 +1,263 @@
+{
+    "version": 1,
+    "deckId": "remember-default",
+    "class": "CS-306",
+    "topicPacks": [
+      {
+        "topicId": "decision-languages",
+        "title": "Decision Problems & Languages",
+        "chapter": "Foundations",
+        "cards": [
+          {
+            "cardId": "dl-1",
+            "term": "Decision Problem",
+            "definition": "Problem where each input instance has a yes or no answer."
+          },
+          {
+            "cardId": "dl-2",
+            "term": "Language",
+            "definition": "Set of strings over a finite alphabet."
+          },
+          {
+            "cardId": "dl-3",
+            "term": "Alphabet",
+            "definition": "Finite set of symbols used to form strings."
+          },
+          {
+            "cardId": "dl-4",
+            "term": "String",
+            "definition": "Finite sequence of symbols from an alphabet."
+          },
+          {
+            "cardId": "dl-5",
+            "term": "Kleene Star",
+            "definition": "All finite concatenations of a language, including empty string."
+          }
+        ]
+      },
+      {
+        "topicId": "automata",
+        "title": "Finite Automata",
+        "chapter": "Regular Languages",
+        "cards": [
+          {
+            "cardId": "fa-1",
+            "term": "DFA",
+            "definition": "Finite automaton with exactly one transition per symbol per state."
+          },
+          {
+            "cardId": "fa-2",
+            "term": "NFA",
+            "definition": "Automaton allowing multiple or zero transitions per symbol."
+          },
+          {
+            "cardId": "fa-3",
+            "term": "ε-transition",
+            "definition": "Transition between states without consuming input."
+          },
+          {
+            "cardId": "fa-4",
+            "term": "Regular Language",
+            "definition": "Language recognized by DFA, NFA, or regular expressions."
+          },
+          {
+            "cardId": "fa-5",
+            "term": "Intersection",
+            "definition": "Set of strings common to two languages."
+          }
+        ]
+      },
+      {
+        "topicId": "turing-machines",
+        "title": "Turing Machines",
+        "chapter": "Computation",
+        "cards": [
+          {
+            "cardId": "tm-1",
+            "term": "Turing Machine",
+            "definition": "Abstract machine with infinite tape capable of general computation."
+          },
+          {
+            "cardId": "tm-2",
+            "term": "Universal TM",
+            "definition": "Turing machine that simulates any other Turing machine."
+          },
+          {
+            "cardId": "tm-3",
+            "term": "Tape",
+            "definition": "Infinite memory divided into cells storing symbols."
+          },
+          {
+            "cardId": "tm-4",
+            "term": "Head",
+            "definition": "Reads and writes symbols, moves along the tape."
+          },
+          {
+            "cardId": "tm-5",
+            "term": "Configuration",
+            "definition": "Current state, tape contents, and head position."
+          },
+          {
+            "cardId": "tm-6",
+            "term": "Church-Turing Thesis",
+            "definition": "All effectively computable functions can be computed by a Turing machine."
+          }
+        ]
+      },
+      {
+        "topicId": "decidability",
+        "title": "Decidability",
+        "chapter": "Limits of Computation",
+        "cards": [
+          {
+            "cardId": "dc-1",
+            "term": "Decidable Language",
+            "definition": "Language where a TM halts and decides membership for all inputs."
+          },
+          {
+            "cardId": "dc-2",
+            "term": "Recognizable Language",
+            "definition": "Language where TM accepts members but may loop on non-members."
+          },
+          {
+            "cardId": "dc-3",
+            "term": "Halting Problem",
+            "definition": "Determining if a TM halts on input; undecidable."
+          },
+          {
+            "cardId": "dc-4",
+            "term": "Acceptance Problem",
+            "definition": "Determining whether a TM accepts a given input."
+          },
+          {
+            "cardId": "dc-5",
+            "term": "Rice’s Theorem",
+            "definition": "All non-trivial semantic properties of TM languages are undecidable."
+          }
+        ]
+      },
+      {
+        "topicId": "complexity",
+        "title": "Complexity Theory",
+        "chapter": "P vs NP",
+        "cards": [
+          {
+            "cardId": "cx-1",
+            "term": "P",
+            "definition": "Problems solvable in polynomial time by a deterministic machine."
+          },
+          {
+            "cardId": "cx-2",
+            "term": "NP",
+            "definition": "Problems whose solutions can be verified in polynomial time."
+          },
+          {
+            "cardId": "cx-3",
+            "term": "Polynomial Time",
+            "definition": "Runtime bounded by n^k for some constant k."
+          },
+          {
+            "cardId": "cx-4",
+            "term": "Verifier",
+            "definition": "Algorithm that checks correctness of a given solution efficiently."
+          },
+          {
+            "cardId": "cx-5",
+            "term": "Certificate",
+            "definition": "Proof used by a verifier to confirm a solution."
+          },
+          {
+            "cardId": "cx-6",
+            "term": "NP-Complete",
+            "definition": "Problems in NP to which all NP problems reduce."
+          }
+        ]
+      },
+      {
+        "topicId": "np-problems",
+        "title": "NP Problems",
+        "chapter": "Reductions",
+        "cards": [
+          {
+            "cardId": "np-1",
+            "term": "SAT",
+            "definition": "Determine if Boolean formula has a satisfying assignment."
+          },
+          {
+            "cardId": "np-2",
+            "term": "3SAT",
+            "definition": "SAT where each clause has exactly three literals."
+          },
+          {
+            "cardId": "np-3",
+            "term": "Vertex Cover",
+            "definition": "Smallest set of vertices covering all edges."
+          },
+          {
+            "cardId": "np-4",
+            "term": "Clique",
+            "definition": "Fully connected subset of vertices in a graph."
+          },
+          {
+            "cardId": "np-5",
+            "term": "Subset Sum",
+            "definition": "Determine if subset sums to a target value."
+          }
+        ]
+      },
+      {
+        "topicId": "approximation",
+        "title": "Approximation Algorithms",
+        "chapter": "Optimization",
+        "cards": [
+          {
+            "cardId": "ap-1",
+            "term": "Approximation Algorithm",
+            "definition": "Efficient algorithm producing near-optimal solutions."
+          },
+          {
+            "cardId": "ap-2",
+            "term": "Approximation Ratio",
+            "definition": "Worst-case ratio between algorithm solution and optimal."
+          },
+          {
+            "cardId": "ap-3",
+            "term": "FPTAS",
+            "definition": "Approximation within (1+ε) in polynomial time."
+          }
+        ]
+      },
+      {
+        "topicId": "flow",
+        "title": "Network Flow",
+        "chapter": "Graphs",
+        "cards": [
+          {
+            "cardId": "fl-1",
+            "term": "Flow Network",
+            "definition": "Directed graph with capacities on edges."
+          },
+          {
+            "cardId": "fl-2",
+            "term": "Capacity",
+            "definition": "Maximum allowed flow through an edge."
+          },
+          {
+            "cardId": "fl-3",
+            "term": "Flow",
+            "definition": "Amount of material sent through network edges."
+          },
+          {
+            "cardId": "fl-4",
+            "term": "Augmenting Path",
+            "definition": "Path where additional flow can be pushed."
+          },
+          {
+            "cardId": "fl-5",
+            "term": "Max Flow Min Cut",
+            "definition": "Maximum flow equals capacity of minimum cut."
+          }
+        ]
+      }
+    ]
+  }
