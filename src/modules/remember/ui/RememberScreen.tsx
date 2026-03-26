@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import flashcardsJson from '../data/flashcards.json'
+import flashcardsJson from '../data/definitions306.json'
 import { parseFlashcardsJsonV1 } from '../model/parseFlashcards'
 import { applyReviewResultToScore, initMemoryScores } from '../model/memoryScore'
 import { loadMemoryScores, saveMemoryScores } from '../model/memoryScoreStorage'
@@ -69,6 +69,11 @@ export const RememberScreen = ({ onBack }: Props) => {
 
   const [isCardFlipped, setIsCardFlipped] = useState(false)
   const [feedback, setFeedback] = useState<ReviewResult | null>(null)
+  const [swipeUi, setSwipeUi] = useState<{
+    dragStrength: number
+    dragDirection: 'left' | 'right' | 'none'
+    isDragging: boolean
+  }>({ dragStrength: 0, dragDirection: 'none', isDragging: false })
   const [cycleReviewedCardIds, setCycleReviewedCardIds] = useState<string[]>(
     [],
   )
@@ -207,6 +212,33 @@ export const RememberScreen = ({ onBack }: Props) => {
         ...
       </button>
 
+      <div
+        className={[
+          'swipeSplitBg',
+          isCardFlipped ? 'isActive' : '',
+          swipeUi.isDragging ? 'isDragging' : '',
+        ].filter(Boolean).join(' ')}
+        aria-hidden="true"
+        style={{
+          opacity: isCardFlipped ? 1 : 0,
+          // subtle "activation" as you drag
+          ['--swipe-strength' as any]: String(swipeUi.dragStrength),
+        }}
+      >
+        <div className="swipeSplitLeft" />
+        <div className="swipeSplitRight" />
+        <div
+          className={[
+            'swipeEdgeLabel',
+            swipeUi.dragDirection === 'left' ? 'isRight' : '',
+            swipeUi.dragDirection === 'right' ? 'isLeft' : '',
+          ].filter(Boolean).join(' ')}
+          style={{ opacity: Math.max(0, swipeUi.dragStrength - 0.1) }}
+        >
+          {swipeUi.dragDirection === 'left' ? "Don't know" : swipeUi.dragDirection === 'right' ? 'Know' : ''}
+        </div>
+      </div>
+
       {topicModalOpen ? (
         <div
           className="topicModalOverlay"
@@ -282,40 +314,21 @@ export const RememberScreen = ({ onBack }: Props) => {
         isFlipped={isCardFlipped}
         onFlip={onFlip}
         onSwipe={onSwipeReview}
+        onSwipeUiChange={setSwipeUi}
       />
-
-      <div
-        className={
-          isCardFlipped ? 'reviewActions' : 'reviewActions reviewActionsHidden'
-        }
-        aria-label="Review actions"
-      >
-        <button
-          type="button"
-          className="reviewButton reviewCorrect"
-          onClick={() => onReview('correct')}
-          disabled={!isCardFlipped}
-        >
-          Correct
-        </button>
-        <button
-          type="button"
-          className="reviewButton reviewIncorrect"
-          onClick={() => onReview('incorrect')}
-          disabled={!isCardFlipped}
-        >
-          Incorrect
-        </button>
-      </div>
 
       {feedback ? (
         <div
           className={
-            feedback === 'correct' ? 'swipeBadge swipeBadgeCorrect' : 'swipeBadge swipeBadgeIncorrect'
+            [
+              'swipeEdgeFeedback',
+              feedback === 'correct' ? 'isLeft' : 'isRight',
+              feedback === 'correct' ? 'swipeEdgeFeedbackCorrect' : 'swipeEdgeFeedbackIncorrect',
+            ].join(' ')
           }
           aria-live="polite"
         >
-          {feedback === 'correct' ? 'Correct' : 'Incorrect'}
+          {feedback === 'correct' ? 'Know' : "Don't know"}
         </div>
       ) : null}
     </main>

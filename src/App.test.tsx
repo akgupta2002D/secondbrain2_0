@@ -3,9 +3,10 @@ import { vi } from 'vitest'
 import App from './App'
 
 describe('App', () => {
-  it('shows modules and opens Remember flashcards', () => {
-    vi.spyOn(Math, 'random').mockReturnValue(0.1)
+  it('shows modules and opens Remember flashcards', async () => {
+    vi.spyOn(Math, 'random').mockReturnValue(0)
     window.localStorage.clear()
+    vi.useFakeTimers()
 
     render(<App />)
 
@@ -21,13 +22,13 @@ describe('App', () => {
 
     fireEvent.click(screen.getByRole('menuitem', { name: 'Remember' }))
 
-    expect(screen.getByText('What is a Hook?')).toBeInTheDocument()
-    expect(screen.getByText('CS-101')).toBeInTheDocument()
+    expect(screen.getByText('Decision Problem')).toBeInTheDocument()
+    expect(screen.getByText('CS-306')).toBeInTheDocument()
 
     // The definition is present in the DOM (back face) even before flip.
     expect(
       screen.getByText(
-        /A Hook is a function that lets you use React features like state and lifecycle/i,
+        /Problem where each input instance has a yes or no answer/i,
       ),
     ).toBeInTheDocument()
 
@@ -38,18 +39,35 @@ describe('App', () => {
       }),
     )
 
-    expect(screen.getByRole('button', { name: 'Correct' })).toBeInTheDocument()
-    expect(
-      screen.getByRole('button', { name: 'Incorrect' }),
-    ).toBeInTheDocument()
+    // Score update: swipe right (know) should increase memory score
+    fireEvent.pointerDown(
+      screen.getByRole('button', {
+        name: /Flashcard back\. Tap to show front\./i,
+      }),
+      { clientX: 100, clientY: 100, pointerId: 1 },
+    )
+    fireEvent.pointerMove(
+      screen.getByRole('button', {
+        name: /Flashcard back\. Tap to show front\./i,
+      }),
+      { clientX: 200, clientY: 100, pointerId: 1 },
+    )
+    fireEvent.pointerUp(
+      screen.getByRole('button', {
+        name: /Flashcard back\. Tap to show front\./i,
+      }),
+      { clientX: 220, clientY: 100, pointerId: 1 },
+    )
 
-    // Score update: correct should increase topic memory score
-    fireEvent.click(screen.getByRole('button', { name: 'Correct' }))
+    // Allow the swipe settle animation timeout to complete.
+    vi.advanceTimersByTime(200)
 
     // Open topic modal and verify updated score
     fireEvent.click(screen.getByRole('button', { name: 'Topics' }))
 
     expect(screen.getByText('60')).toBeInTheDocument()
+
+    vi.useRealTimers()
   })
 })
 
