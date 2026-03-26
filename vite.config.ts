@@ -1,21 +1,9 @@
-import { execSync } from 'node:child_process'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
-const commitCount = (() => {
-  try {
-    const out = execSync('git rev-list --count HEAD', {
-      stdio: ['ignore', 'pipe', 'ignore'],
-    })
-    const n = Number(out.toString().trim())
-    return Number.isFinite(n) ? n : 0
-  } catch {
-    return 0
-  }
-})()
-
-const appVersion = `0.0.${commitCount}`
+// Hardcoded app version shown in the UI.
+const appVersion = '0.0.20'
 
 // https://vite.dev/config/
 export default defineConfig({
