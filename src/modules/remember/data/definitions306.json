@@ -1,263 +1,263 @@
 {
-    "version": 1,
-    "deckId": "remember-default",
-    "class": "CS-306",
-    "topicPacks": [
-      {
-        "topicId": "decision-languages",
-        "title": "Decision Problems & Languages",
-        "chapter": "Foundations",
-        "cards": [
-          {
-            "cardId": "dl-1",
-            "term": "Decision Problem",
-            "definition": "Problem where each input instance has a yes or no answer."
-          },
-          {
-            "cardId": "dl-2",
-            "term": "Language",
-            "definition": "Set of strings over a finite alphabet."
-          },
-          {
-            "cardId": "dl-3",
-            "term": "Alphabet",
-            "definition": "Finite set of symbols used to form strings."
-          },
-          {
-            "cardId": "dl-4",
-            "term": "String",
-            "definition": "Finite sequence of symbols from an alphabet."
-          },
-          {
-            "cardId": "dl-5",
-            "term": "Kleene Star",
-            "definition": "All finite concatenations of a language, including empty string."
-          }
-        ]
-      },
-      {
-        "topicId": "automata",
-        "title": "Finite Automata",
-        "chapter": "Regular Languages",
-        "cards": [
-          {
-            "cardId": "fa-1",
-            "term": "DFA",
-            "definition": "Finite automaton with exactly one transition per symbol per state."
-          },
-          {
-            "cardId": "fa-2",
-            "term": "NFA",
-            "definition": "Automaton allowing multiple or zero transitions per symbol."
-          },
-          {
-            "cardId": "fa-3",
-            "term": "ε-transition",
-            "definition": "Transition between states without consuming input."
-          },
-          {
-            "cardId": "fa-4",
-            "term": "Regular Language",
-            "definition": "Language recognized by DFA, NFA, or regular expressions."
-          },
-          {
-            "cardId": "fa-5",
-            "term": "Intersection",
-            "definition": "Set of strings common to two languages."
-          }
-        ]
-      },
-      {
-        "topicId": "turing-machines",
-        "title": "Turing Machines",
-        "chapter": "Computation",
-        "cards": [
-          {
-            "cardId": "tm-1",
-            "term": "Turing Machine",
-            "definition": "Abstract machine with infinite tape capable of general computation."
-          },
-          {
-            "cardId": "tm-2",
-            "term": "Universal TM",
-            "definition": "Turing machine that simulates any other Turing machine."
-          },
-          {
-            "cardId": "tm-3",
-            "term": "Tape",
-            "definition": "Infinite memory divided into cells storing symbols."
-          },
-          {
-            "cardId": "tm-4",
-            "term": "Head",
-            "definition": "Reads and writes symbols, moves along the tape."
-          },
-          {
-            "cardId": "tm-5",
-            "term": "Configuration",
-            "definition": "Current state, tape contents, and head position."
-          },
-          {
-            "cardId": "tm-6",
-            "term": "Church-Turing Thesis",
-            "definition": "All effectively computable functions can be computed by a Turing machine."
-          }
-        ]
-      },
-      {
-        "topicId": "decidability",
-        "title": "Decidability",
-        "chapter": "Limits of Computation",
-        "cards": [
-          {
-            "cardId": "dc-1",
-            "term": "Decidable Language",
-            "definition": "Language where a TM halts and decides membership for all inputs."
-          },
-          {
-            "cardId": "dc-2",
-            "term": "Recognizable Language",
-            "definition": "Language where TM accepts members but may loop on non-members."
-          },
-          {
-            "cardId": "dc-3",
-            "term": "Halting Problem",
-            "definition": "Determining if a TM halts on input; undecidable."
-          },
-          {
-            "cardId": "dc-4",
-            "term": "Acceptance Problem",
-            "definition": "Determining whether a TM accepts a given input."
-          },
-          {
-            "cardId": "dc-5",
-            "term": "Rice’s Theorem",
-            "definition": "All non-trivial semantic properties of TM languages are undecidable."
-          }
-        ]
-      },
-      {
-        "topicId": "complexity",
-        "title": "Complexity Theory",
-        "chapter": "P vs NP",
-        "cards": [
-          {
-            "cardId": "cx-1",
-            "term": "P",
-            "definition": "Problems solvable in polynomial time by a deterministic machine."
-          },
-          {
-            "cardId": "cx-2",
-            "term": "NP",
-            "definition": "Problems whose solutions can be verified in polynomial time."
-          },
-          {
-            "cardId": "cx-3",
-            "term": "Polynomial Time",
-            "definition": "Runtime bounded by n^k for some constant k."
-          },
-          {
-            "cardId": "cx-4",
-            "term": "Verifier",
-            "definition": "Algorithm that checks correctness of a given solution efficiently."
-          },
-          {
-            "cardId": "cx-5",
-            "term": "Certificate",
-            "definition": "Proof used by a verifier to confirm a solution."
-          },
-          {
-            "cardId": "cx-6",
-            "term": "NP-Complete",
-            "definition": "Problems in NP to which all NP problems reduce."
-          }
-        ]
-      },
-      {
-        "topicId": "np-problems",
-        "title": "NP Problems",
-        "chapter": "Reductions",
-        "cards": [
-          {
-            "cardId": "np-1",
-            "term": "SAT",
-            "definition": "Determine if Boolean formula has a satisfying assignment."
-          },
-          {
-            "cardId": "np-2",
-            "term": "3SAT",
-            "definition": "SAT where each clause has exactly three literals."
-          },
-          {
-            "cardId": "np-3",
-            "term": "Vertex Cover",
-            "definition": "Smallest set of vertices covering all edges."
-          },
-          {
-            "cardId": "np-4",
-            "term": "Clique",
-            "definition": "Fully connected subset of vertices in a graph."
-          },
-          {
-            "cardId": "np-5",
-            "term": "Subset Sum",
-            "definition": "Determine if subset sums to a target value."
-          }
-        ]
-      },
-      {
-        "topicId": "approximation",
-        "title": "Approximation Algorithms",
-        "chapter": "Optimization",
-        "cards": [
-          {
-            "cardId": "ap-1",
-            "term": "Approximation Algorithm",
-            "definition": "Efficient algorithm producing near-optimal solutions."
-          },
-          {
-            "cardId": "ap-2",
-            "term": "Approximation Ratio",
-            "definition": "Worst-case ratio between algorithm solution and optimal."
-          },
-          {
-            "cardId": "ap-3",
-            "term": "FPTAS",
-            "definition": "Approximation within (1+ε) in polynomial time."
-          }
-        ]
-      },
-      {
-        "topicId": "flow",
-        "title": "Network Flow",
-        "chapter": "Graphs",
-        "cards": [
-          {
-            "cardId": "fl-1",
-            "term": "Flow Network",
-            "definition": "Directed graph with capacities on edges."
-          },
-          {
-            "cardId": "fl-2",
-            "term": "Capacity",
-            "definition": "Maximum allowed flow through an edge."
-          },
-          {
-            "cardId": "fl-3",
-            "term": "Flow",
-            "definition": "Amount of material sent through network edges."
-          },
-          {
-            "cardId": "fl-4",
-            "term": "Augmenting Path",
-            "definition": "Path where additional flow can be pushed."
-          },
-          {
-            "cardId": "fl-5",
-            "term": "Max Flow Min Cut",
-            "definition": "Maximum flow equals capacity of minimum cut."
-          }
-        ]
-      }
-    ]
-  }
+  "version": 1,
+  "deckId": "remember-default",
+  "class": "CS-306",
+  "topicPacks": [
+    {
+      "topicId": "decision-languages",
+      "title": "Decision Problems & Languages",
+      "chapter": "Foundations",
+      "cards": [
+        {
+          "cardId": "dl-1",
+          "term": "Decision Problem",
+          "definition": "A decision problem is a computational problem in which each input instance is mapped to a binary outcome, typically \"yes\" or \"no.\" Formally, it can be modeled as a function from strings over an alphabet to {0,1}, forming the basis for complexity theory and computability analysis."
+        },
+        {
+          "cardId": "dl-2",
+          "term": "Language",
+          "definition": "A language is a formally defined set of strings constructed over a finite alphabet. In theoretical computer science, languages correspond to decision problems, where membership represents a \"yes\" instance and non-membership represents a \"no\" instance."
+        },
+        {
+          "cardId": "dl-3",
+          "term": "Alphabet",
+          "definition": "An alphabet is a finite, non-empty set of discrete symbols used as the foundational building blocks for constructing strings. These symbols are atomic and indivisible, defining the domain over which formal languages and computational systems operate."
+        },
+        {
+          "cardId": "dl-4",
+          "term": "String",
+          "definition": "A string is a finite sequence of symbols drawn from a given alphabet. Strings serve as the fundamental objects of study in formal language theory and computation, representing inputs to automata, algorithms, and Turing machines."
+        },
+        {
+          "cardId": "dl-5",
+          "term": "Kleene Star",
+          "definition": "The Kleene star of a language is the set of all finite-length strings formed by concatenating zero or more strings from that language, including the empty string. It is a key closure operation in formal language theory and regular expressions."
+        }
+      ]
+    },
+    {
+      "topicId": "automata",
+      "title": "Finite Automata",
+      "chapter": "Regular Languages",
+      "cards": [
+        {
+          "cardId": "fa-1",
+          "term": "DFA",
+          "definition": "A deterministic finite automaton (DFA) is a computational model consisting of a finite set of states, a transition function, a start state, and accept states. For every state and input symbol, exactly one transition exists, ensuring deterministic computation and predictable behavior."
+        },
+        {
+          "cardId": "fa-2",
+          "term": "NFA",
+          "definition": "A nondeterministic finite automaton (NFA) is a computational model where multiple or zero transitions may exist for a given state and input symbol. Computation proceeds along all possible paths, and acceptance occurs if at least one path reaches an accepting state."
+        },
+        {
+          "cardId": "fa-3",
+          "term": "ε-transition",
+          "definition": "An ε-transition is a transition that allows an automaton to move between states without consuming any input symbol. It introduces nondeterminism and simplifies the construction of automata equivalent to regular expressions."
+        },
+        {
+          "cardId": "fa-4",
+          "term": "Regular Language",
+          "definition": "A regular language is a class of formal languages that can be recognized by finite automata or described using regular expressions. These languages are closed under operations such as union, concatenation, and Kleene star."
+        },
+        {
+          "cardId": "fa-5",
+          "term": "Intersection",
+          "definition": "Intersection is an operation on two languages that produces a new language consisting of strings present in both original languages. It is a key closure property that preserves regularity in formal language theory."
+        }
+      ]
+    },
+    {
+      "topicId": "turing-machines",
+      "title": "Turing Machines",
+      "chapter": "Computation",
+      "cards": [
+        {
+          "cardId": "tm-1",
+          "term": "Turing Machine",
+          "definition": "A Turing machine is an abstract computational model with an infinite tape, a read/write head, and a finite set of states. It formalizes the notion of computation and can simulate any algorithmic process."
+        },
+        {
+          "cardId": "tm-2",
+          "term": "Universal TM",
+          "definition": "A universal Turing machine is capable of simulating any other Turing machine given its encoding and input. It represents the theoretical foundation of programmable computers and general-purpose computation."
+        },
+        {
+          "cardId": "tm-3",
+          "term": "Tape",
+          "definition": "The tape is an infinite sequence of cells that store symbols from an alphabet. It functions as both input and memory, allowing a Turing machine to perform computations without fixed memory limits."
+        },
+        {
+          "cardId": "tm-4",
+          "term": "Head",
+          "definition": "The head of a Turing machine reads symbols from the tape, writes new symbols, and moves left or right. It enables interaction with memory and executes transitions during computation."
+        },
+        {
+          "cardId": "tm-5",
+          "term": "Configuration",
+          "definition": "A configuration represents the complete state of a Turing machine at a given step, including its current state, tape contents, and head position. It captures the entire computational snapshot."
+        },
+        {
+          "cardId": "tm-6",
+          "term": "Church-Turing Thesis",
+          "definition": "The Church-Turing Thesis asserts that any function that can be computed algorithmically can be computed by a Turing machine. It is a foundational assumption in computability theory, though not formally provable."
+        }
+      ]
+    },
+    {
+      "topicId": "decidability",
+      "title": "Decidability",
+      "chapter": "Limits of Computation",
+      "cards": [
+        {
+          "cardId": "dc-1",
+          "term": "Decidable Language",
+          "definition": "A decidable language is one for which there exists a Turing machine that halts on all inputs and correctly determines membership. These correspond to problems that are fully algorithmically solvable."
+        },
+        {
+          "cardId": "dc-2",
+          "term": "Recognizable Language",
+          "definition": "A recognizable language is one where a Turing machine accepts all strings in the language but may loop indefinitely on non-members, reflecting partial computability."
+        },
+        {
+          "cardId": "dc-3",
+          "term": "Halting Problem",
+          "definition": "The Halting Problem asks whether a Turing machine halts on a given input. It is undecidable, demonstrating fundamental limits of algorithmic computation."
+        },
+        {
+          "cardId": "dc-4",
+          "term": "Acceptance Problem",
+          "definition": "The acceptance problem asks whether a Turing machine accepts a given input string. It is undecidable and frequently used in reductions to prove other problems undecidable."
+        },
+        {
+          "cardId": "dc-5",
+          "term": "Rice’s Theorem",
+          "definition": "Rice’s Theorem states that all non-trivial semantic properties of languages recognized by Turing machines are undecidable, highlighting limits in analyzing program behavior."
+        }
+      ]
+    },
+    {
+      "topicId": "complexity",
+      "title": "Complexity Theory",
+      "chapter": "P vs NP",
+      "cards": [
+        {
+          "cardId": "cx-1",
+          "term": "P",
+          "definition": "P is the class of decision problems solvable in polynomial time by a deterministic Turing machine. It represents efficiently solvable problems in computational complexity."
+        },
+        {
+          "cardId": "cx-2",
+          "term": "NP",
+          "definition": "NP is the class of decision problems for which solutions can be verified in polynomial time. It includes many important problems whose efficient solvability is unknown."
+        },
+        {
+          "cardId": "cx-3",
+          "term": "Polynomial Time",
+          "definition": "Polynomial time refers to computational complexity bounded by a polynomial in input size, typically O(n^k). It is used as a standard for efficient computation."
+        },
+        {
+          "cardId": "cx-4",
+          "term": "Verifier",
+          "definition": "A verifier is an algorithm that checks whether a given certificate proves that an input is a valid solution. It operates efficiently, typically in polynomial time."
+        },
+        {
+          "cardId": "cx-5",
+          "term": "Certificate",
+          "definition": "A certificate is auxiliary information that allows a verifier to efficiently confirm correctness of a solution, playing a key role in NP definitions."
+        },
+        {
+          "cardId": "cx-6",
+          "term": "NP-Complete",
+          "definition": "NP-complete problems are the hardest problems in NP, meaning every NP problem can be reduced to them in polynomial time. They are central to the P vs NP question."
+        }
+      ]
+    },
+    {
+      "topicId": "np-problems",
+      "title": "NP Problems",
+      "chapter": "Reductions",
+      "cards": [
+        {
+          "cardId": "np-1",
+          "term": "SAT",
+          "definition": "SAT asks whether a Boolean formula has a satisfying assignment of truth values. It was the first problem proven NP-complete and is foundational in computational complexity."
+        },
+        {
+          "cardId": "np-2",
+          "term": "3SAT",
+          "definition": "3SAT is a restricted version of SAT where each clause has exactly three literals. Despite this constraint, it remains NP-complete and is widely used in reductions."
+        },
+        {
+          "cardId": "np-3",
+          "term": "Vertex Cover",
+          "definition": "Vertex Cover asks for the smallest subset of vertices such that every edge in a graph is incident to at least one selected vertex. It is a classic NP-complete problem."
+        },
+        {
+          "cardId": "np-4",
+          "term": "Clique",
+          "definition": "The clique problem asks whether a graph contains a fully connected subset of vertices of a given size. It is NP-complete and central to graph theory."
+        },
+        {
+          "cardId": "np-5",
+          "term": "Subset Sum",
+          "definition": "Subset Sum asks whether a subset of given integers sums to a specified target value. It is NP-complete and widely studied in combinatorial optimization."
+        }
+      ]
+    },
+    {
+      "topicId": "approximation",
+      "title": "Approximation Algorithms",
+      "chapter": "Optimization",
+      "cards": [
+        {
+          "cardId": "ap-1",
+          "term": "Approximation Algorithm",
+          "definition": "An approximation algorithm is a polynomial-time algorithm designed to produce near-optimal solutions to optimization problems where exact solutions are computationally infeasible."
+        },
+        {
+          "cardId": "ap-2",
+          "term": "Approximation Ratio",
+          "definition": "The approximation ratio is the worst-case ratio between the value of the solution produced by an algorithm and the optimal solution, measuring algorithm performance."
+        },
+        {
+          "cardId": "ap-3",
+          "term": "FPTAS",
+          "definition": "A Fully Polynomial-Time Approximation Scheme (FPTAS) produces solutions within a factor of (1+ε) of optimal, with runtime polynomial in both input size and 1/ε."
+        }
+      ]
+    },
+    {
+      "topicId": "flow",
+      "title": "Network Flow",
+      "chapter": "Graphs",
+      "cards": [
+        {
+          "cardId": "fl-1",
+          "term": "Flow Network",
+          "definition": "A flow network is a directed graph where each edge has a capacity representing the maximum flow allowed. It models systems such as transportation and communication networks."
+        },
+        {
+          "cardId": "fl-2",
+          "term": "Capacity",
+          "definition": "Capacity is the maximum amount of flow that can pass through an edge in a network, constraining feasible flow assignments in optimization problems."
+        },
+        {
+          "cardId": "fl-3",
+          "term": "Flow",
+          "definition": "Flow is the quantity of material or data transmitted through edges of a network, subject to capacity constraints and conservation laws at intermediate nodes."
+        },
+        {
+          "cardId": "fl-4",
+          "term": "Augmenting Path",
+          "definition": "An augmenting path is a path from source to sink along which additional flow can be pushed in a residual graph, forming the basis of max-flow algorithms."
+        },
+        {
+          "cardId": "fl-5",
+          "term": "Max Flow Min Cut",
+          "definition": "The Max Flow Min Cut Theorem states that the maximum flow from source to sink equals the capacity of the minimum cut separating them, establishing a key duality in network optimization."
+        }
+      ]
+    }
+  ]
+}
