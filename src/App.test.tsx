@@ -24,6 +24,7 @@ describe('App', () => {
 
     expect(screen.getByText('Decision Problem')).toBeInTheDocument()
     expect(screen.getByText('CS-306')).toBeInTheDocument()
+    expect(screen.getByLabelText(/Card 1 of \d+/)).toBeInTheDocument()
 
     // The definition is present in the DOM (back face) even before flip.
     expect(
@@ -35,7 +36,7 @@ describe('App', () => {
     // Flip the card to reveal the definition state -> review buttons should appear
     fireEvent.click(
       screen.getByRole('button', {
-        name: /Flashcard front\. Tap to show back\./i,
+        name: /Flashcard front\. Tap to show back/i,
       }),
     )
 

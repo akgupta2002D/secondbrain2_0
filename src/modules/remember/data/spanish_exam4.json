@@ -1,0 +1,438 @@
+{
+    "version": 1,
+    "deckId": "spanish-leccion4-complete",
+    "class": "Spanish",
+    "topicPacks": [
+  
+      {
+        "topicId": "foundations",
+        "title": "Core Grammar Foundations",
+        "chapter": "Prerequisites",
+        "cards": [
+          {
+            "cardId": "f-001",
+            "term": "Subject Pronouns (Spanish)",
+            "definition": "yo (I), tú (you informal), él/ella (he/she), nosotros (we), vosotros (you all Spain), ellos/ellas (they)"
+          },
+          {
+            "cardId": "f-002",
+            "term": "Why subject pronouns are often dropped",
+            "definition": "Because verb conjugations already indicate the subject."
+          },
+          {
+            "cardId": "f-003",
+            "term": "Infinitive verb",
+            "definition": "The base form of a verb (ends in -ar, -er, -ir), e.g., hablar, comer, vivir."
+          },
+          {
+            "cardId": "f-004",
+            "term": "Present tense purpose",
+            "definition": "Used to describe actions happening now or habitual actions."
+          }
+        ]
+      },
+      {
+        "topicId": "vocab-complete-expansion",
+        "title": "FULL Vocabulary (Sports, Places, Objects, Time, Activities)",
+        "chapter": "Lección 4 FULL",
+        "cards": [
+      
+          {"cardId":"vs-001","term":"el fútbol","definition":"soccer"},
+          {"cardId":"vs-002","term":"el baloncesto","definition":"basketball"},
+          {"cardId":"vs-003","term":"el tenis","definition":"tennis"},
+          {"cardId":"vs-004","term":"el golf","definition":"golf"},
+          {"cardId":"vs-005","term":"el béisbol","definition":"baseball"},
+          {"cardId":"vs-006","term":"el vóleibol","definition":"volleyball"},
+          {"cardId":"vs-007","term":"el hockey","definition":"hockey"},
+          {"cardId":"vs-008","term":"el ciclismo","definition":"cycling"},
+          {"cardId":"vs-009","term":"la natación","definition":"swimming"},
+          {"cardId":"vs-010","term":"el esquí","definition":"skiing"},
+      
+          {"cardId":"va-001","term":"esquiar","definition":"to ski"},
+          {"cardId":"va-002","term":"bucear","definition":"to scuba dive"},
+          {"cardId":"va-003","term":"tomar el sol","definition":"to sunbathe"},
+          {"cardId":"va-004","term":"pasear en bicicleta","definition":"to ride a bike"},
+          {"cardId":"va-005","term":"patinar","definition":"to skate"},
+          {"cardId":"va-006","term":"leer","definition":"to read"},
+          {"cardId":"va-007","term":"escribir","definition":"to write"},
+          {"cardId":"va-008","term":"visitar","definition":"to visit"},
+          {"cardId":"va-009","term":"practicar deportes","definition":"to practice sports"},
+          {"cardId":"va-010","term":"ir de excursión","definition":"to go on a trip"},
+      
+          {"cardId":"vp-001","term":"la iglesia","definition":"church"},
+          {"cardId":"vp-002","term":"el gimnasio","definition":"gym"},
+          {"cardId":"vp-003","term":"el museo","definition":"museum"},
+          {"cardId":"vp-004","term":"el parque","definition":"park"},
+          {"cardId":"vp-005","term":"el centro","definition":"downtown/center"},
+          {"cardId":"vp-006","term":"el restaurante","definition":"restaurant"},
+          {"cardId":"vp-007","term":"la cafetería","definition":"cafeteria"},
+          {"cardId":"vp-008","term":"el cine","definition":"movie theater"},
+          {"cardId":"vp-009","term":"la universidad","definition":"university"},
+          {"cardId":"vp-010","term":"la casa","definition":"house"},
+
+          {"cardId":"vo-001","term":"la pelota","definition":"ball"},
+          {"cardId":"vo-002","term":"el equipo","definition":"team"},
+          {"cardId":"vo-003","term":"la bicicleta","definition":"bicycle"},
+          {"cardId":"vo-004","term":"los patines","definition":"skates"},
+          {"cardId":"vo-005","term":"el periódico","definition":"newspaper"},
+          {"cardId":"vo-006","term":"la revista","definition":"magazine"},
+          {"cardId":"vo-007","term":"el correo electrónico","definition":"email"},
+          {"cardId":"vo-008","term":"la radio","definition":"radio"},
+          {"cardId":"vo-009","term":"la televisión","definition":"television"},
+          {"cardId":"vo-010","term":"los boletos","definition":"tickets"},
+      
+          {"cardId":"vt-001","term":"los domingos","definition":"on Sundays"},
+          {"cardId":"vt-002","term":"todos los días","definition":"every day"},
+          {"cardId":"vt-003","term":"los lunes","definition":"on Mondays"},
+          {"cardId":"vt-004","term":"a las ocho","definition":"at 8 o’clock"},
+          {"cardId":"vt-005","term":"por la mañana","definition":"in the morning"},
+          {"cardId":"vt-006","term":"en la noche","definition":"at night"},
+          {"cardId":"vt-007","term":"mañana","definition":"tomorrow"},
+          {"cardId":"vt-008","term":"los fines de semana","definition":"on weekends"},
+          {"cardId":"vt-009","term":"todo el tiempo","definition":"all the time"},
+          {"cardId":"vt-010","term":"cuando","definition":"when"},
+
+          {"cardId":"vv-001","term":"preferir","definition":"to prefer"},
+          {"cardId":"vv-002","term":"contar","definition":"to count / to rely on"},
+          {"cardId":"vv-003","term":"mostrar","definition":"to show"},
+          {"cardId":"vv-004","term":"conseguir","definition":"to get/obtain"},
+          {"cardId":"vv-005","term":"perder","definition":"to lose"},
+          {"cardId":"vv-006","term":"ganar","definition":"to win"},
+          {"cardId":"vv-007","term":"salir","definition":"to leave/go out"},
+          {"cardId":"vv-008","term":"volver","definition":"to return"},
+          {"cardId":"vv-009","term":"almorzar","definition":"to have lunch"},
+          {"cardId":"vv-010","term":"cerrar","definition":"to close"}
+      
+        ]
+      },
+  
+      {
+        "topicId": "vocabulary",
+        "title": "Vocabulary: Activities & Sports",
+        "chapter": "Lección 4 Contextos",
+        "cards": [
+          {
+            "cardId": "v-001",
+            "term": "esquiar",
+            "definition": "to ski"
+          },
+          {
+            "cardId": "v-002",
+            "term": "bucear",
+            "definition": "to scuba dive"
+          },
+          {
+            "cardId": "v-003",
+            "term": "escribir un mensaje electrónico",
+            "definition": "to write an email"
+          },
+          {
+            "cardId": "v-004",
+            "term": "el fútbol",
+            "definition": "soccer"
+          },
+          {
+            "cardId": "v-005",
+            "term": "tomar el sol",
+            "definition": "to sunbathe"
+          },
+          {
+            "cardId": "v-006",
+            "term": "el tenis",
+            "definition": "tennis"
+          },
+          {
+            "cardId": "v-007",
+            "term": "el baloncesto",
+            "definition": "basketball"
+          },
+          {
+            "cardId": "v-008",
+            "term": "pasear en bicicleta",
+            "definition": "to ride a bike"
+          },
+          {
+            "cardId": "v-009",
+            "term": "patinar",
+            "definition": "to skate"
+          },
+          {
+            "cardId": "v-010",
+            "term": "el golf",
+            "definition": "golf"
+          },
+          {
+            "cardId": "v-011",
+            "term": "visitar un monumento",
+            "definition": "to visit a monument"
+          },
+          {
+            "cardId": "v-012",
+            "term": "leer una revista",
+            "definition": "to read a magazine"
+          }
+        ]
+      },
+  
+      {
+        "topicId": "ir-verb",
+        "title": "Present Tense of IR",
+        "chapter": "4.1",
+        "cards": [
+          {
+            "cardId": "ir-001",
+            "term": "Conjugation of ir",
+            "definition": "voy, vas, va, vamos, van"
+          },
+          {
+            "cardId": "ir-002",
+            "term": "Meaning of ir",
+            "definition": "to go"
+          },
+          {
+            "cardId": "ir-003",
+            "term": "Nosotros ___ a pasear en bicicleta.",
+            "definition": "vamos"
+          },
+          {
+            "cardId": "ir-004",
+            "term": "¿Tú y tu primo ___ al cine?",
+            "definition": "van"
+          },
+          {
+            "cardId": "ir-005",
+            "term": "Mis amigos ___ de excursión.",
+            "definition": "van"
+          },
+          {
+            "cardId": "ir-006",
+            "term": "Yo ___ al parque.",
+            "definition": "voy"
+          },
+          {
+            "cardId": "ir-007",
+            "term": "El señor Rodríguez ___ al museo.",
+            "definition": "va"
+          }
+        ]
+      },
+  
+      {
+        "topicId": "stem-e-ie",
+        "title": "Stem-Changing Verbs (e → ie)",
+        "chapter": "4.2",
+        "cards": [
+          {
+            "cardId": "eie-001",
+            "term": "Stem change rule (e → ie)",
+            "definition": "e changes to ie in all forms except nosotros and vosotros."
+          },
+          {
+            "cardId": "eie-002",
+            "term": "pensar",
+            "definition": "to think → pienso, piensas, piensa, pensamos, piensan"
+          },
+          {
+            "cardId": "eie-003",
+            "term": "querer",
+            "definition": "to want → quiero, quieres, quiere"
+          },
+          {
+            "cardId": "eie-004",
+            "term": "entender",
+            "definition": "to understand → entiendo"
+          },
+          {
+            "cardId": "eie-005",
+            "term": "cerrar",
+            "definition": "to close → cierro"
+          },
+          {
+            "cardId": "eie-006",
+            "term": "empezar",
+            "definition": "to begin → empiezo"
+          }
+        ]
+      },
+  
+      {
+        "topicId": "stem-o-ue",
+        "title": "Stem-Changing Verbs (o → ue)",
+        "chapter": "4.2",
+        "cards": [
+          {
+            "cardId": "oue-001",
+            "term": "Stem change rule (o → ue)",
+            "definition": "o changes to ue in all forms except nosotros and vosotros."
+          },
+          {
+            "cardId": "oue-002",
+            "term": "poder",
+            "definition": "to be able → puedo, puedes, puede"
+          },
+          {
+            "cardId": "oue-003",
+            "term": "dormir",
+            "definition": "to sleep → duermo"
+          },
+          {
+            "cardId": "oue-004",
+            "term": "volver",
+            "definition": "to return → vuelvo"
+          },
+          {
+            "cardId": "oue-005",
+            "term": "recordar",
+            "definition": "to remember → recuerdo"
+          }
+        ]
+      },
+  
+      {
+        "topicId": "stem-e-i",
+        "title": "Stem-Changing Verbs (e → i)",
+        "chapter": "4.3",
+        "cards": [
+          {
+            "cardId": "ei-001",
+            "term": "Stem change rule (e → i)",
+            "definition": "e changes to i in most forms (except nosotros/vosotros)."
+          },
+          {
+            "cardId": "ei-002",
+            "term": "pedir",
+            "definition": "to ask for → pido, pides, pide"
+          },
+          {
+            "cardId": "ei-003",
+            "term": "repetir",
+            "definition": "to repeat → repito"
+          },
+          {
+            "cardId": "ei-004",
+            "term": "seguir",
+            "definition": "to follow/continue → sigo"
+          },
+          {
+            "cardId": "ei-005",
+            "term": "decir",
+            "definition": "to say → digo"
+          }
+        ]
+      },
+  
+      {
+        "topicId": "irregular-yo",
+        "title": "Irregular YO Forms",
+        "chapter": "4.4",
+        "cards": [
+          {
+            "cardId": "yo-001",
+            "term": "hacer (yo form)",
+            "definition": "hago"
+          },
+          {
+            "cardId": "yo-002",
+            "term": "poner (yo form)",
+            "definition": "pongo"
+          },
+          {
+            "cardId": "yo-003",
+            "term": "salir (yo form)",
+            "definition": "salgo"
+          },
+          {
+            "cardId": "yo-004",
+            "term": "traer (yo form)",
+            "definition": "traigo"
+          },
+          {
+            "cardId": "yo-005",
+            "term": "ver (yo form)",
+            "definition": "veo"
+          },
+          {
+            "cardId": "yo-006",
+            "term": "oír (yo form)",
+            "definition": "oigo"
+          }
+        ]
+      },
+  
+      {
+        "topicId": "exam-qa",
+        "title": "Exam Questions & Answers",
+        "chapter": "Review Section",
+        "cards": [
+          {
+            "cardId": "qa-001",
+            "term": "AACTÓNNI",
+            "definition": "natación (swimming)"
+          },
+          {
+            "cardId": "qa-002",
+            "term": "LLOÓVBEI",
+            "definition": "vóleibol"
+          },
+          {
+            "cardId": "qa-003",
+            "term": "OLICSCMI",
+            "definition": "ciclismo"
+          },
+          {
+            "cardId": "qa-004",
+            "term": "USEQÍ",
+            "definition": "esquí"
+          },
+          {
+            "cardId": "qa-005",
+            "term": "Which does NOT belong: iglesia, gimnasio, museo, golf",
+            "definition": "golf (others are places)"
+          },
+          {
+            "cardId": "qa-006",
+            "term": "Definition: round object used in games",
+            "definition": "la pelota"
+          },
+          {
+            "cardId": "qa-007",
+            "term": "Definition: museum",
+            "definition": "el museo"
+          },
+          {
+            "cardId": "qa-008",
+            "term": "Benjamín ___ a su clase",
+            "definition": "va"
+          },
+          {
+            "cardId": "qa-009",
+            "term": "Miriam y yo ___ de excursión",
+            "definition": "vamos"
+          },
+          {
+            "cardId": "qa-010",
+            "term": "Yo ___ con mis abuelos",
+            "definition": "almuerzo"
+          },
+          {
+            "cardId": "qa-011",
+            "term": "Tú ___ escribir cartas",
+            "definition": "prefieres"
+          },
+          {
+            "cardId": "qa-012",
+            "term": "David y Óscar ___ estudiar",
+            "definition": "quieren"
+          },
+          {
+            "cardId": "qa-013",
+            "term": "Liliana no ___ ir",
+            "definition": "puede"
+          }
+        ]
+      }
+
+      
+  
+    ]
+  }

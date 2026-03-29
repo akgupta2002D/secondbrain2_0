@@ -29,7 +29,7 @@ export const FlashcardCard = ({
   const ariaLabel = useMemo(() => {
     return isFlipped
       ? 'Flashcard back. Tap to show front.'
-      : 'Flashcard front. Tap to show back.'
+      : 'Flashcard front. Tap to show back or swipe left or right to review.'
   }, [isFlipped])
 
   const startRef = useRef<{ x: number; y: number } | null>(null)
@@ -61,7 +61,7 @@ export const FlashcardCard = ({
   }
 
   const onPointerDown = (e: ReactPointerEvent<HTMLButtonElement>) => {
-    if (!onSwipe || !isFlipped) return
+    if (!onSwipe) return
     startRef.current = { x: e.clientX, y: e.clientY }
     pointerIdRef.current = e.pointerId
     didDragRef.current = false
@@ -79,7 +79,6 @@ export const FlashcardCard = ({
 
   const onPointerMove = (e: ReactPointerEvent<HTMLButtonElement>) => {
     if (!onSwipe) return
-    if (!isFlipped) return // only allow swipe on back side
     if (!isDragging) return
     if (pointerIdRef.current !== e.pointerId) return
 
@@ -105,7 +104,6 @@ export const FlashcardCard = ({
 
   const onPointerUp = (e: ReactPointerEvent<HTMLButtonElement>) => {
     if (!onSwipe) return
-    if (!isFlipped) return // only allow swipe on back side
     if (pointerIdRef.current !== e.pointerId) return
 
     const start = startRef.current
@@ -169,13 +167,31 @@ export const FlashcardCard = ({
     }
   }, [])
 
-  const dragStrength = isFlipped ? clamp01(Math.abs(dragX) / SWIPE_THRESHOLD_PX) : 0
+  const dragStrength = onSwipe
+    ? clamp01(Math.abs(dragX) / SWIPE_THRESHOLD_PX)
+    : 0
   const dragDirection = dragX > 0 ? 'right' : dragX < 0 ? 'left' : 'none'
-  const rotateZ = isFlipped ? clamp01(dragStrength) * (dragX > 0 ? 1 : -1) * 2.5 : 0
+  const rotateZ =
+    onSwipe && (isDragging || isSettling || Math.abs(dragX) > 0.5)
+      ? clamp01(dragStrength) * (dragX > 0 ? 1 : -1) * 2.5
+      : 0
 
+  const showDragTransform =
+    Boolean(onSwipe) &&
+    (isDragging || isSettling || Math.abs(dragX) > 0.5)
+
+  // Omit `onSwipe` from deps: parent often passes an inline handler; including it retriggers
+  // every render and loops with setSwipeUi.
   useEffect(() => {
-    if (!isFlipped) {
-      onSwipeUiChange?.({ dragStrength: 0, dragDirection: 'none', isDragging: false })
+    if (!onSwipe) return
+    const active =
+      isDragging || isSettling || Math.abs(dragX) > 0.5
+    if (!active) {
+      onSwipeUiChange?.({
+        dragStrength: 0,
+        dragDirection: 'none',
+        isDragging: false,
+      })
       return
     }
     onSwipeUiChange?.({
@@ -183,7 +199,14 @@ export const FlashcardCard = ({
       dragDirection,
       isDragging,
     })
-  }, [dragStrength, dragDirection, isDragging, isFlipped, onSwipeUiChange])
+  }, [
+    dragStrength,
+    dragDirection,
+    dragX,
+    isDragging,
+    isSettling,
+    onSwipeUiChange,
+  ])
 
   return (
     <button
@@ -204,7 +227,7 @@ export const FlashcardCard = ({
           isSettling ? 'isSettling' : '',
         ].filter(Boolean).join(' ')}
         style={{
-          transform: isFlipped
+          transform: showDragTransform
             ? `translateX(${dragX}px) rotateZ(${rotateZ}deg)`
             : 'translateX(0px) rotateZ(0deg)',
         }}

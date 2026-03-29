@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 // Hardcoded app version shown in the UI.
-const appVersion = '0.0.20'
+const appVersion = '0.0.21'
 
 // https://vite.dev/config/
 export default defineConfig({

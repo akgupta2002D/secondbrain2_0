@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import flashcardsJson from '../data/definitions306.json'
 import cellBioJson from '../data/cellBio_cellJunction.json'
+import spanishExam4Json from '../data/spanish_exam4.json'
 import { parseFlashcardsJsonV1 } from '../model/parseFlashcards'
 import { applyReviewResultToScore, initMemoryScores } from '../model/memoryScore'
 import { loadMemoryScores, saveMemoryScores } from '../model/memoryScoreStorage'
@@ -15,25 +16,11 @@ type Props = {
   onBack: () => void
 }
 
-const pickRandomCardId = (
-  cards: Array<{ cardId: string }>,
-): string => {
-  if (cards.length === 0) return ''
-  const idx = Math.floor(Math.random() * cards.length)
-  return cards[idx]?.cardId ?? cards[0]!.cardId
-}
-
-const pickRandomDifferentCardId = (
-  cards: Array<{ cardId: string }>,
-  currentCardId: string,
-): string => {
-  if (cards.length === 0) return ''
-  if (cards.length === 1) return cards[0]!.cardId
-
-  const filtered = cards.filter((c) => c.cardId !== currentCardId)
-  return pickRandomCardId(
-    filtered.length > 0 ? filtered : cards,
-  )
+/** Stable deck order, then rotate so review visits every card once in a fixed ring. */
+const buildRotatedCycleOrder = (cardIds: string[]): string[] => {
+  if (cardIds.length === 0) return []
+  const start = Math.floor(Math.random() * cardIds.length)
+  return [...cardIds.slice(start), ...cardIds.slice(0, start)]
 }
 
 export const RememberScreen = ({ onBack }: Props) => {
@@ -41,6 +28,7 @@ export const RememberScreen = ({ onBack }: Props) => {
     const parsed = [
       parseFlashcardsJsonV1(flashcardsJson),
       parseFlashcardsJsonV1(cellBioJson),
+      parseFlashcardsJsonV1(spanishExam4Json),
     ]
 
     const firstErr = parsed.find((r) => r.kind === 'err')
@@ -70,13 +58,9 @@ export const RememberScreen = ({ onBack }: Props) => {
     return parsedDecks.value.find((d) => d.deckId === activeDeckId) ?? parsedDecks.value[0] ?? null
   }, [parsedDecks, activeDeckId])
 
-  const [activeCardId, setActiveCardId] = useState(() => {
-    if (activeDeck) {
-      const allCards = activeDeck.topicPacks.flatMap((tp) => tp.cards)
-      return allCards.length > 0 ? pickRandomCardId(allCards) : ''
-    }
-    return ''
-  })
+  const [cycleOrder, setCycleOrder] = useState<string[]>([])
+  const [cycleIndex, setCycleIndex] = useState(0)
+  const [activeCardId, setActiveCardId] = useState('')
 
   const [memoryScores, setMemoryScores] = useState<Record<string, number>>({})
 
@@ -86,9 +70,6 @@ export const RememberScreen = ({ onBack }: Props) => {
     dragDirection: 'left' | 'right' | 'none'
     isDragging: boolean
   }>({ dragStrength: 0, dragDirection: 'none', isDragging: false })
-  const [cycleReviewedCardIds, setCycleReviewedCardIds] = useState<string[]>(
-    [],
-  )
   const [cyclePromptOpen, setCyclePromptOpen] = useState(false)
 
   if (parsedDecks.kind === 'err') {
@@ -133,11 +114,19 @@ export const RememberScreen = ({ onBack }: Props) => {
   }, [topicModalOpen])
 
   useEffect(() => {
-    // Reset review state when active deck changes.
     setIsCardFlipped(false)
-    setCycleReviewedCardIds([])
     setCyclePromptOpen(false)
-    setActiveCardId(allCards.length > 0 ? pickRandomCardId(allCards) : '')
+    const ids = allCards.map((c) => c.cardId)
+    if (ids.length === 0) {
+      setCycleOrder([])
+      setCycleIndex(0)
+      setActiveCardId('')
+      return
+    }
+    const order = buildRotatedCycleOrder(ids)
+    setCycleOrder(order)
+    setCycleIndex(0)
+    setActiveCardId(order[0]!)
   }, [deck, allCards])
 
   useEffect(() => {
@@ -164,7 +153,6 @@ export const RememberScreen = ({ onBack }: Props) => {
   const onFlip = (): void => setIsCardFlipped((v) => !v)
 
   const onReview = (result: 'correct' | 'incorrect'): void => {
-    if (!isCardFlipped) return
     if (cyclePromptOpen) return
     if (!activeCard) return
 
@@ -181,26 +169,18 @@ export const RememberScreen = ({ onBack }: Props) => {
 
     setIsCardFlipped(false)
 
-    const allCardIds = allCards.map((c) => c.cardId)
-    const currentCardId = activeCard.cardId
-    const nextReviewedIds = Array.from(
-      new Set([...cycleReviewedCardIds, currentCardId]),
-    )
-    const didCompleteCycle = nextReviewedIds.length >= allCardIds.length
+    const n = cycleOrder.length
+    if (n === 0) return
 
-    if (didCompleteCycle) {
+    // Just finished the last card in the rotated cycle.
+    if (cycleIndex >= n - 1) {
       setCyclePromptOpen(true)
-      setCycleReviewedCardIds([])
       return
     }
 
-    setCycleReviewedCardIds(nextReviewedIds)
-
-    const nextCardId = pickRandomDifferentCardId(
-      allCards,
-      currentCardId,
-    )
-    setActiveCardId(nextCardId)
+    const nextIdx = cycleIndex + 1
+    setCycleIndex(nextIdx)
+    setActiveCardId(cycleOrder[nextIdx]!)
   }
 
   const onSwipeReview = (result: ReviewResult): void => {
@@ -209,12 +189,17 @@ export const RememberScreen = ({ onBack }: Props) => {
   }
 
   const onStartAgain = (): void => {
+    const ids = allCards.map((c) => c.cardId)
+    if (ids.length === 0) {
+      setCyclePromptOpen(false)
+      return
+    }
+    const order = buildRotatedCycleOrder(ids)
+    setCycleOrder(order)
+    setCycleIndex(0)
+    setActiveCardId(order[0]!)
     setCyclePromptOpen(false)
     setIsCardFlipped(false)
-    const nextCardId = activeCard
-      ? pickRandomDifferentCardId(allCards, activeCard.cardId)
-      : pickRandomCardId(allCards)
-    setActiveCardId(nextCardId)
   }
 
   const onChooseDifferentTopic = (): void => {
@@ -248,12 +233,21 @@ export const RememberScreen = ({ onBack }: Props) => {
       <div
         className={[
           'swipeSplitBg',
-          isCardFlipped ? 'isActive' : '',
+          isCardFlipped ||
+          swipeUi.isDragging ||
+          swipeUi.dragStrength > 0.02
+            ? 'isActive'
+            : '',
           swipeUi.isDragging ? 'isDragging' : '',
         ].filter(Boolean).join(' ')}
         aria-hidden="true"
         style={{
-          opacity: isCardFlipped ? 1 : 0,
+          opacity:
+            isCardFlipped ||
+            swipeUi.isDragging ||
+            swipeUi.dragStrength > 0.02
+              ? 1
+              : 0,
           // subtle "activation" as you drag
           ['--swipe-strength' as any]: String(swipeUi.dragStrength),
         }}
@@ -350,6 +344,15 @@ export const RememberScreen = ({ onBack }: Props) => {
             </button>
           </div>
         </div>
+      ) : null}
+
+      {cycleOrder.length > 0 && !cyclePromptOpen ? (
+        <p
+          className="rememberCycleProgress"
+          aria-label={`Card ${cycleIndex + 1} of ${cycleOrder.length}`}
+        >
+          {cycleIndex + 1} / {cycleOrder.length}
+        </p>
       ) : null}
 
       <FlashcardCard

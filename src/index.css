@@ -151,6 +151,20 @@ body {
   padding-top: calc(env(safe-area-inset-top) + var(--sb-nav-stack-height));
 }
 
+.rememberCycleProgress {
+  position: absolute;
+  bottom: calc(env(safe-area-inset-bottom) + 0.75rem);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: var(--sb-z-nav);
+  margin: 0;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+}
+
 .memoryScoreItem {
   display: flex;
   gap: 0.5rem;
