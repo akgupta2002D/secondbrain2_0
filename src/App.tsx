@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { RememberScreen } from './modules/remember'
+import { ThoughtsScreen } from './modules/thoughts'
 
-type View = 'home' | 'modules' | 'remember'
+type View = 'home' | 'modules' | 'remember' | 'thoughts'
 
 function App() {
   const [showRefreshPrompt, setShowRefreshPrompt] = useState(false)
@@ -72,6 +73,10 @@ function App() {
     setView('remember')
   }
 
+  const openThoughts = (): void => {
+    setView('thoughts')
+  }
+
   return (
     <>
       {view === 'home' ? (
@@ -119,10 +124,21 @@ function App() {
           >
             Remember
           </button>
+
+          <button
+            type="button"
+            role="menuitem"
+            className="moduleMenuItem"
+            onClick={openThoughts}
+          >
+            Thoughts
+          </button>
         </main>
       ) : null}
 
       {view === 'remember' ? <RememberScreen onBack={goModules} /> : null}
+
+      {view === 'thoughts' ? <ThoughtsScreen onBack={goModules} /> : null}
 
       {showRefreshPrompt ? (
         <div className="updatePrompt" role="alertdialog" aria-live="polite">

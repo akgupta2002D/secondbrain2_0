@@ -856,3 +856,531 @@ body {
     transform: translateY(0) scale(1);
   }
 }
+
+/* Thoughts module */
+.thoughtsScreen {
+  width: 100%;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding-top: calc(env(safe-area-inset-top) + var(--sb-nav-stack-height));
+  gap: 0;
+  text-align: left;
+}
+
+.thoughtsMain {
+  gap: 0;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 56rem;
+  margin: 0 auto;
+  flex: 1;
+}
+
+.thoughtsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0 max(0.25rem, env(safe-area-inset-right)) 0.5rem
+    max(0.25rem, env(safe-area-inset-left));
+  flex-shrink: 0;
+}
+
+.thoughtsHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-shrink: 0;
+}
+
+.thoughtsHeader .backButton {
+  position: static;
+  flex-shrink: 0;
+}
+
+.thoughtsMenuButton {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid rgba(147, 197, 253, 0.4);
+  background: rgba(59, 130, 246, 0.14);
+  color: #e0f2fe;
+  padding: 0.45rem 0.65rem;
+  border-radius: 0.85rem;
+  font-weight: 800;
+  font-size: 0.88rem;
+  cursor: pointer;
+  min-height: 44px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.thoughtsMenuButton:active {
+  transform: scale(0.98);
+}
+
+.thoughtsMenuIcon {
+  font-size: 1.05rem;
+  line-height: 1;
+  opacity: 0.95;
+}
+
+.thoughtsMenuLabel {
+  letter-spacing: 0.01em;
+}
+
+.thoughtsTitle {
+  margin: 0;
+  flex: 1;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 850;
+  color: #f9fafb;
+  min-width: 0;
+}
+
+.thoughtsSignOut {
+  appearance: none;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+  padding: 0.45rem 0.65rem;
+  border-radius: 0.75rem;
+  font-weight: 650;
+  font-size: 0.85rem;
+  cursor: pointer;
+  min-height: 40px;
+  flex-shrink: 0;
+}
+
+.thoughtsSignOut:active {
+  transform: scale(0.98);
+}
+
+.thoughtsMuted {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.95rem;
+}
+
+.thoughtsError {
+  margin: 0 auto;
+  max-width: 56rem;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  background: rgba(239, 68, 68, 0.1);
+  color: #fecaca;
+  font-size: 0.9rem;
+}
+
+.thoughtsConfigHint {
+  max-width: 28rem;
+  padding: 1rem 1.1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.thoughtsConfigTitle {
+  margin: 0 0 0.5rem;
+  font-weight: 800;
+  color: #f9fafb;
+}
+
+.thoughtsConfigBody {
+  margin: 0;
+  color: rgba(229, 231, 235, 0.88);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.thoughtsCode {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.85em;
+  color: #93c5fd;
+}
+
+.thoughtsAuth {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.thoughtsAuthCard {
+  width: min(22rem, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 0.5rem 0.25rem;
+}
+
+.thoughtsAuthTitle {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #f9fafb;
+}
+
+.thoughtsAuthSubtitle {
+  margin: 0 0 0.25rem;
+  color: rgba(229, 231, 235, 0.75);
+  font-size: 0.95rem;
+}
+
+.thoughtsFieldLabel {
+  text-align: left;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: rgba(229, 231, 235, 0.85);
+}
+
+.thoughtsInput {
+  width: 100%;
+  padding: 0.75rem 0.85rem;
+  border-radius: 0.85rem;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: rgba(0, 0, 0, 0.45);
+  color: #f9fafb;
+  font-size: 1rem;
+  min-height: 48px;
+}
+
+.thoughtsInput:focus-visible {
+  outline: 2px solid rgba(147, 197, 253, 0.65);
+  outline-offset: 2px;
+}
+
+.thoughtsAuthMessage {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #93c5fd;
+  text-align: left;
+}
+
+.thoughtsPrimaryButton {
+  appearance: none;
+  border: 1px solid rgba(147, 197, 253, 0.45);
+  background: rgba(59, 130, 246, 0.18);
+  color: #dbeafe;
+  padding: 0.75rem 1rem;
+  border-radius: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+  min-height: 48px;
+  width: 100%;
+}
+
+.thoughtsPrimaryButton:active {
+  transform: scale(0.99);
+}
+
+.thoughtsPrimaryButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.thoughtsSrOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.thoughtsPad {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 max(0.25rem, env(safe-area-inset-right)) max(1rem, env(safe-area-inset-bottom))
+    max(0.25rem, env(safe-area-inset-left));
+}
+
+.thoughtsPadLoading {
+  padding: 1rem 0.5rem;
+  text-align: center;
+}
+
+.thoughtsEditor {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+  min-height: 0;
+}
+
+.thoughtsEditorSolo {
+  min-height: min(70svh, 32rem);
+}
+
+.thoughtsTextarea {
+  width: 100%;
+  flex: 1;
+  min-height: min(58svh, 28rem);
+  resize: vertical;
+  padding: 0.95rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  background: rgba(0, 0, 0, 0.5);
+  color: #f9fafb;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  font-family: inherit;
+}
+
+.thoughtsTextarea:focus-visible {
+  outline: 2px solid rgba(147, 197, 253, 0.55);
+  outline-offset: 2px;
+}
+
+.thoughtsTextarea::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.thoughtsEditorFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.thoughtsSaveStatus {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.thoughtsSaveStatus[data-state='saving'] {
+  color: #93c5fd;
+}
+
+.thoughtsSaveStatus[data-state='error'] {
+  color: #fecaca;
+}
+
+.thoughtsSaveStatus[data-state='offline'] {
+  color: #fde68a;
+}
+
+.thoughtsRetryButton {
+  appearance: none;
+  border: 1px solid rgba(248, 113, 113, 0.45);
+  background: rgba(239, 68, 68, 0.12);
+  color: #fecaca;
+  padding: 0.4rem 0.75rem;
+  border-radius: 0.75rem;
+  font-weight: 750;
+  cursor: pointer;
+  min-height: 40px;
+}
+
+/* Full-screen slide-over notes drawer */
+.thoughtsDrawerRoot {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  pointer-events: none;
+  visibility: hidden;
+  transition: visibility 0.28s ease;
+}
+
+.thoughtsDrawerRoot.isOpen {
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.thoughtsDrawerBackdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.62);
+  opacity: 0;
+  transition: opacity 0.28s ease;
+}
+
+.thoughtsDrawerRoot.isOpen .thoughtsDrawerBackdrop {
+  opacity: 1;
+}
+
+.thoughtsDrawerPanel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 100%;
+  background: #000000;
+  border-right: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: 12px 0 40px rgba(0, 0, 0, 0.55);
+  transform: translateX(-100%);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.thoughtsDrawerRoot.isOpen .thoughtsDrawerPanel {
+  transform: translateX(0);
+}
+
+.thoughtsDrawerSafeArea {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1;
+  padding-top: env(safe-area-inset-top);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.thoughtsDrawerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.65rem 0.5rem 0.75rem;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.thoughtsDrawerBack {
+  appearance: none;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: rgba(0, 0, 0, 0.45);
+  color: #ffffff;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.85rem;
+  font-weight: 800;
+  font-size: 0.9rem;
+  cursor: pointer;
+  min-height: 44px;
+}
+
+.thoughtsDrawerTitle {
+  margin: 0;
+  flex: 1;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #f9fafb;
+}
+
+.thoughtsDrawerNew {
+  appearance: none;
+  border: 1px solid rgba(147, 197, 253, 0.45);
+  background: rgba(59, 130, 246, 0.16);
+  color: #dbeafe;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.85rem;
+  font-weight: 800;
+  font-size: 0.88rem;
+  cursor: pointer;
+  min-height: 44px;
+}
+
+.thoughtsDrawerNew:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.thoughtsDrawerSearchWrap {
+  padding: 0.5rem 0.65rem 0.75rem;
+  flex-shrink: 0;
+}
+
+.thoughtsDrawerSearch {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: rgba(0, 0, 0, 0.45);
+  color: #f9fafb;
+  font-size: 1rem;
+  min-height: 48px;
+}
+
+.thoughtsDrawerSearch:focus-visible {
+  outline: 2px solid rgba(147, 197, 253, 0.6);
+  outline-offset: 2px;
+}
+
+.thoughtsDrawerList {
+  list-style: none;
+  margin: 0;
+  padding: 0.25rem 0.65rem 1rem;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.thoughtsDrawerEmpty {
+  padding: 1.25rem 0.75rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.95rem;
+}
+
+.thoughtsDrawerItem {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  text-align: left;
+  padding: 0.75rem 0.65rem;
+  margin-bottom: 0.4rem;
+  border-radius: 0.85rem;
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  background: rgba(0, 0, 0, 0.35);
+  color: #f9fafb;
+  cursor: pointer;
+  font: inherit;
+  min-height: 48px;
+}
+
+.thoughtsDrawerItem:last-child {
+  margin-bottom: 0;
+}
+
+.thoughtsDrawerItem.isActive {
+  border-color: rgba(147, 197, 253, 0.5);
+  background: rgba(59, 130, 246, 0.14);
+}
+
+.thoughtsDrawerItemPreview {
+  flex: 1;
+  min-width: 0;
+  font-weight: 650;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.thoughtsDrawerItemMeta {
+  flex-shrink: 0;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thoughtsDrawerBackdrop,
+  .thoughtsDrawerPanel,
+  .thoughtsDrawerRoot {
+    transition: none;
+  }
+}
