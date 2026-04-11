@@ -1,0 +1,664 @@
+{
+    "version": 1,
+    "deckId": "spanish-foundations-wls101",
+    "class": "WLS-101",
+    "topics": [
+      {
+        "topicId": "spanish-basics",
+        "title": "Spanish First Principles",
+        "chapter": "Foundations",
+        "cards": [
+          {
+            "cardId": "sb-1",
+            "term": "What is a noun?",
+            "definition": "A noun is a person, place, or thing (e.g., hotel, playa, amigo)."
+          },
+          {
+            "cardId": "sb-2",
+            "term": "What is grammatical gender?",
+            "definition": "All Spanish nouns are either masculine (el) or feminine (la)."
+          },
+          {
+            "cardId": "sb-3",
+            "term": "Masculine vs feminine endings?",
+            "definition": "Nouns ending in -o are usually masculine, and nouns ending in -a are usually feminine."
+          },
+          {
+            "cardId": "sb-4",
+            "term": "What is a pronoun?",
+            "definition": "A pronoun replaces a noun (yo, tú, él, nosotros, ellos)."
+          },
+          {
+            "cardId": "sb-5",
+            "term": "What is a verb?",
+            "definition": "A verb describes an action or state (comer, dormir, ser)."
+          },
+          {
+            "cardId": "sb-6",
+            "term": "What is conjugation?",
+            "definition": "Conjugation is changing a verb form depending on the subject."
+          },
+          {
+            "cardId": "sb-7",
+            "term": "Why are pronouns often dropped?",
+            "definition": "Because verb endings already indicate the subject."
+          }
+        ]
+      },
+      {
+        "topicId": "adjectives-agreement",
+        "title": "Adjectives & Agreement",
+        "chapter": "Grammar",
+        "cards": [
+          {
+            "cardId": "aa-1",
+            "term": "What is an adjective?",
+            "definition": "A word that describes a noun (bonito, alto, interesante)."
+          },
+          {
+            "cardId": "aa-2",
+            "term": "What is agreement?",
+            "definition": "Adjectives must match the noun in gender and number."
+          },
+          {
+            "cardId": "aa-3",
+            "term": "Example of agreement",
+            "definition": "El chico alto vs. la chica alta vs. los chicos altos."
+          }
+        ]
+      },
+      {
+        "topicId": "ser-vs-estar",
+        "title": "Ser vs Estar",
+        "chapter": "Core Verbs",
+        "cards": [
+          {
+            "cardId": "se-1",
+            "term": "When is SER used?",
+            "definition": "Use SER for identity, origin, permanent traits, and general characteristics."
+          },
+          {
+            "cardId": "se-2",
+            "term": "When is ESTAR used?",
+            "definition": "Use ESTAR for temporary states, emotions, physical conditions, and location."
+          },
+          {
+            "cardId": "se-3",
+            "term": "Example of ESTAR",
+            "definition": "Estoy cansado. = I am tired."
+          },
+          {
+            "cardId": "se-4",
+            "term": "Estar conjugation (yo, tú, él, nosotros, ellos)",
+            "definition": "Estoy, estás, está, estamos, están."
+          }
+        ]
+      },
+      {
+        "topicId": "muy-vs-mucho",
+        "title": "Muy vs Mucho",
+        "chapter": "Grammar",
+        "cards": [
+          {
+            "cardId": "mm-1",
+            "term": "When do you use MUY?",
+            "definition": "Use MUY before adjectives or adverbs: muy dramático, muy bien."
+          },
+          {
+            "cardId": "mm-2",
+            "term": "When do you use MUCHO?",
+            "definition": "Use mucho/a/os/as with nouns or as an adverb with verbs: muchas personas, duermo mucho."
+          },
+          {
+            "cardId": "mm-3",
+            "term": "Key difference",
+            "definition": "MUY describes qualities; MUCHO describes quantity or degree."
+          }
+        ]
+      },
+      {
+        "topicId": "stem-changing-verbs",
+        "title": "Stem-Changing Verbs",
+        "chapter": "Verbs",
+        "cards": [
+          {
+            "cardId": "sc-1",
+            "term": "What are stem-changing verbs?",
+            "definition": "They are verbs where the stem vowel changes in certain conjugations."
+          },
+          {
+            "cardId": "sc-2",
+            "term": "E → IE example",
+            "definition": "Pensar → pienso."
+          },
+          {
+            "cardId": "sc-3",
+            "term": "O → UE example",
+            "definition": "Dormir → duermo."
+          },
+          {
+            "cardId": "sc-4",
+            "term": "E → I example",
+            "definition": "Pedir → pido."
+          },
+          {
+            "cardId": "sc-5",
+            "term": "Important rule",
+            "definition": "Stem changes do not happen in the nosotros form in the present tense."
+          },
+          {
+            "cardId": "sc-6",
+            "term": "Irregular yo form example",
+            "definition": "Decir → digo."
+          }
+        ]
+      },
+      {
+        "topicId": "spanish-vocabulary-week9-10",
+        "title": "Week 9 & 10 Vocabulary (Trimmed to 100 Total Cards)",
+        "chapter": "Vocabulary",
+        "cards": [
+          {
+            "cardId": "v-1",
+            "term": "romántico/a",
+            "definition": "romantic | La película es romántica. | The movie is romantic. | Adjective; changes for gender and number."
+          },
+          {
+            "cardId": "v-2",
+            "term": "talentoso/a",
+            "definition": "talented | Mi artista favorita es muy talentosa. | My favorite artist is very talented. | Adjective agreement applies."
+          },
+          {
+            "cardId": "v-3",
+            "term": "animado/a",
+            "definition": "lively | El concierto es muy animado. | The concert is very lively. | Often used for people, events, or places."
+          },
+          {
+            "cardId": "v-4",
+            "term": "artístico/a",
+            "definition": "artistic | Ella es artística. | She is artistic. | Adjective; match gender."
+          },
+          {
+            "cardId": "v-5",
+            "term": "dramático/a",
+            "definition": "dramatic | Los narradores son muy dramáticos. | The announcers are very dramatic. | Use muy before adjectives."
+          },
+          {
+            "cardId": "v-6",
+            "term": "divertido/a",
+            "definition": "fun | La fiesta es divertida. | The party is fun. | Adjective; not the same as the verb divertir."
+          },
+          {
+            "cardId": "v-7",
+            "term": "aburrido/a",
+            "definition": "boring | Los partidos son aburridos. | The games are boring. | Adjective agreement matters."
+          },
+          {
+            "cardId": "v-8",
+            "term": "agresivo/a",
+            "definition": "aggressive | El personaje es agresivo. | The character is aggressive. | Adjective; changes with gender."
+          },
+          {
+            "cardId": "v-9",
+            "term": "misógino/a",
+            "definition": "misogynistic | Las letras son misóginas. | The lyrics are misogynistic. | Adjective; less common but important for discussion."
+          },
+          {
+            "cardId": "v-10",
+            "term": "positivo/a",
+            "definition": "positive | El mensaje es positivo. | The message is positive. | Adjective agreement."
+          },
+          {
+            "cardId": "v-11",
+            "term": "negativo/a",
+            "definition": "negative | El mensaje es negativo. | The message is negative. | Adjective agreement."
+          },
+          {
+            "cardId": "v-12",
+            "term": "pegajoso/a",
+            "definition": "catchy | La canción es pegajosa. | The song is catchy. | Often used for songs and music."
+          },
+          {
+            "cardId": "v-13",
+            "term": "problemático/a",
+            "definition": "problematic | Los narcocorridos son problemáticos. | Narcocorridos are problematic. | Adjective agreement."
+          },
+          {
+            "cardId": "v-14",
+            "term": "la violencia",
+            "definition": "violence | Hay mucha violencia en esa música. | There is a lot of violence in that music. | Abstract feminine noun; use mucha."
+          },
+          {
+            "cardId": "v-15",
+            "term": "las drogas",
+            "definition": "drugs | Hablan de muchas drogas. | They talk about many drugs. | Feminine plural noun."
+          },
+          {
+            "cardId": "v-16",
+            "term": "el concierto",
+            "definition": "concert | Voy al concierto esta noche. | I am going to the concert tonight. | Masculine noun; a + el = al."
+          },
+          {
+            "cardId": "v-17",
+            "term": "el boleto",
+            "definition": "ticket | El boleto cuesta veinte dólares. | The ticket costs twenty dollars. | Masculine noun."
+          },
+          {
+            "cardId": "v-18",
+            "term": "la entrada",
+            "definition": "ticket / admission | La entrada es cara. | The admission ticket is expensive. | Feminine noun; often for admission."
+          },
+          {
+            "cardId": "v-19",
+            "term": "la discoteca",
+            "definition": "dance club | Vamos a la discoteca. | We are going to the dance club. | Feminine noun."
+          },
+          {
+            "cardId": "v-20",
+            "term": "el zoológico",
+            "definition": "zoo | El zoológico está lejos. | The zoo is far away. | Masculine noun; accent matters."
+          },
+          {
+            "cardId": "v-21",
+            "term": "entretener",
+            "definition": "to entertain | Los artistas entretienen al público. | The artists entertain the audience. | Regular -er verb."
+          },
+          {
+            "cardId": "v-22",
+            "term": "la cafetería",
+            "definition": "cafeteria | Voy a la cafetería con amigos. | I go to the cafeteria with friends. | Feminine noun; accent matters."
+          },
+          {
+            "cardId": "v-23",
+            "term": "el cine",
+            "definition": "movie theater / cinema | Prefiero ir al cine. | I prefer to go to the movies. | Masculine noun."
+          },
+          {
+            "cardId": "v-24",
+            "term": "la película",
+            "definition": "movie | La película es dramática. | The movie is dramatic. | Feminine noun."
+          },
+          {
+            "cardId": "v-25",
+            "term": "el festival",
+            "definition": "festival | El festival empieza a las ocho. | The festival starts at eight. | Masculine noun."
+          },
+          {
+            "cardId": "v-26",
+            "term": "empezar",
+            "definition": "to start / begin | El concierto empieza a las siete. | The concert starts at seven. | Stem-changing e → ie."
+          },
+          {
+            "cardId": "v-27",
+            "term": "volver",
+            "definition": "to return | Vuelvo a casa tarde. | I return home late. | Stem-changing o → ue."
+          },
+          {
+            "cardId": "v-28",
+            "term": "pensar",
+            "definition": "to think | Pienso que el rock es mejor. | I think rock is better. | Stem-changing e → ie."
+          },
+          {
+            "cardId": "v-29",
+            "term": "querer",
+            "definition": "to want / to love a person | Quiero viajar. | I want to travel. | Stem-changing e → ie."
+          },
+          {
+            "cardId": "v-30",
+            "term": "dormir",
+            "definition": "to sleep | Duermo mucho los fines de semana. | I sleep a lot on weekends. | Stem-changing o → ue."
+          },
+          {
+            "cardId": "v-31",
+            "term": "pedir",
+            "definition": "to ask for / request | Pido ayuda en el hotel. | I ask for help at the hotel. | Stem-changing e → i."
+          },
+          {
+            "cardId": "v-32",
+            "term": "decir",
+            "definition": "to say / tell | Yo digo la verdad. | I tell the truth. | Irregular yo form: digo."
+          },
+          {
+            "cardId": "v-33",
+            "term": "repetir",
+            "definition": "to repeat | Repito la pregunta. | I repeat the question. | Stem-changing e → i."
+          },
+          {
+            "cardId": "v-34",
+            "term": "seguir",
+            "definition": "to follow / continue | Sigo las recomendaciones. | I follow the recommendations. | Stem-changing e → i; yo sigo."
+          },
+          {
+            "cardId": "v-35",
+            "term": "recordar",
+            "definition": "to remember | Recuerdo mis vacaciones. | I remember my vacation. | Stem-changing o → ue."
+          },
+          {
+            "cardId": "v-36",
+            "term": "perder",
+            "definition": "to lose | Pierdo las llaves del hotel. | I lose the hotel keys. | Stem-changing e → ie."
+          },
+          {
+            "cardId": "v-37",
+            "term": "encontrar",
+            "definition": "to find | Encuentro mi pasaporte. | I find my passport. | Stem-changing o → ue."
+          },
+          {
+            "cardId": "v-38",
+            "term": "conseguir",
+            "definition": "to get / obtain | Consigo información sobre cine. | I get information about movies. | Stem-changing e → i."
+          },
+          {
+            "cardId": "v-39",
+            "term": "la recomendación",
+            "definition": "recommendation | Sigo la recomendación del crítico. | I follow the critic's recommendation. | Feminine noun; accent matters."
+          },
+          {
+            "cardId": "v-40",
+            "term": "el crítico",
+            "definition": "critic | El crítico dice que es buena. | The critic says it is good. | Masculine noun; feminine is la crítica."
+          },
+          {
+            "cardId": "v-41",
+            "term": "el documental",
+            "definition": "documentary | El documental muestra una historia real. | The documentary shows a real story. | Masculine noun."
+          },
+          {
+            "cardId": "v-42",
+            "term": "la historia",
+            "definition": "story / history | La historia es interesante. | The story is interesting. | Feminine noun."
+          },
+          {
+            "cardId": "v-43",
+            "term": "la acción",
+            "definition": "action | Prefiero las películas de acción. | I prefer action movies. | Feminine noun; accent matters."
+          },
+          {
+            "cardId": "v-44",
+            "term": "el horror",
+            "definition": "horror | No me gustan las películas de horror. | I do not like horror movies. | Masculine noun."
+          },
+          {
+            "cardId": "v-45",
+            "term": "el rock",
+            "definition": "rock music | El rock me gusta mucho. | I like rock music a lot. | Masculine noun."
+          },
+          {
+            "cardId": "v-46",
+            "term": "el rap",
+            "definition": "rap music | El rap es popular. | Rap is popular. | Masculine noun."
+          },
+          {
+            "cardId": "v-47",
+            "term": "las vacaciones",
+            "definition": "vacation | Las vacaciones son en julio. | Vacation is in July. | Usually plural in Spanish."
+          },
+          {
+            "cardId": "v-48",
+            "term": "vacation hotel collection",
+            "definition": "hotel vocabulary set: la habitación, la cama, la llave, el piso, la planta baja, el/la huésped | La habitación está en el segundo piso. | The room is on the second floor. | Good compression card for related hotel nouns."
+          },
+          {
+            "cardId": "v-49",
+            "term": "la habitación",
+            "definition": "room | La habitación doble tiene dos camas. | The double room has two beds. | Feminine noun."
+          },
+          {
+            "cardId": "v-50",
+            "term": "la cama",
+            "definition": "bed | La cama está cómoda. | The bed is comfortable. | Feminine noun; often with estar."
+          },
+          {
+            "cardId": "v-51",
+            "term": "la llave",
+            "definition": "key | Tengo la llave del hotel. | I have the hotel key. | Feminine noun."
+          },
+          {
+            "cardId": "v-52",
+            "term": "el piso",
+            "definition": "floor | Mi habitación está en el tercer piso. | My room is on the third floor. | Masculine noun."
+          },
+          {
+            "cardId": "v-53",
+            "term": "la planta baja",
+            "definition": "ground floor | La recepción está en la planta baja. | The reception is on the ground floor. | Fixed phrase."
+          },
+          {
+            "cardId": "v-54",
+            "term": "confirmar una reservación",
+            "definition": "to confirm a reservation | Necesito confirmar una reservación. | I need to confirm a reservation. | Common travel phrase."
+          },
+          {
+            "cardId": "v-55",
+            "term": "el/la huésped",
+            "definition": "guest | El huésped llega hoy. | The guest arrives today. | Can be masculine or feminine."
+          },
+          {
+            "cardId": "v-56",
+            "term": "el equipaje",
+            "definition": "luggage | Llevo mucho equipaje. | I carry a lot of luggage. | Mass noun; use mucho, not muchos."
+          },
+          {
+            "cardId": "v-57",
+            "term": "transportation collection",
+            "definition": "transportation set: el aeropuerto, el avión, la estación de autobuses, la estación del tren, la estación del metro, la llegada, la salida, el pasaje | La salida es a las seis. | The departure is at six. | Compression card for related travel nouns."
+          },
+          {
+            "cardId": "v-58",
+            "term": "el aeropuerto",
+            "definition": "airport | El aeropuerto está lejos del hotel. | The airport is far from the hotel. | Masculine noun."
+          },
+          {
+            "cardId": "v-59",
+            "term": "el avión",
+            "definition": "airplane | El avión sale temprano. | The airplane leaves early. | Masculine noun; accent matters."
+          },
+          {
+            "cardId": "v-60",
+            "term": "la estación de autobuses",
+            "definition": "bus station | La estación de autobuses está cerca. | The bus station is nearby. | Feminine noun phrase."
+          },
+          {
+            "cardId": "v-61",
+            "term": "la estación del tren / del metro",
+            "definition": "train station / metro station | La estación del metro está en el centro. | The metro station is downtown. | Estación can mean station or season depending on context."
+          },
+          {
+            "cardId": "v-62",
+            "term": "el inspector de aduanas",
+            "definition": "customs officer | El inspector de aduanas revisa mi pasaporte. | The customs officer checks my passport. | Travel phrase."
+          },
+          {
+            "cardId": "v-63",
+            "term": "la llegada / la salida",
+            "definition": "arrival / departure | La llegada es a las ocho y la salida es a las seis. | The arrival is at eight and the departure is at six. | Common travel pair."
+          },
+          {
+            "cardId": "v-64",
+            "term": "el pasaje / de ida y vuelta",
+            "definition": "ticket / round trip | Compro un pasaje de ida y vuelta. | I buy a round-trip ticket. | Fixed travel phrase."
+          },
+          {
+            "cardId": "v-65",
+            "term": "nature collection",
+            "definition": "nature set: la playa, el mar, el campo, el paisaje, la pesca, pescar, acampar | Prefiero el campo por el silencio. | I prefer the countryside because of the silence. | Compression card for nature vocabulary."
+          },
+          {
+            "cardId": "v-66",
+            "term": "la playa",
+            "definition": "beach | La playa es muy bonita. | The beach is very beautiful. | Feminine noun."
+          },
+          {
+            "cardId": "v-67",
+            "term": "el mar",
+            "definition": "sea / ocean | El mar está tranquilo. | The sea is calm. | Masculine noun."
+          },
+          {
+            "cardId": "v-68",
+            "term": "el campo",
+            "definition": "countryside | Prefiero el campo. | I prefer the countryside. | Masculine noun."
+          },
+          {
+            "cardId": "v-69",
+            "term": "el paisaje",
+            "definition": "landscape | El paisaje es hermoso. | The landscape is beautiful. | Masculine noun."
+          },
+          {
+            "cardId": "v-70",
+            "term": "la pesca / pescar",
+            "definition": "fishing / to fish | Me gusta pescar en el mar. | I like to fish in the sea. | Noun + verb pair."
+          },
+          {
+            "cardId": "v-71",
+            "term": "acampar",
+            "definition": "to camp | Vamos a acampar en verano. | We are going camping in the summer. | Regular -ar verb."
+          },
+          {
+            "cardId": "v-72",
+            "term": "vacation activities collection",
+            "definition": "activities set: hacer las maletas, tomar fotos, sacar fotos, ir de compras, montar a caballo, hacer surf | Me gusta tomar fotos y hacer surf. | I like to take pictures and surf. | Compression card for common vacation actions."
+          },
+          {
+            "cardId": "v-73",
+            "term": "hacer las maletas",
+            "definition": "to pack luggage | Hago las maletas antes del viaje. | I pack before the trip. | Fixed phrase; hacer is irregular in yo form."
+          },
+          {
+            "cardId": "v-74",
+            "term": "tomar fotos / sacar fotos",
+            "definition": "to take pictures | Tomamos fotos en la playa. | We take pictures at the beach. | Both forms are common."
+          },
+          {
+            "cardId": "v-75",
+            "term": "ir de compras",
+            "definition": "to go shopping | Me gusta ir de compras en vacaciones. | I like to go shopping on vacation. | Fixed expression."
+          },
+          {
+            "cardId": "v-76",
+            "term": "montar a caballo",
+            "definition": "to go horseback riding | Quiero montar a caballo en el campo. | I want to go horseback riding in the countryside. | Fixed phrase."
+          },
+          {
+            "cardId": "v-77",
+            "term": "hacer surf",
+            "definition": "to surf | Hacemos surf en la playa. | We surf at the beach. | Common borrowed phrase with hacer."
+          },
+          {
+            "cardId": "v-78",
+            "term": "weather collection",
+            "definition": "weather set: hace frío, hace calor, llueve, está lloviendo, está nublado, está soleado, hace buen tiempo, hace fresco, va a llover, nieva | Hoy hace fresco y está nublado. | Today it is cool and cloudy. | Good summary card for all major weather phrases."
+          },
+          {
+            "cardId": "v-79",
+            "term": "el tiempo",
+            "definition": "weather / time | ¿Qué tiempo hace hoy? | What is the weather like today? | Means weather or time depending on context."
+          },
+          {
+            "cardId": "v-80",
+            "term": "hace frío / hace calor",
+            "definition": "it is cold / it is hot | Hace calor en julio. | It is hot in July. | Weather uses hacer, not estar."
+          },
+          {
+            "cardId": "v-81",
+            "term": "llueve / está lloviendo",
+            "definition": "it rains / it is raining | Está lloviendo ahora. | It is raining now. | Llueve is general; está lloviendo is happening now."
+          },
+          {
+            "cardId": "v-82",
+            "term": "nublado/a / soleado/a",
+            "definition": "cloudy / sunny | Está soleado hoy. | It is sunny today. | Usually used with estar."
+          },
+          {
+            "cardId": "v-83",
+            "term": "hace buen tiempo / hace fresco",
+            "definition": "the weather is nice / it is cool | Hace buen tiempo en primavera. | The weather is nice in spring. | Fixed weather expressions."
+          },
+          {
+            "cardId": "v-84",
+            "term": "va a llover / nieva",
+            "definition": "it is going to rain / it snows | Creo que va a llover mañana. | I think it is going to rain tomorrow. | Near future uses ir + a + infinitive."
+          },
+          {
+            "cardId": "v-85",
+            "term": "season collection",
+            "definition": "seasons set: el invierno, la primavera, el verano, el otoño, el mes | Mi estación favorita es el verano. | My favorite season is summer. | Good compressed season card."
+          },
+          {
+            "cardId": "v-86",
+            "term": "el invierno / la primavera / el verano / el otoño",
+            "definition": "winter / spring / summer / fall | El invierno es frío y la primavera es bonita. | Winter is cold and spring is beautiful. | Seasons are common class vocab."
+          },
+          {
+            "cardId": "v-87",
+            "term": "el mes",
+            "definition": "month | Enero es el primer mes del año. | January is the first month of the year. | Masculine noun."
+          },
+          {
+            "cardId": "v-88",
+            "term": "enero / julio",
+            "definition": "January / July | Voy a la playa en julio. | I go to the beach in July. | Months are lowercase in Spanish."
+          },
+          {
+            "cardId": "v-89",
+            "term": "estar emotion and condition collection",
+            "definition": "estar adjectives set: cómodo/a, enamorado/a, cerrado/a, ocupado/a, equivocado/a, alegre, confundido/a, nervioso/a, enojado/a, limpio/a, sucio/a, cansado/a, contento/a, avergonzado/a | Estoy nervioso por el examen. | I am nervous about the exam. | Use estar, not ser, for temporary states and conditions."
+          },
+          {
+            "cardId": "v-90",
+            "term": "cómodo/a",
+            "definition": "comfortable | La habitación está cómoda. | The room is comfortable. | Usually with estar."
+          },
+          {
+            "cardId": "v-91",
+            "term": "enamorado/a",
+            "definition": "in love | Estoy enamorado de Ana. | I am in love with Ana. | Use estar for this emotional state."
+          },
+          {
+            "cardId": "v-92",
+            "term": "cerrado/a / limpio/a / sucio/a",
+            "definition": "closed / clean / dirty | La biblioteca está cerrada y mi cuarto está sucio. | The library is closed and my room is dirty. | Physical conditions usually use estar."
+          },
+          {
+            "cardId": "v-93",
+            "term": "ocupado/a / equivocado/a",
+            "definition": "busy / wrong, mistaken | Estamos ocupados y tú estás equivocado. | We are busy and you are wrong. | Temporary conditions with estar."
+          },
+          {
+            "cardId": "v-94",
+            "term": "alegre / confundido/a / nervioso/a / enojado/a",
+            "definition": "happy / confused / nervous / angry | Ella está alegre pero yo estoy nervioso. | She is happy but I am nervous. | Emotion adjectives often tested with estar."
+          },
+          {
+            "cardId": "v-95",
+            "term": "cansado/a / contento/a / avergonzado/a",
+            "definition": "tired / happy / embarrassed | Estoy cansado pero contento. | I am tired but happy. | Temporary feelings use estar."
+          },
+          {
+            "cardId": "v-96",
+            "term": "muy",
+            "definition": "very | Estoy muy cansado. | I am very tired. | Use before adjectives or adverbs."
+          },
+          {
+            "cardId": "v-97",
+            "term": "mucho / mucha / muchos / muchas",
+            "definition": "a lot / many | Hay muchas personas y tengo mucha tarea. | There are many people and I have a lot of homework. | Must agree with nouns; mucho can also modify verbs."
+          },
+          {
+            "cardId": "v-98",
+            "term": "la persona / el gimnasio / la tarea",
+            "definition": "person / gym / homework | Hay muchas personas en el gimnasio y tengo mucha tarea. | There are many people in the gym and I have a lot of homework. | Persona is feminine even if referring to a man."
+          },
+          {
+            "cardId": "v-99",
+            "term": "question words collection",
+            "definition": "¿Dónde?, ¿Cuándo?, ¿Qué?, ¿Cómo?, ¿Con quién? | ¿Dónde vas y con quién? | Where are you going and with whom? | Question words take accent marks."
+          },
+          {
+            "cardId": "v-100",
+            "term": "ir + a + infinitivo",
+            "definition": "to be going to do something | Voy a estudiar en la biblioteca. | I am going to study in the library. | Near-future structure that appears often in conversation."
+          }
+        ]
+      }
+    ]
+  }

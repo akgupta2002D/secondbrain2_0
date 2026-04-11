@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
-import flashcardsJson from '../data/definitions306.json'
-import cellBioJson from '../data/cellBio_cellJunction.json'
-import spanishExam4Json from '../data/spanish_exam4.json'
+import definitions306Json from '../data/definitions306.json'
+import spanishExam5Json from '../data/spanishexam5.json'
 import { parseFlashcardsJsonV1 } from '../model/parseFlashcards'
 import { applyReviewResultToScore, initMemoryScores } from '../model/memoryScore'
 import { loadMemoryScores, saveMemoryScores } from '../model/memoryScoreStorage'
@@ -26,9 +25,8 @@ const buildRotatedCycleOrder = (cardIds: string[]): string[] => {
 export const RememberScreen = ({ onBack }: Props) => {
   const parsedDecks = useMemo(() => {
     const parsed = [
-      parseFlashcardsJsonV1(flashcardsJson),
-      parseFlashcardsJsonV1(cellBioJson),
-      parseFlashcardsJsonV1(spanishExam4Json),
+      parseFlashcardsJsonV1(definitions306Json),
+      parseFlashcardsJsonV1(spanishExam5Json),
     ]
 
     const firstErr = parsed.find((r) => r.kind === 'err')
