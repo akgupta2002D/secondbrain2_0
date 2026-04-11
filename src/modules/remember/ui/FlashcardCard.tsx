@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { PointerEvent as ReactPointerEvent } from 'react'
+import { splitDefinitionForDisplay } from '../lib/splitDefinitionLines'
 import type { Flashcard } from '../model/types'
 import type { ReviewResult } from '../model/memoryScore'
 
@@ -167,6 +168,11 @@ export const FlashcardCard = ({
     }
   }, [])
 
+  const definitionLines = useMemo(
+    () => splitDefinitionForDisplay(card.definition),
+    [card.definition],
+  )
+
   const dragStrength = onSwipe
     ? clamp01(Math.abs(dragX) / SWIPE_THRESHOLD_PX)
     : 0
@@ -253,7 +259,13 @@ export const FlashcardCard = ({
           </div>
 
           <div className="flashcardFace flashcardBack">
-            <div className="flashcardDefinition">{card.definition}</div>
+            <div className="flashcardDefinitionStack">
+              {definitionLines.map((line, i) => (
+                <p key={i} className="flashcardDefinitionLine">
+                  {line}
+                </p>
+              ))}
+            </div>
           </div>
         </div>
       </div>

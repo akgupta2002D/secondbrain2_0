@@ -2,7 +2,7 @@
     "version": 1,
     "deckId": "spanish-foundations-wls101",
     "class": "WLS-101",
-    "topics": [
+    "topicPacks": [
       {
         "topicId": "spanish-basics",
         "title": "Spanish First Principles",

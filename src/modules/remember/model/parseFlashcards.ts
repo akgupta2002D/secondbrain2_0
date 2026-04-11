@@ -60,11 +60,12 @@ export const parseFlashcardsJsonV1 = (
     )
     if (deckClassRes.kind === 'err') return deckClassRes
 
-    const topicPacks = (input as UnknownRecord).topicPacks
-    if (!Array.isArray(topicPacks)) {
+    const raw = (input as UnknownRecord).topicPacks ?? (input as UnknownRecord).topics
+    const topicPacks = Array.isArray(raw) ? raw : null
+    if (!topicPacks) {
       return err({
         kind: 'invalid',
-        message: 'Expected topicPacks to be an array',
+        message: 'Expected topicPacks (or topics) to be an array',
         path: 'topicPacks',
       })
     }
