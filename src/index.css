@@ -1402,3 +1402,303 @@ body {
     transition: none;
   }
 }
+
+/* Identity module — goals graph, mobile-first, centered body */
+.identityScreen {
+  width: 100%;
+  min-height: 100svh;
+  min-height: 100dvh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 0;
+  text-align: center;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.identityTopBar {
+  flex-shrink: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: calc(env(safe-area-inset-top) + 0.65rem) max(1rem, env(safe-area-inset-right)) 0.4rem
+    max(1rem, env(safe-area-inset-left));
+}
+
+.identityTopBar .backButton {
+  position: static;
+}
+
+.identityBody {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem max(0.75rem, env(safe-area-inset-right)) max(1.25rem, env(safe-area-inset-bottom))
+    max(0.75rem, env(safe-area-inset-left));
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.identityShell {
+  width: 100%;
+  max-width: min(22rem, calc(100vw - 1.5rem));
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.45rem, 2vw, 0.75rem);
+}
+
+.identityTitle {
+  margin: 0;
+  font-size: clamp(1.25rem, 5.5vw, 1.65rem);
+  font-weight: 900;
+  color: #f9fafb;
+  padding: 0 0.25rem;
+}
+
+.identitySubtitle {
+  margin: 0;
+  font-size: clamp(0.82rem, 3.2vw, 0.92rem);
+  color: rgba(229, 231, 235, 0.65);
+  line-height: 1.4;
+  max-width: 20rem;
+  padding: 0 0.35rem;
+}
+
+.identityGraphWrap {
+  width: min(88vw, 21.5rem);
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.identityGraphSvg {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  max-height: min(52svh, 22rem);
+  touch-action: manipulation;
+}
+
+.identityNodeLabel {
+  letter-spacing: -0.03em;
+  text-rendering: geometricPrecision;
+}
+
+.identityVineStroke {
+  stroke-dasharray: 5 16;
+  animation: identityVineFlow 4.2s linear infinite;
+}
+
+.identityVineStrokeHot {
+  stroke-dasharray: 2.5 11;
+  animation:
+    identityVineFlow 3.8s linear infinite,
+    identityVineBurn 1.65s ease-in-out infinite;
+}
+
+@keyframes identityVineFlow {
+  to {
+    stroke-dashoffset: -84;
+  }
+}
+
+@keyframes identityVineBurn {
+  0%,
+  100% {
+    stroke-width: 3.65px;
+  }
+  50% {
+    stroke-width: 5px;
+  }
+}
+
+.identityFlameSpin {
+  transform-origin: 0 0;
+}
+
+.identityRingFlameSpin {
+  transform-origin: 0 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .identityFlameSpin {
+    animation: identityFlameRotate 14s linear infinite;
+  }
+
+  .identityRingFlameSpin {
+    animation-name: identityFlameRotate;
+    animation-duration: var(--ring-flame-dur, 16s);
+    animation-delay: var(--ring-flame-delay, 0s);
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+  .identityRingFlameSpin--rev {
+    animation-direction: reverse;
+  }
+}
+
+@keyframes identityFlameRotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.identityCenterPulseRing {
+  animation: identityCenterPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes identityCenterPulse {
+  0%,
+  100% {
+    opacity: 0.18;
+    stroke-width: 12px;
+  }
+  50% {
+    opacity: 0.42;
+    stroke-width: 18px;
+  }
+}
+
+.identityCenterLabel {
+  paint-order: stroke fill;
+  stroke: rgba(127, 29, 29, 0.35);
+  stroke-width: 0.35px;
+  text-shadow:
+    0 0 10px rgba(253, 224, 71, 0.95),
+    0 0 22px rgba(249, 115, 22, 0.75),
+    0 0 34px rgba(239, 68, 68, 0.5),
+    0 0 42px rgba(34, 211, 238, 0.35);
+}
+
+.identityNodeGlow {
+  animation: identityNodeEmber 2.8s ease-in-out infinite;
+}
+
+@keyframes identityNodeEmber {
+  0%,
+  100% {
+    stroke-opacity: 0.28;
+  }
+  50% {
+    stroke-opacity: 0.5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .identityVineStroke,
+  .identityVineStrokeHot {
+    animation: none;
+  }
+
+  .identityFlameSpin {
+    animation: none;
+  }
+
+  .identityRingFlameSpin,
+  .identityRingFlameSpin--rev {
+    animation: none;
+  }
+
+  .identityCenterPulseRing,
+  .identityNodeGlow {
+    animation: none;
+  }
+}
+
+.identityNodeGroup {
+  cursor: pointer;
+  outline: none;
+}
+
+.identityNodeGroup:focus-visible .identityNodeShape {
+  stroke: #ffffff;
+  stroke-width: 3;
+}
+
+.identityCenterGroup {
+  cursor: pointer;
+  outline: none;
+}
+
+.identityCenterGroup:focus-visible .identityCenterCircle {
+  stroke: #ffffff;
+}
+
+.identityDetail {
+  width: 100%;
+  max-width: 100%;
+  text-align: left;
+  padding: 0.85rem 1rem;
+  border-radius: 0.95rem;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  background: rgba(0, 0, 0, 0.4);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.identityDetailLabel {
+  margin: 0;
+  font-weight: 850;
+  font-size: 1rem;
+  color: #f9fafb;
+}
+
+.identityDetailBody {
+  margin: 0.4rem 0 0;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: rgba(229, 231, 235, 0.88);
+}
+
+.identityDetailMuted {
+  margin: 0.35rem 0 0;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.identityError {
+  width: 100%;
+  max-width: min(22rem, calc(100vw - 1.5rem));
+  margin: 0 auto;
+  padding: 1rem 1.05rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  background: rgba(239, 68, 68, 0.08);
+  text-align: left;
+}
+
+.identityErrorTitle {
+  margin: 0;
+  font-weight: 800;
+  color: #fff;
+}
+
+.identityErrorBody {
+  margin: 0.5rem 0 0;
+  color: #fecaca;
+  font-size: 0.95rem;
+}
+
+.identityErrorHint {
+  margin: 0.65rem 0 0;
+  font-size: 0.85rem;
+  color: rgba(229, 231, 235, 0.75);
+}
+
+.identityCode {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.82em;
+  color: #93c5fd;
+}

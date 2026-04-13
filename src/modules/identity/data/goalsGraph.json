@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "center": {
+    "id": "me",
+    "label": "Me"
+  },
+  "nodes": [
+    {
+      "id": "family",
+      "label": "Family First",
+      "detail": "Good son and good brother",
+      "strokeColor": "#f472b6"
+    },
+    {
+      "id": "charcoal",
+      "label": "Charcoal Craft",
+      "detail": "Charcoal master",
+      "strokeColor": "#fdba74"
+    },
+    {
+      "id": "chef",
+      "label": "Chef Spirit",
+      "detail": "Sanji-level cooking",
+      "strokeColor": "#fb923c"
+    },
+    {
+      "id": "shuttle",
+      "label": "Court Speed",
+      "detail": "Badminton fitness",
+      "strokeColor": "#4ade80"
+    },
+    {
+      "id": "vdm",
+      "label": "VDM Vision",
+      "strokeColor": "#c084fc"
+    },
+    {
+      "id": "ai",
+      "label": "AI Builder",
+      "strokeColor": "#38bdf8"
+    },
+    {
+      "id": "voice",
+      "label": "Podcast Edge",
+      "detail": "Podcaster leverage",
+      "strokeColor": "#fde047"
+    },
+    {
+      "id": "joy",
+      "label": "Living Joy",
+      "detail": "Fun person",
+      "strokeColor": "#2dd4bf"
+    }
+  ]
+}

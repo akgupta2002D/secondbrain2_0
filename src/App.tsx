@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
+import { IdentityScreen } from './modules/identity'
 import { RememberScreen } from './modules/remember'
 import { ThoughtsScreen } from './modules/thoughts'
 
-type View = 'home' | 'modules' | 'remember' | 'thoughts'
+type View = 'home' | 'modules' | 'remember' | 'thoughts' | 'identity'
 
 function App() {
   const [showRefreshPrompt, setShowRefreshPrompt] = useState(false)
@@ -77,6 +78,10 @@ function App() {
     setView('thoughts')
   }
 
+  const openIdentity = (): void => {
+    setView('identity')
+  }
+
   return (
     <>
       {view === 'home' ? (
@@ -133,12 +138,23 @@ function App() {
           >
             Thoughts
           </button>
+
+          <button
+            type="button"
+            role="menuitem"
+            className="moduleMenuItem"
+            onClick={openIdentity}
+          >
+            Identity
+          </button>
         </main>
       ) : null}
 
       {view === 'remember' ? <RememberScreen onBack={goModules} /> : null}
 
       {view === 'thoughts' ? <ThoughtsScreen onBack={goModules} /> : null}
+
+      {view === 'identity' ? <IdentityScreen onBack={goModules} /> : null}
 
       {showRefreshPrompt ? (
         <div className="updatePrompt" role="alertdialog" aria-live="polite">
