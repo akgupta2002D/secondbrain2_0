@@ -44,6 +44,8 @@ export default defineConfig({
       },
       devOptions: {
         enabled: true,
+        // generateSW scans dev-dist; only sw.js/workbox files exist there in dev.
+        suppressWarnings: true,
       },
     }),
   ],

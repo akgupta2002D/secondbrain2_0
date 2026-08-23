@@ -70,5 +70,25 @@ describe('App', () => {
 
     vi.useRealTimers()
   })
+
+  it('opens Notes from the home icon and does not list it under Modules', () => {
+    render(<App />)
+
+    expect(screen.getByRole('button', { name: 'Notes' })).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', { name: 'Modules' }))
+
+    expect(screen.getByRole('menuitem', { name: 'Remember' })).toBeInTheDocument()
+    expect(screen.getByRole('menuitem', { name: 'Thoughts' })).toBeInTheDocument()
+    expect(screen.getByRole('menuitem', { name: 'Identity' })).toBeInTheDocument()
+    expect(screen.queryByRole('menuitem', { name: 'Notes' })).not.toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', { name: 'Back' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Notes' }))
+
+    expect(
+      screen.getByRole('main', { name: /Notes/i }),
+    ).toBeInTheDocument()
+  })
 })
 

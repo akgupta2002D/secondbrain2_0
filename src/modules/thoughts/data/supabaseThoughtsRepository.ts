@@ -8,7 +8,6 @@ import type {
 
 type ThoughtRow = {
   id: string
-  user_id: string
   title: string | null
   body: string
   created_at: string
@@ -18,7 +17,6 @@ type ThoughtRow = {
 function mapRow(row: ThoughtRow): Thought {
   return {
     id: row.id,
-    userId: row.user_id,
     title: row.title,
     body: row.body,
     createdAt: row.created_at,
@@ -41,17 +39,9 @@ export function createSupabaseThoughtsRepository(
     },
 
     async create(input: CreateThoughtInput): Promise<Thought> {
-      const {
-        data: { user },
-        error: userErr,
-      } = await client.auth.getUser()
-      if (userErr) throw userErr
-      if (!user) throw new Error('Not signed in')
-
       const { data, error } = await client
         .from('thoughts')
         .insert({
-          user_id: user.id,
           title: input.title ?? null,
           body: input.body,
         })

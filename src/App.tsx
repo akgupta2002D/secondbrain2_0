@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import { IdentityScreen } from './modules/identity'
+import { NotesScreen } from './modules/notes'
 import { RememberScreen } from './modules/remember'
 import { ThoughtsScreen } from './modules/thoughts'
 
-type View = 'home' | 'modules' | 'remember' | 'thoughts' | 'identity'
+type View = 'home' | 'modules' | 'remember' | 'thoughts' | 'identity' | 'notes'
 
 function App() {
   const [showRefreshPrompt, setShowRefreshPrompt] = useState(false)
@@ -82,6 +83,10 @@ function App() {
     setView('identity')
   }
 
+  const openNotes = (): void => {
+    setView('notes')
+  }
+
   return (
     <>
       {view === 'home' ? (
@@ -107,6 +112,26 @@ function App() {
             </button>
             <span className="versionText">{appVersion}</span>
           </span>
+
+          <button
+            type="button"
+            className="notesHomeFab"
+            onClick={openNotes}
+            aria-label="Notes"
+          >
+            <svg
+              className="notesHomeFabIcon"
+              viewBox="0 0 24 24"
+              width="22"
+              height="22"
+              aria-hidden
+            >
+              <path
+                fill="currentColor"
+                d="M6 3h9l5 5v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm8 1.5V9h4.5L14 4.5zM8 12h8v1.5H8V12zm0 3.5h8V17H8v-1.5z"
+              />
+            </svg>
+          </button>
         </main>
       ) : null}
 
@@ -155,6 +180,8 @@ function App() {
       {view === 'thoughts' ? <ThoughtsScreen onBack={goModules} /> : null}
 
       {view === 'identity' ? <IdentityScreen onBack={goModules} /> : null}
+
+      {view === 'notes' ? <NotesScreen onBack={goHome} /> : null}
 
       {showRefreshPrompt ? (
         <div className="updatePrompt" role="alertdialog" aria-live="polite">

@@ -4,7 +4,6 @@ import type { Thought } from '../model/types'
 
 const base = (over: Partial<Thought>): Thought => ({
   id: '1',
-  userId: 'u',
   title: null,
   body: '',
   createdAt: '2026-01-01T00:00:00Z',

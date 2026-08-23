@@ -3,7 +3,7 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 let cached: SupabaseClient | null = null
 
 function resolvePublishableKey(): string | undefined {
-  const publishable = import.meta.env.VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY?.trim()
+  const publishable = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim()
   const legacyAnon = import.meta.env.VITE_SUPABASE_ANON_KEY?.trim()
   return publishable || legacyAnon
 }
@@ -21,9 +21,9 @@ export function getSupabaseClient(): SupabaseClient | null {
   if (!cached) {
     cached = createClient(cfg.url, cfg.anonKey, {
       auth: {
-        persistSession: true,
-        autoRefreshToken: true,
-        detectSessionInUrl: true,
+        persistSession: false,
+        autoRefreshToken: false,
+        detectSessionInUrl: false,
       },
     })
   }

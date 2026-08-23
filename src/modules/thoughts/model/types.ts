@@ -1,6 +1,5 @@
 export type Thought = {
   id: string
-  userId: string
   title: string | null
   body: string
   createdAt: string
