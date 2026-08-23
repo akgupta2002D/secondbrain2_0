@@ -811,6 +811,9 @@ body {
   border: 1px solid rgba(147, 197, 253, 0.4);
   background: rgba(17, 24, 39, 0.92);
   color: #e0f2fe;
+  font-size: 1.75rem;
+  line-height: 1;
+  font-weight: 500;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -821,10 +824,6 @@ body {
 
 .notesHomeFab:active {
   transform: scale(0.96);
-}
-
-.notesHomeFabIcon {
-  display: block;
 }
 
 .updateLinkSmall {

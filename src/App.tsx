@@ -119,18 +119,7 @@ function App() {
             onClick={openNotes}
             aria-label="Notes"
           >
-            <svg
-              className="notesHomeFabIcon"
-              viewBox="0 0 24 24"
-              width="22"
-              height="22"
-              aria-hidden
-            >
-              <path
-                fill="currentColor"
-                d="M6 3h9l5 5v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm8 1.5V9h4.5L14 4.5zM8 12h8v1.5H8V12zm0 3.5h8V17H8v-1.5z"
-              />
-            </svg>
+            +
           </button>
         </main>
       ) : null}

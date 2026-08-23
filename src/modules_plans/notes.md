@@ -33,7 +33,7 @@ Primary files:
 
 ## Current State (Implemented)
 
-- **Home chrome**: Notes is a bottom-right icon FAB. Update + version sit bottom-left. Notes is not in Modules.
+- **Home chrome**: Notes is a bottom-right `+` FAB. Update + version sit bottom-left. Notes is not in Modules.
 - **Open**: loads existing rows, then inserts one new blank note and selects it.
 - **Sidebar**: hamburger opens a left drawer of all notes (first line or “New Note”, plus date). Tap a row to edit it full screen; drawer closes.
 - **Save**: typing autosaves with `update` on that id.
