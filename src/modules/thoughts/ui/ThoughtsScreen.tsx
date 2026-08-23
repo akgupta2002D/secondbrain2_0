@@ -123,7 +123,7 @@ export function ThoughtsScreen({ onBack }: Props) {
             <code className="thoughtsCode">VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY</code>{' '}
             (or <code className="thoughtsCode">VITE_SUPABASE_ANON_KEY</code>) to your environment,
             run the SQL in <code className="thoughtsCode">supabase/migrations</code>
-            (including <code className="thoughtsCode">003_remove_auth.sql</code>),
+            (including <code className="thoughtsCode">004_restore_auth_rls.sql</code>),
             then restart the dev server.
           </p>
         </div>

@@ -6,3 +6,7 @@ Modular iPhone-first PWA (starting with a minimal â€œApp installed / Hey Ankitâ€
 
 See `project_description.md`.
 
+## Supabase
+
+Auth dashboard URLs, env vars, and SQL order: [`supabase/README.md`](supabase/README.md).
+

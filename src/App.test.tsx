@@ -2,7 +2,23 @@ import { fireEvent, render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import App from './App'
 
+const auth = vi.hoisted(() => ({
+  state: { kind: 'signedIn' as 'booting' | 'signedOut' | 'signedIn' },
+}))
+
+vi.mock('./auth', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('./auth')>()
+  return {
+    ...actual,
+    useAuthSession: () => auth.state,
+  }
+})
+
 describe('App', () => {
+  beforeEach(() => {
+    auth.state = { kind: 'signedIn' }
+  })
+
   it('shows modules and opens Remember flashcards', async () => {
     vi.spyOn(Math, 'random').mockReturnValue(0)
     window.localStorage.clear()
@@ -90,5 +106,13 @@ describe('App', () => {
       screen.getByRole('main', { name: /Notes/i }),
     ).toBeInTheDocument()
   })
-})
 
+  it('shows sign-in when signed out and hides Home chrome', () => {
+    auth.state = { kind: 'signedOut' }
+    render(<App />)
+
+    expect(screen.getByRole('main', { name: 'Sign in' })).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'Modules' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'Notes' })).not.toBeInTheDocument()
+  })
+})

@@ -21,9 +21,9 @@ export function getSupabaseClient(): SupabaseClient | null {
   if (!cached) {
     cached = createClient(cfg.url, cfg.anonKey, {
       auth: {
-        persistSession: false,
-        autoRefreshToken: false,
-        detectSessionInUrl: false,
+        persistSession: true,
+        autoRefreshToken: true,
+        detectSessionInUrl: true,
       },
     })
   }

@@ -14,13 +14,15 @@ Goals:
 
 ## Data Contract (v1)
 
-Postgres table `public.notes` ([supabase/migrations/002_notes.sql](../../supabase/migrations/002_notes.sql)):
+Postgres table `public.notes` ([supabase/migrations/002_notes.sql](../../supabase/migrations/002_notes.sql); ownership restored in [004_restore_auth_rls.sql](../../supabase/migrations/004_restore_auth_rls.sql)):
 - `id` uuid
+- `user_id` uuid — owner (`auth.uid()`); RLS so only that user can read/write
 - `"text"` text
 - `created_at` timestamptz — the capture **date** (stable on update)
-- No `user_id` / auth (personal app; see `003_remove_auth.sql`)
 
 Domain type `{ id, text, date }` maps `created_at` → `date`.
+
+Auth / dashboard URLs / env: [`supabase/README.md`](../../supabase/README.md).
 
 Primary files:
 - `src/modules/notes/model/types.ts`

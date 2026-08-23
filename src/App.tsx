@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import { LoginScreen, useAuthSession } from './auth'
+import { getSupabaseClient } from './lib/supabaseClient'
 import { IdentityScreen } from './modules/identity'
 import { NotesScreen } from './modules/notes'
 import { RememberScreen } from './modules/remember'
@@ -7,6 +9,7 @@ import { ThoughtsScreen } from './modules/thoughts'
 type View = 'home' | 'modules' | 'remember' | 'thoughts' | 'identity' | 'notes'
 
 function App() {
+  const auth = useAuthSession()
   const [showRefreshPrompt, setShowRefreshPrompt] = useState(false)
   const [view, setView] = useState<View>('home')
 
@@ -87,6 +90,53 @@ function App() {
     setView('notes')
   }
 
+  const onSignOut = (): void => {
+    void getSupabaseClient()?.auth.signOut()
+  }
+
+  useEffect(() => {
+    if (auth.kind === 'signedOut') {
+      setView('home')
+    }
+  }, [auth.kind])
+
+  if (auth.kind === 'booting') {
+    return (
+      <main className="screen loginScreen" aria-label="Loading">
+        <p className="loginMuted">Loading…</p>
+      </main>
+    )
+  }
+
+  if (auth.kind === 'signedOut') {
+    return (
+      <>
+        <LoginScreen />
+        {showRefreshPrompt ? (
+          <div className="updatePrompt" role="alertdialog" aria-live="polite">
+            <div className="updatePromptInner">
+              <div className="updatePromptText">
+                <p className="updatePromptTitle">Update available</p>
+                <p className="updatePromptBody">Tap refresh to get the latest version.</p>
+              </div>
+              <div className="updatePromptActions">
+                <button className="updatePromptButton" onClick={onRefresh}>
+                  Refresh
+                </button>
+                <button
+                  className="updatePromptDismiss"
+                  onClick={() => setShowRefreshPrompt(false)}
+                >
+                  Later
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : null}
+      </>
+    )
+  }
+
   return (
     <>
       {view === 'home' ? (
@@ -111,6 +161,14 @@ function App() {
               Update
             </button>
             <span className="versionText">{appVersion}</span>
+            <button
+              type="button"
+              className="updateLinkSmall"
+              onClick={onSignOut}
+              aria-label="Sign out"
+            >
+              Sign out
+            </button>
           </span>
 
           <button

@@ -104,7 +104,7 @@ export function NotesScreen({ onBack }: Props) {
             <code className="notesCode">VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY</code>{' '}
             (or <code className="notesCode">VITE_SUPABASE_ANON_KEY</code>) to your environment,
             run the SQL in <code className="notesCode">supabase/migrations</code>
-            (including <code className="notesCode">003_remove_auth.sql</code>),
+            (including <code className="notesCode">004_restore_auth_rls.sql</code>),
             then restart the dev server.
           </p>
         </div>

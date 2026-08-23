@@ -15,6 +15,7 @@ This repo is intended to grow into a **PWA app shell + independent modules**. Us
 - **App shell** owns:
   - bootstrapping, routing, PWA registration, top-level layout, global styling tokens
   - module discovery/registration (a "module registry")
+  - sign-in / session (`src/auth/`); dashboard + SQL reference: `supabase/README.md`
 - **Each module** owns:
   - its routes (if any), screens/components, local state, domain logic
   - a single public entry (e.g. `src/modules/<id>/index.ts`)
