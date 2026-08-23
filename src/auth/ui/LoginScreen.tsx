@@ -46,6 +46,34 @@ export function LoginScreen() {
     return trimmed
   }
 
+  const onSendLink = async (event: FormEvent): Promise<void> => {
+    event.preventDefault()
+    const nextEmail = normalizedEmail()
+    if (!nextEmail) {
+      setError('Enter a valid email.')
+      setInfo(null)
+      return
+    }
+    setBusy(true)
+    setError(null)
+    setInfo(null)
+    try {
+      const { error: authError } = await client.auth.signInWithOtp({
+        email: nextEmail,
+        options: { emailRedirectTo: window.location.origin },
+      })
+      if (authError) {
+        setError(userSafeError(authError, 'Could not send email.'))
+        return
+      }
+      setInfo('Check your email for a sign-in link.')
+    } catch (e) {
+      setError(userSafeError(e, 'Could not send email.'))
+    } finally {
+      setBusy(false)
+    }
+  }
+
   const onSignIn = async (event: FormEvent): Promise<void> => {
     event.preventDefault()
     const nextEmail = normalizedEmail()
@@ -111,53 +139,42 @@ export function LoginScreen() {
     }
   }
 
-  const onMagicLink = async (): Promise<void> => {
-    const nextEmail = normalizedEmail()
-    if (!nextEmail) {
-      setError('Enter a valid email.')
-      setInfo(null)
-      return
-    }
-    setBusy(true)
-    setError(null)
-    setInfo(null)
-    try {
-      const { error: authError } = await client.auth.signInWithOtp({
-        email: nextEmail,
-        options: { emailRedirectTo: window.location.origin },
-      })
-      if (authError) {
-        setError(userSafeError(authError, 'Could not send email.'))
-        return
-      }
-      setInfo('Check your email for a sign-in link.')
-    } catch (e) {
-      setError(userSafeError(e, 'Could not send email.'))
-    } finally {
-      setBusy(false)
-    }
-  }
+  const renderEmailField = (fieldId: string) => (
+    <label className="loginLabel" htmlFor={fieldId}>
+      Email
+      <input
+        id={fieldId}
+        className="loginInput"
+        type="email"
+        name="email"
+        autoComplete="email"
+        inputMode="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        disabled={busy}
+        required
+      />
+    </label>
+  )
 
   return (
     <main className="screen loginScreen" aria-label="Sign in">
       <h1 className="title">Second Brain</h1>
       <p className="loginKicker">Sign in once. This device will remember you.</p>
 
+      <form className="loginForm" onSubmit={(e) => void onSendLink(e)}>
+        <p className="loginSectionTitle">Email a sign-in link</p>
+        {renderEmailField('login-link-email')}
+        <button type="submit" className="modulesButton" disabled={busy}>
+          Send a link
+        </button>
+      </form>
+
+      <div className="loginDivider" role="separator" />
+
       <form className="loginForm" onSubmit={(e) => void onSignIn(e)}>
-        <label className="loginLabel">
-          Email
-          <input
-            className="loginInput"
-            type="email"
-            name="email"
-            autoComplete="email"
-            inputMode="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            disabled={busy}
-            required
-          />
-        </label>
+        <p className="loginSectionTitle">Sign in / create account with email and password</p>
+        {renderEmailField('login-password-email')}
         <label className="loginLabel">
           Password
           <input
@@ -170,18 +187,6 @@ export function LoginScreen() {
             disabled={busy}
           />
         </label>
-
-        {error ? (
-          <p className="loginError" role="alert">
-            {error}
-          </p>
-        ) : null}
-        {info ? (
-          <p className="loginInfo" role="status">
-            {info}
-          </p>
-        ) : null}
-
         <div className="loginActions">
           <button type="submit" className="modulesButton" disabled={busy}>
             Sign in
@@ -194,16 +199,19 @@ export function LoginScreen() {
           >
             Create account
           </button>
-          <button
-            type="button"
-            className="loginTextButton"
-            onClick={() => void onMagicLink()}
-            disabled={busy}
-          >
-            Email me a link
-          </button>
         </div>
       </form>
+
+      {error ? (
+        <p className="loginError" role="alert">
+          {error}
+        </p>
+      ) : null}
+      {info ? (
+        <p className="loginInfo" role="status">
+          {info}
+        </p>
+      ) : null}
     </main>
   )
 }

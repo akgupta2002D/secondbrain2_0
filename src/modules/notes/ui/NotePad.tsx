@@ -156,16 +156,21 @@ export const NotePad = forwardRef<NotePadHandle, Props>(function NotePad(
         <div className="notesHeaderLeft">
           <button
             type="button"
-            className="backButton"
+            className="notesIconButton"
             onClick={() => void onBackClick()}
             aria-label="Back"
           >
-            Back
+            <svg className="notesIconGlyph" viewBox="0 0 24 24" aria-hidden>
+              <path
+                fill="currentColor"
+                d="M15.5 4.5 7 12l8.5 7.5 1.4-1.6L10.2 12l6.7-5.9z"
+              />
+            </svg>
           </button>
           <button
             ref={menuRef}
             type="button"
-            className="notesMenuButton"
+            className="notesIconButton"
             onClick={onOpenList}
             aria-label="Open notes list"
             aria-expanded={listOpen}
@@ -176,15 +181,19 @@ export const NotePad = forwardRef<NotePadHandle, Props>(function NotePad(
             </span>
           </button>
         </div>
-        <p className="notesDate">{formatNoteDate(note.date)}</p>
         <button
           type="button"
-          className="notesDeleteButton"
+          className="notesIconButton notesDeleteIconButton"
           onClick={onDeleteClick}
           disabled={disabled}
           aria-label="Delete note"
         >
-          Delete
+          <svg className="notesIconGlyph" viewBox="0 0 24 24" aria-hidden>
+            <path
+              fill="currentColor"
+              d="M9 3h6l1 2h4v2H4V5h4l1-2zm1 6h2v9h-2V9zm4 0h2v9h-2V9zM8 9h2v9H8V9zM6 21h12V8H6v13z"
+            />
+          </svg>
         </button>
       </header>
 
@@ -202,6 +211,7 @@ export const NotePad = forwardRef<NotePadHandle, Props>(function NotePad(
         spellCheck
       />
       <div className="notesFooter" aria-live="polite">
+        <p className="notesDate">{formatNoteDate(note.date)}</p>
         <span className="notesSaveStatus" data-state={saveState}>
           {statusLabel}
         </span>

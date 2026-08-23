@@ -829,6 +829,8 @@ body {
 .loginScreen {
   width: 100%;
   gap: 1rem;
+  justify-content: flex-start;
+  overflow-y: auto;
 }
 
 .loginKicker {
@@ -898,6 +900,24 @@ body {
 
 .loginActions .modulesButton {
   width: 100%;
+}
+
+.loginForm .modulesButton {
+  width: 100%;
+}
+
+.loginSectionTitle {
+  margin: 0;
+  color: rgba(229, 231, 235, 0.78);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.loginDivider {
+  width: min(22rem, 85%);
+  height: 1px;
+  background: rgba(148, 163, 184, 0.28);
 }
 
 .loginSecondaryButton {
@@ -1867,7 +1887,7 @@ body {
 .notesDate {
   margin: 0;
   flex: 1;
-  text-align: center;
+  text-align: left;
   font-size: 0.82rem;
   font-weight: 650;
   color: rgba(255, 255, 255, 0.5);
@@ -1920,7 +1940,7 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  padding: 0.5rem 1.15rem calc(0.75rem + env(safe-area-inset-bottom));
+  padding: 0.5rem 1.15rem calc(4.5rem + env(safe-area-inset-bottom));
 }
 
 .notesSaveStatus {
@@ -1972,6 +1992,43 @@ body {
   justify-content: center;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+}
+
+.notesIconButton {
+  appearance: none;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+  width: 2.75rem;
+  min-height: 44px;
+  border-radius: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.notesIconButton:active {
+  transform: scale(0.98);
+}
+
+.notesIconButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.notesIconGlyph {
+  width: 1.25rem;
+  height: 1.25rem;
+  display: block;
+}
+
+.notesDeleteIconButton {
+  border-color: rgba(252, 165, 165, 0.35);
+  background: rgba(127, 29, 29, 0.35);
+  color: #fecaca;
 }
 
 .notesMenuButton:active {

@@ -40,8 +40,9 @@ Primary files:
 - **Sidebar**: hamburger opens a left drawer of persisted notes (first line or “New Note”, plus date). Tap a row to edit it full screen; drawer closes.
 - **Save**: first non-empty text `create`s a row; later typing `update`s that id.
 - **New note**: `+` FAB bottom-right switches to a blank pad. A row is created only after you type.
-- **Delete**: Delete on the open-note header removes the saved row (after confirm) and returns to a blank pad. Unsaved drafts are discarded without a server call.
-- **Back**: flushes save, then returns home.
+- **Delete**: trash icon on the open-note header removes the saved row (after confirm) and returns to a blank pad. Unsaved drafts are discarded without a server call.
+- **Back**: chevron icon flushes save, then returns home.
+- **Chrome**: date/time sits in the footer with save status; header is back, list, and delete icons.
 
 ## Known Decisions
 
