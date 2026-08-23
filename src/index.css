@@ -1989,6 +1989,29 @@ body {
   flex-shrink: 0;
 }
 
+.notesDeleteButton {
+  appearance: none;
+  border: 1px solid rgba(252, 165, 165, 0.35);
+  background: rgba(127, 29, 29, 0.35);
+  color: #fecaca;
+  padding: 0.55rem 0.8rem;
+  border-radius: 0.9rem;
+  font-weight: 750;
+  cursor: pointer;
+  min-height: 44px;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.notesDeleteButton:active {
+  transform: scale(0.98);
+}
+
+.notesDeleteButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .notesNewFab {
   position: fixed;
   right: calc(env(safe-area-inset-right) + 0.75rem);

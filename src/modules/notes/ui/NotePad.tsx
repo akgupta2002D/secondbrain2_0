@@ -19,6 +19,7 @@ type Props = {
   onSave: (text: string) => Promise<void>
   onBack: () => void
   onOpenList: () => void
+  onDelete: () => void
   listOpen?: boolean
   disabled?: boolean
   menuRef?: RefObject<HTMLButtonElement | null>
@@ -29,7 +30,7 @@ export type NotePadHandle = {
 }
 
 export const NotePad = forwardRef<NotePadHandle, Props>(function NotePad(
-  { note, onSave, onBack, onOpenList, listOpen, disabled, menuRef },
+  { note, onSave, onBack, onOpenList, onDelete, listOpen, disabled, menuRef },
   ref,
 ) {
   const [text, setText] = useState(note.text)
@@ -54,6 +55,10 @@ export const NotePad = forwardRef<NotePadHandle, Props>(function NotePad(
     if (disabled) return
     const current = textRef.current
     if (current === note.text) {
+      setSaveState('saved')
+      return
+    }
+    if (note.text.trim().length === 0 && current.trim().length === 0) {
       setSaveState('saved')
       return
     }
@@ -128,6 +133,12 @@ export const NotePad = forwardRef<NotePadHandle, Props>(function NotePad(
     onBack()
   }
 
+  const onDeleteClick = (): void => {
+    if (disabled) return
+    debouncedRef.current?.cancel()
+    onDelete()
+  }
+
   const statusLabel =
     saveState === 'saving'
       ? 'Saving…'
@@ -166,7 +177,15 @@ export const NotePad = forwardRef<NotePadHandle, Props>(function NotePad(
           </button>
         </div>
         <p className="notesDate">{formatNoteDate(note.date)}</p>
-        <span className="notesHeaderSpacer" aria-hidden />
+        <button
+          type="button"
+          className="notesDeleteButton"
+          onClick={onDeleteClick}
+          disabled={disabled}
+          aria-label="Delete note"
+        >
+          Delete
+        </button>
       </header>
 
       <label className="notesSrOnly" htmlFor="note-text">

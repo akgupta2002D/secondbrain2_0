@@ -43,5 +43,10 @@ export function createSupabaseNotesRepository(
       if (error) throw error
       return mapNoteRow(data as NoteRow)
     },
+
+    async remove(id: string): Promise<void> {
+      const { error } = await client.from('notes').delete().eq('id', id)
+      if (error) throw error
+    },
   }
 }

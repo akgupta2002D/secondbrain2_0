@@ -6,6 +6,16 @@ import type { Note } from '../model/types'
 import { NotesDrawer } from './NotesDrawer'
 import { NotePad, type NotePadHandle } from './NotePad'
 
+const DRAFT_ID = '__draft__'
+
+function makeDraftNote(): Note {
+  return { id: DRAFT_ID, text: '', date: new Date().toISOString() }
+}
+
+function hasNoteBody(text: string): boolean {
+  return text.trim().length > 0
+}
+
 type Props = {
   onBack: () => void
 }
@@ -15,13 +25,17 @@ export function NotesScreen({ onBack }: Props) {
   const supabase = getSupabaseClient()
 
   const [notes, setNotes] = useState<Note[]>([])
+  const [draft, setDraft] = useState<Note | null>(null)
   const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [padEpoch, setPadEpoch] = useState(0)
   const [loadError, setLoadError] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
 
   const menuRef = useRef<HTMLButtonElement>(null)
   const padRef = useRef<NotePadHandle>(null)
+  const persistedIdRef = useRef<string | null>(null)
+  const createInFlightRef = useRef<Promise<Note> | null>(null)
 
   const repo: NotesRepository | null = useMemo(() => {
     if (!supabase) return null
@@ -29,9 +43,19 @@ export function NotesScreen({ onBack }: Props) {
   }, [supabase])
 
   const selectedNote = useMemo(() => {
+    if (selectedId === DRAFT_ID) return draft
     if (!selectedId) return null
     return notes.find((n) => n.id === selectedId) ?? null
-  }, [notes, selectedId])
+  }, [draft, notes, selectedId])
+
+  const startDraft = useCallback((): void => {
+    persistedIdRef.current = null
+    createInFlightRef.current = null
+    const next = makeDraftNote()
+    setDraft(next)
+    setSelectedId(DRAFT_ID)
+    setPadEpoch((n) => n + 1)
+  }, [])
 
   useEffect(() => {
     if (!repo) return
@@ -43,10 +67,9 @@ export function NotesScreen({ onBack }: Props) {
     void (async () => {
       try {
         const existing = await repo.list()
-        const created = await repo.create({ text: '' })
         if (cancelled) return
-        setNotes([created, ...existing])
-        setSelectedId(created.id)
+        setNotes(existing)
+        startDraft()
       } catch (e) {
         if (cancelled) return
         const msg = e instanceof Error ? e.message : 'Could not load notes'
@@ -59,35 +82,83 @@ export function NotesScreen({ onBack }: Props) {
     return () => {
       cancelled = true
     }
-  }, [repo])
+  }, [repo, startDraft])
 
   const onSaveText = useCallback(
     async (text: string): Promise<void> => {
-      if (!repo || !selectedId) return
-      const updated = await repo.update(selectedId, { text })
+      if (!repo) return
+
+      if (!persistedIdRef.current) {
+        if (!hasNoteBody(text)) return
+
+        if (!createInFlightRef.current) {
+          createInFlightRef.current = repo.create({ text })
+        }
+        const created = await createInFlightRef.current
+        createInFlightRef.current = null
+        const saved =
+          text !== created.text
+            ? await repo.update(created.id, { text })
+            : created
+        persistedIdRef.current = saved.id
+        setDraft(null)
+        setSelectedId(saved.id)
+        setNotes((prev) => [saved, ...prev.filter((n) => n.id !== saved.id)])
+        return
+      }
+
+      const updated = await repo.update(persistedIdRef.current, { text })
       setNotes((prev) => prev.map((n) => (n.id === updated.id ? updated : n)))
     },
-    [repo, selectedId],
+    [repo],
   )
 
   const onSelectNote = async (id: string): Promise<void> => {
     await padRef.current?.flush()
+    persistedIdRef.current = id
+    createInFlightRef.current = null
+    setDraft(null)
     setSelectedId(id)
     setDrawerOpen(false)
   }
 
   const onNewNote = async (): Promise<void> => {
-    if (!repo) return
     setLoadError(null)
     try {
       await padRef.current?.flush()
-      const created = await repo.create({ text: '' })
-      setNotes((prev) => [created, ...prev])
-      setSelectedId(created.id)
+      startDraft()
       setDrawerOpen(false)
     } catch (e) {
       const msg = e instanceof Error ? e.message : 'Could not create note'
       setLoadError(msg)
+    }
+  }
+
+  const onDeleteNote = async (): Promise<void> => {
+    if (!repo) return
+    if (!window.confirm('Delete this note?')) return
+
+    setLoadError(null)
+    setBusy(true)
+    try {
+      const inFlight = createInFlightRef.current
+      let id = persistedIdRef.current
+      if (!id && inFlight) {
+        const created = await inFlight
+        id = created.id
+      }
+      createInFlightRef.current = null
+      if (id) {
+        await repo.remove(id)
+        setNotes((prev) => prev.filter((n) => n.id !== id))
+      }
+      startDraft()
+      setDrawerOpen(false)
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : 'Could not delete note'
+      setLoadError(msg)
+    } finally {
+      setBusy(false)
     }
   }
 
@@ -131,12 +202,13 @@ export function NotesScreen({ onBack }: Props) {
 
       {selectedNote ? (
         <NotePad
-          key={selectedNote.id}
+          key={`${selectedNote.id}-${padEpoch}`}
           ref={padRef}
           note={selectedNote}
           onSave={onSaveText}
           onBack={onBack}
           onOpenList={() => setDrawerOpen(true)}
+          onDelete={() => void onDeleteNote()}
           listOpen={drawerOpen}
           disabled={busy}
           menuRef={menuRef}

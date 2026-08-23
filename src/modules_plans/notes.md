@@ -36,15 +36,16 @@ Primary files:
 ## Current State (Implemented)
 
 - **Home chrome**: Notes is a bottom-right `+` FAB. Update + version sit bottom-left. Notes is not in Modules.
-- **Open**: loads existing rows, then inserts one new blank note and selects it.
-- **Sidebar**: hamburger opens a left drawer of all notes (first line or “New Note”, plus date). Tap a row to edit it full screen; drawer closes.
-- **Save**: typing autosaves with `update` on that id.
-- **New note**: `+` FAB bottom-right creates another blank row and selects it.
+- **Open**: loads existing rows and shows a blank pad. No row is inserted until you type.
+- **Sidebar**: hamburger opens a left drawer of persisted notes (first line or “New Note”, plus date). Tap a row to edit it full screen; drawer closes.
+- **Save**: first non-empty text `create`s a row; later typing `update`s that id.
+- **New note**: `+` FAB bottom-right switches to a blank pad. A row is created only after you type.
+- **Delete**: Delete on the open-note header removes the saved row (after confirm) and returns to a blank pad. Unsaved drafts are discarded without a server call.
 - **Back**: flushes save, then returns home.
 
 ## Known Decisions
 
-- Opening Notes still creates one new blank row, then you can pick older notes.
+- Blank / whitespace-only pads are not stored. Opening Notes or tapping `+` does not insert a row by itself.
 - `created_at` does not change when text is autosaved.
 - Version/update UI is app-shell level; not owned by this module.
 

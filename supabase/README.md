@@ -44,6 +44,8 @@ After `004`, the old unauthenticated PWA cannot read/write notes or thoughts. De
 
 On first sign-in, the app calls `claim_unowned_personal_rows()` so leftover `user_id is null` rows attach to that user (only if no other owner exists).
 
+One-shot data wipe (not a migration): `sql/delete_all_notes.sql` — deletes every row in `public.notes`.
+
 ## When you change something later
 
 - **New domain or port** → add `https://that-origin/**` (and Site URL if it is the primary site). Keep this table in sync.
