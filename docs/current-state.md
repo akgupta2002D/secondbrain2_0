@@ -1,6 +1,6 @@
 # Current state and decisions
 
-Read this first. It is a snapshot of **what the app actually is today** (version `0.0.23` in `vite.config.ts`) and **why**, so you can change it without rediscovering product rules.
+Read this first. It is a snapshot of **what the app actually is today** (version `0.0.24` in `vite.config.ts`) and **why**, so you can change it without rediscovering product rules.
 
 Older docs in this folder (`project_description.md`, parts of `ARCHITECTURE.md`) describe earlier shapes (v1 “Hey Ankit”, Home + Modules button + Notes FAB). Prefer this file when they disagree.
 
@@ -86,7 +86,7 @@ These are product/architecture choices, not leftovers.
 5. **Tab IA is Home | Notes | Modules.** Do not flatten Remember/Thoughts/Identity onto the tab bar, and do not put Notes back in the Modules list, without a product decision.
 6. **No React Router.** In-memory view + optional `pushState` only. Do not invent new product routes.
 7. **Shell owns chrome; modules own mutations.** Do not re-init auth on tab change. Do not remount Notes after first open just to “reset” the pad.
-8. **One bottom offset.** Tab bar + `safe-area-inset-bottom`. Pages must not add a second bottom safe-area (Notes footer used to pad for the old FAB).
+8. **One bottom offset.** Tab bar height only (`--sb-content-bottom`). Do not add `safe-area-inset-bottom` on the tab bar — iOS standalone already insets the webview, and stacking that inset triples the chrome. Pages must not add their own extra bottom safe-area (Notes footer used to pad for the old FAB).
 9. **Presentation refactors must not change APIs/schema/auth/scoring.** If a UI change needs a schema or mutation change, stop and treat it as a separate product task.
 
 ---

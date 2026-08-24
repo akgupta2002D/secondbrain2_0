@@ -4,6 +4,13 @@ import { registerSW } from 'virtual:pwa-register'
 import './index.css'
 import App from './App.tsx'
 
+const isStandalone =
+  window.matchMedia('(display-mode: standalone)').matches ||
+  (window.navigator as Navigator & { standalone?: boolean }).standalone === true
+if (isStandalone) {
+  document.documentElement.classList.add('is-pwa')
+}
+
 // Keep SW logic outside React to avoid issues with test environments.
 const reloadPage = registerSW({
   immediate: true,

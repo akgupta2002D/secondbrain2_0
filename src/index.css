@@ -16,7 +16,8 @@
   --sb-space-32: 32px;
   --sb-space-48: 48px;
   --sb-tab-bar-height: 49px;
-  --sb-content-bottom: calc(var(--sb-tab-bar-height) + env(safe-area-inset-bottom, 0px));
+  /* PWA webview is already inset; do not add safe-area here or the tab bar triples. */
+  --sb-content-bottom: var(--sb-tab-bar-height);
   --sb-radius-8: 8px;
   --sb-radius-12: 12px;
   --sb-radius-16: 16px;
@@ -41,29 +42,60 @@
   -webkit-font-smoothing: antialiased;
 }
 
-html {
-  height: 100%;
-}
-
 html,
 body,
 #root {
   margin: 0;
-  min-height: 100%;
+  height: 100dvh;
   min-height: 100dvh;
-  min-height: -webkit-fill-available;
 }
 
-body,
-#root {
-  height: 100%;
+body {
+  min-height: 100dvh;
   background: #000000;
 }
 
-.screen {
+/* Standalone PWA: 100dvh is shorter than the webview, which left a black strip
+   under the tab bar. Fill the webview. Do not also add safe-area padding — iOS
+   already reports inset-bottom while the layout viewport is already inset. */
+@media (display-mode: standalone) {
+  html {
+    height: 100%;
+    height: -webkit-fill-available;
+  }
+
+  html,
+  body,
+  #root {
+    min-height: 100%;
+    min-height: -webkit-fill-available;
+  }
+
+  body,
+  #root {
+    height: 100%;
+  }
+}
+
+html.is-pwa {
+  height: 100%;
+  height: -webkit-fill-available;
+}
+
+html.is-pwa,
+html.is-pwa body,
+html.is-pwa #root {
   min-height: 100%;
-  min-height: 100dvh;
   min-height: -webkit-fill-available;
+}
+
+html.is-pwa body,
+html.is-pwa #root {
+  height: 100%;
+}
+
+.screen {
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -2323,14 +2355,26 @@ body,
 
 /* Persistent signed-in shell */
 .appShell {
-  height: 100%;
-  min-height: 100%;
+  height: 100dvh;
   min-height: 100dvh;
-  min-height: -webkit-fill-available;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   background: #000000;
+}
+
+@media (display-mode: standalone) {
+  .appShell {
+    height: 100%;
+    min-height: 100%;
+    min-height: -webkit-fill-available;
+  }
+}
+
+html.is-pwa .appShell {
+  height: 100%;
+  min-height: 100%;
+  min-height: -webkit-fill-available;
 }
 
 .appShellPanes {
@@ -2339,16 +2383,7 @@ body,
   position: relative;
 }
 
-.appShellPane {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: var(--sb-content-bottom);
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
+.appShellPane,
 .appShellSubpane {
   position: absolute;
   inset: 0;
@@ -2373,16 +2408,12 @@ body,
 }
 
 .appTabBar {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  flex-shrink: 0;
   z-index: var(--sb-z-tab-bar);
   display: flex;
   align-items: stretch;
   justify-content: space-around;
-  min-height: var(--sb-content-bottom);
-  padding-bottom: env(safe-area-inset-bottom, 0px);
+  min-height: var(--sb-tab-bar-height);
   background: rgba(17, 24, 39, 0.94);
   border-top: 1px solid rgba(148, 163, 184, 0.25);
   backdrop-filter: blur(12px);
