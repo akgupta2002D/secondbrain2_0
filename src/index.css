@@ -16,9 +16,8 @@
   --sb-space-32: 32px;
   --sb-space-48: 48px;
   --sb-tab-bar-height: 49px;
-  /* Small lift so tab labels sit above the home indicator. Do not add
-     env(safe-area-inset-bottom) here or the bar triples. */
-  --sb-tab-bar-lift: 0.175rem;
+  /* 5% of the small viewport; padding-bottom is what actually lifts the labels. */
+  --sb-tab-bar-lift: 5svh;
   --sb-content-bottom: calc(var(--sb-tab-bar-height) + var(--sb-tab-bar-lift));
   --sb-radius-8: 8px;
   --sb-radius-12: 12px;
@@ -2480,6 +2479,7 @@ html.is-pwa .appShell {
   align-items: stretch;
   justify-content: space-around;
   height: calc(var(--sb-tab-bar-height) + var(--sb-tab-bar-lift));
+  padding-bottom: var(--sb-tab-bar-lift);
   background: rgba(17, 24, 39, 0.94);
   border-top: 1px solid rgba(148, 163, 184, 0.25);
   backdrop-filter: blur(12px);

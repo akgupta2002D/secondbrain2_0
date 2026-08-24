@@ -1,6 +1,6 @@
 # Current state and decisions
 
-Read this first. It is a snapshot of **what the app actually is today** (version `0.0.34` in `vite.config.ts`) and **why**, so you can change it without rediscovering product rules.
+Read this first. It is a snapshot of **what the app actually is today** (version `0.0.35` in `vite.config.ts`) and **why**, so you can change it without rediscovering product rules.
 
 Older docs in this folder (`project_description.md`, parts of `ARCHITECTURE.md`) describe earlier shapes (v1 “Hey Ankit”, Home + Modules button + Notes FAB). Prefer this file when they disagree.
 
