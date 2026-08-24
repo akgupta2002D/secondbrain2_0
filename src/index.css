@@ -757,7 +757,7 @@ html.is-pwa #root {
 
 .homeTopActions {
   position: absolute;
-  top: calc(env(safe-area-inset-top) + 0.75rem);
+  top: calc(env(safe-area-inset-top) + 0.2rem);
   left: calc(env(safe-area-inset-right) + 1rem);
   z-index: var(--sb-z-nav);
   display: flex;
