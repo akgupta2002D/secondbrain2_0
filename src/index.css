@@ -58,9 +58,9 @@ body {
   background: #000000;
 }
 
-/* Safari tab: visible window is 100dvh. Installed PWA: 100lvh is the large
-   viewport (full screen). 100% / 100dvh stop short and leave a black strip
-   under the tab bar. Do not add safe-area padding on the tab bar. */
+/* Safari tab: visible window is 100dvh.
+   Installed PWA: pin to the visual viewport with inset: 0. 100lvh is taller
+   than what iOS actually shows; overflow:hidden then clips the tab bar. */
 @media (display-mode: browser) {
   html,
   body,
@@ -70,35 +70,21 @@ body {
   }
 }
 
-@media (display-mode: standalone) {
-  html,
-  body,
-  #root {
-    height: 100%;
-    height: 100lvh;
-    min-height: 100%;
-    min-height: 100lvh;
-  }
-}
-
 html.is-pwa,
 html.is-pwa body {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  inset: 0;
   width: 100%;
+  height: 100%;
   overflow: hidden;
   overscroll-behavior: none;
+  /* Match the tab bar so any home-indicator sliver is not a black hole. */
+  background: #111827;
 }
 
-html.is-pwa,
-html.is-pwa body,
 html.is-pwa #root {
   height: 100%;
-  height: 100lvh;
   min-height: 100%;
-  min-height: 100lvh;
 }
 
 .screen {
@@ -2431,20 +2417,9 @@ html.is-pwa #root {
   background: #000000;
 }
 
-@media (display-mode: standalone) {
-  .appShell {
-    height: 100%;
-    height: 100lvh;
-    min-height: 100%;
-    min-height: 100lvh;
-  }
-}
-
 html.is-pwa .appShell {
   height: 100%;
-  height: 100lvh;
   min-height: 100%;
-  min-height: 100lvh;
 }
 
 .appShellPanes {

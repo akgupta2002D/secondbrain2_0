@@ -1,6 +1,6 @@
 # Current state and decisions
 
-Read this first. It is a snapshot of **what the app actually is today** (version `0.0.30` in `vite.config.ts`) and **why**, so you can change it without rediscovering product rules.
+Read this first. It is a snapshot of **what the app actually is today** (version `0.0.31` in `vite.config.ts`) and **why**, so you can change it without rediscovering product rules.
 
 Older docs in this folder (`project_description.md`, parts of `ARCHITECTURE.md`) describe earlier shapes (v1 “Hey Ankit”, Home + Modules button + Notes FAB). Prefer this file when they disagree.
 
@@ -15,7 +15,7 @@ Ops for Auth/SQL: [`../supabase/README.md`](../supabase/README.md). Coding rules
 - **Vite + React + TypeScript** PWA (`vite-plugin-pwa`). No React Router.
 - **Vercel** deploys `main`. **Supabase** is Auth + Postgres.
 - Session lives in `localStorage` (Supabase client). App version is injected as `__APP_VERSION__`.
-- iPhone-first: `viewport-fit=cover`, `100dvh` in Safari tab, `100lvh` in the installed PWA, black UI, safe-area insets.
+- iPhone-first: `viewport-fit=cover`, `100dvh` in Safari tab, visual-viewport pin (`inset: 0`) in the installed PWA, black UI, safe-area insets.
 
 ### Auth (gate, not a module)
 
