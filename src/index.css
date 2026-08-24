@@ -2056,7 +2056,10 @@ html.is-pwa #root {
   align-items: center;
   justify-content: flex-end;
   gap: var(--sb-space-12);
-  padding: var(--sb-space-8) 1.15rem calc(3.5rem + var(--sb-space-12));
+  flex-shrink: 0;
+  /* Same band as the shell + (3.5rem FAB, 0.75rem above the tab bar). */
+  min-height: calc(3.5rem + 0.75rem);
+  padding: 0 5rem 0.75rem 1.15rem;
 }
 
 .notesFooterMeta {
@@ -2066,6 +2069,7 @@ html.is-pwa #root {
   gap: 0.45rem;
   margin: 0;
   min-width: 0;
+  white-space: nowrap;
 }
 
 .notesFooterSep {
@@ -2450,6 +2454,10 @@ html.is-pwa .appShell {
 .appShell .screen {
   min-height: 100%;
   padding-bottom: var(--sb-space-16);
+}
+
+.appShell .notesMain {
+  padding-bottom: 0;
 }
 
 .appShell .updatePrompt {
