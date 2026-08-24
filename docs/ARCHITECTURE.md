@@ -1,4 +1,4 @@
-# Architecture — Second Brain `0.0.25`
+# Architecture — Second Brain `0.0.26`
 
 For what exists **right now** and why (tabs, auth, product rules), start with [`current-state.md`](current-state.md). This file is a structural snapshot. Version is the home-screen string from `vite.config.ts` (`__APP_VERSION__`).
 
