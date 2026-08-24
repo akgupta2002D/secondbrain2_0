@@ -30,6 +30,15 @@
   --sb-z-tab-bar: 30;
   /* Approx: absolute nav top gap + button height + buffer */
   --sb-nav-stack-height: 4.5rem;
+  /* One chrome spec for Home actions, back, Notes header icons. */
+  --sb-chrome-size: 2.75rem;
+  --sb-chrome-radius: 0.9rem;
+  --sb-chrome-gap: 0.5rem;
+  --sb-chrome-offset: 0.2rem;
+  --sb-chrome-x: 1rem;
+  --sb-chrome-top: calc(env(safe-area-inset-top) + var(--sb-chrome-offset));
+  --sb-chrome-left: calc(env(safe-area-inset-left) + var(--sb-chrome-x));
+  --sb-chrome-right: calc(env(safe-area-inset-right) + var(--sb-chrome-x));
   font-family:
     Inter,
     -apple-system,
@@ -601,20 +610,22 @@ html.is-pwa .appShellSubpane {
 /* Remember: topic menu (top-right) + modal */
 .topicMenuButton {
   position: absolute;
-  top: calc(env(safe-area-inset-top) + 0.75rem);
-  right: calc(env(safe-area-inset-right) + 1rem);
+  top: var(--sb-chrome-top);
+  right: var(--sb-chrome-right);
   z-index: var(--sb-z-nav);
   appearance: none;
   border: 1px solid rgba(148, 163, 184, 0.3);
   background: rgba(0, 0, 0, 0.75);
   color: #ffffff;
-  padding: 0.55rem 0.8rem;
-  border-radius: 0.9rem;
+  padding: 0;
+  border-radius: var(--sb-chrome-radius);
   font-weight: 950;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  width: 3.2rem;
-  min-height: 44px;
+  width: var(--sb-chrome-size);
+  min-width: var(--sb-chrome-size);
+  height: var(--sb-chrome-size);
+  min-height: var(--sb-chrome-size);
 }
 
 .topicMenuButton:active {
@@ -768,24 +779,28 @@ html.is-pwa .appShellSubpane {
 
 .homeTopActions {
   position: absolute;
-  top: calc(env(safe-area-inset-top) + 0.2rem);
-  left: calc(env(safe-area-inset-right) + 1rem);
+  top: var(--sb-chrome-top);
+  left: var(--sb-chrome-left);
   z-index: var(--sb-z-nav);
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--sb-chrome-gap);
 }
 
-.homeIconButton {
+.homeIconButton,
+.backButton,
+.notesIconButton,
+.notesMenuButton {
   appearance: none;
   border: 1px solid rgba(148, 163, 184, 0.3);
   background: rgba(0, 0, 0, 0.35);
   color: #ffffff;
-  width: 2.75rem;
-  min-width: 2.75rem;
-  min-height: 44px;
+  width: var(--sb-chrome-size);
+  min-width: var(--sb-chrome-size);
+  height: var(--sb-chrome-size);
+  min-height: var(--sb-chrome-size);
   padding: 0;
-  border-radius: 0.9rem;
+  border-radius: var(--sb-chrome-radius);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -793,13 +808,18 @@ html.is-pwa .appShellSubpane {
   -webkit-tap-highlight-color: transparent;
 }
 
-.homeIconGlyph {
+.homeIconGlyph,
+.backButtonIcon,
+.notesIconGlyph {
   width: 1.35rem;
   height: 1.35rem;
   display: block;
 }
 
-.homeIconButton:active {
+.homeIconButton:active,
+.backButton:active,
+.notesIconButton:active,
+.notesMenuButton:active {
   transform: scale(0.98);
 }
 
@@ -877,33 +897,9 @@ html.is-pwa .appShellSubpane {
 
 .backButton {
   position: absolute;
-  top: calc(env(safe-area-inset-top) + 0.75rem);
-  left: calc(env(safe-area-inset-left) + 1rem);
+  top: var(--sb-chrome-top);
+  left: var(--sb-chrome-left);
   z-index: var(--sb-z-nav);
-  appearance: none;
-  border: 1px solid rgba(148, 163, 184, 0.3);
-  background: rgba(0, 0, 0, 0.35);
-  color: #ffffff;
-  width: 2.75rem;
-  min-width: 2.75rem;
-  min-height: 44px;
-  padding: 0;
-  border-radius: 0.9rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.backButtonIcon {
-  width: 1.35rem;
-  height: 1.35rem;
-  display: block;
-}
-
-.backButton:active {
-  transform: scale(0.98);
 }
 
 .bottomUpdateVersion {
@@ -1189,7 +1185,7 @@ html.is-pwa .appShellSubpane {
   width: 100%;
   align-items: stretch;
   justify-content: flex-start;
-  padding-top: calc(env(safe-area-inset-top) + var(--sb-nav-stack-height));
+  padding-top: 0;
   gap: 0;
   text-align: left;
 }
@@ -1209,17 +1205,16 @@ html.is-pwa .appShellSubpane {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: var(--sb-chrome-gap);
   width: 100%;
-  padding: 0 max(0.25rem, env(safe-area-inset-right)) 0.5rem
-    max(0.25rem, env(safe-area-inset-left));
+  padding: var(--sb-chrome-top) var(--sb-chrome-right) 0.5rem var(--sb-chrome-left);
   flex-shrink: 0;
 }
 
 .thoughtsHeaderLeft {
   display: flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: var(--sb-chrome-gap);
   flex-shrink: 0;
 }
 
@@ -1644,8 +1639,7 @@ html.is-pwa .appShellSubpane {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: calc(env(safe-area-inset-top) + 0.65rem) max(1rem, env(safe-area-inset-right)) 0.4rem
-    max(1rem, env(safe-area-inset-left));
+  padding: var(--sb-chrome-top) var(--sb-chrome-right) 0.4rem var(--sb-chrome-left);
 }
 
 .identityTopBar .backButton {
@@ -1989,16 +1983,16 @@ html.is-pwa .appShellSubpane {
   flex: 1;
   min-height: 100%;
   width: 100%;
-  padding: env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left);
+  padding: 0;
 }
 
 .notesHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: var(--sb-chrome-gap);
   width: 100%;
-  padding: 0.75rem 1rem 0.35rem;
+  padding: var(--sb-chrome-top) var(--sb-chrome-right) 0.35rem var(--sb-chrome-left);
   flex-shrink: 0;
 }
 
@@ -2120,54 +2114,17 @@ html.is-pwa .appShellSubpane {
 .notesHeaderLeft {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: var(--sb-chrome-gap);
   flex-shrink: 0;
 }
 
 .notesMenuButton {
-  appearance: none;
-  border: 1px solid rgba(148, 163, 184, 0.35);
-  background: rgba(0, 0, 0, 0.35);
   color: #ffffff;
-  width: 2.75rem;
-  min-height: 44px;
-  border-radius: 0.85rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.notesIconButton {
-  appearance: none;
-  border: 1px solid rgba(148, 163, 184, 0.35);
-  background: rgba(0, 0, 0, 0.35);
-  color: #ffffff;
-  width: 2.75rem;
-  min-height: 44px;
-  border-radius: 0.85rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  padding: 0;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.notesIconButton:active {
-  transform: scale(0.98);
 }
 
 .notesIconButton:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-}
-
-.notesIconGlyph {
-  width: 1.25rem;
-  height: 1.25rem;
-  display: block;
 }
 
 .notesDeleteIconButton {
