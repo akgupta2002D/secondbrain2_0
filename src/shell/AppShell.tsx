@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
+import { EngineScreen } from '../modules/engine'
 import { IdentityScreen } from '../modules/identity'
 import { NotesScreen } from '../modules/notes'
 import { RememberScreen } from '../modules/remember'
@@ -24,17 +25,26 @@ type Props = {
   onDismissRefresh: () => void
 }
 
-const INITIAL_NAV: ShellNav = { tab: 'home', modulesPane: 'list' }
+const INITIAL_NAV: ShellNav = { tab: 'home', modulesPane: 'list', notesOpen: false }
 
 function readHistoryNav(state: unknown): ShellNav | null {
   if (!state || typeof state !== 'object' || !('sb' in state)) return null
   const sb = (state as { sb?: unknown }).sb
   if (!sb || typeof sb !== 'object') return null
-  const tab = 'tab' in sb ? (sb as { tab?: unknown }).tab : null
+  const rawTab = 'tab' in sb ? (sb as { tab?: unknown }).tab : null
   const modulesPane =
     'modulesPane' in sb ? (sb as { modulesPane?: unknown }).modulesPane : null
-  if (!isAppTab(tab) || !isModulesPane(modulesPane)) return null
-  return { tab, modulesPane }
+  if (!isModulesPane(modulesPane)) return null
+
+  const notesOpen =
+    rawTab === 'notes' ||
+    ('notesOpen' in sb && (sb as { notesOpen?: unknown }).notesOpen === true)
+
+  if (rawTab === 'notes') {
+    return { tab: 'home', modulesPane, notesOpen: true }
+  }
+  if (!isAppTab(rawTab)) return null
+  return { tab: rawTab, modulesPane, notesOpen }
 }
 
 export function AppShell({
@@ -47,7 +57,9 @@ export function AppShell({
 }: Props) {
   const [tab, setTab] = useState<AppTab>(INITIAL_NAV.tab)
   const [modulesPane, setModulesPane] = useState<ModulesPane>(INITIAL_NAV.modulesPane)
+  const [notesOpen, setNotesOpen] = useState(INITIAL_NAV.notesOpen)
   const [notesVisited, setNotesVisited] = useState(false)
+  const [newNoteNonce, setNewNoteNonce] = useState(0)
   const [rememberVisited, setRememberVisited] = useState(false)
   const [thoughtsVisited, setThoughtsVisited] = useState(false)
   const [identityVisited, setIdentityVisited] = useState(false)
@@ -55,7 +67,8 @@ export function AppShell({
   const applyNav = useCallback((next: ShellNav): void => {
     setTab(next.tab)
     setModulesPane(next.modulesPane)
-    if (next.tab === 'notes') setNotesVisited(true)
+    setNotesOpen(next.notesOpen)
+    if (next.notesOpen) setNotesVisited(true)
     if (next.tab === 'modules' && next.modulesPane === 'remember') {
       setRememberVisited(true)
     }
@@ -91,30 +104,48 @@ export function AppShell({
   }, [applyNav])
 
   const onSelectTab = (next: AppTab): void => {
+    if (notesOpen) {
+      if (next === 'modules' && tab === 'modules' && modulesPane !== 'list') {
+        navigate({ tab: 'modules', modulesPane: 'list', notesOpen: false })
+        return
+      }
+      navigate({ tab: next, modulesPane, notesOpen: false })
+      return
+    }
     if (next === 'modules' && tab === 'modules' && modulesPane !== 'list') {
-      navigate({ tab: 'modules', modulesPane: 'list' })
+      navigate({ tab: 'modules', modulesPane: 'list', notesOpen: false })
       return
     }
     if (next === tab) return
-    navigate({ tab: next, modulesPane })
+    navigate({ tab: next, modulesPane, notesOpen: false })
   }
 
-  const goHome = (): void => navigate({ tab: 'home', modulesPane })
-  const goModulesList = (): void => navigate({ tab: 'modules', modulesPane: 'list' })
+  const closeNotes = (): void => navigate({ tab, modulesPane, notesOpen: false })
+  const goHome = (): void => navigate({ tab: 'home', modulesPane, notesOpen: false })
+  const goModulesList = (): void =>
+    navigate({ tab: 'modules', modulesPane: 'list', notesOpen: false })
   const openRemember = (): void =>
-    navigate({ tab: 'modules', modulesPane: 'remember' })
+    navigate({ tab: 'modules', modulesPane: 'remember', notesOpen: false })
   const openThoughts = (): void =>
-    navigate({ tab: 'modules', modulesPane: 'thoughts' })
+    navigate({ tab: 'modules', modulesPane: 'thoughts', notesOpen: false })
   const openIdentity = (): void =>
-    navigate({ tab: 'modules', modulesPane: 'identity' })
+    navigate({ tab: 'modules', modulesPane: 'identity', notesOpen: false })
+
+  const onNotesFab = (): void => {
+    setNotesVisited(true)
+    setNewNoteNonce((n) => n + 1)
+    if (!notesOpen) {
+      navigate({ tab, modulesPane, notesOpen: true })
+    }
+  }
 
   return (
     <div className="appShell">
       <div className="appShellPanes">
         <div
           className="appShellPane"
-          hidden={tab !== 'home'}
-          inert={tab !== 'home' ? true : undefined}
+          hidden={notesOpen || tab !== 'home'}
+          inert={notesOpen || tab !== 'home' ? true : undefined}
         >
           <HomeScreen
             appVersion={appVersion}
@@ -125,16 +156,26 @@ export function AppShell({
 
         <div
           className="appShellPane"
-          hidden={tab !== 'notes'}
-          inert={tab !== 'notes' ? true : undefined}
+          hidden={notesOpen || tab !== 'engine'}
+          inert={notesOpen || tab !== 'engine' ? true : undefined}
         >
-          {notesVisited ? <NotesScreen onBack={goHome} /> : null}
+          <EngineScreen />
         </div>
 
         <div
           className="appShellPane"
-          hidden={tab !== 'modules'}
-          inert={tab !== 'modules' ? true : undefined}
+          hidden={!notesOpen}
+          inert={!notesOpen ? true : undefined}
+        >
+          {notesVisited ? (
+            <NotesScreen onBack={closeNotes} newNoteNonce={newNoteNonce} />
+          ) : null}
+        </div>
+
+        <div
+          className="appShellPane"
+          hidden={notesOpen || tab !== 'modules'}
+          inert={notesOpen || tab !== 'modules' ? true : undefined}
         >
           <div
             className="appShellSubpane"
@@ -180,6 +221,15 @@ export function AppShell({
           ) : null}
         </div>
       </div>
+
+      <button
+        type="button"
+        className="notesNewFab"
+        onClick={onNotesFab}
+        aria-label="New note"
+      >
+        +
+      </button>
 
       <TabBar tab={tab} onSelect={onSelectTab} />
 

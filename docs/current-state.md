@@ -31,12 +31,13 @@ Signed-out users only see sign-in. There is no tab bar on login.
 
 Persistent **`AppShell`** (`src/shell/`). Only the content pane swaps.
 
-Tabs: **Home | Notes | Modules**.
+Tabs: **Home | Engine | Modules**. Notes is the `+` above the tab bar.
 
 ```
 Sign in ──► AppShell
               ├── Home     (title, Update, version, Sign out)
-              ├── Notes    (capture pad; not listed under Modules)
+              ├── Engine   (placeholder systems stats; not listed under Modules)
+              ├── Notes    (opened by +; not a tab; not listed under Modules)
               └── Modules
                     ├── list: Remember, Thoughts, Identity
                     ├── Remember
@@ -44,8 +45,8 @@ Sign in ──► AppShell
                     └── Identity
 ```
 
-- Home is **not** a launcher with a center Modules button or a Notes `+` FAB. Tabs replaced those.
-- **Notes is a top-level tab.** Remember / Thoughts / Identity stay nested under Modules.
+- Home is **not** a launcher with a center Modules button. The Notes `+` sits above the tab bar (same control as on the Notes pad).
+- **Engine is a top-level tab.** Notes is capture-only (`+`). Remember / Thoughts / Identity stay nested under Modules.
 - After first visit, Notes / Remember / Thoughts / Identity **stay mounted** (hidden) so pad, draft, and scroll survive tab switches.
 - Notes is **not** mounted at login (that would start a local draft without opening Notes).
 - In a module, Back returns to the Modules list. Tapping **Modules** while inside a module also returns to the list.
@@ -55,7 +56,8 @@ Sign in ──► AppShell
 
 | Surface | Where | Data | Behavior that must not change casually |
 | --- | --- | --- | --- |
-| **Notes** | Tab | Supabase `notes` | Blank **local** draft on open. Row is created only after real text. Autosave `update`. Delete is confirm + server delete. Date/status in footer. |
+| **Notes** | Shell `+` | Supabase `notes` | Blank **local** draft on open. Row is created only after real text. Autosave `update`. Delete is confirm + server delete. Date/status in footer. |
+| **Engine** | Tab | None yet | Placeholder copy only. Live host/Supabase stats are planned in [`engine.md`](engine.md); do not scrape them from the PWA. |
 | **Thoughts** | Modules | Supabase `thoughts` | If the list is empty, **insert one empty thought**. Search + drawer. Debounced save. Realtime refresh. |
 | **Remember** | Modules | Bundled JSON decks | Swipe to score. Scores in `localStorage` (not Postgres). |
 | **Identity** | Modules | Bundled `goalsGraph.json` | On-device graph only. |
@@ -71,7 +73,7 @@ Modules do not import each other. Public entry is each `src/modules/<id>/index.t
 
 ### Tests
 
-`src/App.test.tsx` drives Home / Notes / Modules through the **tab bar**. Remember swipe/score still starts from Modules. `npm test` + `npx tsc -b`.
+`src/App.test.tsx` drives Home / Engine / Modules through the **tab bar** and Notes through the **+** control. Remember swipe/score still starts from Modules. `npm test` + `npx tsc -b`.
 
 ---
 
@@ -83,7 +85,7 @@ These are product/architecture choices, not leftovers.
 2. **Notes create-on-type, not create-on-open.** Opening Notes must not insert an empty SQL row. Delete stays confirm-then-server.
 3. **Thoughts always has at least one row** once the module has loaded against an empty table (insert-if-empty). Do not “fix” that to match Notes.
 4. **Remember and Identity stay local.** Do not move scores or the identity graph to Supabase unless that is an explicit product change.
-5. **Tab IA is Home | Notes | Modules.** Do not flatten Remember/Thoughts/Identity onto the tab bar, and do not put Notes back in the Modules list, without a product decision.
+5. **Tab IA is Home | Engine | Modules.** Notes is the `+` above the tab bar, not a tab and not in the Modules list. Do not flatten Remember/Thoughts/Identity onto the tab bar without a product decision.
 6. **No React Router.** In-memory view + optional `pushState` only. Do not invent new product routes.
 7. **Shell owns chrome; modules own mutations.** Do not re-init auth on tab change. Do not remount Notes after first open just to “reset” the pad.
 8. **One bottom offset.** Tab bar height only (`--sb-content-bottom`). Do not add `safe-area-inset-bottom` on the tab bar — iOS standalone already insets the webview, and stacking that inset triples the chrome. Pages must not add their own extra bottom safe-area (Notes footer used to pad for the old FAB).
@@ -99,6 +101,7 @@ These are product/architecture choices, not leftovers.
 | Sign-in / session | `src/auth/`, `src/App.tsx` |
 | Supabase client / env names | `src/lib/supabaseClient.ts` |
 | Notes pad / draft / delete | `src/modules/notes/` |
+| Engine placeholder / later stats | `src/modules/engine/`, [`docs/engine.md`](engine.md) |
 | Thoughts editor / empty-row | `src/modules/thoughts/` |
 | Flashcards / scores | `src/modules/remember/` |
 | Goals graph | `src/modules/identity/` |
@@ -109,6 +112,6 @@ These are product/architecture choices, not leftovers.
 
 ## Out of scope today
 
-No payments, push, or shared/multi-user product. No Edge Functions in the PWA. Background “organize notes” jobs are not in this client.
+No payments, push, or shared/multi-user product. No Edge Functions in the PWA. Background “organize notes” jobs are not in this client. Engine has no live metrics yet — see [`engine.md`](engine.md).
 
 Planning leftovers (not current UI): `flashcards.md`, `src/modules_plans/`.

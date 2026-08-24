@@ -4,7 +4,7 @@ Tracks the current plan + live state for the `notes` module.
 
 ## Purpose
 
-`notes` is a capture pad opened from a home-screen icon (not listed under Modules).
+`notes` is a capture pad opened from the shell `+` above the tab bar (not listed under Modules).
 
 Goals:
 - Open a full-screen iOS-like typing surface
@@ -35,13 +35,13 @@ Primary files:
 
 ## Current State (Implemented)
 
-- **Home chrome**: Notes is a bottom-right `+` FAB. Update + version sit bottom-left. Notes is not in Modules.
+- **Home chrome**: Notes is the shell `+` above the tab bar (not a tab, not in Modules). Update + version sit bottom-left.
 - **Open**: loads existing rows and shows a blank pad. No row is inserted until you type.
 - **Sidebar**: hamburger opens a left drawer of persisted notes (first line or “New Note”, plus date). Tap a row to edit it full screen; drawer closes.
 - **Save**: first non-empty text `create`s a row; later typing `update`s that id.
 - **New note**: `+` FAB bottom-right switches to a blank pad. A row is created only after you type.
 - **Delete**: trash icon on the open-note header removes the saved row (after confirm) and returns to a blank pad. Unsaved drafts are discarded without a server call.
-- **Back**: chevron icon flushes save, then returns home.
+- **Back**: chevron icon flushes save, then returns to the previous tab.
 - **Chrome**: date/time sits in the footer with save status; header is back, list, and delete icons.
 
 ## Known Decisions

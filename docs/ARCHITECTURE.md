@@ -40,6 +40,7 @@ flowchart LR
 
   subgraph mods [Modules]
     notes[notes]
+    engine[engine]
     thoughts[thoughts]
     remember[remember]
     identity[identity]
@@ -53,6 +54,7 @@ flowchart LR
   app --> authHook
   app --> login
   app --> notes
+  app --> engine
   app --> thoughts
   app --> remember
   app --> identity
@@ -66,7 +68,7 @@ flowchart LR
   identity --> json
 ```
 
-- Shell owns view state and auth. Modules do not import each other.
+- Shell owns view state and auth. Modules do not import each other. Engine has no backend yet (placeholder UI).
 - Notes and Thoughts talk to Supabase only through `getSupabaseClient()` and their own repository.
 - Remember: `definitions306.json`, `spanishexam5.json`, memory scores in `localStorage`.
 - Identity: `goalsGraph.json`.
@@ -78,6 +80,7 @@ flowchart LR
   boot[Loading]
   signin[Sign_in]
   home[Home]
+  engine[Engine]
   modules[Modules]
   notes[Notes]
   remember[Remember]
@@ -88,9 +91,11 @@ flowchart LR
   boot --> home
   signin -->|session| home
   home -->|Sign_out| signin
+  home -->|Engine| engine
   home -->|Modules| modules
   home -->|plus| notes
-  notes -->|Back| home
+  engine -->|plus| notes
+  notes -->|Back| lastTab
   modules -->|Back| home
   modules --> remember
   modules --> thoughts
@@ -117,7 +122,7 @@ stateDiagram-v2
 
 ### Notes
 
-Enter: Home `+`. Exit: Back → Home.
+Enter: shell `+`. Exit: Back → previous tab.
 
 ```mermaid
 stateDiagram-v2
@@ -130,6 +135,16 @@ stateDiagram-v2
   listOpen --> savedPad
   draftPad --> [*]
   savedPad --> [*]
+```
+
+### Engine
+
+Enter: Engine tab. Exit: other tab. Placeholder only; no stats API yet. See [`engine.md`](engine.md).
+
+```mermaid
+stateDiagram-v2
+  [*] --> placeholder
+  placeholder --> [*]
 ```
 
 ### Thoughts

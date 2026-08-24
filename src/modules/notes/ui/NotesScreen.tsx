@@ -29,9 +29,10 @@ function commitNotes(notes: Note[]): Note[] {
 
 type Props = {
   onBack: () => void
+  newNoteNonce?: number
 }
 
-export function NotesScreen({ onBack }: Props) {
+export function NotesScreen({ onBack, newNoteNonce = 0 }: Props) {
   const configured = getSupabaseConfig() !== null
   const supabase = getSupabaseClient()
 
@@ -147,6 +148,14 @@ export function NotesScreen({ onBack }: Props) {
     }
   }
 
+  const onNewNoteRef = useRef(onNewNote)
+  onNewNoteRef.current = onNewNote
+
+  useEffect(() => {
+    if (!newNoteNonce) return
+    void onNewNoteRef.current()
+  }, [newNoteNonce])
+
   const onDeleteNote = async (): Promise<void> => {
     if (!repo) return
     if (!window.confirm('Delete this note?')) return
@@ -226,18 +235,6 @@ export function NotesScreen({ onBack }: Props) {
           disabled={deleting}
           menuRef={menuRef}
         />
-      ) : null}
-
-      {selectedNote ? (
-        <button
-          type="button"
-          className="notesNewFab"
-          onClick={() => void onNewNote()}
-          aria-label="New note"
-          disabled={deleting}
-        >
-          +
-        </button>
       ) : null}
 
       <NotesDrawer

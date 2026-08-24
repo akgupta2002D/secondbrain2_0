@@ -87,14 +87,16 @@ describe('App', () => {
     vi.useRealTimers()
   })
 
-  it('opens Notes from the tab bar and does not list it under Modules', () => {
+  it('opens Notes from the + control and does not list it under Modules', () => {
     render(<App />)
 
     expect(screen.getByRole('button', { name: 'Home' })).toHaveAttribute(
       'aria-current',
       'page',
     )
-    expect(screen.getByRole('button', { name: 'Notes' })).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'Notes' })).not.toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Engine' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'New note' })).toBeInTheDocument()
 
     fireEvent.click(screen.getByRole('button', { name: 'Modules' }))
 
@@ -106,17 +108,33 @@ describe('App', () => {
     expect(screen.getByRole('menuitem', { name: 'Thoughts' })).toBeInTheDocument()
     expect(screen.getByRole('menuitem', { name: 'Identity' })).toBeInTheDocument()
     expect(screen.queryByRole('menuitem', { name: 'Notes' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('menuitem', { name: 'Engine' })).not.toBeInTheDocument()
 
     fireEvent.click(screen.getByRole('button', { name: 'Back' }))
-    fireEvent.click(screen.getByRole('button', { name: 'Notes' }))
+    fireEvent.click(screen.getByRole('button', { name: 'New note' }))
 
     expect(
       screen.getByRole('main', { name: /Notes/i }),
     ).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Notes' })).toHaveAttribute(
+    expect(screen.getByRole('button', { name: 'Home' })).toHaveAttribute(
       'aria-current',
       'page',
     )
+  })
+
+  it('opens Engine from the tab bar', () => {
+    render(<App />)
+
+    fireEvent.click(screen.getByRole('button', { name: 'Engine' }))
+
+    expect(screen.getByRole('button', { name: 'Engine' })).toHaveAttribute(
+      'aria-current',
+      'page',
+    )
+    expect(screen.getByRole('main', { name: 'Engine' })).toBeInTheDocument()
+    expect(
+      screen.getByText('This will display stats about the server we use.'),
+    ).toBeInTheDocument()
   })
 
   it('returns to the Modules list when the Modules tab is tapped inside a module', () => {
@@ -139,6 +157,7 @@ describe('App', () => {
 
     expect(screen.getByRole('main', { name: 'Sign in' })).toBeInTheDocument()
     expect(screen.queryByRole('button', { name: 'Modules' })).not.toBeInTheDocument()
-    expect(screen.queryByRole('button', { name: 'Notes' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'Engine' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'New note' })).not.toBeInTheDocument()
   })
 })
