@@ -2448,7 +2448,7 @@ html.is-pwa .appShell {
 
 .appShell .screen {
   min-height: 100%;
-  padding-bottom: var(--sb-space-16);
+  /* padding-bottom: var(--sb-space-16); */
 }
 
 .appShell .notesMain {
