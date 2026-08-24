@@ -87,13 +87,21 @@ describe('App', () => {
     vi.useRealTimers()
   })
 
-  it('opens Notes from the home icon and does not list it under Modules', () => {
+  it('opens Notes from the tab bar and does not list it under Modules', () => {
     render(<App />)
 
+    expect(screen.getByRole('button', { name: 'Home' })).toHaveAttribute(
+      'aria-current',
+      'page',
+    )
     expect(screen.getByRole('button', { name: 'Notes' })).toBeInTheDocument()
 
     fireEvent.click(screen.getByRole('button', { name: 'Modules' }))
 
+    expect(screen.getByRole('button', { name: 'Modules' })).toHaveAttribute(
+      'aria-current',
+      'page',
+    )
     expect(screen.getByRole('menuitem', { name: 'Remember' })).toBeInTheDocument()
     expect(screen.getByRole('menuitem', { name: 'Thoughts' })).toBeInTheDocument()
     expect(screen.getByRole('menuitem', { name: 'Identity' })).toBeInTheDocument()
@@ -105,6 +113,24 @@ describe('App', () => {
     expect(
       screen.getByRole('main', { name: /Notes/i }),
     ).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Notes' })).toHaveAttribute(
+      'aria-current',
+      'page',
+    )
+  })
+
+  it('returns to the Modules list when the Modules tab is tapped inside a module', () => {
+    render(<App />)
+
+    fireEvent.click(screen.getByRole('button', { name: 'Modules' }))
+    fireEvent.click(screen.getByRole('menuitem', { name: 'Remember' }))
+
+    expect(screen.getByText('Decision Problem')).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', { name: 'Modules' }))
+
+    expect(screen.getByRole('main', { name: 'Modules' })).toBeInTheDocument()
+    expect(screen.getByRole('menuitem', { name: 'Remember' })).toBeInTheDocument()
   })
 
   it('shows sign-in when signed out and hides Home chrome', () => {

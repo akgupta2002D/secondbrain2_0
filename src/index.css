@@ -8,10 +8,24 @@
   color: #e5e7eb;
   background: #000000;
   /* Mobile-first UI tokens */
+  --sb-space-4: 4px;
+  --sb-space-8: 8px;
+  --sb-space-12: 12px;
+  --sb-space-16: 16px;
+  --sb-space-24: 24px;
+  --sb-space-32: 32px;
+  --sb-space-48: 48px;
+  --sb-tab-bar-height: 49px;
+  --sb-content-bottom: calc(var(--sb-tab-bar-height) + env(safe-area-inset-bottom, 0px));
+  --sb-radius-8: 8px;
+  --sb-radius-12: 12px;
+  --sb-radius-16: 16px;
+  --sb-duration: 160ms;
   --sb-z-nav: 20;
   --sb-z-overlay: 5;
   --sb-z-feedback: 10;
   --sb-z-modal: 80;
+  --sb-z-tab-bar: 30;
   /* Approx: absolute nav top gap + button height + buffer */
   --sb-nav-stack-height: 4.5rem;
   font-family:
@@ -31,16 +45,17 @@ html,
 body,
 #root {
   margin: 0;
-  min-height: 100%;
+  height: 100dvh;
+  min-height: 100dvh;
 }
 
 body {
-  min-height: 100svh;
+  min-height: 100dvh;
   background: #000000;
 }
 
 .screen {
-  min-height: 100svh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -153,7 +168,7 @@ body {
 
 .rememberCycleProgress {
   position: absolute;
-  bottom: calc(env(safe-area-inset-bottom) + 0.75rem);
+  bottom: calc(var(--sb-content-bottom) + 0.75rem);
   left: 50%;
   transform: translateX(-50%);
   z-index: var(--sb-z-nav);
@@ -775,12 +790,22 @@ body {
   border: 1px solid rgba(148, 163, 184, 0.3);
   background: rgba(0, 0, 0, 0.35);
   color: #ffffff;
-  padding: 0.55rem 0.8rem;
+  width: 2.75rem;
+  min-width: 2.75rem;
+  min-height: 44px;
+  padding: 0;
   border-radius: 0.9rem;
-  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  min-height: 44px;
+}
+
+.backButtonIcon {
+  width: 1.35rem;
+  height: 1.35rem;
+  display: block;
 }
 
 .backButton:active {
@@ -790,8 +815,8 @@ body {
 .bottomUpdateVersion {
   position: fixed;
   left: calc(env(safe-area-inset-left) + 0.75rem);
-  bottom: calc(env(safe-area-inset-bottom) + 0.35rem);
-  z-index: 200;
+  bottom: calc(var(--sb-content-bottom) + 0.35rem);
+  z-index: 25;
   display: inline-flex;
   gap: 0.5rem;
   align-items: center;
@@ -1074,7 +1099,7 @@ body {
 
 .thoughtsMain {
   gap: 0;
-  min-height: 100svh;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -1215,7 +1240,7 @@ body {
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 0 max(0.25rem, env(safe-area-inset-right)) max(1rem, env(safe-area-inset-bottom))
+  padding: 0 max(0.25rem, env(safe-area-inset-right)) var(--sb-space-16)
     max(0.25rem, env(safe-area-inset-left));
 }
 
@@ -1374,10 +1399,13 @@ body {
   border: 1px solid rgba(148, 163, 184, 0.35);
   background: rgba(0, 0, 0, 0.45);
   color: #ffffff;
-  padding: 0.5rem 0.75rem;
+  width: 2.75rem;
+  min-width: 2.75rem;
+  padding: 0;
   border-radius: 0.85rem;
-  font-weight: 800;
-  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   min-height: 44px;
 }
@@ -1501,8 +1529,7 @@ body {
 /* Identity module — goals graph, mobile-first, centered body */
 .identityScreen {
   width: 100%;
-  min-height: 100svh;
-  min-height: 100dvh;
+  min-height: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -1536,7 +1563,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0.35rem max(0.75rem, env(safe-area-inset-right)) max(1.25rem, env(safe-area-inset-bottom))
+  padding: 0.35rem max(0.75rem, env(safe-area-inset-right)) var(--sb-space-16)
     max(0.75rem, env(safe-area-inset-left));
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
@@ -1811,7 +1838,7 @@ body {
 .notesMain {
   padding-top: 0;
   gap: 0;
-  min-height: 100svh;
+  min-height: 100%;
 }
 
 .notesConfigHint {
@@ -1863,10 +1890,9 @@ body {
   display: flex;
   flex-direction: column;
   flex: 1;
-  min-height: 100svh;
+  min-height: 100%;
   width: 100%;
-  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom)
-    env(safe-area-inset-left);
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left);
 }
 
 .notesHeader {
@@ -1886,8 +1912,7 @@ body {
 
 .notesDate {
   margin: 0;
-  flex: 1;
-  text-align: left;
+  text-align: right;
   font-size: 0.82rem;
   font-weight: 650;
   color: rgba(255, 255, 255, 0.5);
@@ -1938,14 +1963,33 @@ body {
 .notesFooter {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  padding: 0.5rem 1.15rem calc(4.5rem + env(safe-area-inset-bottom));
+  justify-content: flex-end;
+  gap: var(--sb-space-12);
+  padding: var(--sb-space-8) 1.15rem calc(3.5rem + var(--sb-space-12));
+}
+
+.notesFooterMeta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.45rem;
+  margin: 0;
+  min-width: 0;
+}
+
+.notesFooterSep {
+  color: rgba(255, 255, 255, 0.28);
+  font-weight: 500;
 }
 
 .notesSaveStatus {
   font-size: 0.82rem;
+  font-weight: 650;
   color: rgba(255, 255, 255, 0.45);
+}
+
+.notesSaveStatus[data-state='saved'] {
+  color: #4ade80;
 }
 
 .notesSaveStatus[data-state='saving'] {
@@ -2072,7 +2116,7 @@ body {
 .notesNewFab {
   position: fixed;
   right: calc(env(safe-area-inset-right) + 0.75rem);
-  bottom: calc(env(safe-area-inset-bottom) + 0.75rem);
+  bottom: calc(var(--sb-content-bottom) + 0.75rem);
   z-index: 220;
   width: 3.5rem;
   height: 3.5rem;
@@ -2177,10 +2221,13 @@ body {
   border: 1px solid rgba(148, 163, 184, 0.35);
   background: rgba(0, 0, 0, 0.45);
   color: #ffffff;
-  padding: 0.5rem 0.75rem;
+  width: 2.75rem;
+  min-width: 2.75rem;
+  padding: 0;
   border-radius: 0.85rem;
-  font-weight: 800;
-  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   min-height: 44px;
 }
@@ -2265,4 +2312,173 @@ body {
     transition: none;
   }
 }
+
+/* Persistent signed-in shell */
+.appShell {
+  height: 100dvh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #000000;
+}
+
+.appShellPanes {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+}
+
+.appShellPane,
+.appShellSubpane {
+  position: absolute;
+  inset: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.appShellPane[hidden],
+.appShellSubpane[hidden] {
+  display: none;
+}
+
+.appShell .screen {
+  min-height: 100%;
+  padding-bottom: var(--sb-space-16);
+}
+
+.appShell .updatePrompt {
+  bottom: var(--sb-content-bottom);
+  padding-bottom: 0.75rem;
+  z-index: 50;
+}
+
+.appTabBar {
+  flex-shrink: 0;
+  z-index: var(--sb-z-tab-bar);
+  display: flex;
+  align-items: stretch;
+  justify-content: space-around;
+  min-height: var(--sb-tab-bar-height);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  background: rgba(17, 24, 39, 0.94);
+  border-top: 1px solid rgba(148, 163, 184, 0.25);
+  backdrop-filter: blur(12px);
+}
+
+.appTabButton {
+  appearance: none;
+  flex: 1;
+  min-height: 44px;
+  min-width: 44px;
+  border: 0;
+  background: transparent;
+  color: rgba(229, 231, 235, 0.62);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: var(--sb-space-4) 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity var(--sb-duration) ease, color var(--sb-duration) ease,
+    transform var(--sb-duration) ease;
+}
+
+.appTabButton[aria-current='page'] {
+  color: #e0f2fe;
+}
+
+.appTabButton:active {
+  opacity: 0.6;
+  transform: scale(0.96);
+}
+
+.appTabIcon {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.appTabLabel {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.padSkeleton {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 12rem;
+  width: 100%;
+  padding: var(--sb-space-16);
+  gap: var(--sb-space-16);
+}
+
+.padSkeletonHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--sb-space-8);
+}
+
+.padSkeletonIconEnd {
+  margin-left: auto;
+}
+
+.padSkeletonBlock,
+.padSkeletonLine {
+  display: block;
+  border-radius: var(--sb-radius-8);
+  background: rgba(148, 163, 184, 0.22);
+  animation: padSkeletonPulse 1.2s ease-in-out infinite;
+}
+
+.padSkeletonIcon {
+  width: 44px;
+  height: 44px;
+}
+
+.padSkeletonBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sb-space-12);
+  padding-top: var(--sb-space-8);
+}
+
+.padSkeletonLine {
+  height: 12px;
+  width: 100%;
+}
+
+.padSkeletonLineShort {
+  width: 42%;
+}
+
+@keyframes padSkeletonPulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .appTabButton,
+  .moduleMenuItem,
+  .notesIconButton,
+  .notesNewFab,
+  .backButton {
+    transition: none;
+  }
+
+  .padSkeletonBlock,
+  .padSkeletonLine {
+    animation: none;
+  }
+}
+
 

@@ -1,6 +1,12 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { getSupabaseClient, getSupabaseConfig } from '../../../lib/supabaseClient'
+import { BackIcon } from '../../../shell/BackIcon'
+import { PadSkeleton } from '../../../shell/PadSkeleton'
 import { createSupabaseNotesRepository } from '../data/supabaseNotesRepository'
+import {
+  readNotesListCache,
+  writeNotesListCache,
+} from '../lib/notesListCache'
 import type { NotesRepository } from '../model/notesRepository'
 import type { Note } from '../model/types'
 import { NotesDrawer } from './NotesDrawer'
@@ -16,6 +22,11 @@ function hasNoteBody(text: string): boolean {
   return text.trim().length > 0
 }
 
+function commitNotes(notes: Note[]): Note[] {
+  writeNotesListCache(notes)
+  return notes
+}
+
 type Props = {
   onBack: () => void
 }
@@ -24,12 +35,13 @@ export function NotesScreen({ onBack }: Props) {
   const configured = getSupabaseConfig() !== null
   const supabase = getSupabaseClient()
 
-  const [notes, setNotes] = useState<Note[]>([])
-  const [draft, setDraft] = useState<Note | null>(null)
-  const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [notes, setNotes] = useState<Note[]>(() => readNotesListCache() ?? [])
+  const [draft, setDraft] = useState<Note | null>(() => makeDraftNote())
+  const [selectedId, setSelectedId] = useState<string | null>(DRAFT_ID)
   const [padEpoch, setPadEpoch] = useState(0)
   const [loadError, setLoadError] = useState<string | null>(null)
-  const [busy, setBusy] = useState(false)
+  const [listLoading, setListLoading] = useState(() => readNotesListCache() == null)
+  const [deleting, setDeleting] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
 
   const menuRef = useRef<HTMLButtonElement>(null)
@@ -61,28 +73,27 @@ export function NotesScreen({ onBack }: Props) {
     if (!repo) return
 
     let cancelled = false
-    setBusy(true)
+    setListLoading(readNotesListCache() == null)
     setLoadError(null)
 
     void (async () => {
       try {
         const existing = await repo.list()
         if (cancelled) return
-        setNotes(existing)
-        startDraft()
+        setNotes(commitNotes(existing))
       } catch (e) {
         if (cancelled) return
         const msg = e instanceof Error ? e.message : 'Could not load notes'
         setLoadError(msg)
       } finally {
-        if (!cancelled) setBusy(false)
+        if (!cancelled) setListLoading(false)
       }
     })()
 
     return () => {
       cancelled = true
     }
-  }, [repo, startDraft])
+  }, [repo])
 
   const onSaveText = useCallback(
     async (text: string): Promise<void> => {
@@ -103,12 +114,14 @@ export function NotesScreen({ onBack }: Props) {
         persistedIdRef.current = saved.id
         setDraft(null)
         setSelectedId(saved.id)
-        setNotes((prev) => [saved, ...prev.filter((n) => n.id !== saved.id)])
+        setNotes((prev) => commitNotes([saved, ...prev.filter((n) => n.id !== saved.id)]))
         return
       }
 
       const updated = await repo.update(persistedIdRef.current, { text })
-      setNotes((prev) => prev.map((n) => (n.id === updated.id ? updated : n)))
+      setNotes((prev) =>
+        commitNotes(prev.map((n) => (n.id === updated.id ? updated : n))),
+      )
     },
     [repo],
   )
@@ -139,7 +152,7 @@ export function NotesScreen({ onBack }: Props) {
     if (!window.confirm('Delete this note?')) return
 
     setLoadError(null)
-    setBusy(true)
+    setDeleting(true)
     try {
       const inFlight = createInFlightRef.current
       let id = persistedIdRef.current
@@ -150,7 +163,7 @@ export function NotesScreen({ onBack }: Props) {
       createInFlightRef.current = null
       if (id) {
         await repo.remove(id)
-        setNotes((prev) => prev.filter((n) => n.id !== id))
+        setNotes((prev) => commitNotes(prev.filter((n) => n.id !== id)))
       }
       startDraft()
       setDrawerOpen(false)
@@ -158,7 +171,7 @@ export function NotesScreen({ onBack }: Props) {
       const msg = e instanceof Error ? e.message : 'Could not delete note'
       setLoadError(msg)
     } finally {
-      setBusy(false)
+      setDeleting(false)
     }
   }
 
@@ -166,7 +179,7 @@ export function NotesScreen({ onBack }: Props) {
     return (
       <main className="screen notesScreen" aria-label="Notes setup">
         <button type="button" className="backButton" onClick={onBack} aria-label="Back">
-          Back
+          <BackIcon />
         </button>
         <div className="notesConfigHint">
           <p className="notesConfigTitle">Supabase not configured</p>
@@ -191,12 +204,12 @@ export function NotesScreen({ onBack }: Props) {
         </p>
       ) : null}
 
-      {busy && !selectedNote ? (
+      {listLoading && !selectedNote ? (
         <>
           <button type="button" className="backButton" onClick={onBack} aria-label="Back">
-            Back
+            <BackIcon />
           </button>
-          <p className="notesMuted">Loading…</p>
+          <PadSkeleton label="Loading notes" />
         </>
       ) : null}
 
@@ -210,7 +223,7 @@ export function NotesScreen({ onBack }: Props) {
           onOpenList={() => setDrawerOpen(true)}
           onDelete={() => void onDeleteNote()}
           listOpen={drawerOpen}
-          disabled={busy}
+          disabled={deleting}
           menuRef={menuRef}
         />
       ) : null}
@@ -221,7 +234,7 @@ export function NotesScreen({ onBack }: Props) {
           className="notesNewFab"
           onClick={() => void onNewNote()}
           aria-label="New note"
-          disabled={busy}
+          disabled={deleting}
         >
           +
         </button>
@@ -233,7 +246,7 @@ export function NotesScreen({ onBack }: Props) {
         notes={notes}
         selectedId={selectedId}
         onSelect={(id) => void onSelectNote(id)}
-        disabled={busy}
+        disabled={deleting}
         returnFocusRef={menuRef}
       />
     </main>

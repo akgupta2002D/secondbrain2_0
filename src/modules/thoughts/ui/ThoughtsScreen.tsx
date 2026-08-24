@@ -1,11 +1,22 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { getSupabaseClient, getSupabaseConfig } from '../../../lib/supabaseClient'
+import { BackIcon } from '../../../shell/BackIcon'
+import { PadSkeleton } from '../../../shell/PadSkeleton'
 import { createSupabaseThoughtsRepository } from '../data/supabaseThoughtsRepository'
 import { filterThoughts } from '../lib/filterThoughts'
+import {
+  readThoughtsListCache,
+  writeThoughtsListCache,
+} from '../lib/thoughtsListCache'
 import type { Thought } from '../model/types'
 import type { ThoughtsRepository } from '../model/thoughtsRepository'
 import { ThoughtEditor } from './ThoughtEditor'
 import { ThoughtsDrawer } from './ThoughtsDrawer'
+
+function commitThoughts(thoughts: Thought[]): Thought[] {
+  writeThoughtsListCache(thoughts)
+  return thoughts
+}
 
 type Props = {
   onBack: () => void
@@ -15,10 +26,15 @@ export function ThoughtsScreen({ onBack }: Props) {
   const configured = getSupabaseConfig() !== null
   const supabase = getSupabaseClient()
 
-  const [thoughts, setThoughts] = useState<Thought[]>([])
-  const [listLoading, setListLoading] = useState(false)
+  const cachedThoughts = readThoughtsListCache()
+  const [thoughts, setThoughts] = useState<Thought[]>(() => cachedThoughts ?? [])
+  const [listLoading, setListLoading] = useState(
+    () => cachedThoughts == null || cachedThoughts.length === 0,
+  )
   const [listError, setListError] = useState<string | null>(null)
-  const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [selectedId, setSelectedId] = useState<string | null>(
+    () => cachedThoughts?.[0]?.id ?? null,
+  )
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
 
@@ -36,7 +52,8 @@ export function ThoughtsScreen({ onBack }: Props) {
 
   const loadThoughts = useCallback(async (): Promise<void> => {
     if (!repo) return
-    setListLoading(true)
+    const stale = readThoughtsListCache()
+    if (stale == null || stale.length === 0) setListLoading(true)
     setListError(null)
     try {
       let rows = await repo.list()
@@ -44,7 +61,7 @@ export function ThoughtsScreen({ onBack }: Props) {
         const created = await repo.create({ body: '' })
         rows = [created]
       }
-      setThoughts(rows)
+      setThoughts(commitThoughts(rows))
       setSelectedId((prev) => {
         if (prev && rows.some((r) => r.id === prev)) return prev
         return rows[0]?.id ?? null
@@ -91,7 +108,7 @@ export function ThoughtsScreen({ onBack }: Props) {
     setListError(null)
     try {
       const t = await repo.create({ body: '' })
-      setThoughts((prev) => [t, ...prev])
+      setThoughts((prev) => commitThoughts([t, ...prev]))
       setSelectedId(t.id)
     } catch (e) {
       const msg = e instanceof Error ? e.message : 'Could not create'
@@ -106,7 +123,7 @@ export function ThoughtsScreen({ onBack }: Props) {
     const title = firstLine && firstLine.length > 0 ? firstLine : null
     const updated = await repo.update(selectedId, { body, title })
     setThoughts((prev) =>
-      prev.map((t) => (t.id === updated.id ? updated : t)),
+      commitThoughts(prev.map((t) => (t.id === updated.id ? updated : t))),
     )
   }
 
@@ -114,7 +131,7 @@ export function ThoughtsScreen({ onBack }: Props) {
     return (
       <main className="screen thoughtsScreen" aria-label="Thoughts setup">
         <button type="button" className="backButton" onClick={onBack} aria-label="Back">
-          Back
+          <BackIcon />
         </button>
         <div className="thoughtsConfigHint">
           <p className="thoughtsConfigTitle">Supabase not configured</p>
@@ -147,7 +164,7 @@ export function ThoughtsScreen({ onBack }: Props) {
             <span className="thoughtsMenuLabel">Notes</span>
           </button>
           <button type="button" className="backButton" onClick={onBack} aria-label="Back">
-            Back
+            <BackIcon />
           </button>
         </div>
         <h1 className="thoughtsTitle">Thoughts</h1>
@@ -162,7 +179,7 @@ export function ThoughtsScreen({ onBack }: Props) {
 
       <div className="thoughtsPad">
         {listLoading && !selectedThought ? (
-          <p className="thoughtsMuted thoughtsPadLoading">Loading…</p>
+          <PadSkeleton label="Loading thoughts" />
         ) : null}
 
         {selectedThought ? (

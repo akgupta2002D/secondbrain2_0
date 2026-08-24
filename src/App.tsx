@@ -1,17 +1,12 @@
 import { useEffect, useState } from 'react'
 import { LoginScreen, useAuthSession } from './auth'
 import { getSupabaseClient } from './lib/supabaseClient'
-import { IdentityScreen } from './modules/identity'
-import { NotesScreen } from './modules/notes'
-import { RememberScreen } from './modules/remember'
-import { ThoughtsScreen } from './modules/thoughts'
-
-type View = 'home' | 'modules' | 'remember' | 'thoughts' | 'identity' | 'notes'
+import { AppShell } from './shell/AppShell'
+import { UpdatePrompt } from './shell/UpdatePrompt'
 
 function App() {
   const auth = useAuthSession()
   const [showRefreshPrompt, setShowRefreshPrompt] = useState(false)
-  const [view, setView] = useState<View>('home')
 
   const appVersion = typeof __APP_VERSION__ === 'string' ? __APP_VERSION__ : '0.0.0'
 
@@ -71,34 +66,9 @@ function App() {
     window.location.reload()
   }
 
-  const openModules = (): void => setView('modules')
-  const goHome = (): void => setView('home')
-  const goModules = (): void => setView('modules')
-  const openRemember = (): void => {
-    setView('remember')
-  }
-
-  const openThoughts = (): void => {
-    setView('thoughts')
-  }
-
-  const openIdentity = (): void => {
-    setView('identity')
-  }
-
-  const openNotes = (): void => {
-    setView('notes')
-  }
-
   const onSignOut = (): void => {
     void getSupabaseClient()?.auth.signOut()
   }
-
-  useEffect(() => {
-    if (auth.kind === 'signedOut') {
-      setView('home')
-    }
-  }, [auth.kind])
 
   if (auth.kind === 'booting') {
     return (
@@ -113,145 +83,24 @@ function App() {
       <>
         <LoginScreen />
         {showRefreshPrompt ? (
-          <div className="updatePrompt" role="alertdialog" aria-live="polite">
-            <div className="updatePromptInner">
-              <div className="updatePromptText">
-                <p className="updatePromptTitle">Update available</p>
-                <p className="updatePromptBody">Tap refresh to get the latest version.</p>
-              </div>
-              <div className="updatePromptActions">
-                <button className="updatePromptButton" onClick={onRefresh}>
-                  Refresh
-                </button>
-                <button
-                  className="updatePromptDismiss"
-                  onClick={() => setShowRefreshPrompt(false)}
-                >
-                  Later
-                </button>
-              </div>
-            </div>
-          </div>
+          <UpdatePrompt
+            onRefresh={() => void onRefresh()}
+            onDismiss={() => setShowRefreshPrompt(false)}
+          />
         ) : null}
       </>
     )
   }
 
   return (
-    <>
-      {view === 'home' ? (
-        <main className="screen homeScreen" aria-label="Home">
-          <h1 className="title">Second Brain</h1>
-
-          <button
-            type="button"
-            className="modulesButton"
-            onClick={openModules}
-          >
-            Modules
-          </button>
-
-          <span className="bottomUpdateVersion" aria-label={`Version ${appVersion}`}>
-            <button
-              type="button"
-              className="updateLinkSmall"
-              onClick={onHardUpdate}
-              aria-label="Update PWA"
-            >
-              Update
-            </button>
-            <span className="versionText">{appVersion}</span>
-            <button
-              type="button"
-              className="updateLinkSmall"
-              onClick={onSignOut}
-              aria-label="Sign out"
-            >
-              Sign out
-            </button>
-          </span>
-
-          <button
-            type="button"
-            className="notesHomeFab"
-            onClick={openNotes}
-            aria-label="Notes"
-          >
-            +
-          </button>
-        </main>
-      ) : null}
-
-      {view === 'modules' ? (
-        <main className="screen modulesScreen" aria-label="Modules">
-          <button
-            type="button"
-            className="backButton"
-            onClick={goHome}
-            aria-label="Back"
-          >
-            Back
-          </button>
-
-          <button
-            type="button"
-            role="menuitem"
-            className="moduleMenuItem"
-            onClick={openRemember}
-          >
-            Remember
-          </button>
-
-          <button
-            type="button"
-            role="menuitem"
-            className="moduleMenuItem"
-            onClick={openThoughts}
-          >
-            Thoughts
-          </button>
-
-          <button
-            type="button"
-            role="menuitem"
-            className="moduleMenuItem"
-            onClick={openIdentity}
-          >
-            Identity
-          </button>
-        </main>
-      ) : null}
-
-      {view === 'remember' ? <RememberScreen onBack={goModules} /> : null}
-
-      {view === 'thoughts' ? <ThoughtsScreen onBack={goModules} /> : null}
-
-      {view === 'identity' ? <IdentityScreen onBack={goModules} /> : null}
-
-      {view === 'notes' ? <NotesScreen onBack={goHome} /> : null}
-
-      {showRefreshPrompt ? (
-        <div className="updatePrompt" role="alertdialog" aria-live="polite">
-          <div className="updatePromptInner">
-            <div className="updatePromptText">
-              <p className="updatePromptTitle">Update available</p>
-              <p className="updatePromptBody">Tap refresh to get the latest version.</p>
-            </div>
-            <div className="updatePromptActions">
-              <button className="updatePromptButton" onClick={onRefresh}>
-                Refresh
-              </button>
-              <button
-                className="updatePromptDismiss"
-                onClick={() => setShowRefreshPrompt(false)}
-              >
-                Later
-              </button>
-            </div>
-          </div>
-        </div>
-      ) : null}
-    </>
+    <AppShell
+      appVersion={appVersion}
+      onHardUpdate={() => void onHardUpdate()}
+      onSignOut={onSignOut}
+      showRefreshPrompt={showRefreshPrompt}
+      onRefresh={() => void onRefresh()}
+      onDismissRefresh={() => setShowRefreshPrompt(false)}
+    />
   )
 }
 
