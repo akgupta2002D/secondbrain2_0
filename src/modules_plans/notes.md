@@ -35,7 +35,7 @@ Primary files:
 
 ## Current State (Implemented)
 
-- **Home chrome**: Notes is the shell `+` above the tab bar (not a tab, not in Modules). Update + version sit bottom-left.
+- **Home chrome**: Notes is the shell `+` above the tab bar (not a tab, not in Modules). Sign out + Update are top-right icons; version sits bottom-left.
 - **Open**: loads existing rows and shows a blank pad. No row is inserted until you type.
 - **Sidebar**: hamburger opens a left drawer of persisted notes (first line or “New Note”, plus date). Tap a row to edit it full screen; drawer closes.
 - **Save**: first non-empty text `create`s a row; later typing `update`s that id.

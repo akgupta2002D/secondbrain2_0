@@ -24,7 +24,7 @@ Signed-out users only see sign-in. There is no tab bar on login.
 - Magic link is primary (`signInWithOtp`, redirect = `window.location.origin`).
 - Email + password sign-in and create-account are also on the same screen.
 - Signed-in: `useAuthSession` stays in `App.tsx`; the shell does not recreate the session per screen.
-- Sign out is on Home (next to Update / version).
+- Sign out and Update are icons at the top right of Home (Sign out, then Update). Version stays bottom-left.
 - Env: `VITE_SUPABASE_URL` + `VITE_SUPABASE_PUBLISHABLE_KEY` (legacy alias `VITE_SUPABASE_ANON_KEY`).
 
 ### Signed-in navigation
@@ -35,7 +35,7 @@ Tabs: **Home | Engine | Modules**. Notes is the `+` above the tab bar.
 
 ```
 Sign in ──► AppShell
-              ├── Home     (title, Update, version, Sign out)
+              ├── Home     (title; top-right Sign out + Update icons; version)
               ├── Engine   (placeholder systems stats; not listed under Modules)
               ├── Notes    (opened by +; not a tab; not listed under Modules)
               └── Modules
