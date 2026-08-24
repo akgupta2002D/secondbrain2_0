@@ -17,7 +17,7 @@
   --sb-space-48: 48px;
   --sb-tab-bar-height: 49px;
   /* 5% of the small viewport; padding-bottom is what actually lifts the labels. */
-  --sb-tab-bar-lift: 5svh;
+  --sb-tab-bar-lift: 3svh;
   --sb-content-bottom: calc(var(--sb-tab-bar-height) + var(--sb-tab-bar-lift));
   --sb-radius-8: 8px;
   --sb-radius-12: 12px;
