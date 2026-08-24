@@ -1,6 +1,6 @@
 # Architecture — Second Brain `0.0.22`
 
-Snapshot of the running app. Version is the home-screen string from `vite.config.ts` (`__APP_VERSION__`).
+For what exists **right now** and why (tabs, auth, product rules), start with [`current-state.md`](current-state.md). This file is a structural snapshot. Version is the home-screen string from `vite.config.ts` (`__APP_VERSION__`).
 
 ## Infra
 

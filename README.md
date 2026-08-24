@@ -1,16 +1,20 @@
 # secondbrain
 
-Modular iPhone-first PWA (starting with a minimal “App installed / Hey Ankit” screen).
+Personal iPhone-first PWA (Second Brain): notes, thoughts, flashcards, identity graph.
 
-## Project description
+## Docs
 
-See `project_description.md`.
+Start here: [`docs/current-state.md`](docs/current-state.md) — what the app is today and the decisions behind it.
 
-## Architecture
-
-Current app shape (version `0.0.22`): [`ARCHITECTURE.md`](ARCHITECTURE.md).
+| File | What it is |
+| --- | --- |
+| [`docs/current-state.md`](docs/current-state.md) | Live product + engineering snapshot (read this first) |
+| [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Structural snapshot (version `0.0.22`) |
+| [`docs/coding_reference.md`](docs/coding_reference.md) | Module boundaries and coding rules |
+| [`docs/project_description.md`](docs/project_description.md) | Original v1 intent (historical) |
+| [`docs/pwa_to_ios_appfeel.md`](docs/pwa_to_ios_appfeel.md) | Checklist that drove the shell/tab refactor |
+| [`supabase/README.md`](supabase/README.md) | Auth dashboard URLs, env vars, SQL order |
 
 ## Supabase
 
 Auth dashboard URLs, env vars, and SQL order: [`supabase/README.md`](supabase/README.md).
-

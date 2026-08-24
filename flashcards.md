@@ -15,7 +15,7 @@ The module’s v1 goal is to:
 
 ## Module Contract (module boundary)
 
-Following `coding_reference.md`, the `remember` module will be self-contained and expose a single public entry:
+Following `docs/coding_reference.md`, the `remember` module will be self-contained and expose a single public entry:
 
 - Module `id`: `remember`
 - Module `name`: “Remember”
@@ -23,7 +23,7 @@ Following `coding_reference.md`, the `remember` module will be self-contained an
 - Module-owned UI/screens/components and domain logic live under `src/modules/remember/`
 - Shared helpers (if any) live under `src/shared/`
 
-Rule of thumb from `coding_reference.md`:
+Rule of thumb from `docs/coding_reference.md`:
 - Do not import from another module’s internal paths; only import from that module’s public `index.ts`.
 
 ---
@@ -95,7 +95,7 @@ The module will take information from a JSON file (static for now) and parse it 
     - `term`: prompt text (flashcard front)
     - `definition`: answer text (flashcard back)
 
-### Defensive parsing requirements (from `coding_reference.md`)
+### Defensive parsing requirements (from `docs/coding_reference.md`)
 
 At the parsing boundary:
 - Validate the JSON shape and types
@@ -173,7 +173,7 @@ The key is: keep “game rules / scoring” in a dedicated domain layer so the U
 
 ## Modular Code Plan (folder structure)
 
-This is the future-friendly structure aligned to your `project_description.md`:
+This is the future-friendly structure aligned to your `docs/project_description.md`:
 
 ```text
 src/modules/remember/
@@ -205,7 +205,7 @@ The module UI should represent these explicit states:
 - `ready` (deck loaded + scores initialized)
 - `error` (JSON invalid or parsing failed)
 
-Per `coding_reference.md`, errors should be:
+Per `docs/coding_reference.md`, errors should be:
 - typed
 - user-safe in UI
 - technical details kept for logs/dev
