@@ -143,7 +143,7 @@ export function AppShell({
     <div className="appShell">
       <div className="appShellPanes">
         <div
-          className="appShellPane"
+          className="appShellPane appShellPane--locked"
           hidden={notesOpen || tab !== 'home'}
           inert={notesOpen || tab !== 'home' ? true : undefined}
         >
@@ -155,7 +155,7 @@ export function AppShell({
         </div>
 
         <div
-          className="appShellPane"
+          className="appShellPane appShellPane--locked"
           hidden={notesOpen || tab !== 'engine'}
           inert={notesOpen || tab !== 'engine' ? true : undefined}
         >
