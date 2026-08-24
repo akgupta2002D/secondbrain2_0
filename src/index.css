@@ -2467,7 +2467,7 @@ html.is-pwa .appShell {
   display: flex;
   align-items: stretch;
   justify-content: space-around;
-  min-height: 100vh;
+  height: calc(var(--sb-tab-bar-height) + var(--sb-tab-bar-lift));
   background: rgba(17, 24, 39, 0.94);
   border-top: 1px solid rgba(148, 163, 184, 0.25);
   backdrop-filter: blur(12px);
