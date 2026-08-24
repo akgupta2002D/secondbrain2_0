@@ -41,21 +41,29 @@
   -webkit-font-smoothing: antialiased;
 }
 
+html {
+  height: 100%;
+}
+
 html,
 body,
 #root {
   margin: 0;
-  height: 100dvh;
+  min-height: 100%;
   min-height: 100dvh;
+  min-height: -webkit-fill-available;
 }
 
-body {
-  min-height: 100dvh;
+body,
+#root {
+  height: 100%;
   background: #000000;
 }
 
 .screen {
+  min-height: 100%;
   min-height: 100dvh;
+  min-height: -webkit-fill-available;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -2315,8 +2323,10 @@ body {
 
 /* Persistent signed-in shell */
 .appShell {
-  height: 100dvh;
+  height: 100%;
+  min-height: 100%;
   min-height: 100dvh;
+  min-height: -webkit-fill-available;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -2329,7 +2339,16 @@ body {
   position: relative;
 }
 
-.appShellPane,
+.appShellPane {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: var(--sb-content-bottom);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .appShellSubpane {
   position: absolute;
   inset: 0;
@@ -2354,12 +2373,15 @@ body {
 }
 
 .appTabBar {
-  flex-shrink: 0;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: var(--sb-z-tab-bar);
   display: flex;
   align-items: stretch;
   justify-content: space-around;
-  min-height: var(--sb-tab-bar-height);
+  min-height: var(--sb-content-bottom);
   padding-bottom: env(safe-area-inset-bottom, 0px);
   background: rgba(17, 24, 39, 0.94);
   border-top: 1px solid rgba(148, 163, 184, 0.25);
