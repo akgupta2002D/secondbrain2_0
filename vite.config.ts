@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 // Hardcoded app version shown in the UI.
-const appVersion = '0.0.26'
+const appVersion = '0.0.27'
 
 // Home-screen icons: PNG sizes generated from public/icons/pwa_icon.jpg
 // (iOS "Add to Home Screen" uses apple-touch-icon.png, not JPEG).
