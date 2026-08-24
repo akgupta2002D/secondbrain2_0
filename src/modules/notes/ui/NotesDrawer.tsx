@@ -1,4 +1,5 @@
 import { useEffect, useId, type RefObject } from 'react'
+import { BackIcon } from '../../../shell/BackIcon'
 import { formatNoteDate } from '../lib/formatNoteDate'
 import type { Note } from '../model/types'
 
@@ -93,7 +94,7 @@ export function NotesDrawer({
               onClick={onClose}
               aria-label="Back to note"
             >
-              Back
+              <BackIcon />
             </button>
             <h2 id={titleId} className="notesDrawerTitle">
               Notes

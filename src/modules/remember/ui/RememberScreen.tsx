@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { BackIcon } from '../../../shell/BackIcon'
 import definitions306Json from '../data/definitions306.json'
 import spanishExam5Json from '../data/spanishexam5.json'
 import { parseFlashcardsJsonV1 } from '../model/parseFlashcards'
@@ -213,7 +214,7 @@ export const RememberScreen = ({ onBack }: Props) => {
         onClick={onBack}
         aria-label="Back"
       >
-        Back
+        <BackIcon />
       </button>
 
       <button

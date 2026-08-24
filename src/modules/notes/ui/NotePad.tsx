@@ -8,6 +8,7 @@ import {
   useState,
   type RefObject,
 } from 'react'
+import { BackIcon } from '../../../shell/BackIcon'
 import { createDebouncedCallback } from '../lib/autoSave'
 import { formatNoteDate } from '../lib/formatNoteDate'
 import type { Note, NoteSaveState } from '../model/types'
@@ -160,12 +161,7 @@ export const NotePad = forwardRef<NotePadHandle, Props>(function NotePad(
             onClick={() => void onBackClick()}
             aria-label="Back"
           >
-            <svg className="notesIconGlyph" viewBox="0 0 24 24" aria-hidden>
-              <path
-                fill="currentColor"
-                d="M15.5 4.5 7 12l8.5 7.5 1.4-1.6L10.2 12l6.7-5.9z"
-              />
-            </svg>
+            <BackIcon />
           </button>
           <button
             ref={menuRef}
@@ -211,10 +207,15 @@ export const NotePad = forwardRef<NotePadHandle, Props>(function NotePad(
         spellCheck
       />
       <div className="notesFooter" aria-live="polite">
-        <p className="notesDate">{formatNoteDate(note.date)}</p>
-        <span className="notesSaveStatus" data-state={saveState}>
-          {statusLabel}
-        </span>
+        <p className="notesFooterMeta">
+          <span className="notesSaveStatus" data-state={saveState}>
+            {statusLabel}
+          </span>
+          <span className="notesFooterSep" aria-hidden>
+            |
+          </span>
+          <span className="notesDate">{formatNoteDate(note.date)}</span>
+        </p>
         {saveState === 'error' ? (
           <button
             type="button"

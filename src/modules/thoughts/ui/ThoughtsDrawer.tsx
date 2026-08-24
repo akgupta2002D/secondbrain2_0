@@ -1,4 +1,5 @@
 import { useEffect, useId, useRef, type RefObject } from 'react'
+import { BackIcon } from '../../../shell/BackIcon'
 import type { Thought } from '../model/types'
 
 type Props = {
@@ -116,7 +117,7 @@ export function ThoughtsDrawer({
               onClick={onClose}
               aria-label="Back to note"
             >
-              Back
+              <BackIcon />
             </button>
             <h2 id={titleId} className="thoughtsDrawerTitle">
               Notes

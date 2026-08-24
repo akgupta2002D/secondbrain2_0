@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { BackIcon } from '../../../shell/BackIcon'
 import goalsGraphJson from '../data/goalsGraph.json'
 import { parseGoalsGraph } from '../lib/parseGoalsGraph'
 import { IdentityGraph } from './IdentityGraph'
@@ -21,7 +22,7 @@ export function IdentityScreen({ onBack }: Props) {
       <main className="screen identityScreen" aria-label="Identity graph error">
         <div className="identityTopBar">
           <button type="button" className="backButton" onClick={onBack} aria-label="Back">
-            Back
+            <BackIcon />
           </button>
         </div>
         <div className="identityBody">
@@ -44,7 +45,7 @@ export function IdentityScreen({ onBack }: Props) {
     <main className="screen identityScreen" aria-label="Identity goals">
       <div className="identityTopBar">
         <button type="button" className="backButton" onClick={onBack} aria-label="Back">
-          Back
+          <BackIcon />
         </button>
       </div>
 
