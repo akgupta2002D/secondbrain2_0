@@ -59,8 +59,9 @@ body {
 }
 
 /* Safari tab: visible window is 100dvh.
-   Installed PWA: pin to the visual viewport with inset: 0. 100lvh is taller
-   than what iOS actually shows; overflow:hidden then clips the tab bar. */
+   Installed PWA: 100lvh fills the home-indicator band. Do not use
+   position:fixed + inset:0 here — that shrinks to the visual viewport and
+   leaves a hole under the tab bar. Overflow/overscroll lock stops panning. */
 @media (display-mode: browser) {
   html,
   body,
@@ -71,20 +72,27 @@ body {
 }
 
 html.is-pwa,
-html.is-pwa body {
-  position: fixed;
-  inset: 0;
+html.is-pwa body,
+html.is-pwa #root {
   width: 100%;
   height: 100%;
+  height: 100lvh;
+  min-height: 100%;
+  min-height: 100lvh;
   overflow: hidden;
   overscroll-behavior: none;
-  /* Match the tab bar so any home-indicator sliver is not a black hole. */
-  background: #111827;
+  background: #000000;
 }
 
-html.is-pwa #root {
-  height: 100%;
-  min-height: 100%;
+html.is-pwa .appShellPane--locked {
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+
+html.is-pwa .appShellPane:not(.appShellPane--locked),
+html.is-pwa .appShellSubpane {
+  overscroll-behavior: none;
 }
 
 .screen {
@@ -2419,7 +2427,11 @@ html.is-pwa #root {
 
 html.is-pwa .appShell {
   height: 100%;
+  height: 100lvh;
   min-height: 100%;
+  min-height: 100lvh;
+  overflow: hidden;
+  overscroll-behavior: none;
 }
 
 .appShellPanes {
@@ -2448,7 +2460,7 @@ html.is-pwa .appShell {
 
 .appShell .screen {
   min-height: 100%;
-  /* padding-bottom: var(--sb-space-16); */
+  padding-bottom: 0;
 }
 
 .appShell .notesMain {
