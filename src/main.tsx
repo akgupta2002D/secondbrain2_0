@@ -27,7 +27,7 @@ if (isStandalone) {
         return
       }
       const scrollable = target.closest(
-        'textarea, .appShellPane:not(.appShellPane--locked), .appShellSubpane, .loginScreen, .notesDrawerList, .thoughtsDrawerList, .identityBody',
+        'textarea, .biographyThread, .appShellPane:not(.appShellPane--locked), .appShellSubpane, .loginScreen, .notesDrawerList, .thoughtsDrawerList, .identityBody',
       )
       if (!scrollable) event.preventDefault()
     },

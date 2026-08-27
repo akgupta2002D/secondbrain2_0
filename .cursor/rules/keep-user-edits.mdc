@@ -1,0 +1,14 @@
+---
+description: Never overwrite code the user changed themselves
+alwaysApply: true
+---
+
+# Keep the user's personal code changes
+
+If Ankit (the user) edited a file, that edit is the source of truth. Do not revert, restyle, relocate, or "clean up" it unless he explicitly asks.
+
+- Treat working-tree diffs, uncommitted hunks, and follow-up messages like "I changed X" as intentional.
+- When you touch a file he also edited, keep his lines. Merge around them. Do not rewrite the whole file.
+- Do not revert his CSS values, copy, layout, names, or structure to match an older design or your preference.
+- If his change conflicts with a refactor you want, keep his version and adapt your work to it. Ask before replacing it.
+- `git checkout`, `git restore`, and other discard commands must not target his edits unless he asked to discard them.

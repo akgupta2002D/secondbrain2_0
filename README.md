@@ -14,6 +14,7 @@ Start here: [`docs/current-state.md`](docs/current-state.md) — what the app is
 | [`docs/project_description.md`](docs/project_description.md) | Original v1 intent (historical) |
 | [`docs/pwa_to_ios_appfeel.md`](docs/pwa_to_ios_appfeel.md) | Checklist that drove the shell/tab refactor |
 | [`docs/engine.md`](docs/engine.md) | Plan: Engine microservice (Ubuntu / Supabase stats) |
+| [`docs/add-tab-and-module.md`](docs/add-tab-and-module.md) | How to add a tab or a module (no React Router) |
 | [`supabase/README.md`](supabase/README.md) | Auth dashboard URLs, env vars, SQL order |
 
 ## Supabase

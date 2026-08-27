@@ -1,0 +1,1 @@
+export { BiographyScreen } from './ui/BiographyScreen'

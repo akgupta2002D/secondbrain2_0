@@ -8,6 +8,7 @@ type Props = {
 const TABS: { id: AppTab; label: string }[] = [
   { id: 'home', label: 'Home' },
   { id: 'engine', label: 'Engine' },
+  { id: 'biography', label: 'Biography' },
   { id: 'modules', label: 'Modules' },
 ]
 
@@ -29,6 +30,17 @@ function TabIcon({ id }: { id: AppTab }) {
         <path
           fill="currentColor"
           d="M9 2h2v2h2V2h2v2h1.2c.9 0 1.8.7 1.8 1.6V7h2v2h-2v2h2v2h-2v2h2v2h-2v1.4c0 .9-.8 1.6-1.8 1.6H15v2h-2v-2h-2v2H9v-2H7.8c-1 0-1.8-.7-1.8-1.6V17H4v-2h2v-2H4v-2h2V9H4V7h2V5.6C6 4.7 6.8 4 7.8 4H9V2zm1 6.5v7h1.4V8.5H10zm2.6 2.2v4.8h1.4v-4.8h-1.4zM16 8.5v7h1.4v-7H16z"
+        />
+      </svg>
+    )
+  }
+
+  if (id === 'biography') {
+    return (
+      <svg className="appTabIcon" viewBox="0 0 24 24" aria-hidden>
+        <path
+          fill="currentColor"
+          d="M6 3h9.5A2.5 2.5 0 0 1 18 5.5V21H7.5A1.5 1.5 0 0 1 6 19.5V3zm2 2v14h8V5.5a.5.5 0 0 0-.5-.5H8zm1.5 3h5v2h-5V8zm0 3.5h5V13h-5v-1.5z"
         />
       </svg>
     )

@@ -4,6 +4,7 @@ import { IdentityScreen } from '../modules/identity'
 import { NotesScreen } from '../modules/notes'
 import { RememberScreen } from '../modules/remember'
 import { ThoughtsScreen } from '../modules/thoughts'
+import { BiographyScreen } from '../modules/biography'
 import { HomeScreen } from './HomeScreen'
 import { ModulesList } from './ModulesList'
 import { TabBar } from './TabBar'
@@ -160,6 +161,14 @@ export function AppShell({
           inert={notesOpen || tab !== 'engine' ? true : undefined}
         >
           <EngineScreen />
+        </div>
+
+        <div
+          className="appShellPane appShellPane--chat"
+          hidden={notesOpen || tab !== 'biography'}
+          inert={notesOpen || tab !== 'biography' ? true : undefined}
+        >
+          <BiographyScreen />
         </div>
 
         <div

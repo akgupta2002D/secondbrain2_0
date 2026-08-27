@@ -9,7 +9,7 @@ The systems-stats design (microservice, Ubuntu, Supabase) lives in [`docs/engine
 `engine` is a first-class tab that will show health and capacity of the machines this app depends on.
 
 Goals:
-- Open from the bottom tab bar (Home | Engine | Modules)
+- Open from the bottom tab bar (Home | Engine | Biography | Modules)
 - Read stats from a dedicated microservice (not from the PWA directly)
 - Stay independent from notes / thoughts / remember / identity
 

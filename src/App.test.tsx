@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { vi } from 'vitest'
 import App from './App'
 
@@ -17,6 +17,10 @@ vi.mock('./auth', async (importOriginal) => {
 describe('App', () => {
   beforeEach(() => {
     auth.state = { kind: 'signedIn' }
+  })
+
+  afterEach(() => {
+    vi.unstubAllGlobals()
   })
 
   it('shows modules and opens Remember flashcards', async () => {
@@ -109,6 +113,7 @@ describe('App', () => {
     expect(screen.getByRole('menuitem', { name: 'Identity' })).toBeInTheDocument()
     expect(screen.queryByRole('menuitem', { name: 'Notes' })).not.toBeInTheDocument()
     expect(screen.queryByRole('menuitem', { name: 'Engine' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('menuitem', { name: 'Biography' })).not.toBeInTheDocument()
 
     fireEvent.click(screen.getByRole('button', { name: 'Back' }))
     fireEvent.click(screen.getByRole('button', { name: 'New note' }))
@@ -135,6 +140,71 @@ describe('App', () => {
     expect(
       screen.getByText('This will display stats about the server we use.'),
     ).toBeInTheDocument()
+  })
+
+  it('opens Biography from the tab bar and looks up a name', async () => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({
+        ok: true,
+        data: {
+          name: 'Napoleon',
+          summary: 'French general and emperor of France.',
+          quick_facts: { BORN: 'August 15, 1769', HEIGHT: '5 ft. 7 in.' },
+          source_url: 'https://example.com/napoleon',
+        },
+      }),
+    })
+    vi.stubGlobal('fetch', fetchMock)
+
+    render(<App />)
+    fireEvent.click(screen.getByRole('button', { name: 'Biography' }))
+
+    expect(screen.getByRole('button', { name: 'Biography' })).toHaveAttribute(
+      'aria-current',
+      'page',
+    )
+    expect(screen.getByRole('main', { name: 'Biography' })).toBeInTheDocument()
+
+    const input = screen.getByPlaceholderText('Name of a person')
+    fireEvent.change(input, { target: { value: 'Napoleon' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Send' }))
+
+    expect(input).toHaveValue('')
+    expect(fetchMock).toHaveBeenCalledWith(
+      'https://biography.sarpasahajivan.org/api/biography?name=Napoleon',
+    )
+
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { name: 'Napoleon' })).toBeInTheDocument()
+    })
+    expect(
+      screen.getByText('French general and emperor of France.'),
+    ).toBeInTheDocument()
+    expect(screen.getByText('August 15, 1769')).toBeInTheDocument()
+  })
+
+  it('shows a soft error when Biography lookup fails', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockRejectedValue(new Error('network')),
+    )
+
+    render(<App />)
+    fireEvent.click(screen.getByRole('button', { name: 'Biography' }))
+
+    fireEvent.change(screen.getByPlaceholderText('Name of a person'), {
+      target: { value: 'Napoleon' },
+    })
+    fireEvent.click(screen.getByRole('button', { name: 'Send' }))
+
+    expect(screen.getByPlaceholderText('Name of a person')).toHaveValue('')
+
+    await waitFor(() => {
+      expect(
+        screen.getByText('Could not reach the biography service. Try again in a moment.'),
+      ).toBeInTheDocument()
+    })
   })
 
   it('returns to the Modules list when the Modules tab is tapped inside a module', () => {
