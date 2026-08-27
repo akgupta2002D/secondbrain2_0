@@ -11,7 +11,7 @@ API: `GET https://biography.sarpasahajivan.org/api/biography?name=…`
 ## Current State (Implemented)
 
 - **Chrome**: Biography tab (book icon). Not listed under Modules.
-- **Screen**: Thread + composer above the tab bar (right padding leaves room for `+`).
+- **Screen**: Thread + composer above the tab bar. The Notes `+` is Home/Notes only, so the composer uses full width.
 - **Send**: Clears the input immediately, then fetches. Soft errors stay in the thread.
 - **Shown**: Summary paragraph and quick facts. No extra product routes.
 

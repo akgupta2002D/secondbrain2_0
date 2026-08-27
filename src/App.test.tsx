@@ -114,6 +114,7 @@ describe('App', () => {
     expect(screen.queryByRole('menuitem', { name: 'Notes' })).not.toBeInTheDocument()
     expect(screen.queryByRole('menuitem', { name: 'Engine' })).not.toBeInTheDocument()
     expect(screen.queryByRole('menuitem', { name: 'Biography' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'New note' })).not.toBeInTheDocument()
 
     fireEvent.click(screen.getByRole('button', { name: 'Back' }))
     fireEvent.click(screen.getByRole('button', { name: 'New note' }))
@@ -121,6 +122,7 @@ describe('App', () => {
     expect(
       screen.getByRole('main', { name: /Notes/i }),
     ).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'New note' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Home' })).toHaveAttribute(
       'aria-current',
       'page',
@@ -140,6 +142,7 @@ describe('App', () => {
     expect(
       screen.getByText('This will display stats about the server we use.'),
     ).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'New note' })).not.toBeInTheDocument()
   })
 
   it('opens Biography from the tab bar and looks up a name', async () => {
@@ -165,6 +168,7 @@ describe('App', () => {
       'page',
     )
     expect(screen.getByRole('main', { name: 'Biography' })).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'New note' })).not.toBeInTheDocument()
 
     const input = screen.getByPlaceholderText('Name of a person')
     fireEvent.change(input, { target: { value: 'Napoleon' } })

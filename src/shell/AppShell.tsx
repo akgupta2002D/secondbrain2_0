@@ -231,14 +231,16 @@ export function AppShell({
         </div>
       </div>
 
-      <button
-        type="button"
-        className="notesNewFab"
-        onClick={onNotesFab}
-        aria-label="New note"
-      >
-        +
-      </button>
+      {notesOpen || tab === 'home' ? (
+        <button
+          type="button"
+          className="notesNewFab"
+          onClick={onNotesFab}
+          aria-label="New note"
+        >
+          +
+        </button>
+      ) : null}
 
       <TabBar tab={tab} onSelect={onSelectTab} />
 

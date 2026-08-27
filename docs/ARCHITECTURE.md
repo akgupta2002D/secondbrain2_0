@@ -98,8 +98,6 @@ flowchart LR
   home -->|Biography| biography
   home -->|Modules| modules
   home -->|plus| notes
-  engine -->|plus| notes
-  biography -->|plus| notes
   notes -->|Back| lastTab
   modules -->|Back| home
   modules --> remember

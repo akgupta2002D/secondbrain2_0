@@ -46,7 +46,7 @@ Sign in ──► AppShell
                     └── Identity
 ```
 
-- Home is **not** a launcher with a center Modules button. The Notes `+` sits above the tab bar (same control as on the Notes pad).
+- Home is **not** a launcher with a center Modules button. The Notes `+` sits above the tab bar on **Home** and **Notes** only (same control as on the Notes pad).
 - **Engine is a top-level tab.** **Biography is a top-level tab.** Notes is capture-only (`+`). Remember / Thoughts / Identity stay nested under Modules.
 - After first visit, Notes / Remember / Thoughts / Identity **stay mounted** (hidden) so pad, draft, and scroll survive tab switches.
 - Notes is **not** mounted at login (that would start a local draft without opening Notes).

@@ -960,7 +960,7 @@ html.is-pwa .appShellSubpane {
   display: flex;
   align-items: center;
   gap: 0.55rem;
-  padding: 0.65rem 5rem 0.75rem var(--sb-chrome-x);
+  padding: 0.65rem var(--sb-chrome-x) 0.75rem;
   border-top: 1px solid rgba(148, 163, 184, 0.18);
   background: #000000;
 }

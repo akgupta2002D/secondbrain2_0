@@ -15,7 +15,7 @@ Goals:
 
 ## Current State (Implemented)
 
-- **Chrome**: Engine is a tab with a CPU/stats icon. Notes is no longer a tab; capture is the shell `+` FAB above the tab bar.
+- **Chrome**: Engine is a tab with a CPU/stats icon. Notes capture is the shell `+` on Home and Notes, not on Engine.
 - **Screen**: Placeholder copy only — “This will display stats about the server we use.”
 - **Network**: No fetch. No env vars. No schema.
 

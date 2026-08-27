@@ -116,7 +116,7 @@ This app is one signed-in **shell** (PWA), not a site with public URLs.
 
 **What the current design gives you**
 
-1. **Tab bar and `+` never unmount.** Chrome is not a route layout that remounts on every navigation.
+1. **Tab bar never unmounts.** The Notes `+` is only on Home and Notes. Chrome is not a route layout that remounts on every navigation.
 2. **Panes can stay mounted** (`hidden`, not unmount). Notes draft, Thoughts scroll, Remember card position survive leaving and coming back. A typical `<Route>` swap destroys that unless you add extra keep-alive.
 3. **Auth is created once** in `App.tsx`. Changing tab does not rebuild the session.
 4. **iPhone Back** is `history.pushState` / `popstate` with a small `{ sb: { tab, modulesPane, notesOpen } }` blob. No `/engine` or `/modules/remember` to keep in sync with the tab bar.
