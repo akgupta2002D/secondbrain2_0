@@ -26,7 +26,7 @@ export function EngineScreen() {
       </h1>
 
       <p className="engineSubtitle">
-        Live health and statistics from the server we use.
+        Welcome to Second Brain's Engine.
       </p>
     </div>
 
