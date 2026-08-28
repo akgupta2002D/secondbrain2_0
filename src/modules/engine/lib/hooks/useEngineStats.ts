@@ -8,7 +8,7 @@ import {
   import { getEngineStats } from "../api/engineApi"
   import type { EngineStats } from "../types/engine"
   
-  const REFRESH_INTERVAL_MS = 15_000
+  const REFRESH_INTERVAL_MS = 900000
   
   export function useEngineStats() {
     const [stats, setStats] =
