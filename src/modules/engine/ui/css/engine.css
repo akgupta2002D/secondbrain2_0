@@ -1,0 +1,864 @@
+/* =========================================================
+   ENGINE
+   ---------------------------------------------------------
+   The appShell/appShellPane owns:
+   - viewport sizing
+   - vertical scrolling
+   - bottom tab-bar layout
+
+   Engine owns:
+   - content layout
+   - its top safe-area
+   - spacing and responsive presentation
+   ========================================================= */
+
+
+/* =========================================================
+   SCREEN
+   Reset global .screen presentation rules.
+   ========================================================= */
+
+   .screen.engineScreen {
+    --engine-text: #f8fafc;
+    --engine-muted: rgba(226, 232, 240, 0.62);
+    --engine-faint: rgba(226, 232, 240, 0.44);
+  
+    --engine-surface: rgba(255, 255, 255, 0.035);
+    --engine-surface-strong: rgba(255, 255, 255, 0.055);
+  
+    --engine-border: rgba(148, 163, 184, 0.15);
+    --engine-border-soft: rgba(148, 163, 184, 0.1);
+  
+    display: flex;
+    flex-direction: column;
+  
+    width: 100%;
+    max-width: 1180px;
+  
+    height: 100%;
+    min-height: 0;
+    min-width: 0;
+  
+    margin: 0 auto;
+  
+    justify-content: flex-start;
+    align-items: stretch;
+  
+    text-align: left;
+  
+    gap: 0;
+  
+    color: var(--engine-text);
+  
+    /* ENGINE OWNS SCROLLING */
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+  
+    padding-top: max(16px, env(safe-area-inset-top));
+    padding-right: max(16px, env(safe-area-inset-right));
+  
+    /* breathing room after footer */
+    padding-bottom: 32px;
+  
+    padding-left: max(16px, env(safe-area-inset-left));
+  }
+  
+  
+  /* =========================================================
+     HEADER
+     ========================================================= */
+  
+  .engineScreen .engineHeader {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+  
+    gap: 16px;
+  
+    width: 100%;
+    min-width: 0;
+  
+    margin-bottom: 24px;
+  }
+  
+  .engineScreen .engineHeaderCopy {
+    min-width: 0;
+  }
+  
+  .engineScreen .engineTitle {
+    margin: 0;
+  
+    color: #f9fafb;
+  
+    font-size: clamp(1.85rem, 4vw, 2.4rem);
+    font-weight: 750;
+    line-height: 1.05;
+  
+    letter-spacing: -0.035em;
+  }
+  
+  .engineScreen .engineSubtitle {
+    max-width: 34rem;
+  
+    margin: 7px 0 0;
+  
+    color: var(--engine-muted);
+  
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+  
+  
+  /* =========================================================
+     REFRESH
+     ========================================================= */
+  
+  .engineScreen .engineRefreshButton {
+    appearance: none;
+  
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  
+    flex-shrink: 0;
+  
+    min-width: 44px;
+    min-height: 44px;
+  
+    padding: 0 14px;
+  
+    border: 1px solid var(--engine-border);
+    border-radius: 12px;
+  
+    background: rgba(255, 255, 255, 0.035);
+    color: #e5e7eb;
+  
+    font: inherit;
+    font-size: 0.84rem;
+    font-weight: 650;
+  
+    cursor: pointer;
+    touch-action: manipulation;
+  
+    -webkit-tap-highlight-color: transparent;
+  
+    transition:
+      background-color 150ms ease,
+      border-color 150ms ease,
+      opacity 150ms ease,
+      transform 100ms ease;
+  }
+  
+  @media (hover: hover) {
+    .engineScreen .engineRefreshButton:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.075);
+      border-color: rgba(148, 163, 184, 0.28);
+    }
+  }
+  
+  .engineScreen .engineRefreshButton:active:not(:disabled) {
+    transform: scale(0.97);
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .engineScreen .engineRefreshButton:focus-visible {
+    outline: 2px solid #93c5fd;
+    outline-offset: 2px;
+  }
+  
+  .engineScreen .engineRefreshButton:disabled {
+    cursor: default;
+    opacity: 0.45;
+  }
+  
+  
+  /* =========================================================
+     OVERVIEW
+     ========================================================= */
+  
+  .engineScreen .engineOverview {
+    display: flex;
+    flex-direction: column;
+  
+    width: 100%;
+    min-width: 0;
+  
+    gap: 30px;
+  }
+  
+  
+  /* =========================================================
+     HERO
+     ========================================================= */
+  
+  .engineScreen .engineHero {
+    display: grid;
+  
+    grid-template-columns:
+      minmax(0, 1fr)
+      auto;
+  
+    align-items: center;
+  
+    min-width: 0;
+  
+    gap: 20px;
+  
+    padding: 18px;
+  
+    background: var(--engine-surface-strong);
+    border: 1px solid var(--engine-border);
+    border-radius: 18px;
+  }
+  
+  .engineScreen .engineHero > div:first-child {
+    min-width: 0;
+  }
+  
+  .engineScreen .engineHeroStatus {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  
+    gap: 9px;
+  }
+  
+  .engineScreen .engineHero h2 {
+    margin: 11px 0 4px;
+  
+    color: #f8fafc;
+  
+    font-size: clamp(1.15rem, 3vw, 1.4rem);
+    font-weight: 650;
+    line-height: 1.25;
+  
+    letter-spacing: -0.015em;
+  
+    text-transform: capitalize;
+  }
+  
+  .engineScreen .engineHero p {
+    margin: 0;
+  
+    color: var(--engine-muted);
+  
+    font-size: 0.84rem;
+    line-height: 1.4;
+  }
+  
+  .engineScreen .engineHealthScore {
+    color: var(--engine-muted);
+  
+    font-size: 0.78rem;
+    font-weight: 500;
+  }
+  
+  
+  /* =========================================================
+     STATUS
+     ========================================================= */
+  
+  .engineScreen .engineStatus {
+    display: inline-flex;
+    align-items: center;
+  
+    gap: 7px;
+  
+    font-size: 0.8rem;
+    font-weight: 650;
+  
+    text-transform: capitalize;
+  }
+  
+  .engineScreen .engineStatusDot {
+    width: 8px;
+    height: 8px;
+  
+    flex: 0 0 auto;
+  
+    border-radius: 999px;
+  
+    background: currentColor;
+  
+    box-shadow: 0 0 0 3px color-mix(
+      in srgb,
+      currentColor 13%,
+      transparent
+    );
+  }
+  
+  .engineScreen .engineStatus--healthy {
+    color: #4ade80;
+  }
+  
+  .engineScreen .engineStatus--warning,
+  .engineScreen .engineStatus--degraded {
+    color: #fbbf24;
+  }
+  
+  .engineScreen .engineStatus--critical,
+  .engineScreen .engineStatus--unhealthy {
+    color: #f87171;
+  }
+  
+  .engineScreen .engineStatus--unknown {
+    color: #94a3b8;
+  }
+  
+  
+  /* =========================================================
+     CURRENT POWER
+     ========================================================= */
+  
+  .engineScreen .enginePowerNow {
+    display: flex;
+    flex-direction: column;
+  
+    align-items: flex-end;
+  
+    flex-shrink: 0;
+  
+    white-space: nowrap;
+  }
+  
+  .engineScreen .enginePowerNow span {
+    margin-bottom: 2px;
+  
+    color: var(--engine-muted);
+  
+    font-size: 0.74rem;
+    line-height: 1.3;
+  }
+  
+  .engineScreen .enginePowerNow strong {
+    color: #ffffff;
+  
+    font-size: clamp(1.45rem, 5vw, 1.95rem);
+    font-weight: 700;
+    line-height: 1.1;
+  
+    letter-spacing: -0.04em;
+  
+    font-variant-numeric: tabular-nums;
+  }
+  
+  
+  /* =========================================================
+     SECTION
+     ========================================================= */
+  
+  .engineScreen .engineSection,
+  .engineScreen .engineIssues {
+    display: flex;
+    flex-direction: column;
+  
+    min-width: 0;
+  
+    gap: 11px;
+  }
+  
+  .engineScreen .engineSection > h2,
+  .engineScreen .engineIssues > h2 {
+    margin: 0;
+  
+    color: rgba(248, 250, 252, 0.82);
+  
+    font-size: 0.88rem;
+    font-weight: 650;
+    line-height: 1.3;
+  
+    letter-spacing: 0.01em;
+  }
+  
+  
+  /* =========================================================
+     STAT GRID
+     Mobile first: two columns.
+     ========================================================= */
+  
+  .engineScreen .engineStatsGrid {
+    display: grid;
+  
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  
+    gap: 10px;
+  
+    min-width: 0;
+  }
+  
+  
+  /* =========================================================
+     STAT CARD
+     ========================================================= */
+  
+  .engineScreen .engineStatCard {
+    display: flex;
+    flex-direction: column;
+  
+    min-width: 0;
+  
+    padding: 14px;
+  
+    background: var(--engine-surface);
+    border: 1px solid var(--engine-border-soft);
+    border-radius: 14px;
+  }
+  
+  .engineScreen .engineStatLabel {
+    display: block;
+  
+    color: var(--engine-muted);
+  
+    font-size: 0.74rem;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+  
+  .engineScreen .engineStatValue {
+    display: block;
+  
+    min-width: 0;
+  
+    margin-top: 7px;
+  
+    color: #ffffff;
+  
+    font-size: clamp(1.08rem, 4vw, 1.4rem);
+    font-weight: 675;
+    line-height: 1.2;
+  
+    letter-spacing: -0.025em;
+  
+    font-variant-numeric: tabular-nums;
+  
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .engineScreen .engineStatDetail {
+    display: block;
+  
+    margin-top: 7px;
+  
+    color: var(--engine-faint);
+  
+    font-size: 0.72rem;
+    line-height: 1.4;
+  
+    overflow-wrap: anywhere;
+  }
+  
+  
+  /* =========================================================
+     PROGRESS
+     ========================================================= */
+  
+  .engineScreen .engineProgress {
+    width: 100%;
+    height: 4px;
+  
+    margin-top: 13px;
+  
+    overflow: hidden;
+  
+    background: rgba(148, 163, 184, 0.14);
+  
+    border-radius: 999px;
+  }
+  
+  .engineScreen .engineProgressFill {
+    height: 100%;
+  
+    background: #60a5fa;
+  
+    border-radius: inherit;
+  
+    transition: width 180ms ease;
+  }
+  
+  
+  /* =========================================================
+     SYSTEM INFO
+     ========================================================= */
+  
+  .engineScreen .engineInfoList {
+    overflow: hidden;
+  
+    background: var(--engine-surface);
+    border: 1px solid var(--engine-border-soft);
+    border-radius: 14px;
+  }
+  
+  .engineScreen .engineInfoList > div {
+    display: grid;
+  
+    grid-template-columns:
+      minmax(0, 0.9fr)
+      minmax(0, 1.2fr);
+  
+    align-items: center;
+  
+    min-height: 46px;
+  
+    gap: 16px;
+  
+    padding: 10px 14px;
+  
+    border-bottom: 1px solid
+      rgba(148, 163, 184, 0.09);
+  }
+  
+  .engineScreen .engineInfoList > div:last-child {
+    border-bottom: 0;
+  }
+  
+  .engineScreen .engineInfoList span {
+    min-width: 0;
+  
+    color: var(--engine-muted);
+  
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+  
+  .engineScreen .engineInfoList strong {
+    min-width: 0;
+  
+    color: rgba(248, 250, 252, 0.9);
+  
+    font-size: 0.8rem;
+    font-weight: 550;
+    line-height: 1.4;
+  
+    text-align: right;
+  
+    overflow-wrap: anywhere;
+  }
+  
+  
+  /* =========================================================
+     ISSUES
+     ========================================================= */
+  
+  .engineScreen .engineIssue {
+    padding: 12px 14px;
+  
+    color: #fecaca;
+  
+    font-size: 0.8rem;
+    line-height: 1.45;
+  
+    background: rgba(239, 68, 68, 0.055);
+  
+    border: 1px solid rgba(248, 113, 113, 0.18);
+    border-radius: 12px;
+  
+    overflow-wrap: anywhere;
+  }
+  
+  
+  /* =========================================================
+     LOADING
+     ========================================================= */
+  
+  .engineScreen .engineLoading {
+    display: flex;
+  
+    align-items: center;
+    justify-content: center;
+  
+    min-height: min(36vh, 260px);
+  
+    padding: 24px;
+  
+    color: var(--engine-muted);
+  
+    font-size: 0.84rem;
+  
+    background: var(--engine-surface);
+  
+    border: 1px solid var(--engine-border-soft);
+    border-radius: 16px;
+  }
+  
+  .engineScreen .engineLoading::before {
+    content: "";
+  
+    width: 8px;
+    height: 8px;
+  
+    margin-right: 10px;
+  
+    flex: 0 0 auto;
+  
+    background: #93c5fd;
+  
+    border-radius: 50%;
+  
+    animation: enginePulse 1.1s ease-in-out infinite;
+  }
+  
+  @keyframes enginePulse {
+    0%,
+    100% {
+      opacity: 0.25;
+      transform: scale(0.8);
+    }
+  
+    50% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  
+  /* =========================================================
+     ERROR
+     ========================================================= */
+  
+  .engineScreen .engineError {
+    display: flex;
+    flex-direction: column;
+  
+    align-items: flex-start;
+  
+    gap: 7px;
+  
+    padding: 16px;
+  
+    color: #fecaca;
+  
+    background: rgba(239, 68, 68, 0.05);
+  
+    border: 1px solid rgba(248, 113, 113, 0.18);
+    border-radius: 14px;
+  }
+  
+  .engineScreen .engineError strong {
+    color: #fee2e2;
+  
+    font-size: 0.9rem;
+  }
+  
+  .engineScreen .engineError span {
+    color: rgba(254, 226, 226, 0.7);
+  
+    font-size: 0.8rem;
+    line-height: 1.45;
+  
+    overflow-wrap: anywhere;
+  }
+  
+  .engineScreen .engineRetryButton {
+    appearance: none;
+  
+    min-height: 44px;
+  
+    margin-top: 2px;
+  
+    padding: 0 4px;
+  
+    border: 0;
+  
+    background: transparent;
+    color: #fecaca;
+  
+    font: inherit;
+    font-size: 0.82rem;
+    font-weight: 650;
+  
+    cursor: pointer;
+    touch-action: manipulation;
+  
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .engineScreen .engineRetryButton:active {
+    opacity: 0.55;
+  }
+  
+  .engineScreen .engineRetryButton:focus-visible {
+    outline: 2px solid #fca5a5;
+    outline-offset: 2px;
+  }
+  
+  
+  /* =========================================================
+     FOOTER
+     ========================================================= */
+  
+  .engineScreen .engineFooter {
+    display: flex;
+  
+    align-items: center;
+    justify-content: space-between;
+  
+    flex-wrap: wrap;
+  
+    gap: 6px 12px;
+  
+    width: 100%;
+  
+    margin-top: 22px;
+    padding-top: 12px;
+  
+    color: var(--engine-faint);
+  
+    border-top: 1px solid
+      rgba(148, 163, 184, 0.08);
+  
+    font-size: 0.69rem;
+    line-height: 1.4;
+  
+    font-variant-numeric: tabular-nums;
+  }
+  
+  
+  /* =========================================================
+     DESKTOP
+     ========================================================= */
+  
+  @media (min-width: 900px) {
+    .screen.engineScreen {
+      padding-top: max(
+        28px,
+        env(safe-area-inset-top)
+      );
+  
+      padding-right: max(
+        28px,
+        env(safe-area-inset-right)
+      );
+  
+      padding-bottom: 40px;
+  
+      padding-left: max(
+        28px,
+        env(safe-area-inset-left)
+      );
+    }
+  
+    .engineScreen .engineHeader {
+      margin-bottom: 28px;
+    }
+  
+    .engineScreen .engineOverview {
+      gap: 34px;
+    }
+  
+    .engineScreen .engineStatsGrid {
+      grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+  
+      gap: 12px;
+    }
+  
+    .engineScreen .engineStatCard {
+      padding: 16px;
+    }
+  
+    .engineScreen .engineHero {
+      padding: 20px;
+    }
+  }
+  
+  
+  /* =========================================================
+     SMALL PHONES
+     ========================================================= */
+  
+  @media (max-width: 390px) {
+    .screen.engineScreen {
+      padding-right: max(
+        12px,
+        env(safe-area-inset-right)
+      );
+  
+      padding-left: max(
+        12px,
+        env(safe-area-inset-left)
+      );
+    }
+  
+    .engineScreen .engineHeader {
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+  
+    .engineScreen .engineTitle {
+      font-size: 1.75rem;
+    }
+  
+    .engineScreen .engineSubtitle {
+      font-size: 0.78rem;
+    }
+  
+    .engineScreen .engineRefreshButton {
+      padding-inline: 11px;
+      font-size: 0.78rem;
+    }
+  
+    .engineScreen .engineHero {
+      gap: 12px;
+      padding: 14px;
+      border-radius: 15px;
+    }
+  
+    .engineScreen .enginePowerNow strong {
+      font-size: 1.3rem;
+    }
+  
+    .engineScreen .engineStatCard {
+      padding: 12px;
+    }
+  }
+  
+  
+  /* =========================================================
+     VERY NARROW PHONES
+     ========================================================= */
+  
+  @media (max-width: 330px) {
+    .engineScreen .engineStatsGrid {
+      grid-template-columns: 1fr;
+    }
+  
+    .engineScreen .engineHero {
+      grid-template-columns: 1fr;
+    }
+  
+    .engineScreen .enginePowerNow {
+      align-items: flex-start;
+    }
+  
+    .engineScreen .engineInfoList > div {
+      grid-template-columns: 1fr;
+  
+      gap: 3px;
+    }
+  
+    .engineScreen .engineInfoList strong {
+      text-align: left;
+    }
+  }
+  
+  
+  /* =========================================================
+     REDUCED MOTION
+     ========================================================= */
+  
+  @media (prefers-reduced-motion: reduce) {
+    .engineScreen .engineRefreshButton,
+    .engineScreen .engineProgressFill {
+      transition: none;
+    }
+  
+    .engineScreen .engineLoading::before {
+      animation: none;
+    }
+  }

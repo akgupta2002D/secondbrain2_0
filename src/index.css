@@ -823,18 +823,6 @@ html.is-pwa .appShellSubpane {
   transform: scale(0.98);
 }
 
-.engineScreen {
-  width: 100%;
-  gap: 1rem;
-}
-
-.enginePlaceholder {
-  margin: 0;
-  max-width: 22rem;
-  color: rgba(229, 231, 235, 0.72);
-  font-size: 1rem;
-  line-height: 1.45;
-}
 
 .biographyScreen {
   width: 100%;
