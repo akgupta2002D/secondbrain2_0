@@ -977,10 +977,6 @@ html.is-pwa .appShellSubpane {
   color: #fde68a;
 }
 
-.financeChip--wide {
-  grid-column: 1 / -1;
-}
-
 .financeChipInput {
   appearance: none;
   width: 100%;

@@ -32,7 +32,6 @@ function EditableChip({
   busy,
   editing,
   draft,
-  className,
   onStartEdit,
   onDraftChange,
   onCommit,
@@ -44,7 +43,6 @@ function EditableChip({
   busy: boolean
   editing: boolean
   draft: string
-  className?: string
   onStartEdit: () => void
   onDraftChange: (value: string) => void
   onCommit: () => void
@@ -53,7 +51,7 @@ function EditableChip({
   return (
     <button
       type="button"
-      className={`financeChip financeChip--${tone} financeChipButton${className ? ` ${className}` : ''}`}
+      className={`financeChip financeChip--${tone} financeChipButton`}
       disabled={busy && !editing}
       onClick={() => {
         if (!editing) onStartEdit()
@@ -142,7 +140,7 @@ export function FinanceSummary({
     }
   }
 
-  const renderEditable = (bucket: FinanceBucket, className?: string) => {
+  const renderEditable = (bucket: FinanceBucket) => {
     const chip = EDITABLE.find((item) => item.bucket === bucket)
     if (!chip) return null
     return (
@@ -154,7 +152,6 @@ export function FinanceSummary({
         busy={busy}
         editing={editing === chip.bucket}
         draft={draft}
-        className={className}
         onStartEdit={() => setEditing(chip.bucket)}
         onDraftChange={setDraft}
         onCommit={() => {
@@ -171,14 +168,14 @@ export function FinanceSummary({
   return (
     <section className="financeSummary" aria-label="Balances summary">
       <div
-        className="financeChip financeChip--net financeChip--wide"
+        className="financeChip financeChip--net"
         aria-label={`Available after debt ${formatUsd(availableCents)}`}
       >
         <span className="financeChipLabel">Available</span>
         <span className="financeChipValue">{formatUsd(availableCents)}</span>
       </div>
 
-      {renderEditable('current', 'financeChip--wide')}
+      {renderEditable('current')}
 
       <button
         type="button"
