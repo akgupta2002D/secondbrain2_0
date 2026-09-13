@@ -33,10 +33,20 @@ function balancesPatch(input: UpdateBalancesInput): Record<string, number | stri
 export function createSupabaseFinanceRepository(
   client: SupabaseClient,
 ): FinanceRepository {
+  async function requireUserId(): Promise<string> {
+    const { data, error } = await client.auth.getUser()
+    if (error) throw error
+    const id = data.user?.id
+    if (!id) throw new Error('Not signed in.')
+    return id
+  }
+
   async function ensureBalances(): Promise<FinanceBalances> {
+    const userId = await requireUserId()
     const { data, error } = await client
       .from('finance_balances')
       .select('*')
+      .eq('user_id', userId)
       .maybeSingle()
 
     if (error) throw error
@@ -45,6 +55,7 @@ export function createSupabaseFinanceRepository(
     const { data: inserted, error: insertError } = await client
       .from('finance_balances')
       .insert({
+        user_id: userId,
         current_cents: 0,
         emergency_cents: 0,
         rewards_cents: 0,
@@ -53,8 +64,33 @@ export function createSupabaseFinanceRepository(
       .select()
       .single()
 
-    if (insertError) throw insertError
+    // If a concurrent insert won, read the existing row.
+    if (insertError) {
+      const { data: existing, error: readError } = await client
+        .from('finance_balances')
+        .select('*')
+        .eq('user_id', userId)
+        .maybeSingle()
+      if (readError) throw readError
+      if (existing) return mapBalancesRow(existing as FinanceBalancesRow)
+      throw insertError
+    }
     return mapBalancesRow(inserted as FinanceBalancesRow)
+  }
+
+  async function updateOwnBalances(
+    patch: Record<string, number | string>,
+  ): Promise<FinanceBalances> {
+    const userId = await requireUserId()
+    const { data, error } = await client
+      .from('finance_balances')
+      .update(patch)
+      .eq('user_id', userId)
+      .select()
+      .single()
+
+    if (error) throw error
+    return mapBalancesRow(data as FinanceBalancesRow)
   }
 
   return {
@@ -87,14 +123,7 @@ export function createSupabaseFinanceRepository(
 
     async updateBalances(input) {
       await ensureBalances()
-      const { data, error } = await client
-        .from('finance_balances')
-        .update(balancesPatch(input))
-        .select()
-        .single()
-
-      if (error) throw error
-      return mapBalancesRow(data as FinanceBalancesRow)
+      return updateOwnBalances(balancesPatch(input))
     },
 
     async createLedgerEntry(input: CreateLedgerInput) {
@@ -118,23 +147,17 @@ export function createSupabaseFinanceRepository(
       if (entryError) throw entryError
 
       const next = applyLedgerToBalances(balances, input)
-      const { data: balanceRow, error: balanceError } = await client
-        .from('finance_balances')
-        .update({
-          current_cents: next.currentCents,
-          emergency_cents: next.emergencyCents,
-          rewards_cents: next.rewardsCents,
-          investments_cents: next.investmentsCents,
-          updated_at: new Date().toISOString(),
-        })
-        .select()
-        .single()
-
-      if (balanceError) throw balanceError
+      const balanceRow = await updateOwnBalances({
+        current_cents: next.currentCents,
+        emergency_cents: next.emergencyCents,
+        rewards_cents: next.rewardsCents,
+        investments_cents: next.investmentsCents,
+        updated_at: new Date().toISOString(),
+      })
 
       return {
         entry: mapLedgerRow(entryRow as FinanceLedgerRow),
-        balances: mapBalancesRow(balanceRow as FinanceBalancesRow),
+        balances: balanceRow,
       }
     },
 

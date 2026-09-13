@@ -12,7 +12,6 @@ import type {
   FinanceLedgerEntry,
 } from '../model/types'
 import { emptyBalances } from '../data/mapFinance'
-import { FinanceBuckets } from './FinanceBuckets'
 import { FinanceDebtSheet } from './FinanceDebtSheet'
 import { FinanceEntryForm } from './FinanceEntryForm'
 import { FinanceLogSheet } from './FinanceLogSheet'
@@ -188,13 +187,10 @@ export function FinanceScreen() {
             debtCents={debtCents}
             investmentsCents={balances.investmentsCents}
             emergencyCents={balances.emergencyCents}
-            onOpenDebt={() => setDebtOpen(true)}
-          />
-
-          <FinanceBuckets
-            balances={balances}
+            rewardsCents={balances.rewardsCents}
             busy={busy}
-            onSave={onSaveBucket}
+            onOpenDebt={() => setDebtOpen(true)}
+            onSaveBucket={onSaveBucket}
           />
 
           <h2 className="financeSectionTitle">New entry</h2>

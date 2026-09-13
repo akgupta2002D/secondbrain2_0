@@ -950,6 +950,7 @@ html.is-pwa .appShellSubpane {
 }
 
 .financeChip--red {
+  grid-column: 1 / -1;
   border-color: rgba(252, 165, 165, 0.35);
   background: linear-gradient(160deg, rgba(239, 68, 68, 0.16), rgba(0, 0, 0, 0.2));
 }
@@ -967,53 +968,36 @@ html.is-pwa .appShellSubpane {
   color: #bfdbfe;
 }
 
-.financeBuckets {
-  display: grid;
-  gap: 0.45rem;
-  padding: 0.7rem 0.8rem;
-  border-radius: 1rem;
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  background: rgba(255, 255, 255, 0.03);
-}
-
-.financeBucketRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  min-height: 2.4rem;
-}
-
-.financeBucketLabel {
-  font-size: 0.95rem;
-  color: rgba(226, 232, 240, 0.88);
-  font-weight: 600;
-}
-
-.financeBucketValue {
+.financeChipInput {
   appearance: none;
+  width: 100%;
+  min-height: 1.6rem;
   border: 0;
-  background: transparent;
-  color: #f8fafc;
+  border-radius: 0.45rem;
+  background: rgba(0, 0, 0, 0.35);
+  color: inherit;
   font: inherit;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  cursor: pointer;
-  padding: 0.25rem 0;
+  font-size: 1.1rem;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  padding: 0.15rem 0.35rem;
 }
 
-.financeBucketInput {
-  appearance: none;
-  width: 7.5rem;
-  min-height: 2.2rem;
-  border-radius: 0.65rem;
-  border: 1px solid rgba(147, 197, 253, 0.4);
-  background: rgba(17, 24, 39, 0.85);
-  color: #f8fafc;
-  font: inherit;
-  font-weight: 700;
-  text-align: right;
-  padding: 0.3rem 0.55rem;
+.financeChip--green .financeChipInput {
+  color: #86efac;
+}
+
+.financeChip--blue .financeChipInput {
+  color: #bfdbfe;
+}
+
+.financeChipInput:focus-visible {
+  outline: 2px solid rgba(147, 197, 253, 0.55);
+  outline-offset: 1px;
+}
+
+.financeSummaryError {
+  grid-column: 1 / -1;
 }
 
 .financeForm {
@@ -1106,7 +1090,6 @@ html.is-pwa .appShellSubpane {
 .financeSubmit:disabled,
 .financeInput:disabled,
 .financeSelect:disabled,
-.financeBucketValue:disabled,
 .financeKindButton:disabled {
   opacity: 0.55;
 }
@@ -1138,19 +1121,20 @@ html.is-pwa .appShellSubpane {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding: 0;
+  padding: 0 0 var(--sb-content-bottom);
+  box-sizing: border-box;
 }
 
 .financeSheet {
   width: min(100%, 34rem);
-  max-height: min(78vh, 40rem);
+  max-height: min(70dvh, calc(100% - 0.75rem));
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   border-radius: 1.25rem 1.25rem 0 0;
   border: 1px solid rgba(148, 163, 184, 0.22);
   border-bottom: 0;
   background: #0a0a0a;
-  padding: 1rem 1rem calc(1rem + env(safe-area-inset-bottom));
+  padding: 1rem 1rem 1.15rem;
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
