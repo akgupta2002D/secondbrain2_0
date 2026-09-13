@@ -12,6 +12,7 @@ import type {
   FinanceLedgerEntry,
 } from '../model/types'
 import { emptyBalances } from '../data/mapFinance'
+import { useKeyboardInset } from '../lib/useKeyboardInset'
 import { FinanceDebtSheet } from './FinanceDebtSheet'
 import { FinanceEntryForm } from './FinanceEntryForm'
 import { FinanceLogSheet } from './FinanceLogSheet'
@@ -29,6 +30,8 @@ function LogIcon() {
 }
 
 export function FinanceScreen() {
+  useKeyboardInset()
+
   const configured = getSupabaseConfig() !== null
   const supabase = getSupabaseClient()
 

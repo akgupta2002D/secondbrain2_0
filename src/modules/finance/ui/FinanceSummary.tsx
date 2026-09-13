@@ -13,7 +13,7 @@ type Props = {
   onSaveBucket: (bucket: FinanceBucket, cents: number) => Promise<void>
 }
 
-const CHIP_META: {
+const EDITABLE: {
   bucket: FinanceBucket
   label: string
   tone: 'green' | 'blue'
@@ -24,6 +24,75 @@ const CHIP_META: {
   { bucket: 'emergency', label: 'Emergency', tone: 'blue', centsKey: 'emergencyCents' },
   { bucket: 'rewards', label: 'Rewards', tone: 'blue', centsKey: 'rewardsCents' },
 ]
+
+function EditableChip({
+  label,
+  tone,
+  valueCents,
+  busy,
+  editing,
+  draft,
+  onStartEdit,
+  onDraftChange,
+  onCommit,
+  onCancel,
+}: {
+  label: string
+  tone: 'green' | 'blue'
+  valueCents: number
+  busy: boolean
+  editing: boolean
+  draft: string
+  onStartEdit: () => void
+  onDraftChange: (value: string) => void
+  onCommit: () => void
+  onCancel: () => void
+}) {
+  return (
+    <button
+      type="button"
+      className={`financeChip financeChip--${tone} financeChipButton`}
+      disabled={busy && !editing}
+      onClick={() => {
+        if (!editing) onStartEdit()
+      }}
+      aria-label={
+        editing
+          ? `Editing ${label}`
+          : `${label} ${formatUsd(valueCents)}. Tap to edit.`
+      }
+    >
+      <span className="financeChipLabel">{label}</span>
+      {editing ? (
+        <input
+          className="financeChipInput"
+          value={draft}
+          inputMode="decimal"
+          aria-label={`Edit ${label}`}
+          disabled={busy}
+          autoFocus
+          onClick={(e) => e.stopPropagation()}
+          onChange={(e) => onDraftChange(e.target.value)}
+          onFocus={(e) => {
+            e.currentTarget.scrollIntoView({ block: 'center', behavior: 'smooth' })
+          }}
+          onBlur={() => {
+            onCommit()
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault()
+              onCommit()
+            }
+            if (e.key === 'Escape') onCancel()
+          }}
+        />
+      ) : (
+        <span className="financeChipValue">{formatUsd(valueCents)}</span>
+      )}
+    </button>
+  )
+}
 
 export function FinanceSummary({
   currentCents,
@@ -41,6 +110,7 @@ export function FinanceSummary({
     emergencyCents,
     rewardsCents,
   }
+  const availableCents = currentCents - debtCents
 
   const [editing, setEditing] = useState<FinanceBucket | null>(null)
   const [draft, setDraft] = useState('')
@@ -48,7 +118,7 @@ export function FinanceSummary({
 
   useEffect(() => {
     if (!editing) return
-    const chip = CHIP_META.find((item) => item.bucket === editing)
+    const chip = EDITABLE.find((item) => item.bucket === editing)
     if (!chip) return
     setDraft(centsToDollarsInput(amounts[chip.centsKey]))
     setError(null)
@@ -70,57 +140,34 @@ export function FinanceSummary({
     }
   }
 
+  const renderEditable = (bucket: FinanceBucket) => {
+    const chip = EDITABLE.find((item) => item.bucket === bucket)
+    if (!chip) return null
+    return (
+      <EditableChip
+        key={chip.bucket}
+        label={chip.label}
+        tone={chip.tone}
+        valueCents={amounts[chip.centsKey]}
+        busy={busy}
+        editing={editing === chip.bucket}
+        draft={draft}
+        onStartEdit={() => setEditing(chip.bucket)}
+        onDraftChange={setDraft}
+        onCommit={() => {
+          void commit()
+        }}
+        onCancel={() => {
+          setEditing(null)
+          setError(null)
+        }}
+      />
+    )
+  }
+
   return (
     <section className="financeSummary" aria-label="Balances summary">
-      {CHIP_META.map((chip) => {
-        const value = amounts[chip.centsKey]
-        const isEditing = editing === chip.bucket
-        return (
-          <button
-            key={chip.bucket}
-            type="button"
-            className={`financeChip financeChip--${chip.tone} financeChipButton`}
-            disabled={busy && !isEditing}
-            onClick={() => {
-              if (!isEditing) setEditing(chip.bucket)
-            }}
-            aria-label={
-              isEditing
-                ? `Editing ${chip.label}`
-                : `${chip.label} ${formatUsd(value)}. Tap to edit.`
-            }
-          >
-            <span className="financeChipLabel">{chip.label}</span>
-            {isEditing ? (
-              <input
-                className="financeChipInput"
-                value={draft}
-                inputMode="decimal"
-                aria-label={`Edit ${chip.label}`}
-                disabled={busy}
-                autoFocus
-                onClick={(e) => e.stopPropagation()}
-                onChange={(e) => setDraft(e.target.value)}
-                onBlur={() => {
-                  void commit()
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    e.preventDefault()
-                    void commit()
-                  }
-                  if (e.key === 'Escape') {
-                    setEditing(null)
-                    setError(null)
-                  }
-                }}
-              />
-            ) : (
-              <span className="financeChipValue">{formatUsd(value)}</span>
-            )}
-          </button>
-        )
-      })}
+      {renderEditable('current')}
 
       <button
         type="button"
@@ -131,6 +178,18 @@ export function FinanceSummary({
         <span className="financeChipLabel">Debt</span>
         <span className="financeChipValue">{formatUsd(debtCents)}</span>
       </button>
+
+      <div
+        className="financeChip financeChip--net"
+        aria-label={`Available after debt ${formatUsd(availableCents)}`}
+      >
+        <span className="financeChipLabel">Available</span>
+        <span className="financeChipValue">{formatUsd(availableCents)}</span>
+      </div>
+
+      {renderEditable('investments')}
+      {renderEditable('emergency')}
+      {renderEditable('rewards')}
 
       {error ? (
         <p className="financeInlineError financeSummaryError" role="alert">

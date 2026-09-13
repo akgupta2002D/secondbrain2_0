@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react'
+import { scrollFinanceFieldIntoView } from '../lib/useKeyboardInset'
 import { dollarsToCents, todayIsoDate } from '../model/money'
 import type { CreateLedgerInput, FinanceBucket, LedgerKind } from '../model/types'
 
@@ -91,13 +92,14 @@ export function FinanceEntryForm({ busy, onSubmit }: Props) {
         </button>
       </div>
 
-      <label className="financeField">
+      <label className="financeField financeField--row">
         <span>Bucket</span>
         <select
           className="financeSelect"
           value={bucket}
           disabled={busy}
           onChange={(e) => setBucket(e.target.value as FinanceBucket)}
+          onFocus={(e) => scrollFinanceFieldIntoView(e.target)}
         >
           {BUCKETS.map((item) => (
             <option key={item.id} value={item.id}>
@@ -107,7 +109,7 @@ export function FinanceEntryForm({ busy, onSubmit }: Props) {
         </select>
       </label>
 
-      <label className="financeField">
+      <label className="financeField financeField--row">
         <span>Date</span>
         <input
           className="financeInput"
@@ -115,11 +117,12 @@ export function FinanceEntryForm({ busy, onSubmit }: Props) {
           value={date}
           disabled={busy}
           onChange={(e) => setDate(e.target.value)}
+          onFocus={(e) => scrollFinanceFieldIntoView(e.target)}
         />
       </label>
 
-      <label className="financeField">
-        <span>Amount (USD)</span>
+      <label className="financeField financeField--row">
+        <span>Amount</span>
         <input
           className="financeInput"
           inputMode="decimal"
@@ -127,11 +130,12 @@ export function FinanceEntryForm({ busy, onSubmit }: Props) {
           value={amount}
           disabled={busy}
           onChange={(e) => setAmount(e.target.value)}
+          onFocus={(e) => scrollFinanceFieldIntoView(e.target)}
         />
       </label>
 
-      <label className="financeField">
-        <span>Description</span>
+      <label className="financeField financeField--row">
+        <span>Note</span>
         <input
           className="financeInput"
           maxLength={120}
@@ -139,6 +143,7 @@ export function FinanceEntryForm({ busy, onSubmit }: Props) {
           value={description}
           disabled={busy}
           onChange={(e) => setDescription(e.target.value)}
+          onFocus={(e) => scrollFinanceFieldIntoView(e.target)}
         />
       </label>
 

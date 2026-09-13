@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react'
+import { scrollFinanceFieldIntoView } from '../lib/useKeyboardInset'
 import { dollarsToCents, formatUsd } from '../model/money'
 import type { CreateCommitmentInput, FinanceCommitment } from '../model/types'
 
@@ -101,22 +102,30 @@ export function FinanceDebtSheet({
         </ul>
 
         <form className="financeCommitmentForm" onSubmit={(e) => void handleAdd(e)}>
-          <input
-            className="financeInput"
-            placeholder="Commitment name"
-            value={name}
-            disabled={busy}
-            maxLength={80}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <input
-            className="financeInput"
-            placeholder="Amount"
-            inputMode="decimal"
-            value={amount}
-            disabled={busy}
-            onChange={(e) => setAmount(e.target.value)}
-          />
+          <label className="financeField financeField--row">
+            <span>Name</span>
+            <input
+              className="financeInput"
+              placeholder="Commitment"
+              value={name}
+              disabled={busy}
+              maxLength={80}
+              onChange={(e) => setName(e.target.value)}
+              onFocus={(e) => scrollFinanceFieldIntoView(e.target)}
+            />
+          </label>
+          <label className="financeField financeField--row">
+            <span>Amount</span>
+            <input
+              className="financeInput"
+              placeholder="0.00"
+              inputMode="decimal"
+              value={amount}
+              disabled={busy}
+              onChange={(e) => setAmount(e.target.value)}
+              onFocus={(e) => scrollFinanceFieldIntoView(e.target)}
+            />
+          </label>
           {error ? (
             <p className="financeInlineError" role="alert">
               {error}
