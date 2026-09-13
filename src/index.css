@@ -969,13 +969,16 @@ html.is-pwa .appShellSubpane {
 }
 
 .financeChip--net {
-  grid-column: 1 / -1;
   border-color: rgba(250, 204, 21, 0.35);
   background: linear-gradient(160deg, rgba(234, 179, 8, 0.14), rgba(0, 0, 0, 0.2));
 }
 
 .financeChip--net .financeChipValue {
   color: #fde68a;
+}
+
+.financeChip--wide {
+  grid-column: 1 / -1;
 }
 
 .financeChipInput {
