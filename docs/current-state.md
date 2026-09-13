@@ -31,7 +31,7 @@ Signed-out users only see sign-in. There is no tab bar on login.
 
 Persistent **`AppShell`** (`src/shell/`). Only the content pane swaps.
 
-Tabs: **Home | Engine | Finance | Modules**. Notes is the `+` above the tab bar.
+Tabs: **Home | Engine | Finance | Modules**. Notes is the `+` above the tab bar on Home and Notes only.
 
 ```
 Sign in ──► AppShell
@@ -39,8 +39,7 @@ Sign in ──► AppShell
               ├── Engine     (server stats; not listed under Modules)
               ├── Finance    (placeholder; not listed under Modules)
               ├── Notes      (opened by +; not a tab; not listed under Modules)
-              └── Modules
-                    ├── list: Remember, Thoughts, Identity, Biography
+              └── Modules    (iPhone-style app grid)
                     ├── Remember
                     ├── Thoughts
                     ├── Identity
@@ -59,8 +58,8 @@ Sign in ──► AppShell
 | Surface | Where | Data | Behavior that must not change casually |
 | --- | --- | --- | --- |
 | **Notes** | Shell `+` | Supabase `notes` | Blank **local** draft on open. Row is created only after real text. Autosave `update`. Delete is confirm + server delete. Date/status in footer. |
+| **Engine** | Tab | Engine stats API | Live host metrics UI. Do not scrape SSH / service-role from the PWA. |
 | **Finance** | Tab | None yet | Placeholder copy only. |
-| **Engine** | Tab | None yet | Placeholder copy only. Live host/Supabase stats are planned in [`engine.md`](engine.md); do not scrape them from the PWA. |
 | **Biography** | Modules | Public biography API | Type a name, send, show summary + quick facts. Soft errors in the thread. |
 | **Thoughts** | Modules | Supabase `thoughts` | If the list is empty, **insert one empty thought**. Search + drawer. Debounced save. Realtime refresh. |
 | **Remember** | Modules | Bundled JSON decks | Swipe to score. Scores in `localStorage` (not Postgres). |
@@ -89,7 +88,7 @@ These are product/architecture choices, not leftovers.
 2. **Notes create-on-type, not create-on-open.** Opening Notes must not insert an empty SQL row. Delete stays confirm-then-server.
 3. **Thoughts always has at least one row** once the module has loaded against an empty table (insert-if-empty). Do not “fix” that to match Notes.
 4. **Remember and Identity stay local.** Do not move scores or the identity graph to Supabase unless that is an explicit product change.
-5. **Tab IA is Home | Engine | Finance | Modules.** Notes is the `+` on Home and Notes only, not a tab and not in the Modules list. Do not flatten Remember/Thoughts/Identity/Biography onto the tab bar without a product decision.
+5. **Tab IA is Home | Engine | Finance | Modules.** Notes is the `+` on Home and Notes only, not a tab and not in the Modules grid. Do not flatten Remember/Thoughts/Identity/Biography onto the tab bar without a product decision.
 6. **No React Router.** In-memory view + optional `pushState` only. Do not invent new product routes.
 7. **Shell owns chrome; modules own mutations.** Do not re-init auth on tab change. Do not remount Notes after first open just to “reset” the pad.
 8. **One bottom offset.** Tab bar height only (`--sb-content-bottom`). Do not add `safe-area-inset-bottom` on the tab bar — iOS standalone already insets the webview, and stacking that inset triples the chrome. Pages must not add their own extra bottom safe-area (Notes footer used to pad for the old FAB).
