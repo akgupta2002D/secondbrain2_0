@@ -70,7 +70,7 @@ flowchart LR
   identity --> json
 ```
 
-- Shell owns view state and auth. Modules do not import each other. Engine has no backend yet (placeholder UI). Biography fetches a public name lookup API.
+- Shell owns view state and auth. Modules do not import each other. Biography lives under Modules and fetches a public name lookup API.
 - Notes and Thoughts talk to Supabase only through `getSupabaseClient()` and their own repository.
 - Remember: `definitions306.json`, `spanishexam5.json`, memory scores in `localStorage`.
 - Identity: `goalsGraph.json`.
@@ -83,19 +83,18 @@ flowchart LR
   signin[Sign_in]
   home[Home]
   engine[Engine]
-  biography[Biography]
   modules[Modules]
   notes[Notes]
   remember[Remember]
   thoughts[Thoughts]
   identity[Identity]
+  biography[Biography]
 
   boot --> signin
   boot --> home
   signin -->|session| home
   home -->|Sign_out| signin
   home -->|Engine| engine
-  home -->|Biography| biography
   home -->|Modules| modules
   home -->|plus| notes
   notes -->|Back| lastTab
@@ -103,9 +102,11 @@ flowchart LR
   modules --> remember
   modules --> thoughts
   modules --> identity
+  modules --> biography
   remember -->|Back| modules
   thoughts -->|Back| modules
   identity -->|Back| modules
+  biography -->|Back| modules
 ```
 
 ## Modules
@@ -152,7 +153,7 @@ stateDiagram-v2
 
 ### Biography
 
-Enter: Biography tab. Exit: other tab. Type a name, send, read summary + quick facts in the thread.
+Enter: Modules → Biography. Exit: Back → Modules. Type a name, send, read summary + quick facts in the thread.
 
 ```mermaid
 stateDiagram-v2

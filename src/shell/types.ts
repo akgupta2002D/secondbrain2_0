@@ -1,6 +1,6 @@
-export type AppTab = 'home' | 'engine' | 'modules' | 'biography'
+export type AppTab = 'home' | 'engine' | 'modules'
 
-export type ModulesPane = 'list' | 'remember' | 'thoughts' | 'identity'
+export type ModulesPane = 'list' | 'remember' | 'thoughts' | 'identity' | 'biography'
 
 export type ShellNav = {
   tab: AppTab
@@ -9,7 +9,7 @@ export type ShellNav = {
 }
 
 export function isAppTab(value: unknown): value is AppTab {
-  return value === 'home' || value === 'engine' || value === 'modules' || value === 'biography'
+  return value === 'home' || value === 'engine' || value === 'modules'
 }
 
 export function isModulesPane(value: unknown): value is ModulesPane {
@@ -17,6 +17,7 @@ export function isModulesPane(value: unknown): value is ModulesPane {
     value === 'list' ||
     value === 'remember' ||
     value === 'thoughts' ||
-    value === 'identity'
+    value === 'identity' ||
+    value === 'biography'
   )
 }

@@ -5,6 +5,7 @@ type Props = {
   onRemember: () => void
   onThoughts: () => void
   onIdentity: () => void
+  onBiography: () => void
 }
 
 export function ModulesList({
@@ -12,6 +13,7 @@ export function ModulesList({
   onRemember,
   onThoughts,
   onIdentity,
+  onBiography,
 }: Props) {
   return (
     <main className="screen modulesScreen" aria-label="Modules">
@@ -29,6 +31,10 @@ export function ModulesList({
 
       <button type="button" role="menuitem" className="moduleMenuItem" onClick={onIdentity}>
         Identity
+      </button>
+
+      <button type="button" role="menuitem" className="moduleMenuItem" onClick={onBiography}>
+        Biography
       </button>
     </main>
   )

@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from 'react'
+import { BiographyScreen } from '../modules/biography'
 import { EngineScreen } from '../modules/engine'
 import { IdentityScreen } from '../modules/identity'
 import { NotesScreen } from '../modules/notes'
 import { RememberScreen } from '../modules/remember'
 import { ThoughtsScreen } from '../modules/thoughts'
-import { BiographyScreen } from '../modules/biography'
 import { HomeScreen } from './HomeScreen'
 import { ModulesList } from './ModulesList'
 import { TabBar } from './TabBar'
@@ -44,6 +44,10 @@ function readHistoryNav(state: unknown): ShellNav | null {
   if (rawTab === 'notes') {
     return { tab: 'home', modulesPane, notesOpen: true }
   }
+  // Legacy: Biography used to be a tab.
+  if (rawTab === 'biography') {
+    return { tab: 'modules', modulesPane: 'biography', notesOpen }
+  }
   if (!isAppTab(rawTab)) return null
   return { tab: rawTab, modulesPane, notesOpen }
 }
@@ -64,6 +68,7 @@ export function AppShell({
   const [rememberVisited, setRememberVisited] = useState(false)
   const [thoughtsVisited, setThoughtsVisited] = useState(false)
   const [identityVisited, setIdentityVisited] = useState(false)
+  const [biographyVisited, setBiographyVisited] = useState(false)
 
   const applyNav = useCallback((next: ShellNav): void => {
     setTab(next.tab)
@@ -78,6 +83,9 @@ export function AppShell({
     }
     if (next.tab === 'modules' && next.modulesPane === 'identity') {
       setIdentityVisited(true)
+    }
+    if (next.tab === 'modules' && next.modulesPane === 'biography') {
+      setBiographyVisited(true)
     }
   }, [])
 
@@ -131,6 +139,8 @@ export function AppShell({
     navigate({ tab: 'modules', modulesPane: 'thoughts', notesOpen: false })
   const openIdentity = (): void =>
     navigate({ tab: 'modules', modulesPane: 'identity', notesOpen: false })
+  const openBiography = (): void =>
+    navigate({ tab: 'modules', modulesPane: 'biography', notesOpen: false })
 
   const onNotesFab = (): void => {
     setNotesVisited(true)
@@ -164,14 +174,6 @@ export function AppShell({
         </div>
 
         <div
-          className="appShellPane appShellPane--chat"
-          hidden={notesOpen || tab !== 'biography'}
-          inert={notesOpen || tab !== 'biography' ? true : undefined}
-        >
-          <BiographyScreen />
-        </div>
-
-        <div
           className="appShellPane"
           hidden={!notesOpen}
           inert={!notesOpen ? true : undefined}
@@ -196,6 +198,7 @@ export function AppShell({
               onRemember={openRemember}
               onThoughts={openThoughts}
               onIdentity={openIdentity}
+              onBiography={openBiography}
             />
           </div>
 
@@ -226,6 +229,16 @@ export function AppShell({
               inert={modulesPane !== 'identity' ? true : undefined}
             >
               <IdentityScreen onBack={goModulesList} />
+            </div>
+          ) : null}
+
+          {biographyVisited ? (
+            <div
+              className="appShellSubpane appShellPane--chat"
+              hidden={modulesPane !== 'biography'}
+              inert={modulesPane !== 'biography' ? true : undefined}
+            >
+              <BiographyScreen onBack={goModulesList} />
             </div>
           ) : null}
         </div>

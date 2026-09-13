@@ -1,6 +1,11 @@
 import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
+import { BackIcon } from '../../../shell/BackIcon'
 import { fetchBiography } from '../data/fetchBiography'
 import type { BiographyRecord } from '../model/types'
+
+type Props = {
+  onBack: () => void
+}
 
 type ChatItem =
   | { id: string; role: 'user'; text: string }
@@ -29,7 +34,7 @@ function ReplyCard({ record }: { record: BiographyRecord }) {
   )
 }
 
-export function BiographyScreen() {
+export function BiographyScreen({ onBack }: Props) {
   const inputId = useId()
   const [draft, setDraft] = useState('')
   const [items, setItems] = useState<ChatItem[]>([])
@@ -73,6 +78,10 @@ export function BiographyScreen() {
 
   return (
     <main className="screen biographyScreen" aria-label="Biography">
+      <button type="button" className="backButton" onClick={onBack} aria-label="Back">
+        <BackIcon />
+      </button>
+
       <div className="biographyThread">
         {items.length === 0 ? (
           <p className="biographyEmpty">

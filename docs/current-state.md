@@ -31,24 +31,24 @@ Signed-out users only see sign-in. There is no tab bar on login.
 
 Persistent **`AppShell`** (`src/shell/`). Only the content pane swaps.
 
-Tabs: **Home | Engine | Biography | Modules**. Notes is the `+` above the tab bar.
+Tabs: **Home | Engine | Modules**. Notes is the `+` above the tab bar.
 
 ```
 Sign in ──► AppShell
               ├── Home       (title; Sign out + Update icons; version)
-              ├── Engine     (placeholder systems stats; not listed under Modules)
-              ├── Biography  (name lookup chat; not listed under Modules)
+              ├── Engine     (server stats; not listed under Modules)
               ├── Notes      (opened by +; not a tab; not listed under Modules)
               └── Modules
-                    ├── list: Remember, Thoughts, Identity
+                    ├── list: Remember, Thoughts, Identity, Biography
                     ├── Remember
                     ├── Thoughts
-                    └── Identity
+                    ├── Identity
+                    └── Biography
 ```
 
 - Home is **not** a launcher with a center Modules button. The Notes `+` sits above the tab bar on **Home** and **Notes** only (same control as on the Notes pad).
-- **Engine is a top-level tab.** **Biography is a top-level tab.** Notes is capture-only (`+`). Remember / Thoughts / Identity stay nested under Modules.
-- After first visit, Notes / Remember / Thoughts / Identity **stay mounted** (hidden) so pad, draft, and scroll survive tab switches.
+- **Engine is a top-level tab.** Notes is capture-only (`+`). Remember / Thoughts / Identity / Biography stay nested under Modules.
+- After first visit, Notes / Remember / Thoughts / Identity / Biography **stay mounted** (hidden) so pad, draft, scroll, and chat survive tab switches.
 - Notes is **not** mounted at login (that would start a local draft without opening Notes).
 - In a module, Back returns to the Modules list. Tapping **Modules** while inside a module also returns to the list.
 - Optional history: `history.pushState` so iPhone edge-swipe / browser Back matches the UI. Still no React Router.
@@ -59,7 +59,7 @@ Sign in ──► AppShell
 | --- | --- | --- | --- |
 | **Notes** | Shell `+` | Supabase `notes` | Blank **local** draft on open. Row is created only after real text. Autosave `update`. Delete is confirm + server delete. Date/status in footer. |
 | **Engine** | Tab | None yet | Placeholder copy only. Live host/Supabase stats are planned in [`engine.md`](engine.md); do not scrape them from the PWA. |
-| **Biography** | Tab | Public biography API | Type a name, send, show summary + quick facts. Soft errors in the thread. Not listed under Modules. |
+| **Biography** | Modules | Public biography API | Type a name, send, show summary + quick facts. Soft errors in the thread. |
 | **Thoughts** | Modules | Supabase `thoughts` | If the list is empty, **insert one empty thought**. Search + drawer. Debounced save. Realtime refresh. |
 | **Remember** | Modules | Bundled JSON decks | Swipe to score. Scores in `localStorage` (not Postgres). |
 | **Identity** | Modules | Bundled `goalsGraph.json` | On-device graph only. |
@@ -75,7 +75,7 @@ Modules do not import each other. Public entry is each `src/modules/<id>/index.t
 
 ### Tests
 
-`src/App.test.tsx` drives Home / Engine / Biography / Modules through the **tab bar** and Notes through the **+** control. Remember swipe/score still starts from Modules. `npm test` + `npx tsc -b`.
+`src/App.test.tsx` drives Home / Engine / Modules through the **tab bar** and Notes through the **+** control. Biography and Remember start from Modules. `npm test` + `npx tsc -b`.
 
 ---
 
@@ -87,7 +87,7 @@ These are product/architecture choices, not leftovers.
 2. **Notes create-on-type, not create-on-open.** Opening Notes must not insert an empty SQL row. Delete stays confirm-then-server.
 3. **Thoughts always has at least one row** once the module has loaded against an empty table (insert-if-empty). Do not “fix” that to match Notes.
 4. **Remember and Identity stay local.** Do not move scores or the identity graph to Supabase unless that is an explicit product change.
-5. **Tab IA is Home | Engine | Biography | Modules.** Notes is the `+` above the tab bar, not a tab and not in the Modules list. Do not flatten Remember/Thoughts/Identity onto the tab bar without a product decision.
+5. **Tab IA is Home | Engine | Modules.** Notes is the `+` on Home and Notes only, not a tab and not in the Modules list. Do not flatten Remember/Thoughts/Identity/Biography onto the tab bar without a product decision.
 6. **No React Router.** In-memory view + optional `pushState` only. Do not invent new product routes.
 7. **Shell owns chrome; modules own mutations.** Do not re-init auth on tab change. Do not remount Notes after first open just to “reset” the pad.
 8. **One bottom offset.** Tab bar height only (`--sb-content-bottom`). Do not add `safe-area-inset-bottom` on the tab bar — iOS standalone already insets the webview, and stacking that inset triples the chrome. Pages must not add their own extra bottom safe-area (Notes footer used to pad for the old FAB).
