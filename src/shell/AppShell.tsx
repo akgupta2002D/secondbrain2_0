@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { BiographyScreen } from '../modules/biography'
 import { EngineScreen } from '../modules/engine'
+import { FinanceScreen } from '../modules/finance'
 import { IdentityScreen } from '../modules/identity'
 import { NotesScreen } from '../modules/notes'
 import { RememberScreen } from '../modules/remember'
@@ -171,6 +172,14 @@ export function AppShell({
           inert={notesOpen || tab !== 'engine' ? true : undefined}
         >
           <EngineScreen />
+        </div>
+
+        <div
+          className="appShellPane appShellPane--locked"
+          hidden={notesOpen || tab !== 'finance'}
+          inert={notesOpen || tab !== 'finance' ? true : undefined}
+        >
+          <FinanceScreen />
         </div>
 
         <div

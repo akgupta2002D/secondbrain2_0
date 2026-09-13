@@ -100,6 +100,7 @@ describe('App', () => {
     )
     expect(screen.queryByRole('button', { name: 'Notes' })).not.toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Engine' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Finance' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'New note' })).toBeInTheDocument()
 
     fireEvent.click(screen.getByRole('button', { name: 'Modules' }))
@@ -114,6 +115,7 @@ describe('App', () => {
     expect(screen.getByRole('menuitem', { name: 'Biography' })).toBeInTheDocument()
     expect(screen.queryByRole('menuitem', { name: 'Notes' })).not.toBeInTheDocument()
     expect(screen.queryByRole('menuitem', { name: 'Engine' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('menuitem', { name: 'Finance' })).not.toBeInTheDocument()
     expect(screen.queryByRole('button', { name: 'New note' })).not.toBeInTheDocument()
 
     fireEvent.click(screen.getByRole('button', { name: 'Back' }))
@@ -145,6 +147,19 @@ describe('App', () => {
     expect(screen.queryByRole('button', { name: 'New note' })).not.toBeInTheDocument()
   })
 
+  it('opens Finance from the tab bar', () => {
+    render(<App />)
+
+    fireEvent.click(screen.getByRole('button', { name: 'Finance' }))
+
+    expect(screen.getByRole('button', { name: 'Finance' })).toHaveAttribute(
+      'aria-current',
+      'page',
+    )
+    expect(screen.getByRole('main', { name: 'Finance' })).toBeInTheDocument()
+    expect(screen.getByText('Money tracking will live here.')).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'New note' })).not.toBeInTheDocument()
+  })
 
   it('opens Biography from Modules and looks up a name', async () => {
     const fetchMock = vi.fn().mockImplementation(async (input: RequestInfo) => {
@@ -243,6 +258,7 @@ describe('App', () => {
     expect(screen.getByRole('main', { name: 'Sign in' })).toBeInTheDocument()
     expect(screen.queryByRole('button', { name: 'Modules' })).not.toBeInTheDocument()
     expect(screen.queryByRole('button', { name: 'Engine' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'Finance' })).not.toBeInTheDocument()
     expect(screen.queryByRole('button', { name: 'New note' })).not.toBeInTheDocument()
   })
 })

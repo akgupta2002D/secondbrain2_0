@@ -824,6 +824,20 @@ html.is-pwa .appShellSubpane {
 }
 
 
+
+.financeScreen {
+  width: 100%;
+  gap: 1rem;
+}
+
+.financePlaceholder {
+  margin: 0;
+  max-width: 22rem;
+  color: rgba(229, 231, 235, 0.72);
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
 .biographyScreen {
   position: relative;
   width: 100%;

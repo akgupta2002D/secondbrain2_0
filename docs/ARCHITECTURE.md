@@ -41,6 +41,7 @@ flowchart LR
   subgraph mods [Modules]
     notes[notes]
     engine[engine]
+    finance[finance]
     biography[biography]
     thoughts[thoughts]
     remember[remember]
@@ -56,6 +57,7 @@ flowchart LR
   app --> login
   app --> notes
   app --> engine
+  app --> finance
   app --> biography
   app --> thoughts
   app --> remember
@@ -70,7 +72,7 @@ flowchart LR
   identity --> json
 ```
 
-- Shell owns view state and auth. Modules do not import each other. Biography lives under Modules and fetches a public name lookup API.
+- Shell owns view state and auth. Modules do not import each other. Finance is a placeholder tab. Biography lives under Modules and fetches a public name lookup API.
 - Notes and Thoughts talk to Supabase only through `getSupabaseClient()` and their own repository.
 - Remember: `definitions306.json`, `spanishexam5.json`, memory scores in `localStorage`.
 - Identity: `goalsGraph.json`.
@@ -83,6 +85,7 @@ flowchart LR
   signin[Sign_in]
   home[Home]
   engine[Engine]
+  finance[Finance]
   modules[Modules]
   notes[Notes]
   remember[Remember]
@@ -95,6 +98,7 @@ flowchart LR
   signin -->|session| home
   home -->|Sign_out| signin
   home -->|Engine| engine
+  home -->|Finance| finance
   home -->|Modules| modules
   home -->|plus| notes
   notes -->|Back| lastTab
@@ -144,6 +148,16 @@ stateDiagram-v2
 ### Engine
 
 Enter: Engine tab. Exit: other tab. Placeholder only; no stats API yet. See [`engine.md`](engine.md).
+
+```mermaid
+stateDiagram-v2
+  [*] --> placeholder
+  placeholder --> [*]
+```
+
+### Finance
+
+Enter: Finance tab. Exit: other tab. Placeholder only.
 
 ```mermaid
 stateDiagram-v2
