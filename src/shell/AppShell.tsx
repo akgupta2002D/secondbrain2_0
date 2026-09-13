@@ -175,7 +175,7 @@ export function AppShell({
         </div>
 
         <div
-          className="appShellPane appShellPane--locked"
+          className="appShellPane"
           hidden={notesOpen || tab !== 'finance'}
           inert={notesOpen || tab !== 'finance' ? true : undefined}
         >

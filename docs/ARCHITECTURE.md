@@ -72,7 +72,7 @@ flowchart LR
   identity --> json
 ```
 
-- Shell owns view state and auth. Modules do not import each other. Finance is a placeholder tab. Biography lives under Modules and fetches a public name lookup API.
+- Shell owns view state and auth. Modules do not import each other. Finance stores balances, commitments, and ledger rows in Supabase. Biography lives under Modules and fetches a public name lookup API.
 - Notes and Thoughts talk to Supabase only through `getSupabaseClient()` and their own repository.
 - Remember: `definitions306.json`, `spanishexam5.json`, memory scores in `localStorage`.
 - Identity: `goalsGraph.json`.
@@ -157,12 +157,18 @@ stateDiagram-v2
 
 ### Finance
 
-Enter: Finance tab. Exit: other tab. Placeholder only.
+Enter: Finance tab. Exit: other tab. Balances + commitments + ledger in Supabase (`005_finance.sql`).
 
 ```mermaid
 stateDiagram-v2
-  [*] --> placeholder
-  placeholder --> [*]
+  [*] --> summary
+  summary --> entryForm
+  summary --> debtSheet
+  summary --> logSheet
+  entryForm --> summary
+  debtSheet --> summary
+  logSheet --> summary
+  summary --> [*]
 ```
 
 ### Biography

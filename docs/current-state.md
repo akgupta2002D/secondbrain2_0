@@ -37,7 +37,7 @@ Tabs: **Home | Engine | Finance | Modules**. Notes is the `+` above the tab bar 
 Sign in ──► AppShell
               ├── Home       (title; Sign out + Update icons; version)
               ├── Engine     (server stats; not listed under Modules)
-              ├── Finance    (placeholder; not listed under Modules)
+              ├── Finance    (balances, ledger, debt; not listed under Modules)
               ├── Notes      (opened by +; not a tab; not listed under Modules)
               └── Modules    (iPhone-style app grid)
                     ├── Remember
@@ -59,7 +59,7 @@ Sign in ──► AppShell
 | --- | --- | --- | --- |
 | **Notes** | Shell `+` | Supabase `notes` | Blank **local** draft on open. Row is created only after real text. Autosave `update`. Delete is confirm + server delete. Date/status in footer. |
 | **Engine** | Tab | Engine stats API | Live host metrics UI. Do not scrape SSH / service-role from the PWA. |
-| **Finance** | Tab | None yet | Placeholder copy only. |
+| **Finance** | Tab | Supabase finance_* | Editable buckets; expense/earning form (bucket picker, default Current); debt = sum of commitments; bank-style log. Run `005_finance.sql`. |
 | **Biography** | Modules | Public biography API | Type a name, send, show summary + quick facts. Soft errors in the thread. |
 | **Thoughts** | Modules | Supabase `thoughts` | If the list is empty, **insert one empty thought**. Search + drawer. Debounced save. Realtime refresh. |
 | **Remember** | Modules | Bundled JSON decks | Swipe to score. Scores in `localStorage` (not Postgres). |
@@ -106,7 +106,7 @@ These are product/architecture choices, not leftovers.
 | Supabase client / env names | `src/lib/supabaseClient.ts` |
 | Notes pad / draft / delete | `src/modules/notes/` |
 | Engine placeholder / later stats | `src/modules/engine/`, [`docs/engine.md`](engine.md) |
-| Finance placeholder | `src/modules/finance/`, [`../src/modules_plans/finance.md`](../src/modules_plans/finance.md) |
+| Finance balances / ledger / debt | `src/modules/finance/`, [`../src/modules_plans/finance.md`](../src/modules_plans/finance.md), `supabase/migrations/005_finance.sql` |
 | Biography name lookup | `src/modules/biography/`, [`../src/modules_plans/biography.md`](../src/modules_plans/biography.md) |
 | Thoughts editor / empty-row | `src/modules/thoughts/` |
 | Flashcards / scores | `src/modules/remember/` |

@@ -39,10 +39,13 @@ Restart `npm run dev` after changing `.env`. After changing Vercel env vars, red
 2. `migrations/002_notes.sql`
 3. `migrations/003_remove_auth.sql` — historical; already applied in prod
 4. `migrations/004_restore_auth_rls.sql` — restore `user_id`, RLS, revoke `anon`, `claim_unowned_personal_rows()`
+5. `migrations/005_finance.sql` — `finance_balances`, `finance_commitments`, `finance_ledger` + RLS
 
 After `004`, the old unauthenticated PWA cannot read/write notes or thoughts. Deploy the login UI in the same window.
 
 On first sign-in, the app calls `claim_unowned_personal_rows()` so leftover `user_id is null` rows attach to that user (only if no other owner exists).
+
+`005` adds per-user Finance tables (balances in cents, debt commitments, expense/earning ledger). Run it in the SQL editor after `004`. The Finance tab creates a zero balances row on first open if none exists.
 
 One-shot data wipe (not a migration): `sql/delete_all_notes.sql` — deletes every row in `public.notes`.
 

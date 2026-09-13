@@ -825,8 +825,478 @@ html.is-pwa .appShellSubpane {
 
 
 .financeScreen {
+  position: relative;
   width: 100%;
-  gap: 1rem;
+  min-height: 100%;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 0.85rem;
+  text-align: left;
+  padding: var(--sb-chrome-top) var(--sb-chrome-x) 1.25rem;
+}
+
+.appShell .financeScreen {
+  padding-bottom: 1.25rem;
+}
+
+.financeHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.financeTitle {
+  margin: 0;
+  color: #f8fafc;
+  font-size: clamp(1.75rem, 6vw, 2.35rem);
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.financeLogButton {
+  appearance: none;
+  width: var(--sb-chrome-size);
+  height: var(--sb-chrome-size);
+  border-radius: var(--sb-chrome-radius);
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  background: rgba(255, 255, 255, 0.04);
+  color: #e2e8f0;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.financeLogButton:active {
+  transform: scale(0.98);
+}
+
+.financeLogIcon {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+.financeMuted {
+  margin: 0;
+  color: rgba(226, 232, 240, 0.62);
+}
+
+.financeSectionTitle {
+  margin: 0.35rem 0 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(148, 163, 184, 0.95);
+}
+
+.financeSummary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.financeChip {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.75rem 0.8rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: rgba(255, 255, 255, 0.03);
+  min-width: 0;
+}
+
+.financeChipButton {
+  appearance: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.financeChipButton:active {
+  transform: scale(0.99);
+}
+
+.financeChipLabel {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(226, 232, 240, 0.62);
+}
+
+.financeChipValue {
+  font-size: 1.15rem;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.financeChip--green {
+  border-color: rgba(74, 222, 128, 0.35);
+  background: linear-gradient(160deg, rgba(34, 197, 94, 0.16), rgba(0, 0, 0, 0.2));
+}
+
+.financeChip--green .financeChipValue {
+  color: #86efac;
+}
+
+.financeChip--red {
+  border-color: rgba(252, 165, 165, 0.35);
+  background: linear-gradient(160deg, rgba(239, 68, 68, 0.16), rgba(0, 0, 0, 0.2));
+}
+
+.financeChip--red .financeChipValue {
+  color: #fecaca;
+}
+
+.financeChip--blue {
+  border-color: rgba(147, 197, 253, 0.32);
+  background: linear-gradient(160deg, rgba(59, 130, 246, 0.16), rgba(0, 0, 0, 0.2));
+}
+
+.financeChip--blue .financeChipValue {
+  color: #bfdbfe;
+}
+
+.financeBuckets {
+  display: grid;
+  gap: 0.45rem;
+  padding: 0.7rem 0.8rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.financeBucketRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 2.4rem;
+}
+
+.financeBucketLabel {
+  font-size: 0.95rem;
+  color: rgba(226, 232, 240, 0.88);
+  font-weight: 600;
+}
+
+.financeBucketValue {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: #f8fafc;
+  font: inherit;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  padding: 0.25rem 0;
+}
+
+.financeBucketInput {
+  appearance: none;
+  width: 7.5rem;
+  min-height: 2.2rem;
+  border-radius: 0.65rem;
+  border: 1px solid rgba(147, 197, 253, 0.4);
+  background: rgba(17, 24, 39, 0.85);
+  color: #f8fafc;
+  font: inherit;
+  font-weight: 700;
+  text-align: right;
+  padding: 0.3rem 0.55rem;
+}
+
+.financeForm {
+  display: grid;
+  gap: 0.65rem;
+  padding: 0.85rem 0.9rem 1rem;
+  border-radius: 1.05rem;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.financeKindToggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem;
+}
+
+.financeKindButton {
+  appearance: none;
+  min-height: 42px;
+  border-radius: 0.8rem;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  background: rgba(0, 0, 0, 0.35);
+  color: rgba(226, 232, 240, 0.85);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.financeKindButton--activeExpense {
+  border-color: rgba(252, 165, 165, 0.45);
+  background: rgba(239, 68, 68, 0.16);
+  color: #fecaca;
+}
+
+.financeKindButton--activeEarning {
+  border-color: rgba(74, 222, 128, 0.45);
+  background: rgba(34, 197, 94, 0.16);
+  color: #86efac;
+}
+
+.financeField {
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(148, 163, 184, 0.95);
+}
+
+.financeInput,
+.financeSelect {
+  appearance: none;
+  width: 100%;
+  min-height: 44px;
+  border-radius: 0.8rem;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: rgba(17, 24, 39, 0.72);
+  color: #f8fafc;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: normal;
+  text-transform: none;
+  padding: 0.55rem 0.8rem;
+}
+
+.financeSelect {
+  padding-right: 2rem;
+  background-image: linear-gradient(45deg, transparent 50%, #94a3b8 50%),
+    linear-gradient(135deg, #94a3b8 50%, transparent 50%);
+  background-position:
+    calc(100% - 1.1rem) 1.15rem,
+    calc(100% - 0.75rem) 1.15rem;
+  background-size: 0.35rem 0.35rem, 0.35rem 0.35rem;
+  background-repeat: no-repeat;
+}
+
+.financeSubmit {
+  appearance: none;
+  min-height: 46px;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(147, 197, 253, 0.4);
+  background: rgba(59, 130, 246, 0.2);
+  color: #e0f2fe;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.financeSubmit:disabled,
+.financeInput:disabled,
+.financeSelect:disabled,
+.financeBucketValue:disabled,
+.financeKindButton:disabled {
+  opacity: 0.55;
+}
+
+.financeInlineError {
+  margin: 0;
+  color: #fecaca;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.financeTextButton {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: #93c5fd;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.financeSheetScrim {
+  position: fixed;
+  inset: 0;
+  z-index: var(--sb-z-modal);
+  background: rgba(0, 0, 0, 0.62);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0;
+}
+
+.financeSheet {
+  width: min(100%, 34rem);
+  max-height: min(78vh, 40rem);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 1.25rem 1.25rem 0 0;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-bottom: 0;
+  background: #0a0a0a;
+  padding: 1rem 1rem calc(1rem + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.financeSheetHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.financeSheetTitle {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 750;
+  color: #f8fafc;
+}
+
+.financeSheetSub {
+  margin: 0.2rem 0 0;
+  color: #fecaca;
+  font-weight: 700;
+}
+
+.financeSheetClose {
+  appearance: none;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  background: rgba(255, 255, 255, 0.04);
+  color: #e2e8f0;
+  border-radius: 0.75rem;
+  min-height: 40px;
+  padding: 0 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.financeCommitmentList,
+.financeLogList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.financeEmptyHint {
+  color: rgba(226, 232, 240, 0.55);
+  font-size: 0.95rem;
+}
+
+.financeCommitmentItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.7rem 0.75rem;
+  border-radius: 0.85rem;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.financeCommitmentCopy {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.financeCommitmentName {
+  color: #f1f5f9;
+  font-weight: 650;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.financeCommitmentAmount {
+  color: #fecaca;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.financeCommitmentRemove {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: rgba(252, 165, 165, 0.9);
+  font-weight: 700;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.financeCommitmentForm {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 0.25rem;
+}
+
+.financeLogItem {
+  padding: 0.7rem 0.75rem;
+  border-radius: 0.85rem;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.financeLogTop {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.financeLogDate {
+  color: rgba(226, 232, 240, 0.7);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.financeLogAmount {
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+}
+
+.financeLogAmount--out {
+  color: #fecaca;
+}
+
+.financeLogAmount--in {
+  color: #86efac;
+}
+
+.financeLogDesc {
+  margin: 0.35rem 0 0;
+  color: #f1f5f9;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.financeLogMeta {
+  margin: 0.2rem 0 0;
+  color: rgba(148, 163, 184, 0.9);
+  font-size: 0.75rem;
+  text-transform: capitalize;
 }
 
 .financePlaceholder {

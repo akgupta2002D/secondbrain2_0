@@ -157,7 +157,7 @@ describe('App', () => {
       'page',
     )
     expect(screen.getByRole('main', { name: 'Finance' })).toBeInTheDocument()
-    expect(screen.getByText('Money tracking will live here.')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Finance' })).toBeInTheDocument()
     expect(screen.queryByRole('button', { name: 'New note' })).not.toBeInTheDocument()
   })
 
