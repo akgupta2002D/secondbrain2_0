@@ -11,7 +11,7 @@ Track current cash, emergency fund, rewards, and investments. Log expenses and e
 - **Chrome**: Finance tab (currency icon). Not listed under Modules. Notes `+` is Home/Notes only.
 - **Summary**: Three rows — Available | Current; Debt | Invested; Emergency | Rewards. Available = Current − Debt (read-only). Tap a money chip to edit.
 - **Form**: Expense or earning; date; amount; description; bucket picker (default Current). Clears on successful submit. Updates the chosen bucket.
-- **Log icon**: Bank-style history of ledger rows.
+- **Keyboard**: visualViewport inset animates sheet/form clearance; focused fields scroll inside the Finance pane or debt sheet (iOS-like avoidance).
 - **Data**: Supabase `finance_balances`, `finance_commitments`, `finance_ledger` (cents + RLS). Migration `005_finance.sql`.
 
 ## Known Decisions

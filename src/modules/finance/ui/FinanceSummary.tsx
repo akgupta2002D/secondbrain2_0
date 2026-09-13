@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { scrollFinanceFieldIntoView } from '../lib/useKeyboardInset'
 import { centsToDollarsInput, dollarsToCents, formatUsd } from '../model/money'
 import type { FinanceBucket } from '../model/types'
 
@@ -74,7 +75,7 @@ function EditableChip({
           onClick={(e) => e.stopPropagation()}
           onChange={(e) => onDraftChange(e.target.value)}
           onFocus={(e) => {
-            e.currentTarget.scrollIntoView({ block: 'center', behavior: 'smooth' })
+            scrollFinanceFieldIntoView(e.currentTarget)
           }}
           onBlur={() => {
             onCommit()

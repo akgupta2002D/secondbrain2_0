@@ -11,6 +11,15 @@ if (isStandalone) {
   document.documentElement.classList.add('is-pwa')
 
   const pinViewport = (): void => {
+    // Don't fight keyboard avoidance while Finance (or any) field is focused.
+    if (document.documentElement.classList.contains('is-keyboard-open')) return
+    const active = document.activeElement
+    if (
+      active instanceof HTMLElement &&
+      active.closest('.financeScreen, .financeSheet')
+    ) {
+      return
+    }
     window.scrollTo(0, 0)
   }
   pinViewport()
