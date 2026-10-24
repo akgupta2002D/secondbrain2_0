@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { BackIcon } from '../../../shell/BackIcon'
 import definitions306Json from '../data/definitions306.json'
+import eyeFloatersResearchFlashcardsReviewedV1Json from '../data/eye_floaters_research_flashcards_reviewed.json'
 import spanishExam5Json from '../data/spanishexam5.json'
 import { parseFlashcardsJsonV1 } from '../model/parseFlashcards'
 import { applyReviewResultToScore, initMemoryScores } from '../model/memoryScore'
@@ -28,6 +29,7 @@ export const RememberScreen = ({ onBack }: Props) => {
     const parsed = [
       parseFlashcardsJsonV1(definitions306Json),
       parseFlashcardsJsonV1(spanishExam5Json),
+      parseFlashcardsJsonV1(eyeFloatersResearchFlashcardsReviewedV1Json),
     ]
 
     const firstErr = parsed.find((r) => r.kind === 'err')

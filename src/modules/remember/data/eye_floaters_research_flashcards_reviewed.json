@@ -1,0 +1,1130 @@
+{
+  "version": 1,
+  "deckId": "eye-floaters-computational-research-v1",
+  "class": "Senior Thesis — Ophthalmology & Computational Optics",
+  "topicPacks": [
+    {
+      "topicId": "eye-anatomy",
+      "title": "Eye Anatomy",
+      "chapter": "Eye Biology",
+      "cards": [
+        {
+          "cardId": "eye-anatomy-001",
+          "term": "Eyeball",
+          "definition": "Organ that focuses light onto the retina for visual processing.\nOrientation: Front = cornea; back = retina and optic nerve; vitreous fills most of the interior."
+        },
+        {
+          "cardId": "eye-anatomy-002",
+          "term": "Cornea",
+          "definition": "Transparent front surface supplying most of the eye's refractive power.\nLocation: Transparent dome at the very front, in front of the aqueous-filled anterior chamber."
+        },
+        {
+          "cardId": "eye-anatomy-003",
+          "term": "Sclera",
+          "definition": "Tough outer coat that supports and protects the eye.\nLocation: Outer white coat; joins the cornea at the limbus."
+        },
+        {
+          "cardId": "eye-anatomy-004",
+          "term": "Conjunctiva",
+          "definition": "Thin membrane covering the visible sclera and inner eyelids.\nLocation: Covers the visible sclera, not the corneal surface."
+        },
+        {
+          "cardId": "eye-anatomy-005",
+          "term": "Iris",
+          "definition": "Pigmented muscular structure controlling pupil size.\nLocation: Behind the cornea and aqueous; in front of the crystalline lens."
+        },
+        {
+          "cardId": "eye-anatomy-006",
+          "term": "Pupil",
+          "definition": "Adjustable opening in the iris through which light enters.\nLocation: Central hole of the iris, in front of the lens; not a physical tissue."
+        },
+        {
+          "cardId": "eye-anatomy-007",
+          "term": "Crystalline lens",
+          "definition": "Flexible transparent structure that fine-tunes focus.\nLocation: Behind the iris/pupil and in front of the vitreous; held by zonules."
+        },
+        {
+          "cardId": "eye-anatomy-008",
+          "term": "Ciliary muscle",
+          "definition": "Changes lens shape during accommodation.\nLocation: Ring in the ciliary body around the lens; relaxation/tension changes zonular pull."
+        },
+        {
+          "cardId": "eye-anatomy-009",
+          "term": "Zonules",
+          "definition": "Fibers suspending the lens and transmitting ciliary forces.\nLocation: Run from ciliary body to lens capsule."
+        },
+        {
+          "cardId": "eye-anatomy-010",
+          "term": "Anterior chamber",
+          "definition": "Fluid-filled space between cornea and iris.\nLocation: Between posterior corneal surface and anterior iris surface; contains aqueous, not vitreous."
+        },
+        {
+          "cardId": "eye-anatomy-011",
+          "term": "Aqueous humor",
+          "definition": "Clear fluid nourishing anterior eye tissues and maintaining pressure.\nLocation: Circulates through posterior and anterior chambers; distinct from vitreous gel."
+        },
+        {
+          "cardId": "eye-anatomy-012",
+          "term": "Vitreous chamber",
+          "definition": "Large space behind the lens and in front of the retina.\nLocation: Posterior to the lens, bounded by retina and other posterior ocular tissues."
+        },
+        {
+          "cardId": "eye-anatomy-013",
+          "term": "Vitreous body",
+          "definition": "Transparent gel-like material filling the vitreous chamber.\nLocation: Fills the vitreous chamber; its collagen/hyaluronan organization matters for floaters."
+        },
+        {
+          "cardId": "eye-anatomy-014",
+          "term": "Retina",
+          "definition": "Light-sensitive neural tissue converting photoreceptor responses into signals processed by retinal circuits.\nLocation: Innermost neural layer lining the back of the eye, adjacent to the vitreous."
+        },
+        {
+          "cardId": "eye-anatomy-015",
+          "term": "Macula",
+          "definition": "Central retinal region specialized for detailed vision.\nLocation: Central posterior retina; surrounds the fovea."
+        },
+        {
+          "cardId": "eye-anatomy-016",
+          "term": "Fovea",
+          "definition": "Central macular pit with very high cone density and sharp vision.\nLocation: Center of the macula; densely packed cones support high acuity."
+        },
+        {
+          "cardId": "eye-anatomy-017",
+          "term": "Optic disc",
+          "definition": "Exit region of optic nerve fibers; lacks photoreceptors.\nLocation: On the nasal side of the retinal posterior pole; normal physiological blind spot."
+        },
+        {
+          "cardId": "eye-anatomy-018",
+          "term": "Optic nerve",
+          "definition": "Axons of retinal ganglion cells carrying visual information toward the brain.\nConnection: Ganglion-cell axons exit at the optic disc and project toward visual centers."
+        },
+        {
+          "cardId": "eye-anatomy-019",
+          "term": "Choroid",
+          "definition": "Vascular tissue nourishing the outer retina.\nLocation: Between sclera and retina/RPE; highly vascular."
+        },
+        {
+          "cardId": "eye-anatomy-020",
+          "term": "Retinal pigment epithelium (RPE)",
+          "definition": "Cell layer supporting photoreceptors and absorbing stray light.\nLocation: Monolayer between photoreceptors and choroid."
+        }
+      ],
+      "studyNote": "Learn the order light traverses: cornea → aqueous/pupil → lens → vitreous → retina. Also locate layers and chambers."
+    },
+    {
+      "topicId": "vision-physiology",
+      "title": "Vision and Visual Processing",
+      "chapter": "Foundations",
+      "cards": [
+        {
+          "cardId": "vision-physiology-001",
+          "term": "Refraction",
+          "definition": "Bending of light when it passes between media with different refractive indices.\nResearch link: Separate optical image quality from retinal coding and conscious vision."
+        },
+        {
+          "cardId": "vision-physiology-002",
+          "term": "Accommodation",
+          "definition": "Adjustment of lens power to focus at different distances.\nResearch link: Separate optical image quality from retinal coding and conscious vision."
+        },
+        {
+          "cardId": "vision-physiology-003",
+          "term": "Emmetropia",
+          "definition": "Optical state in which distant objects focus on the retina without accommodation.\nResearch link: Separate optical image quality from retinal coding and conscious vision."
+        },
+        {
+          "cardId": "vision-physiology-004",
+          "term": "Myopia",
+          "definition": "Distant light focuses in front of the retina when accommodation is relaxed.\nResearch link: Separate optical image quality from retinal coding and conscious vision."
+        },
+        {
+          "cardId": "vision-physiology-005",
+          "term": "Hyperopia",
+          "definition": "Distant light tends to focus behind the retina without accommodation.\nResearch link: Separate optical image quality from retinal coding and conscious vision."
+        },
+        {
+          "cardId": "vision-physiology-006",
+          "term": "Astigmatism",
+          "definition": "Different optical powers across meridians cause uneven focus.\nResearch link: Separate optical image quality from retinal coding and conscious vision."
+        },
+        {
+          "cardId": "vision-physiology-007",
+          "term": "Photoreceptor",
+          "definition": "Retinal rod or cone cell that converts absorbed light into a change in electrical signaling.\nResearch link: Separate optical image quality from retinal coding and conscious vision."
+        },
+        {
+          "cardId": "vision-physiology-008",
+          "term": "Rods",
+          "definition": "Photoreceptors specialized for sensitivity at low light levels.\nResearch link: Separate optical image quality from retinal coding and conscious vision."
+        },
+        {
+          "cardId": "vision-physiology-009",
+          "term": "Cones",
+          "definition": "Photoreceptors supporting color and high-acuity daylight vision.\nResearch link: Separate optical image quality from retinal coding and conscious vision."
+        },
+        {
+          "cardId": "vision-physiology-010",
+          "term": "Phototransduction",
+          "definition": "Conversion of absorbed photons into electrical changes in photoreceptors.\nMechanism: Light hyperpolarizes rods and cones and alters neurotransmitter release."
+        },
+        {
+          "cardId": "vision-physiology-011",
+          "term": "Bipolar cells",
+          "definition": "Relay photoreceptor signals toward ganglion cells.\nResearch link: Separate optical image quality from retinal coding and conscious vision."
+        },
+        {
+          "cardId": "vision-physiology-012",
+          "term": "Ganglion cells",
+          "definition": "Retinal neurons whose axons form the optic nerve.\nResearch link: Separate optical image quality from retinal coding and conscious vision."
+        },
+        {
+          "cardId": "vision-physiology-013",
+          "term": "Visual pathway",
+          "definition": "Retina → optic nerve → thalamic LGN → visual cortex, with additional pathways.\nDetail: Most conscious vision routes via the lateral geniculate nucleus to occipital cortex."
+        },
+        {
+          "cardId": "vision-physiology-014",
+          "term": "Visual acuity",
+          "definition": "Ability to resolve fine spatial details.\nResearch link: Separate optical image quality from retinal coding and conscious vision."
+        },
+        {
+          "cardId": "vision-physiology-015",
+          "term": "Contrast sensitivity",
+          "definition": "Ability to detect brightness differences across spatial scales.\nFloater link: Contrast may worsen even if standard high-contrast visual acuity remains good."
+        },
+        {
+          "cardId": "vision-physiology-016",
+          "term": "Adaptation",
+          "definition": "Change in visual sensitivity with prevailing lighting.\nResearch link: Separate optical image quality from retinal coding and conscious vision."
+        },
+        {
+          "cardId": "vision-physiology-017",
+          "term": "Entoptic phenomenon",
+          "definition": "Visual experience caused by structures or processes within the eye.\nExample: Vitreous floater shadows are perceived because of structures within the observer’s eye."
+        },
+        {
+          "cardId": "vision-physiology-018",
+          "term": "Retinal image",
+          "definition": "Spatial distribution of incoming light formed on the retina.\nSimulation link: A retinal irradiance map is a physical prediction, not the final conscious percept."
+        },
+        {
+          "cardId": "vision-physiology-019",
+          "term": "Percept",
+          "definition": "Subjective experience constructed by visual processing, not a retinal photograph.\nResearch link: A participant-matched image measures reported perception, not actual floater anatomy."
+        }
+      ],
+      "studyNote": "The eye creates a retinal signal, but the brain determines perception; visual acuity ≠ contrast sensitivity."
+    },
+    {
+      "topicId": "vitreous-biology",
+      "title": "Vitreous Biology",
+      "chapter": "Floater Foundations",
+      "cards": [
+        {
+          "cardId": "vitreous-biology-001",
+          "term": "Vitreous composition",
+          "definition": "Mostly water, with a collagen network, hyaluronan, and other constituents.\nContext: Its high water content does not mean it behaves like simple water; its matrix affects motion."
+        },
+        {
+          "cardId": "vitreous-biology-002",
+          "term": "Collagen fibrils",
+          "definition": "Fine structural fibers contributing to the vitreous framework.\nFloater link: Aggregated or reorganized fibers may create refractive-index disturbances."
+        },
+        {
+          "cardId": "vitreous-biology-003",
+          "term": "Hyaluronan",
+          "definition": "Water-binding polymer helping maintain vitreous gel properties.\nRole: Helps maintain hydration and separation of collagen fibrils in the vitreous matrix."
+        },
+        {
+          "cardId": "vitreous-biology-004",
+          "term": "Vitreous cortex",
+          "definition": "Outer region of the vitreous adjacent to ocular structures.\nLocation: Thin peripheral condensed vitreous, including its posterior retinal-facing portion."
+        },
+        {
+          "cardId": "vitreous-biology-005",
+          "term": "Vitreoretinal interface",
+          "definition": "Boundary where vitreous cortex interacts with the retinal surface.\nResearch link: Traction here is relevant to PVD, tears and some visual symptoms."
+        },
+        {
+          "cardId": "vitreous-biology-006",
+          "term": "Vitreous base",
+          "definition": "Region of especially firm vitreous attachment near the retinal periphery.\nLocation: Straddles the ora serrata region; unusually strong attachment."
+        },
+        {
+          "cardId": "vitreous-biology-007",
+          "term": "Vitreous liquefaction (synchysis)",
+          "definition": "Formation or enlargement of liquid regions within the vitreous gel.\nDistinction: Liquefaction can occur without complete posterior vitreous detachment."
+        },
+        {
+          "cardId": "vitreous-biology-008",
+          "term": "Vitreous collapse (syneresis)",
+          "definition": "Structural aggregation and contraction of vitreous gel, often accompanying liquefaction.\nDistinction: Structural collapse and liquefaction are related but not identical changes."
+        },
+        {
+          "cardId": "vitreous-biology-009",
+          "term": "Posterior vitreous detachment (PVD)",
+          "definition": "Separation of posterior vitreous cortex from the retina.\nImportant: Common with aging but floaters can exist without PVD; acute symptoms merit examination."
+        },
+        {
+          "cardId": "vitreous-biology-010",
+          "term": "Weiss ring",
+          "definition": "Ring-shaped opacity sometimes seen after vitreous separation near the optic disc.\nLocation: May arise from tissue around the optic nerve head after PVD; not present in every PVD."
+        },
+        {
+          "cardId": "vitreous-biology-011",
+          "term": "Vitreous opacity",
+          "definition": "Structure or material in vitreous that alters light transmission.\nImportant: A transparent refractive-index difference may still alter retinal illumination."
+        },
+        {
+          "cardId": "vitreous-biology-012",
+          "term": "Myodesopsia",
+          "definition": "Perception of mobile spots, threads, or other vitreous-related shadows.\nClinical distinction: Symptom name; it does not identify a unique anatomical cause."
+        },
+        {
+          "cardId": "vitreous-biology-013",
+          "term": "Symptomatic vitreous floaters",
+          "definition": "Vitreous opacities associated with bothersome visual symptoms.\nResearch link: Reported bother, functional contrast and imaging findings need not agree."
+        },
+        {
+          "cardId": "vitreous-biology-014",
+          "term": "Non-PVD floaters",
+          "definition": "Floaters present without a posterior vitreous detachment.\nImportant: No-PVD status should be confirmed clinically, not inferred from age alone."
+        },
+        {
+          "cardId": "vitreous-biology-015",
+          "term": "Vitreous degeneration",
+          "definition": "Structural changes in the gel that may create opacities and liquid spaces.\nRisk context: Myopia, aging and ocular inflammation can influence vitreous changes."
+        },
+        {
+          "cardId": "vitreous-biology-016",
+          "term": "Floater morphology",
+          "definition": "Physical size, shape, orientation, and distribution of an opacity.\nSimulation link: Represent strands, sheets or aggregates instead of assuming only dark circles."
+        },
+        {
+          "cardId": "vitreous-biology-017",
+          "term": "Floater mobility",
+          "definition": "How an opacity moves in the vitreous with eye motion and internal fluid forces.\nSimulation link: Inertia, vitreous mechanics and eye motion affect perceived trajectories."
+        },
+        {
+          "cardId": "vitreous-biology-018",
+          "term": "Floater location",
+          "definition": "Three-dimensional position of an opacity relative to the lens and retina.\nSimulation link: Use 3D depth, not only x/y, because retinal pattern depends on distance."
+        },
+        {
+          "cardId": "vitreous-biology-019",
+          "term": "Retinal tear warning signs",
+          "definition": "New flashes, sudden floater increase or curtain-like visual loss can indicate retinal pathology.\nSafety: Sudden flashes, many new floaters, or a field curtain warrant urgent dilated retinal assessment."
+        }
+      ],
+      "studyNote": "Understand why a mostly transparent collagen/hyaluronan gel can contain symptomatic optical structures."
+    },
+    {
+      "topicId": "optics-fundamentals",
+      "title": "Fundamental Optics",
+      "chapter": "Physics",
+      "cards": [
+        {
+          "cardId": "optics-fundamentals-001",
+          "term": "Light ray",
+          "definition": "Geometric approximation showing the direction of light propagation.\nResearch link: Relate this physical quantity to predicted retinal illumination patterns."
+        },
+        {
+          "cardId": "optics-fundamentals-002",
+          "term": "Wavefront",
+          "definition": "Surface joining points of equal optical phase.\nSimulation link: Numerical wavefront phase makes diffraction and interference computable."
+        },
+        {
+          "cardId": "optics-fundamentals-003",
+          "term": "Wavelength",
+          "definition": "Distance between repeating phases of a wave; affects diffraction and color.\nUnit: Usually nanometers for visible light; polychromatic white light needs wavelength integration."
+        },
+        {
+          "cardId": "optics-fundamentals-004",
+          "term": "Refractive index (n)",
+          "definition": "Ratio of light speed in vacuum to its phase speed in a medium.\nFloater link: Small contrast between opacity and vitreous may still create optical effects."
+        },
+        {
+          "cardId": "optics-fundamentals-005",
+          "term": "Snell's law",
+          "definition": "n₁ sin θ₁ = n₂ sin θ₂; relates incident and refracted angles.\nApplication: Ray tracing through cornea and lens interfaces."
+        },
+        {
+          "cardId": "optics-fundamentals-006",
+          "term": "Reflection",
+          "definition": "Light returning from a boundary between media.\nFloater link: Backscattered/reflected signal may be weak even when subjective effect is strong."
+        },
+        {
+          "cardId": "optics-fundamentals-007",
+          "term": "Scattering",
+          "definition": "Redistribution of light into other propagation directions.\nFloater link: Light is redistributed, so a simple black blocking mask may be misleading."
+        },
+        {
+          "cardId": "optics-fundamentals-008",
+          "term": "Absorption",
+          "definition": "Conversion of light energy into other forms within matter.\nDistinction: Loss of transmitted energy is different from phase alteration by a clear structure."
+        },
+        {
+          "cardId": "optics-fundamentals-009",
+          "term": "Transmission",
+          "definition": "Fraction of incident light passing through a system.\nCaution: For coherent waves, use complex amplitude transmission, not intensity alone."
+        },
+        {
+          "cardId": "optics-fundamentals-010",
+          "term": "Optical density",
+          "definition": "Logarithmic measure of attenuation; often OD = −log₁₀(T).\nCaution: OD summarizes attenuation, not all phase-induced interference effects."
+        },
+        {
+          "cardId": "optics-fundamentals-011",
+          "term": "Diffraction",
+          "definition": "Wave spreading/interference around edges or through apertures.\nFloater link: Edges and fine structures can produce nontrivial retinal intensity patterns."
+        },
+        {
+          "cardId": "optics-fundamentals-012",
+          "term": "Interference",
+          "definition": "Combination of waves according to their phase relationships.\nFloater link: Light waves can reinforce or cancel, changing retinal brightness."
+        },
+        {
+          "cardId": "optics-fundamentals-013",
+          "term": "Point spread function (PSF)",
+          "definition": "Image intensity pattern produced by an ideal point source.\nLimitation: A single global PSF need not describe position-dependent opacity effects."
+        },
+        {
+          "cardId": "optics-fundamentals-014",
+          "term": "Convolution",
+          "definition": "Operation combining an image with a spatial response or blur kernel.\nCondition: Simple convolution assumes a linear, approximately shift-invariant imaging system."
+        },
+        {
+          "cardId": "optics-fundamentals-015",
+          "term": "Aperture",
+          "definition": "Opening restricting which rays or waves pass through an optical system.\nEye link: The iris pupil is an adjustable aperture, altering illumination angular range."
+        },
+        {
+          "cardId": "optics-fundamentals-016",
+          "term": "Depth of field",
+          "definition": "Range of object distances appearing acceptably sharp.\nDistinction: Apparent floater sharpness is not the same as ordinary external-scene focus."
+        },
+        {
+          "cardId": "optics-fundamentals-017",
+          "term": "Irradiance",
+          "definition": "Radiant power arriving per unit area, typically W/m².\nSimulation output: Compute relative or calibrated retinal irradiance at each position."
+        },
+        {
+          "cardId": "optics-fundamentals-018",
+          "term": "Luminance",
+          "definition": "Photometric measure of light from a surface in a direction, in cd/m².\nExperiment link: Monitor luminance requires calibrated display conditions for comparisons."
+        },
+        {
+          "cardId": "optics-fundamentals-019",
+          "term": "Michelson contrast",
+          "definition": "(Imax − Imin)/(Imax + Imin), useful for repeating patterns.\nUse: Appropriate for bright/dark periodic gratings; also specify contrast conventions."
+        },
+        {
+          "cardId": "optics-fundamentals-020",
+          "term": "Weber contrast",
+          "definition": "(I − Ibackground)/Ibackground, useful for small targets on uniform backgrounds.\nUse: Small targets on a near-uniform background; contrast may be negative for dark targets."
+        },
+        {
+          "cardId": "optics-fundamentals-021",
+          "term": "Spatial frequency",
+          "definition": "Number of light-dark cycles per degree of visual angle or other distance unit.\nUnit: Cycles/degree for perception; cycles/mm for physical image-plane measures."
+        },
+        {
+          "cardId": "optics-fundamentals-022",
+          "term": "Modulation transfer function (MTF)",
+          "definition": "How strongly an optical system preserves contrast at each spatial frequency.\nConnection: Optical contrast transfer is distinct from overall human contrast sensitivity."
+        }
+      ],
+      "studyNote": "Ask whether a prediction requires rays, wave phase, physical radiometry or perceptual contrast."
+    },
+    {
+      "topicId": "floater-optics",
+      "title": "Optics of Floater Perception",
+      "chapter": "Physics",
+      "cards": [
+        {
+          "cardId": "floater-optics-001",
+          "term": "Floater shadow",
+          "definition": "Retinal illumination disturbance associated with a vitreous opacity.\nPrecision: A pattern of retinal irradiance variation; often includes phase/diffraction effects."
+        },
+        {
+          "cardId": "floater-optics-002",
+          "term": "Why visible on bright uniform backgrounds?",
+          "definition": "Uniform scenes can make localized contrast disturbances easier to notice.\nNuance: Background statistics and adaptation matter; more photons alone do not explain visibility."
+        },
+        {
+          "cardId": "floater-optics-003",
+          "term": "Why pupil diameter matters",
+          "definition": "It changes the range of incident light paths and resulting shadow structure.\nLiterature: A 2022 Fourier-optics model predicted stronger effects for constricted pupils."
+        },
+        {
+          "cardId": "floater-optics-004",
+          "term": "Why distance to retina matters",
+          "definition": "Opacity-retina separation affects shadow spread and structure.\nModel link: Change axial position and compare pattern width, edges and local contrast."
+        },
+        {
+          "cardId": "floater-optics-005",
+          "term": "Does a floater simply block light?",
+          "definition": "Not always; refraction, scattering, diffraction, and absorption may all contribute.\nLiterature: Even weakly contrasting transparent structures can be symptomatic."
+        },
+        {
+          "cardId": "floater-optics-006",
+          "term": "Physical shape vs perceived shape",
+          "definition": "Perceived image depends on optical propagation and visual processing.\nInference: Reconstructing perception cannot uniquely recover original 3D anatomy."
+        },
+        {
+          "cardId": "floater-optics-007",
+          "term": "Shadow sharpness",
+          "definition": "Degree of spatial edge definition in the retinal intensity pattern.\nMeasure: Can be operationalized via edge-spread width or local spatial gradients."
+        },
+        {
+          "cardId": "floater-optics-008",
+          "term": "Penumbra",
+          "definition": "Partially illuminated region around a shadow due to light-source or aperture geometry.\nModel link: Varies with source angular extent, pupil geometry and object separation."
+        },
+        {
+          "cardId": "floater-optics-009",
+          "term": "Angular size",
+          "definition": "Size expressed as the visual angle subtended at the eye.\nExperiment: Use visual angle when comparing patterns across monitors/viewing distances."
+        },
+        {
+          "cardId": "floater-optics-010",
+          "term": "Eye movement and floaters",
+          "definition": "Opacities can move relative to the retina and continue drifting after a saccade.\nResearch design: Record gaze or standardize eye movements for motion experiments."
+        },
+        {
+          "cardId": "floater-optics-011",
+          "term": "Saccade",
+          "definition": "Rapid eye movement shifting the point of gaze.\nFloater link: Internal structures may lag eye motion, creating after-movement drift."
+        },
+        {
+          "cardId": "floater-optics-012",
+          "term": "Fixation",
+          "definition": "Maintaining gaze on a target to control retinal positioning.\nExperiment: A fixation marker reduces uncontrolled changes in retinal coordinates."
+        },
+        {
+          "cardId": "floater-optics-013",
+          "term": "Opacity refractive-index contrast",
+          "definition": "Difference between the opacity's and vitreous's refractive indices.\nWave model: Difference in optical path length can alter phase without strong absorption."
+        },
+        {
+          "cardId": "floater-optics-014",
+          "term": "Retinal illumination map",
+          "definition": "Computed 2D field of light intensity across retinal positions.\nOutput: Compare baseline versus opacity-present patterns with quantitative contrast metrics."
+        },
+        {
+          "cardId": "floater-optics-015",
+          "term": "Pupil-plane field",
+          "definition": "Optical amplitude/phase distribution at the pupil used in wave-optics models.\nSoftware link: Model as complex array with amplitude and phase."
+        },
+        {
+          "cardId": "floater-optics-016",
+          "term": "Image overlay limitation",
+          "definition": "A dark sprite can mimic appearance but does not establish physical accuracy.\nUse: Good for matching subjective reports; inadequate to claim physical optical validation."
+        }
+      ],
+      "studyNote": "A floater is an optical perturbation, not merely a dark sprite. Depth and pupil are key candidate parameters."
+    },
+    {
+      "topicId": "simulation-models",
+      "title": "Computational Simulation",
+      "chapter": "Computational Methods",
+      "cards": [
+        {
+          "cardId": "simulation-models-001",
+          "term": "Computational model",
+          "definition": "Mathematical simplification used to predict or explore a real system.\nResearch link: Record this in the model specification and test its numerical consequences."
+        },
+        {
+          "cardId": "simulation-models-002",
+          "term": "Forward model",
+          "definition": "Given eye and floater properties, predicts retinal illumination or appearance.\nFloater example: Input pupil + opacity geometry + wavelength → retinal intensity distribution."
+        },
+        {
+          "cardId": "simulation-models-003",
+          "term": "Inverse model",
+          "definition": "Uses observed outputs to estimate model parameters, often non-uniquely.\nFloater caution: Multiple opacity depths/shapes may produce similar perceptual matches."
+        },
+        {
+          "cardId": "simulation-models-004",
+          "term": "Parameter",
+          "definition": "Adjustable quantity representing a property of the modeled system.\nResearch link: Record this in the model specification and test its numerical consequences."
+        },
+        {
+          "cardId": "simulation-models-005",
+          "term": "State variable",
+          "definition": "Quantity describing the model's condition at a specific time.\nResearch link: Record this in the model specification and test its numerical consequences."
+        },
+        {
+          "cardId": "simulation-models-006",
+          "term": "Boundary condition",
+          "definition": "Constraint imposed at the edge of a simulated domain.\nResearch link: Record this in the model specification and test its numerical consequences."
+        },
+        {
+          "cardId": "simulation-models-007",
+          "term": "Initial condition",
+          "definition": "Starting values of model state before simulation progresses.\nResearch link: Record this in the model specification and test its numerical consequences."
+        },
+        {
+          "cardId": "simulation-models-008",
+          "term": "Assumption",
+          "definition": "Explicit simplification accepted for a particular model and purpose.\nResearch link: Record this in the model specification and test its numerical consequences."
+        },
+        {
+          "cardId": "simulation-models-009",
+          "term": "Geometric optics",
+          "definition": "Models light paths as rays; useful when wave effects are negligible.\nResearch link: Record this in the model specification and test its numerical consequences."
+        },
+        {
+          "cardId": "simulation-models-010",
+          "term": "Ray tracing",
+          "definition": "Numerically follows light rays through surfaces and media.\nUse: Understand geometric paths through cornea, pupil and lens before wave calculations."
+        },
+        {
+          "cardId": "simulation-models-011",
+          "term": "Wave optics",
+          "definition": "Models light using complex fields, propagation, and interference.\nUse: Essential when phase, interference and diffraction affect predicted patterns."
+        },
+        {
+          "cardId": "simulation-models-012",
+          "term": "Fourier optics",
+          "definition": "Uses Fourier transforms to analyze imaging and diffraction.\nFloater reference: Harmer et al. (2022) used it to model vitreous opacity effects."
+        },
+        {
+          "cardId": "simulation-models-013",
+          "term": "Fresnel propagation",
+          "definition": "Approximate wave propagation suitable for many near-field geometries.\nUse: Propagate complex fields between nearby optical planes; check approximation assumptions."
+        },
+        {
+          "cardId": "simulation-models-014",
+          "term": "Fraunhofer diffraction",
+          "definition": "Far-field diffraction approximation or equivalent focal-plane regime.\nUse: Appropriate in the far field or focal-plane geometry, not for every floater depth."
+        },
+        {
+          "cardId": "simulation-models-015",
+          "term": "Complex optical field",
+          "definition": "Amplitude and phase representation of a light wave.\nData model: A 2D array of complex numbers holds amplitude and phase."
+        },
+        {
+          "cardId": "simulation-models-016",
+          "term": "Phase",
+          "definition": "Position within a wave cycle; crucial to interference.\nFloater link: A transparent opacity may shift phase and cause interference without blocking light."
+        },
+        {
+          "cardId": "simulation-models-017",
+          "term": "Intensity from field",
+          "definition": "For a coherent scalar field, intensity is proportional to |U|².\nCaution: For broadband or incoherent sources, combine contributions appropriately."
+        },
+        {
+          "cardId": "simulation-models-018",
+          "term": "2D opacity mask",
+          "definition": "Grid representing opacity outline or spatially varying transmission.\nCaution: A binary opaque mask is only a baseline; complex transmission is more general."
+        },
+        {
+          "cardId": "simulation-models-019",
+          "term": "3D opacity volume",
+          "definition": "Voxel representation of an object's spatial extent and optical properties.\nUse: Study depth-dependent distribution rather than only an image-plane sprite."
+        },
+        {
+          "cardId": "simulation-models-020",
+          "term": "Voxel",
+          "definition": "Three-dimensional counterpart of an image pixel.\nResearch link: Record this in the model specification and test its numerical consequences."
+        },
+        {
+          "cardId": "simulation-models-021",
+          "term": "Rasterization",
+          "definition": "Converting continuous geometry into a discrete pixel grid.\nResearch link: Record this in the model specification and test its numerical consequences."
+        },
+        {
+          "cardId": "simulation-models-022",
+          "term": "Numerical resolution",
+          "definition": "Spatial or temporal sampling density used by a simulation.\nResearch link: Record this in the model specification and test its numerical consequences."
+        },
+        {
+          "cardId": "simulation-models-023",
+          "term": "Time step (Δt)",
+          "definition": "Interval between successive simulated states.\nResearch link: Record this in the model specification and test its numerical consequences."
+        },
+        {
+          "cardId": "simulation-models-024",
+          "term": "Parameter sweep",
+          "definition": "Systematically varying inputs to study their effects on outputs.\nExample: Compare shadow contrast across pupil diameter and floater-retina distance."
+        },
+        {
+          "cardId": "simulation-models-025",
+          "term": "Sensitivity analysis",
+          "definition": "Assessing how model outputs respond to changes in inputs.\nGoal: Identify parameters that most influence visibility, guiding experiments."
+        },
+        {
+          "cardId": "simulation-models-026",
+          "term": "Identifiability",
+          "definition": "Whether distinct parameter values can be distinguished from available observations.\nResearch limit: A visually matched simulated floater is not automatically a unique diagnosis."
+        },
+        {
+          "cardId": "simulation-models-027",
+          "term": "Simulation artifact",
+          "definition": "A feature caused by modeling or numerical choices, not underlying physics.\nTest: Change numerical grid and verify predicted fringe patterns remain stable."
+        }
+      ],
+      "studyNote": "Distinguish a forward optical solver, inverse parameter estimation, and illustrative rendering."
+    },
+    {
+      "topicId": "implementation",
+      "title": "Implementation and Software Architecture",
+      "chapter": "Computational Methods",
+      "cards": [
+        {
+          "cardId": "implementation-001",
+          "term": "NumPy array",
+          "definition": "Efficient multi-dimensional numerical grid used to store images or fields.\nResearch link: Use this to make generated visualizations reproducible and measurable."
+        },
+        {
+          "cardId": "implementation-002",
+          "term": "FFT",
+          "definition": "Fast Fourier transform for efficient analysis of spatial-frequency components.\nResearch link: Use this to make generated visualizations reproducible and measurable."
+        },
+        {
+          "cardId": "implementation-003",
+          "term": "SciPy",
+          "definition": "Python library with numerical, signal-processing, and optimization tools.\nResearch link: Use this to make generated visualizations reproducible and measurable."
+        },
+        {
+          "cardId": "implementation-004",
+          "term": "OpenCV",
+          "definition": "Computer-vision tools for image processing and measurement.\nResearch link: Use this to make generated visualizations reproducible and measurable."
+        },
+        {
+          "cardId": "implementation-005",
+          "term": "WebGL",
+          "definition": "Browser technology for GPU-accelerated graphics rendering.\nResearch link: Use this to make generated visualizations reproducible and measurable."
+        },
+        {
+          "cardId": "implementation-006",
+          "term": "Three.js",
+          "definition": "JavaScript library for building interactive 3D visualizations.\nResearch link: Use this to make generated visualizations reproducible and measurable."
+        },
+        {
+          "cardId": "implementation-007",
+          "term": "React",
+          "definition": "UI framework for parameter controls and interactive interfaces.\nResearch link: Use this to make generated visualizations reproducible and measurable."
+        },
+        {
+          "cardId": "implementation-008",
+          "term": "Backend API",
+          "definition": "Interface separating simulation calculations from user-facing controls.\nResearch link: Use this to make generated visualizations reproducible and measurable."
+        },
+        {
+          "cardId": "implementation-009",
+          "term": "Reproducible random seed",
+          "definition": "Recorded seed that allows the same stochastic output to be regenerated.\nResearch link: Use this to make generated visualizations reproducible and measurable."
+        },
+        {
+          "cardId": "implementation-010",
+          "term": "Config file",
+          "definition": "Machine-readable record of parameter values and experiment settings.\nResearch link: Use this to make generated visualizations reproducible and measurable."
+        },
+        {
+          "cardId": "implementation-011",
+          "term": "Version control",
+          "definition": "Tracking code changes to reproduce previous experiments.\nResearch link: Use this to make generated visualizations reproducible and measurable."
+        },
+        {
+          "cardId": "implementation-012",
+          "term": "Unit test",
+          "definition": "Automated check that an individual calculation behaves as expected.\nResearch link: Use this to make generated visualizations reproducible and measurable."
+        },
+        {
+          "cardId": "implementation-013",
+          "term": "Regression test",
+          "definition": "Check that a software change does not alter established results unexpectedly.\nResearch link: Use this to make generated visualizations reproducible and measurable."
+        },
+        {
+          "cardId": "implementation-014",
+          "term": "GPU acceleration",
+          "definition": "Parallel processing useful for large image or wave calculations.\nResearch link: Use this to make generated visualizations reproducible and measurable."
+        },
+        {
+          "cardId": "implementation-015",
+          "term": "Rendering",
+          "definition": "Turning simulated information into an image for display.\nDistinction: Display transform/gamma can differ from the underlying retinal irradiance model."
+        }
+      ],
+      "studyNote": "Think in pipelines: parameter record → numerical model → image → measurable metrics → versioned result."
+    },
+    {
+      "topicId": "experiments",
+      "title": "Experimental Design and Validation",
+      "chapter": "Research Methods",
+      "cards": [
+        {
+          "cardId": "experiments-001",
+          "term": "Independent variable",
+          "definition": "Factor deliberately varied or compared in an experiment.\nFloater study: Specify its role before recruiting participants or interpreting results."
+        },
+        {
+          "cardId": "experiments-002",
+          "term": "Dependent variable",
+          "definition": "Outcome measured to assess the effect of an input.\nFloater study: Specify its role before recruiting participants or interpreting results."
+        },
+        {
+          "cardId": "experiments-003",
+          "term": "Confounder",
+          "definition": "Uncontrolled factor that could distort the apparent relationship.\nFloater study: Specify its role before recruiting participants or interpreting results."
+        },
+        {
+          "cardId": "experiments-004",
+          "term": "Control condition",
+          "definition": "Reference condition used for comparison with experimental changes.\nFloater study: Specify its role before recruiting participants or interpreting results."
+        },
+        {
+          "cardId": "experiments-005",
+          "term": "Optical validation",
+          "definition": "Checking simulation predictions against theory or independent measurements.\nBenchmark: Check direction/magnitude of pupil effects against published model predictions."
+        },
+        {
+          "cardId": "experiments-006",
+          "term": "Perceptual validation",
+          "definition": "Checking whether simulated stimuli correspond to reported or measured vision.\nBenchmark: Test whether observers recognize or consistently match simulated symptoms."
+        },
+        {
+          "cardId": "experiments-007",
+          "term": "Face validity",
+          "definition": "Whether a simulation looks plausible; weaker than quantitative validation.\nWarning: Looking realistic does not prove a correct physics model."
+        },
+        {
+          "cardId": "experiments-008",
+          "term": "Construct validity",
+          "definition": "Whether a measurement actually captures the intended phenomenon.\nFloater study: Specify its role before recruiting participants or interpreting results."
+        },
+        {
+          "cardId": "experiments-009",
+          "term": "Test–retest reliability",
+          "definition": "Consistency of measurements when a task is repeated.\nExample: Compare participant-created floater maps across separate sessions."
+        },
+        {
+          "cardId": "experiments-010",
+          "term": "Intraclass correlation (ICC)",
+          "definition": "Statistic often used to quantify agreement of repeated measurements.\nCaution: Choose ICC form to match the rating/design; not all ICCs are interchangeable."
+        },
+        {
+          "cardId": "experiments-011",
+          "term": "Randomization",
+          "definition": "Varying assignment/order to reduce systematic bias.\nFloater study: Specify its role before recruiting participants or interpreting results."
+        },
+        {
+          "cardId": "experiments-012",
+          "term": "Counterbalancing",
+          "definition": "Distributing presentation orders to limit order effects.\nFloater study: Specify its role before recruiting participants or interpreting results."
+        },
+        {
+          "cardId": "experiments-013",
+          "term": "Blinding",
+          "definition": "Preventing relevant expectations from influencing ratings or measurement.\nFloater study: Specify its role before recruiting participants or interpreting results."
+        },
+        {
+          "cardId": "experiments-014",
+          "term": "Calibration",
+          "definition": "Relating device settings or model values to known physical measurements.\nFloater link: Record pixel pitch, viewing distance, brightness and display gamma."
+        },
+        {
+          "cardId": "experiments-015",
+          "term": "Uncertainty interval",
+          "definition": "Range expressing limited precision or uncertainty in an estimate.\nFloater study: Specify its role before recruiting participants or interpreting results."
+        },
+        {
+          "cardId": "experiments-016",
+          "term": "Ground truth",
+          "definition": "Trusted reference measurement used to evaluate predictions.\nWarning: A subjective report is not objective ground truth for vitreous geometry."
+        },
+        {
+          "cardId": "experiments-017",
+          "term": "Psychophysics",
+          "definition": "Study linking physical stimulus properties to perception and behavior.\nFloater study: Specify its role before recruiting participants or interpreting results."
+        },
+        {
+          "cardId": "experiments-018",
+          "term": "Two-alternative forced choice (2AFC)",
+          "definition": "Trial where a participant selects one of two stimulus alternatives.\nFloater study: Specify its role before recruiting participants or interpreting results."
+        },
+        {
+          "cardId": "experiments-019",
+          "term": "Contrast detection threshold",
+          "definition": "Minimum contrast detected at a defined performance criterion.\nFloater study: Specify its role before recruiting participants or interpreting results."
+        },
+        {
+          "cardId": "experiments-020",
+          "term": "Visual analog scale",
+          "definition": "Continuous rating scale used to capture subjective judgments.\nFloater study: Specify its role before recruiting participants or interpreting results."
+        },
+        {
+          "cardId": "experiments-021",
+          "term": "Within-subject design",
+          "definition": "Each participant experiences multiple compared conditions.\nFloater study: Specify its role before recruiting participants or interpreting results."
+        },
+        {
+          "cardId": "experiments-022",
+          "term": "Between-subject design",
+          "definition": "Different participants experience different experimental conditions.\nFloater study: Specify its role before recruiting participants or interpreting results."
+        },
+        {
+          "cardId": "experiments-023",
+          "term": "Effect size",
+          "definition": "Magnitude of a relationship or difference, distinct from its p-value.\nFloater study: Specify its role before recruiting participants or interpreting results."
+        },
+        {
+          "cardId": "experiments-024",
+          "term": "Power analysis",
+          "definition": "Estimation of sample needs given effect size, variance, and desired sensitivity.\nCaution: No universal sample size; justify from endpoint, expected effect and study design."
+        },
+        {
+          "cardId": "experiments-025",
+          "term": "IRB approval",
+          "definition": "Ethics oversight for eligible research involving human participants.\nPractice: Check that approval specifically covers tasks, stimuli and new data collection."
+        },
+        {
+          "cardId": "experiments-026",
+          "term": "Data provenance",
+          "definition": "Record of the origin and processing history of research data.\nFloater study: Specify its role before recruiting participants or interpreting results."
+        },
+        {
+          "cardId": "experiments-027",
+          "term": "Reproducibility",
+          "definition": "Ability to obtain matching results from the same methods and data.\nFloater study: Specify its role before recruiting participants or interpreting results."
+        },
+        {
+          "cardId": "experiments-028",
+          "term": "Generalizability",
+          "definition": "Extent to which findings apply beyond studied conditions or participants.\nFloater study: Specify its role before recruiting participants or interpreting results."
+        }
+      ],
+      "studyNote": "Keep optical validation, participant matching, and clinical inference separate."
+    },
+    {
+      "topicId": "integrative",
+      "title": "Integrative Reasoning",
+      "chapter": "Research Synthesis",
+      "cards": [
+        {
+          "cardId": "integrative-001",
+          "term": "From anatomy to simulation",
+          "definition": "Represent pupil, optical media, opacity, and retina with model geometry and parameters.\nBridge: Cornea/lens = focusing elements; iris = aperture; vitreous opacity = perturbation."
+        },
+        {
+          "cardId": "integrative-002",
+          "term": "From physics to code",
+          "definition": "Translate propagation laws into numerical operations on rays, fields, or arrays.\nThesis goal: Connect a defined biological assumption to a testable computational prediction."
+        },
+        {
+          "cardId": "integrative-003",
+          "term": "From simulation to experiment",
+          "definition": "Change one controlled input and quantify a defined output.\nThesis goal: Connect a defined biological assumption to a testable computational prediction."
+        },
+        {
+          "cardId": "integrative-004",
+          "term": "Why distinguish retina and perception?",
+          "definition": "Neural processing means retinal illumination is not identical to conscious appearance.\nResearch: Treat optical output and subjective report as separate validation targets."
+        },
+        {
+          "cardId": "integrative-005",
+          "term": "Why start with a simple model?",
+          "definition": "It tests assumptions and code before adding complex physics.\nThesis goal: Connect a defined biological assumption to a testable computational prediction."
+        },
+        {
+          "cardId": "integrative-006",
+          "term": "When is ray tracing insufficient?",
+          "definition": "When diffraction or interference materially affects the intended prediction.\nThesis goal: Connect a defined biological assumption to a testable computational prediction."
+        },
+        {
+          "cardId": "integrative-007",
+          "term": "Why benchmark published results?",
+          "definition": "Agreement with established predictions helps detect errors and limitations.\nThesis goal: Connect a defined biological assumption to a testable computational prediction."
+        },
+        {
+          "cardId": "integrative-008",
+          "term": "Why match simulation to a participant?",
+          "definition": "To quantify a subjective percept through adjustable model parameters.\nThesis goal: Connect a defined biological assumption to a testable computational prediction."
+        },
+        {
+          "cardId": "integrative-009",
+          "term": "Why not infer actual opacity anatomy from matching?",
+          "definition": "Different physical configurations can produce similar perceived patterns.\nThesis goal: Connect a defined biological assumption to a testable computational prediction."
+        },
+        {
+          "cardId": "integrative-010",
+          "term": "Minimum scientific output per run",
+          "definition": "Parameter settings, assumptions, generated image, measurements, and software version.\nThesis goal: Connect a defined biological assumption to a testable computational prediction."
+        },
+        {
+          "cardId": "integrative-011",
+          "term": "Three evidence levels",
+          "definition": "Plausible visualization, validated optical prediction, and validated perceptual correspondence.\nGood claim: Say whether a result is illustrative, optically benchmarked, or human-validated."
+        }
+      ],
+      "studyNote": "The thesis becomes credible when assumptions, predictions, observations and limitations are explicit."
+    },
+    {
+      "topicId": "clinical-context",
+      "title": "Clinical Conditions and Assessment",
+      "chapter": "Applied Eye Research and Context",
+      "studyNote": "Differentiate floater symptoms from other eye disease; recognize clinical measurement limits.",
+      "cards": [
+        {
+          "cardId": "clinical-context-001",
+          "term": "Cataract",
+          "definition": "Clouding of the crystalline lens, not the vitreous.\nContrast: Cataracts mainly affect focused light before it enters the vitreous."
+        },
+        {
+          "cardId": "clinical-context-002",
+          "term": "Glaucoma",
+          "definition": "Progressive optic neuropathy often associated with characteristic visual-field loss.\nContrast: An optic-nerve disease, not a vitreous opacity."
+        },
+        {
+          "cardId": "clinical-context-003",
+          "term": "Age-related macular degeneration",
+          "definition": "Disease of the central macula impairing detailed vision.\nLocation: Retina at the back of the eye, not the vitreous cavity."
+        },
+        {
+          "cardId": "clinical-context-004",
+          "term": "Diabetic retinopathy",
+          "definition": "Diabetes-related retinal vascular damage.\nClinical link: Bleeding into the vitreous may also cause sudden floaters."
+        },
+        {
+          "cardId": "clinical-context-005",
+          "term": "Retinal detachment",
+          "definition": "Separation of neurosensory retina from underlying supporting tissues.\nSafety: New curtain-like field loss is an emergency assessment indication."
+        },
+        {
+          "cardId": "clinical-context-006",
+          "term": "Uveitis",
+          "definition": "Inflammation of uveal tissues, sometimes with vitreous inflammatory cells.\nDifferential: Floaters can reflect inflammation, not just collagen aggregates."
+        },
+        {
+          "cardId": "clinical-context-007",
+          "term": "Dilated fundus examination",
+          "definition": "Clinical examination of retina and vitreous through a dilated pupil.\nUse: Important for ruling out retinal tears in symptomatic cases."
+        },
+        {
+          "cardId": "clinical-context-008",
+          "term": "Optical coherence tomography (OCT)",
+          "definition": "Cross-sectional imaging using low-coherence light interferometry.\nLimit: Standard retinal OCT does not fully visualize all vitreous opacities."
+        },
+        {
+          "cardId": "clinical-context-009",
+          "term": "B-scan ultrasonography",
+          "definition": "Ultrasound imaging of ocular structures through reflected sound.\nUse: Can assess vitreous echoes and posterior segment when optical viewing is limited."
+        },
+        {
+          "cardId": "clinical-context-010",
+          "term": "Quantitative ultrasonography",
+          "definition": "Ultrasound-based attempt to measure vitreous echo characteristics.\nResearch: An objective structural metric that may complement symptom reports."
+        },
+        {
+          "cardId": "clinical-context-011",
+          "term": "Contrast sensitivity function (CSF)",
+          "definition": "Sensitivity to contrast across a range of spatial frequencies.\nResearch: May reveal floater-related functional deficits missed by acuity testing."
+        },
+        {
+          "cardId": "clinical-context-012",
+          "term": "Patient-reported outcome measure (PROM)",
+          "definition": "Structured questionnaire reporting symptoms or quality of life.\nResearch: Keep reported functional impact distinct from imaging findings."
+        },
+        {
+          "cardId": "clinical-context-013",
+          "term": "Pars plana vitrectomy",
+          "definition": "Surgery removing vitreous gel, sometimes considered for severe symptoms.\nCaution: Invasive and associated with meaningful ocular risks."
+        },
+        {
+          "cardId": "clinical-context-014",
+          "term": "Laser vitreolysis",
+          "definition": "Laser treatment intended to disrupt selected vitreous opacities.\nEvidence: Benefits and risks vary; do not assume established effectiveness for all floaters."
+        },
+        {
+          "cardId": "clinical-context-015",
+          "term": "Neuroadaptation",
+          "definition": "Change in perceptual response as the nervous system adapts to stimuli.\nCaution: Perceived improvement need not mean the opacity disappeared."
+        }
+      ]
+    },
+    {
+      "topicId": "eye-health-context",
+      "title": "Researchers, Institutions and Public Eye Health",
+      "chapter": "Applied Eye Research and Context",
+      "studyNote": "Context cards: mostly vision science, services and cataract care—not direct floater-model validation.",
+      "cards": [
+        {
+          "cardId": "eye-health-context-001",
+          "term": "Sanduk Ruit",
+          "definition": "Nepali ophthalmologist and co-founder of Tilganga, renowned for accessible cataract surgery.\nContext: Built scalable eye-care delivery and helped advance affordable intraocular lens access."
+        },
+        {
+          "cardId": "eye-health-context-002",
+          "term": "Tilganga Institute of Ophthalmology",
+          "definition": "Nepal-based nonprofit eye-care, research, training and manufacturing institution.\nLocation: Kathmandu; includes an eye bank and affordable intraocular lens manufacturing."
+        },
+        {
+          "cardId": "eye-health-context-003",
+          "term": "Himalayan Cataract Project",
+          "definition": "Organization expanding access to high-quality cataract and eye care.\nContext: Associated with Sanduk Ruit and Geoffrey Tabin; not primarily a floater lab."
+        },
+        {
+          "cardId": "eye-health-context-004",
+          "term": "National Eye Institute (NEI)",
+          "definition": "U.S. NIH institute supporting vision research and public eye-health education.\nUse: Trusted anatomy, disease and vision-science background references."
+        },
+        {
+          "cardId": "eye-health-context-005",
+          "term": "American Academy of Ophthalmology (AAO)",
+          "definition": "Professional ophthalmology organization publishing clinical and patient guidance.\nUse: Clinical distinctions, symptoms and ophthalmic terminology."
+        },
+        {
+          "cardId": "eye-health-context-006",
+          "term": "World Health Organization (WHO) vision facts",
+          "definition": "At least 2.2 billion people have near or distance vision impairment globally.\n2026 estimate: At least 1 billion cases were preventable or still unaddressed."
+        },
+        {
+          "cardId": "eye-health-context-007",
+          "term": "Harmer–Luff–Gini floater model (2022)",
+          "definition": "Fourier-optics model of retinal effects from a simplified vitreous opacity.\nResearch link: Predicts pupil-dependent effects and altered contrast sensitivity."
+        },
+        {
+          "cardId": "eye-health-context-008",
+          "term": "Wilmer Eye Institute",
+          "definition": "Johns Hopkins ophthalmology research and clinical institution.\nContext: Published 2025 commentary supporting patient-centered symptomatic-floater assessment."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "National Eye Institute — About the Eye",
+      "url": "https://www.nei.nih.gov/eye-health-information/healthy-vision/nei-for-kids/about-eye"
+    },
+    {
+      "title": "NCBI Webvision — Gross Anatomy of the Eye",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK11534/"
+    },
+    {
+      "title": "NEI — Floaters",
+      "url": "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/floaters"
+    },
+    {
+      "title": "AAO — What Are Floaters and Flashes?",
+      "url": "https://aao.org/eye-health/diseases/what-are-floaters-flashes"
+    },
+    {
+      "title": "Harmer et al. (2022) — Optical Scattering from Vitreous Floaters",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9303562/"
+    },
+    {
+      "title": "Almidani and Ramulu (2025) — Patient-Centered Care in Symptomatic Floaters",
+      "url": "https://jamanetwork.com/journals/jamaophthalmology/article-abstract/2839368"
+    },
+    {
+      "title": "Tilganga Institute of Ophthalmology — About",
+      "url": "https://tilganga.org/about-us/"
+    },
+    {
+      "title": "WHO — Blindness and vision impairment (2026)",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/blindness-and-visual-impairment"
+    }
+  ],
+  "reviewedThrough": "2026-10-23"
+}
